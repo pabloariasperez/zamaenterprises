@@ -20,8 +20,8 @@ public class Juego extends GameCanvas {
        private Animador animador; 
        private Graphics g;
        
-        private Boton b1,b2,b3,b4,b5,b6,b7, b8;
-         private Boton opcion1, opcion2, opcion3;
+        private Boton botonJugar,botonContinuar,botonMultiplayer,botonPuntajes,botonOpciones,botonTutorial,botonCreditos, botonSalir;
+         private Boton opcionSonido, opcionIdioma, opcionBorrar;
         private Menu menu, menuOpciones;
         private Fondo fondo;
         private boolean arribaPresionado = false;
@@ -57,40 +57,40 @@ public class Juego extends GameCanvas {
 
     public void creaBotonesOpciones(){
         try {
-            opcion1 = new Boton("/Sonido.jpg", "/Sonido1.jpg");
-            opcion2 = new Boton("/Idioma.jpg", "/Idioma1.jpg");
-            opcion3 = new Boton("/Borrar.jpg", "/Borrar1.jpg");
+            opcionSonido = new Boton("/Sonido.jpg", "/Sonido1.jpg");
+            opcionIdioma = new Boton("/Idioma.jpg", "/Idioma1.jpg");
+            opcionBorrar = new Boton("/Borrar.jpg", "/Borrar1.jpg");
            
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        menuOpciones.agregarBoton(opcion1);
-        menuOpciones.agregarBoton(opcion2);
-        menuOpciones.agregarBoton(opcion3);
+        menuOpciones.agregarBoton(opcionSonido);
+        menuOpciones.agregarBoton(opcionIdioma);
+        menuOpciones.agregarBoton(opcionBorrar);
        
        
     }
 
     public void creaBotones() throws IOException{
-        b1 = new Boton("/jugar.jpg", "/Jugar1.jpg");
-        b2 = new Boton("/Continuar.jpg", "/Continuar1.jpg");
-        b3 = new Boton("/Multiplayer.jpg", "/Multiplayer1.jpg");
-        b4 = new Boton("/Puntajes.jpg", "/Puntajes1.jpg");
-        b5 = new Boton("/Opciones.jpg", "/Opciones1.jpg");
-        b6 = new Boton("/Tutorial.jpg", "/Tutorial1.jpg");
-        b7 = new Boton("/Creditos.jpg", "/Creditos1.jpg");
-        b8 = new Boton("/Salir.jpg", "/Salir1.jpg");
+        botonJugar = new Boton("/jugar.jpg", "/Jugar1.jpg");
+        botonContinuar = new Boton("/Continuar.jpg", "/Continuar1.jpg");
+        botonMultiplayer = new Boton("/Multiplayer.jpg", "/Multiplayer1.jpg");
+        botonPuntajes = new Boton("/Puntajes.jpg", "/Puntajes1.jpg");
+        botonOpciones = new Boton("/Opciones.jpg", "/Opciones1.jpg");
+        botonTutorial = new Boton("/Tutorial.jpg", "/Tutorial1.jpg");
+        botonCreditos = new Boton("/Creditos.jpg", "/Creditos1.jpg");
+        botonSalir = new Boton("/Salir.jpg", "/Salir1.jpg");
 
 
 
-        menu.agregarBoton(b1);
-        menu.agregarBoton(b2);
-        menu.agregarBoton(b3);
-        menu.agregarBoton(b4);
-        menu.agregarBoton(b5);
-        menu.agregarBoton(b6);
-        menu.agregarBoton(b7);
-        menu.agregarBoton(b8);
+        menu.agregarBoton(botonJugar);
+        menu.agregarBoton(botonContinuar);
+        menu.agregarBoton(botonMultiplayer);
+        menu.agregarBoton(botonPuntajes);
+        menu.agregarBoton(botonOpciones);
+        menu.agregarBoton(botonTutorial);
+        menu.agregarBoton(botonCreditos);
+        menu.agregarBoton(botonSalir);
 
 
     }

@@ -7,7 +7,7 @@ import javax.microedition.lcdui.Image;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+//prueba
 /**
  *
  * @author mi16
