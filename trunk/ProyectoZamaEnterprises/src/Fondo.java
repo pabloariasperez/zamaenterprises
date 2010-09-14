@@ -31,8 +31,5 @@ public class Fondo
 
         
         g.drawImage(imagen, x, y, Graphics.LEFT|Graphics.TOP);
-//        if ( x<-(imagen.getWidth()-Juego.ANCHO) ) {
-//            g.drawImage(imagen, x+imagen.getWidth(), y, Graphics.LEFT|Graphics.TOP);
-       // }
     }
 }

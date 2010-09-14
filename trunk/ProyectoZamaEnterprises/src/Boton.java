@@ -3,15 +3,6 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-//prueba
-/**
- *
- * @author mi16
- */
 public class Boton {
 
      private Image imageSelected;
