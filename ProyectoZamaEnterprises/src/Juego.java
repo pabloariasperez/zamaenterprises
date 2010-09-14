@@ -4,15 +4,6 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author mi16
- */
 public class Juego extends GameCanvas {
        public static int ALTO;
        public static int ANCHO;
