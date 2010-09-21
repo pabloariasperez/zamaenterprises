@@ -7,7 +7,7 @@ public class Animador implements Runnable
 
     private final int FPS = 50;
     private final int RETARDO = 1000/FPS;
-
+//
     public Animador(Juego juego) {
 
         this.juego = juego;
