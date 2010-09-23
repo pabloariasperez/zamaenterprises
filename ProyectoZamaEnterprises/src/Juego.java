@@ -1,4 +1,7 @@
 
+//Proyecto zama enterprises
+// Autores Pablo, Erik y Daniel
+
 import java.io.IOException;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
