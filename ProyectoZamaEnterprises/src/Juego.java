@@ -34,7 +34,7 @@ public class Juego extends GameCanvas {
 
         g = this.getGraphics();
 
-        menu = new Menu(8);
+        menu = new Menu(5);
         menuOpciones = new Menu(3);
         try {
             this.creaBotones();
@@ -81,9 +81,9 @@ public class Juego extends GameCanvas {
         menu.agregarBoton(botonContinuar);
         menu.agregarBoton(botonMultiplayer);
         menu.agregarBoton(botonPuntajes);
-        menu.agregarBoton(botonOpciones);
-        menu.agregarBoton(botonTutorial);
-        menu.agregarBoton(botonCreditos);
+  //      menu.agregarBoton(botonOpciones);
+//        menu.agregarBoton(botonTutorial);
+//        menu.agregarBoton(botonCreditos);
         menu.agregarBoton(botonSalir);
 
 
