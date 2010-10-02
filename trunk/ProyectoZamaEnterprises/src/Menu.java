@@ -1,10 +1,12 @@
 
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 
 public class Menu {
     private Boton[] botones;
     private int numButtons;
     private int posicion;
+    private Image titulo;
     static final int MARGEN_SELECCIONADO = 60;
 
     public Menu( int totalButtons){
@@ -23,9 +25,10 @@ public class Menu {
             b.switchImage();
             b.setX( MARGEN_SELECCIONADO );
             this.posicion = 0;
+
         }
 
-        b.setY(20 + (numButtons*((Juego.ALTO-20)/getTotalButtons())));
+        b.setY(60 + (numButtons*((Juego.ALTO-60)/getTotalButtons())));
         numButtons++;
     }
 
