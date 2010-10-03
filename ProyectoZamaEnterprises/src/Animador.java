@@ -26,7 +26,11 @@ public class Animador implements Runnable
         while ( corriendo ) {
 
             long ini = System.currentTimeMillis();
-            juego.actualizar();
+            try {
+                juego.actualizar();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
             juego.dibujar();
             long fin = System.currentTimeMillis();
 
