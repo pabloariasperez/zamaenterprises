@@ -11,6 +11,17 @@ public class AppAnimacion extends MIDlet {
 
         juego = new Juego(this);
         menu = new MenuCanvas(this);
+
+    }
+
+    public void switchDisplay(){
+        if(Display.getDisplay(this).getCurrent() == menu){
+            Display.getDisplay(this).setCurrent(juego);
+
+        }
+        else{
+            Display.getDisplay(this).setCurrent(menu);
+        }
     }
     public void startApp() {
         Display.getDisplay(this).setCurrent(menu);
@@ -20,5 +31,6 @@ public class AppAnimacion extends MIDlet {
     }
 
     public void destroyApp(boolean unconditional) {
+       
     }
 }

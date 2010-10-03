@@ -21,7 +21,7 @@ public class MenuCanvas extends GameCanvas {
     public static int ALTO, ANCHO;
     private Fondo fondo;
     private AppAnimacion midlet;
-    private Menu menu;
+    private Menu menu, menuActual;
     private Menu menuOpciones;
      private Animador animador; 
     private ManejadorTeclado manejadorTec;
@@ -29,6 +29,7 @@ public class MenuCanvas extends GameCanvas {
      private int pantallaActual;
      private final int PANTALLA_PRINCIPAL;
      private final int PANTALLA_OPCIONES;
+     private boolean banderaPresionado;
 
     public MenuCanvas(AppAnimacion midlet){
         super(true);
@@ -38,12 +39,13 @@ public class MenuCanvas extends GameCanvas {
         g = this.getGraphics();
         this.PANTALLA_PRINCIPAL = 1;
         this.PANTALLA_OPCIONES = 2;
+        this.banderaPresionado = false;
         this.pantallaActual = this.PANTALLA_PRINCIPAL;
 
         manejadorTec = new ManejadorTeclado(this);
         menu = new Menu(5, this.ALTO);
         menuOpciones = new Menu(3,this.ALTO);
-
+        this.menuActual = this.menu;
 
         try {
         this.creaBotones();
@@ -99,40 +101,58 @@ public class MenuCanvas extends GameCanvas {
 
     }
     public void cambiarPantalla(){
+       
+        if(this.pantallaActual==this.PANTALLA_PRINCIPAL){
+            this.pantallaActual = this.PANTALLA_OPCIONES;
+            this.menuActual = this.menuOpciones;
+
+        }
+        else{
+            this.pantallaActual = this.PANTALLA_PRINCIPAL;
+            this.menuActual = this.menu;
+        }
+        
 
     }
 
 
     public void dibujar(){
-        if(this.pantallaActual==this.PANTALLA_PRINCIPAL)
-             this.menu.dibujar(g);
-         else
-             this.menuOpciones.dibujar(g);
 
-         this.fondo.dibujar(g);
+         g.setColor(0x00FFFFFF);
+         g.fillRect(0, 0, ANCHO, ALTO);
+         
+        this.menuActual.dibujar(g);
+
+        this.flushGraphics();
+
     }
 
     public void actualizar(){
-        try {
-            fondo.actualizar();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
 
         if( manejadorTec.upPresionado()){
             //arribaPresionado = true;
             System.out.println("ARRIBA");
-            menu.moverOpcion(-1);
+            this.menuActual.moverOpcion(-1);
+
         }else if(manejadorTec.downPresionado() ){
             //abajoPresionado = true;
             System.out.println("ABAJO");
-            menu.moverOpcion(1);
-        }
-        else if(this.menu.getPosition() == 3  & manejadorTec.firePresionado()){
-            this.cambiarPantalla();
+            this.menuActual.moverOpcion(1);
         }
 
-        else if(this.menu.getPosition() == 4 & manejadorTec.firePresionado()){
+         else if(this.menu.getPosition() == 0  && manejadorTec.firePresionado()){
+            midlet.switchDisplay();
+        }
+        else if(this.menu.getPosition() == 3  && manejadorTec.firePresionado()){
+            this.cambiarPantalla();
+        }
+          else if(this.menuOpciones.getPosition() == 2  && manejadorTec.firePresionado()){
+            this.cambiarPantalla();
+
+        }
+
+
+        else if(this.menu.getPosition() == 4 && manejadorTec.firePresionado()){
             midlet.destroyApp(true);
             midlet.notifyDestroyed();
     }
