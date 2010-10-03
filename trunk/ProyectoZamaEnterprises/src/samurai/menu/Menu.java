@@ -41,9 +41,17 @@ public class Menu {
         return this.botones.length;
     }
 
+    public void setDefaultPosition(){
+        this.botones[posicion].switchImage();
+        this.posicion =0;
+        this.botones[posicion].switchImage();
+
+    }
+
     public void dibujar(Graphics g) {
          for(int i =0; i<this.numButtons; i++){
              botones[i].dibujar(g);
+             
          }
     }
 
