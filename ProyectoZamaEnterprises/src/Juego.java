@@ -6,6 +6,7 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.juego.*;
+import samurai.escenarios.*;
 
 public class Juego extends GameCanvas {
        public static int ALTO;
@@ -117,12 +118,10 @@ public class Juego extends GameCanvas {
             //arribaPresionado = true;
             System.out.println("ARRIBA");
             menu.moverOpcion(-1);
-            menuOpciones.moverOpcion(-1);
         }else if(manejadorTec.downPresionado() ){
             //abajoPresionado = true;
             System.out.println("ABAJO");
             menu.moverOpcion(1);
-            menuOpciones.moverOpcion(1);
         }
         else if(this.menu.getPosition() == 3  & manejadorTec.firePresionado()){
             this.cambiarPantalla();
