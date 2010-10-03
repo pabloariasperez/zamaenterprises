@@ -4,7 +4,7 @@ import javax.microedition.lcdui.Graphics;
 import samurai.animacion.*;
 
 public class ManejadorSekai implements Animable{
-    private final int NUMERO_FRAMES_ATAQUE = 13;
+    private final int NUMERO_FRAMES_ATAQUE = 14;
 
     private SpriteSekai sekai;
     private SpriteEfectos efectosEspada;
