@@ -33,10 +33,11 @@ public class MenuCanvas extends GameCanvas {
 
     public MenuCanvas(AppAnimacion midlet){
         super(true);
+        this.midlet = midlet;
+        this.setFullScreenMode(true);
+        g = this.getGraphics();
         this.ALTO = this.getHeight();
         this.ANCHO = this.getWidth();
-        this.midlet = midlet;
-        g = this.getGraphics();
         this.PANTALLA_PRINCIPAL = 1;
         this.PANTALLA_OPCIONES = 2;
         this.banderaPresionado = false;
