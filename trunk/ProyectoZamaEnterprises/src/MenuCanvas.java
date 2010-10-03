@@ -126,7 +126,7 @@ public class MenuCanvas extends GameCanvas {
         this.flushGraphics();
 
     }
-
+// ahi va
     public void actualizar(){
 
         if( manejadorTec.upPresionado()){
