@@ -80,9 +80,9 @@ public class Juego extends GameCanvas {
 
         menu.agregarBoton(botonJugar);
         menu.agregarBoton(botonContinuar);
-        menu.agregarBoton(botonMultiplayer);
+        //menu.agregarBoton(botonMultiplayer);
         menu.agregarBoton(botonPuntajes);
-        //menu.agregarBoton(botonOpciones);
+        menu.agregarBoton(botonOpciones);
         //menu.agregarBoton(botonTutorial);
         //menu.agregarBoton(botonCreditos);
         menu.agregarBoton(botonSalir);
@@ -112,44 +112,26 @@ public class Juego extends GameCanvas {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-        int teclado = getKeyStates();
-
-        //if(!( (teclado & UP_PRESSED)!= 0 ) )
-          //  manejadorTec.upPresionado(false);
-          //      arribaPresionado = false;
-
-
-        //if(!( (teclado & FIRE_PRESSED)!= 0 ) )
-          //      opcionPresionado = false;
-
-        //if(manejadorTec.checarPresionado()& manejadorTec.upPresionado(teclado)/*( (teclado & DOWN_PRESSED)!= 0 )*/ )
-
-          //      abajoPresionado = false;
-          
+       
         if( manejadorTec.upPresionado()){
             //arribaPresionado = true;
             System.out.println("ARRIBA");
             menu.moverOpcion(-1);
             menuOpciones.moverOpcion(-1);
+        }else if(manejadorTec.downPresionado() ){
+            //abajoPresionado = true;
+            System.out.println("ABAJO");
+            menu.moverOpcion(1);
+            menuOpciones.moverOpcion(1);
         }
-
-//        }else if(manejadorTec.downPresionado(teclado) ){
-//            //abajoPresionado = true;
-//            System.out.println("ABAJO");
-//            menu.moverOpcion(1);
-//            menuOpciones.moverOpcion(1);
-//        }
-//        else if(/*!opcionPresionado  & */this.menu.getPosition() == 4  & manejadorTec.firePresionado(teclado)/*(teclado & FIRE_PRESSED)!=0*/){
-//            opcionPresionado = false;
-//            this.cambiarPantalla();
-//        }
+        else if(this.menu.getPosition() == 3  & manejadorTec.firePresionado()){
+            this.cambiarPantalla();
+        }
         
-//        else if(!opcionPresionado  & this.menu.getPosition() == 7  & (teclado & FIRE_PRESSED)!=0){
-//            opcionPresionado = false;
-//            midlet.destroyApp(true);
-//            midlet.notifyDestroyed();
-//
-//    }
+        else if(this.menu.getPosition() == 4 & manejadorTec.firePresionado()){
+            midlet.destroyApp(true);
+            midlet.notifyDestroyed();
+    }
         this.dibujar();
     }
 
