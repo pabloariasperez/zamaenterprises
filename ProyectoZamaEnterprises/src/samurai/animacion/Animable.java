@@ -5,11 +5,17 @@
 
 package samurai.animacion;
 
+import javax.microedition.lcdui.Graphics;
+
 /**
  *
  * @author mi16
  */
 public interface Animable  {
+
+
+    public abstract void dibujar(Graphics g);
+
 
     
 

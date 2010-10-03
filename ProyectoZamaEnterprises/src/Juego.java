@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
+import samurai.animacion.SpriteEfectos;
+import samurai.animacion.SpriteSekai;
 import samurai.juego.*;
 import samurai.escenarios.*;
 
@@ -22,6 +24,10 @@ public class Juego extends GameCanvas {
         private int pantalla = 0;
 
         private ManejadorTeclado manejadorTec;
+        
+        private SpriteSekai sekai;
+        private SpriteEfectos efectos;
+        private ManejadorSekai manejadorSekai;
 
     public Juego(AppAnimacion midlet) {
 
@@ -36,10 +42,14 @@ public class Juego extends GameCanvas {
 
         menu = new Menu(5);
         menuOpciones = new Menu(3);
+        manejadorTec = new ManejadorTeclado(this);
         try {
             this.creaBotones();
             this.creaBotonesOpciones();
             fondo = new Fondo("/samurai/imagenes/tecsi.gif", 0, 0);
+            sekai= new SpriteSekai("/samurai/imagenes/sekai.png", 100, 200);
+            efectos= new SpriteEfectos("/samurai/imagenes/SpritesEfectos.png", 100, 170);
+            manejadorSekai= new ManejadorSekai(sekai, efectos, manejadorTec);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -47,7 +57,7 @@ public class Juego extends GameCanvas {
         animador.iniciar();
         this.dibujar();
 
-        manejadorTec = new ManejadorTeclado(this);
+       
         
     }
 
@@ -103,7 +113,7 @@ public class Juego extends GameCanvas {
              this.menuOpciones.dibujar(g);
 
          this.fondo.dibujar(g);
-
+         manejadorSekai.dibujar(g);
          flushGraphics();
     }
 
@@ -113,7 +123,7 @@ public class Juego extends GameCanvas {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-       
+        manejadorSekai.actualizar();
         if( manejadorTec.upPresionado()){
             //arribaPresionado = true;
             System.out.println("ARRIBA");
