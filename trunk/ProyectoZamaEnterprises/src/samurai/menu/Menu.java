@@ -1,15 +1,20 @@
+package samurai.menu;
+
 
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
+
 
 public class Menu {
     private Boton[] botones;
     private int numButtons;
     private int posicion;
     private Image titulo;
+    private final int ALTO;
     static final int MARGEN_SELECCIONADO = 60;
 
-    public Menu( int totalButtons){
+    public Menu( int totalButtons, int alto){
+        this.ALTO = alto;
         this.numButtons = 0;
         botones = new Boton[ totalButtons ];
     }
@@ -28,7 +33,7 @@ public class Menu {
 
         }
 
-        b.setY(60 + (numButtons*((Juego.ALTO-60)/getTotalButtons())));
+        b.setY(60 + (numButtons*((this.ALTO-60)/getTotalButtons())));
         numButtons++;
     }
 
