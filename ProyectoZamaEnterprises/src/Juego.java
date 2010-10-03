@@ -38,7 +38,7 @@ public class Juego extends GameCanvas {
         try {
             this.creaBotones();
             this.creaBotonesOpciones();
-            fondo = new Fondo("/tecsi.gif", 0, 0);
+            fondo = new Fondo("/samurai/imagenes/tecsi.gif", 0, 0);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -52,9 +52,9 @@ public class Juego extends GameCanvas {
 
     public void creaBotonesOpciones(){
         try {
-            opcionSonido = new Boton("/Sonido.jpg", "/Sonido1.jpg");
-            opcionIdioma = new Boton("/Idioma.jpg", "/Idioma1.jpg");
-            opcionBorrar = new Boton("/Borrar.jpg", "/Borrar1.jpg");
+            opcionSonido = new Boton("/samurai/imagenes/Sonido.jpg", "/samurai/imagenes/Sonido1.jpg");
+            opcionIdioma = new Boton("/samurai/imagenes/Idioma.jpg", "/samurai/imagenes/Idioma1.jpg");
+            opcionBorrar = new Boton("/samurai/imagenes/Borrar.jpg", "/samurai/imagenes/Borrar1.jpg");
            
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -67,14 +67,14 @@ public class Juego extends GameCanvas {
     }
 
     public void creaBotones() throws IOException{
-        botonJugar = new Boton("/jugar.jpg", "/Jugar1.jpg");
-        botonContinuar = new Boton("/Continuar.jpg", "/Continuar1.jpg");
-        botonMultiplayer = new Boton("/Multiplayer.jpg", "/Multiplayer1.jpg");
-        botonPuntajes = new Boton("/Puntajes.jpg", "/Puntajes1.jpg");
-        botonOpciones = new Boton("/Opciones.jpg", "/Opciones1.jpg");
-        botonTutorial = new Boton("/Tutorial.jpg", "/Tutorial1.jpg");
-        botonCreditos = new Boton("/Creditos.jpg", "/Creditos1.jpg");
-        botonSalir = new Boton("/Salir.jpg", "/Salir1.jpg");
+        botonJugar = new Boton("/samurai/imagenes/jugar.jpg", "/samurai/imagenes/Jugar1.jpg");
+        botonContinuar = new Boton("/samurai/imagenes/Continuar.jpg", "/samurai/imagenes/Continuar1.jpg");
+        botonMultiplayer = new Boton("/samurai/imagenes/Multiplayer.jpg", "/samurai/imagenes/Multiplayer1.jpg");
+        botonPuntajes = new Boton("/samurai/imagenes/Puntajes.jpg", "/samurai/imagenes/Puntajes1.jpg");
+        botonOpciones = new Boton("/samurai/imagenes/Opciones.jpg", "/samurai/imagenes/Opciones1.jpg");
+        botonTutorial = new Boton("/samurai/imagenes/Tutorial.jpg", "/samurai/imagenes/Tutorial1.jpg");
+        botonCreditos = new Boton("/samurai/imagenes/Creditos.jpg", "/samurai/imagenes/Creditos1.jpg");
+        botonSalir = new Boton("/samurai/imagenes/Salir.jpg", "/samurai/imagenes/Salir1.jpg");
 
 
 
