@@ -52,6 +52,14 @@ public class ManejadorSekai implements Animable{
                 efectosEspada.ataque();
             }
             estoyAnimandome=true;
+        } else if(manejadorTec.firePresionado()){
+            if(efectosEspada.getSecuencia()==3){
+                efectosEspada.ataque();
+            }else{
+                efectosEspada.setAtaqueFrontal();
+                efectosEspada.ataque();
+            }
+            estoyAnimandome=true;
         }
 
 }
