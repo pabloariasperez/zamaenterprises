@@ -1,4 +1,3 @@
-
 //Proyecto zama enterprises
 // Autores Pablo, Erik y Daniel
 
@@ -6,6 +5,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
+import samurai.juego.*;
 
 public class Juego extends GameCanvas {
        public static int ALTO;
@@ -18,10 +18,9 @@ public class Juego extends GameCanvas {
          private Boton opcionSonido, opcionIdioma, opcionBorrar;
         private Menu menu, menuOpciones;
         private Fondo fondo;
-        private boolean arribaPresionado = false;
-        private boolean abajoPresionado = false;
-        private boolean opcionPresionado = false;
         private int pantalla = 0;
+
+        private ManejadorTeclado manejadorTec;
 
     public Juego(AppAnimacion midlet) {
 
@@ -46,6 +45,8 @@ public class Juego extends GameCanvas {
         animador = new Animador(this);
         animador.iniciar();
         this.dibujar();
+
+        manejadorTec = new ManejadorTeclado(this);
         
     }
 
@@ -81,9 +82,9 @@ public class Juego extends GameCanvas {
         menu.agregarBoton(botonContinuar);
         menu.agregarBoton(botonMultiplayer);
         menu.agregarBoton(botonPuntajes);
-  //      menu.agregarBoton(botonOpciones);
-//        menu.agregarBoton(botonTutorial);
-//        menu.agregarBoton(botonCreditos);
+        //menu.agregarBoton(botonOpciones);
+        //menu.agregarBoton(botonTutorial);
+        //menu.agregarBoton(botonCreditos);
         menu.agregarBoton(botonSalir);
 
 
@@ -105,46 +106,50 @@ public class Juego extends GameCanvas {
          flushGraphics();
     }
 
-    void actualizar() {
-        try {
+    void actualizar() throws InterruptedException {
+          try {
             fondo.actualizar();
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
         int teclado = getKeyStates();
 
-        if(!( (teclado & UP_PRESSED)!= 0 ) )
-                arribaPresionado = false;
+        //if(!( (teclado & UP_PRESSED)!= 0 ) )
+          //  manejadorTec.upPresionado(false);
+          //      arribaPresionado = false;
 
-        if(!( (teclado & FIRE_PRESSED)!= 0 ) )
-                opcionPresionado = false;
 
-        if(!( (teclado & DOWN_PRESSED)!= 0 ) )
-                abajoPresionado = false;
+        //if(!( (teclado & FIRE_PRESSED)!= 0 ) )
+          //      opcionPresionado = false;
 
-        if( !arribaPresionado & (teclado & UP_PRESSED)!= 0  ){
-            arribaPresionado = true;
+        //if(manejadorTec.checarPresionado()& manejadorTec.upPresionado(teclado)/*( (teclado & DOWN_PRESSED)!= 0 )*/ )
+
+          //      abajoPresionado = false;
+          
+        if( manejadorTec.upPresionado()){
+            //arribaPresionado = true;
             System.out.println("ARRIBA");
             menu.moverOpcion(-1);
             menuOpciones.moverOpcion(-1);
-        }else if(!abajoPresionado & (teclado & DOWN_PRESSED)!= 0 ){
-            abajoPresionado = true;
-            System.out.println("ABAJO");
-            menu.moverOpcion(1);
-            menuOpciones.moverOpcion(1);
         }
-        else if(!opcionPresionado & this.menu.getPosition() == 4  & (teclado & FIRE_PRESSED)!=0){
-            opcionPresionado = false;
-            this.cambiarPantalla();
-        }
-        
-        else if(!opcionPresionado & this.menu.getPosition() == 7  & (teclado & FIRE_PRESSED)!=0){
-            opcionPresionado = false;
-            midlet.destroyApp(true);
-            midlet.notifyDestroyed();
-        
 
-    }
+//        }else if(manejadorTec.downPresionado(teclado) ){
+//            //abajoPresionado = true;
+//            System.out.println("ABAJO");
+//            menu.moverOpcion(1);
+//            menuOpciones.moverOpcion(1);
+//        }
+//        else if(/*!opcionPresionado  & */this.menu.getPosition() == 4  & manejadorTec.firePresionado(teclado)/*(teclado & FIRE_PRESSED)!=0*/){
+//            opcionPresionado = false;
+//            this.cambiarPantalla();
+//        }
+        
+//        else if(!opcionPresionado  & this.menu.getPosition() == 7  & (teclado & FIRE_PRESSED)!=0){
+//            opcionPresionado = false;
+//            midlet.destroyApp(true);
+//            midlet.notifyDestroyed();
+//
+//    }
         this.dibujar();
     }
 
@@ -152,6 +157,5 @@ public class Juego extends GameCanvas {
         this.pantalla = 1;
         this.dibujar();
     }
-     }
 
-
+}
