@@ -51,6 +51,7 @@ public class Menu {
             }else{
                 this.botones[posicion+1].switchImage();
                 posicion++;
+                System.out.println(posicion);
             }
          }else{
             if( posicion - 1 < 0 ){
