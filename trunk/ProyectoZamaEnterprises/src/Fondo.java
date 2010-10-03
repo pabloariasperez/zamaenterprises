@@ -20,7 +20,7 @@ public class Fondo
     public void actualizar() throws InterruptedException {
 
         if(inicio){
-        Thread.sleep(2000);
+     //   Thread.sleep(2000);
         x= x-3000;
         this.inicio = false;
         }
