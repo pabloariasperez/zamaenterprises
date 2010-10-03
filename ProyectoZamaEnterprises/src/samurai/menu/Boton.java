@@ -1,3 +1,5 @@
+package samurai.menu;
+
 
 
 import java.io.IOException;

@@ -28,10 +28,11 @@ public class SpriteEfectos extends Sprite implements Animable {
 
         this.poscionX=posicionX;
         this.poscionY=posicionY;
+        this.setPosition(poscionX, poscionY);
 
         this.secuenciaIzq=new int[] {0,0,1,1,2,2,3,3,4,4,5,5,6,6};
         this.secuenciaDer=new int[] {7,7,8,8,9,9,10,10,11,11, 12,12,13,13};
-        this.secuenciaFrente=new int[] {14,14,14,14,15,15,15,15,15,15,16,16,16,16};
+        this.secuenciaFrente=new int[] {14,14,15,15,16,16,16,17,17,17,18,18,19,19};
     }
 
     public void dibujar(Graphics g) {
@@ -40,6 +41,7 @@ public class SpriteEfectos extends Sprite implements Animable {
 
    public void setAtaqueIzq(){
         this.setFrameSequence(secuenciaIzq);
+        this.setPosition(poscionX-40, poscionY-20);
         this.secuenciaSeleccionada=1;
     }
    public void ataque(){
@@ -48,11 +50,13 @@ public class SpriteEfectos extends Sprite implements Animable {
    }
     public void setAtaqueDer(){
         this.setFrameSequence(secuenciaDer);
+        this.setPosition(poscionX+20, poscionY-20);
         this.secuenciaSeleccionada=2;
     }
 
      public void setAtaqueFrontal(){
         this.setFrameSequence(secuenciaFrente);
+        this.setPosition(poscionX-10, poscionY-40);
         this.secuenciaSeleccionada=3;
     }
 
