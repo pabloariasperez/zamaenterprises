@@ -16,20 +16,22 @@ import samurai.menu.*;
  */
 public class MenuCanvas extends GameCanvas {
 
-    private Boton botonJugar,botonContinuar,botonMultiplayer,botonPuntajes,botonOpciones,botonTutorial,botonCreditos, botonSalir;
+    private Boton botonNuevo,botonContinuar,botonPuntajes,botonOpciones,botonSalir;
     private Boton opcionSonido, opcionIdioma, opcionBorrar;
+    private Indicador indicadorMenu, indicadorOpciones;
     public static int ALTO, ANCHO;
+    private Logo logoTec;
     private Fondo fondo;
     private AppAnimacion midlet;
     private Menu menu, menuActual;
     private Menu menuOpciones;
-     private Animador animador; 
+    private Animador animador; 
     private ManejadorTeclado manejadorTec;
-     private Graphics g;
-     private int pantallaActual;
-     private final int PANTALLA_PRINCIPAL;
-     private final int PANTALLA_OPCIONES;
-     private boolean banderaPresionado;
+    private Graphics g;
+    private int pantallaActual;
+    private final int PANTALLA_PRINCIPAL;
+    private final int PANTALLA_OPCIONES;
+    private boolean banderaPresionado;
 
     public MenuCanvas(AppAnimacion midlet){
         super(true);
@@ -44,17 +46,26 @@ public class MenuCanvas extends GameCanvas {
         this.pantallaActual = this.PANTALLA_PRINCIPAL;
 
         manejadorTec = new ManejadorTeclado(this);
-        menu = new Menu(5, this.ALTO);
-        menuOpciones = new Menu(3,this.ALTO);
-        this.menuActual = this.menu;
-
         try {
-        this.creaBotones();
-        this.creaBotonesOpciones();
-            fondo = new Fondo("/samurai/imagenes/tecsi.gif", 0, 0);
+            indicadorMenu = new Indicador("/samurai/imagenes/slash.png",15,((this.ALTO-60)/5)+27);
+            indicadorOpciones = new Indicador("/samurai/imagenes/slash.png",15,((this.ALTO-60)/3)+27);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        menu = new Menu(5, this.ALTO,indicadorMenu);
+        menuOpciones = new Menu(3,this.ALTO, indicadorOpciones);
+        this.menuActual = this.menu;
+
+        try {
+        fondo=new Fondo("/samurai/imagenes/fondo.png");
+        this.creaBotones();
+        this.creaBotonesOpciones();
+        logoTec = new Logo("/samurai/imagenes/tecsi.gif", 0, 0);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+       
 
         animador = new Animador(this);
         animador.iniciar();
@@ -64,9 +75,9 @@ public class MenuCanvas extends GameCanvas {
 
      public void creaBotonesOpciones(){
         try {
-            opcionSonido = new Boton("/samurai/imagenes/Sonido.jpg", "/samurai/imagenes/Sonido1.jpg");
-            opcionIdioma = new Boton("/samurai/imagenes/Idioma.jpg", "/samurai/imagenes/Idioma1.jpg");
-            opcionBorrar = new Boton("/samurai/imagenes/Borrar.jpg", "/samurai/imagenes/Borrar1.jpg");
+            opcionSonido = new Boton("/samurai/imagenes/Sonido.jpg");
+            opcionIdioma = new Boton("/samurai/imagenes/Idioma.jpg");
+            opcionBorrar = new Boton("/samurai/imagenes/Borrar.jpg");
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -79,18 +90,15 @@ public class MenuCanvas extends GameCanvas {
     }
 
     public void creaBotones() throws IOException{
-        botonJugar = new Boton("/samurai/imagenes/jugar.jpg", "/samurai/imagenes/Jugar1.jpg");
-        botonContinuar = new Boton("/samurai/imagenes/Continuar.jpg", "/samurai/imagenes/Continuar1.jpg");
-        botonMultiplayer = new Boton("/samurai/imagenes/Multiplayer.jpg", "/samurai/imagenes/Multiplayer1.jpg");
-        botonPuntajes = new Boton("/samurai/imagenes/Puntajes.jpg", "/samurai/imagenes/Puntajes1.jpg");
-        botonOpciones = new Boton("/samurai/imagenes/Opciones.jpg", "/samurai/imagenes/Opciones1.jpg");
-        botonTutorial = new Boton("/samurai/imagenes/Tutorial.jpg", "/samurai/imagenes/Tutorial1.jpg");
-        botonCreditos = new Boton("/samurai/imagenes/Creditos.jpg", "/samurai/imagenes/Creditos1.jpg");
-        botonSalir = new Boton("/samurai/imagenes/Salir.jpg", "/samurai/imagenes/Salir1.jpg");
+        botonNuevo = new Boton("/samurai/imagenes/botonNuevo.png");
+        botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
+        botonPuntajes = new Boton("/samurai/imagenes/botonPuntajes.png");
+        botonOpciones = new Boton("/samurai/imagenes/botonOpciones.png");
+        botonSalir = new Boton("/samurai/imagenes/Salir.jpg");
 
 
 
-        menu.agregarBoton(botonJugar);
+        menu.agregarBoton(botonNuevo);
         menu.agregarBoton(botonContinuar);
         //menu.agregarBoton(botonMultiplayer);
         menu.agregarBoton(botonPuntajes);
@@ -119,9 +127,9 @@ public class MenuCanvas extends GameCanvas {
 
     public void dibujar(){
 
-         g.setColor(0x00FFFFFF);
-         g.fillRect(0, 0, ANCHO, ALTO);
-         
+        g.setColor(0x00FFFFFF);
+        g.fillRect(0, 0, ANCHO, ALTO);
+        this.fondo.dibujar(g);
         this.menuActual.dibujar(g);
 
         this.flushGraphics();
