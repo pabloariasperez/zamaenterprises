@@ -1,37 +1,22 @@
 package samurai.menu;
 
-
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.Sprite;
 
-
-public class Fondo
+public class Fondo extends Sprite
 {
-    private Image imagen;
-    private int x, y;
-    private boolean inicio = true;
+    private int posicionX;
+    private int posicionY;
 
-    public Fondo(String archivo, int x, int y) throws IOException {
-
-        imagen = Image.createImage(archivo);
-        this.x = x;
-        this.y = y;
+    public Fondo(String archivoFondo) throws IOException{
+        super(Image.createImage(archivoFondo), 240,320);
+        this.posicionX=0;
+        this.posicionY=0;
+        this.setPosition(posicionX, posicionY);
     }
-
-    public void actualizar() throws InterruptedException {
-
-        if(inicio){
-     //   Thread.sleep(2000);
-        x= x-3000;
-        this.inicio = false;
-        }
-       
-    }
-
-    public void dibujar(Graphics g) {
-
-        
-        g.drawImage(imagen, x, y, Graphics.LEFT|Graphics.TOP);
+    public void dibujar(Graphics g){
+        this.paint(g);
     }
 }
