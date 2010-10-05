@@ -1,8 +1,10 @@
 package samurai.menu;
 
 
+import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.Sprite;
 
 
 public class Menu {
@@ -10,18 +12,18 @@ public class Menu {
     private Indicador indicador;
     private int numButtons;
     private int posicion;
-    private Image titulo;
+    private Sprite titulo;
     private final int ALTO;
     static final int MARGEN_SELECCIONADO = 60;
-    private final int INDICADOR_DEF_X, AUMENTO_Y;
+    private final int INDICADOR_DEF_X=15;
 
-    public Menu( int totalButtons, int alto, Indicador indicador){
+    public Menu( int totalButtons, int alto, String archivoTitulo, String archivoIndicador) throws IOException{
         this.ALTO = alto;
         this.numButtons = 0;
+        titulo= new Sprite(Image.createImage(archivoTitulo));
+        titulo.setPosition(20, 20);
         botones = new Boton[ totalButtons ];
-        this.indicador=indicador;
-        this.INDICADOR_DEF_X=15;
-        this.AUMENTO_Y=27;
+        this.indicador= new Indicador (archivoIndicador,INDICADOR_DEF_X,this.MARGEN_SELECCIONADO);
     }
 
     public int getPosition(){
@@ -38,7 +40,7 @@ public class Menu {
 
         }
 
-        b.setY(60 + (numButtons*((this.ALTO-60)/getTotalButtons())));
+        b.setY(MARGEN_SELECCIONADO + (numButtons*((this.ALTO-MARGEN_SELECCIONADO)/getTotalButtons())));
         numButtons++;
     }
 
@@ -55,9 +57,14 @@ public class Menu {
 
     public void dibujar(Graphics g) {
         this.indicador.dibujar(g);
+        this.titulo.paint(g);
         for(int i =0; i<this.numButtons; i++){
              botones[i].dibujar(g);
          }
+    }
+    public void moverIndicador(int posicion){
+        int nuevaY=this.MARGEN_SELECCIONADO+(posicion*((this.ALTO-this.MARGEN_SELECCIONADO)/getTotalButtons()));
+        this.indicador.cambiarPosicion(this.INDICADOR_DEF_X,nuevaY );
     }
 
      public void moverOpcion(int haciaDonde){
@@ -65,22 +72,22 @@ public class Menu {
          if( haciaDonde == 1){
             if( posicion + 1 > getTotalButtons() - 1 ){
                 this.botones[0].switchImage();
-                this.indicador.cambiarPosicion(this.INDICADOR_DEF_X, ((this.ALTO-60)/getTotalButtons())+this.AUMENTO_Y);
                 posicion=0;
+                moverIndicador(posicion);
             }else{
                 this.botones[posicion+1].switchImage();
                 posicion++;
-                this.indicador.cambiarPosicion(this.INDICADOR_DEF_X, ((this.ALTO-60)/getTotalButtons())*(posicion+1)+this.AUMENTO_Y);
+                moverIndicador(posicion);
             }
          }else{
             if( posicion - 1 < 0 ){
                 this.botones[getTotalButtons()-1].switchImage();
                 posicion=getTotalButtons()-1;
-                this.indicador.cambiarPosicion(this.INDICADOR_DEF_X, ((this.ALTO-60)/getTotalButtons())*(posicion+1)+this.AUMENTO_Y);
+                moverIndicador(posicion);
             }else{
                 this.botones[posicion-1].switchImage();
                 posicion--;
-                this.indicador.cambiarPosicion(this.INDICADOR_DEF_X, ((this.ALTO-60)/getTotalButtons())*(posicion+1)+this.AUMENTO_Y);
+                moverIndicador(posicion);
             }
          }
      }
