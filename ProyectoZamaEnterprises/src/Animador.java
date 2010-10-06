@@ -6,7 +6,7 @@ public class Animador implements Runnable
     private boolean corriendo;
     private Thread thread;
 
-    private final int FPS = 50;
+    private final int FPS = 60;
     private final int RETARDO = 1000/FPS;
 //
     public Animador(Juego juego) {

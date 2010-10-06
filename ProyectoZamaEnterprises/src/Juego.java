@@ -7,8 +7,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
-import samurai.animacion.SpriteEfectos;
-import samurai.animacion.SpriteSekai;
+import samurai.animacion.*;
 import samurai.juego.*;
 import samurai.escenarios.*;
 
@@ -23,7 +22,11 @@ public class Juego extends GameCanvas {
         private int pantalla = 0;
 
         private ManejadorTeclado manejadorTec;
-        
+
+        private SpriteEnemigo enemigo;
+        private ManejadorEnemigo manejadorEnemigo;
+
+
         private SpriteSekai sekai;
         private SpriteEfectos efectos;
         private ManejadorSekai manejadorSekai;
@@ -42,7 +45,10 @@ public class Juego extends GameCanvas {
        
         manejadorTec = new ManejadorTeclado(this);
         try {
-            
+            enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png",60,60);
+            manejadorEnemigo = new ManejadorEnemigo(enemigo,manejadorTec);
+
+
             sekai= new SpriteSekai("/samurai/imagenes/sekai.png",(this.getWidth()/2)-20, this.getHeight()-60);
             efectos= new SpriteEfectos("/samurai/imagenes/SpritesEfectos.png",(this.getWidth()/2)-20, this.getHeight()-60);
             manejadorSekai= new ManejadorSekai(sekai, efectos, manejadorTec);
@@ -63,7 +69,8 @@ public class Juego extends GameCanvas {
       //       this.inicio = false;
        //  }
          g.fillRect(0, 0, ANCHO, ALTO);
-         
+         manejadorEnemigo.dibujar(g);
+
          manejadorSekai.dibujar(g);
          flushGraphics();
     }
@@ -71,6 +78,7 @@ public class Juego extends GameCanvas {
     void actualizar() throws InterruptedException {
           
         manejadorSekai.actualizar();
+        manejadorEnemigo.actualizar();
         if( manejadorTec.upPresionado()){
 
         }else if(manejadorTec.downPresionado() ){
