@@ -13,7 +13,7 @@ public class Boton {
      static final int DEF_X = 10;
      private int x, y;
 
-     //Recibe como argumento la coordenada Y, y las direcciones de las imágenes del botón para cuando está seleccionado y para cuando no.
+     //Recibe como argumento el nombre del archivo de la imagen
      public Boton(String file) throws IOException{
         this.image = Image.createImage(file);
         this.x = Boton.DEF_X;
@@ -37,7 +37,7 @@ public class Boton {
       public int getX(){
           return this.x;
       }
-      
+      //Cambia la x donde se dibuja el boton cuando este esta seleccionado
     void switchImage() {
         isSelected = !isSelected;
         if( isSelected )

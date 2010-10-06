@@ -10,6 +10,7 @@ public class Fondo extends Sprite
     private int posicionX;
     private int posicionY;
 
+    //Recibe como parametro el nombre de la imagen a utilizar como fondo
     public Fondo(String archivoFondo) throws IOException{
         super(Image.createImage(archivoFondo), 240,320);
         this.posicionX=0;
