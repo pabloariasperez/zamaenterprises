@@ -25,7 +25,7 @@ public class Menu {
         botones = new Boton[ totalButtons ];
         this.indicador= new Indicador (archivoIndicador,INDICADOR_DEF_X,this.MARGEN_SELECCIONADO);
     }
-
+    //Regresa la posicion del boton
     public int getPosition(){
         return this.posicion;
     }
@@ -43,7 +43,7 @@ public class Menu {
         b.setY(MARGEN_SELECCIONADO + (numButtons*((this.ALTO-MARGEN_SELECCIONADO)/getTotalButtons())));
         numButtons++;
     }
-
+    //Regresa el numero total de botones que hay en el menú
     public int getTotalButtons(){
         return this.botones.length;
     }
