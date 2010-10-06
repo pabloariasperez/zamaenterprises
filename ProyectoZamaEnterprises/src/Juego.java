@@ -41,7 +41,6 @@ public class Juego extends GameCanvas {
         this.ALTO = this.getHeight();
 
         g = this.getGraphics();
-
        
         manejadorTec = new ManejadorTeclado(this);
         try {
@@ -62,6 +61,10 @@ public class Juego extends GameCanvas {
        
         
     }
+    public Animador getAnimador(){
+        return this.animador;
+    }
+
 
     void dibujar() {
          g.setColor(0x00FFFFFF);
@@ -97,5 +100,7 @@ public class Juego extends GameCanvas {
         this.pantalla = 1;
         this.dibujar();
     }
+
+  
 
 }

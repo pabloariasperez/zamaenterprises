@@ -48,7 +48,6 @@ public class SpriteEnemigo  extends Sprite implements Animable {
             this.setFrameSequence(secuenciaMediaFrente);
 
         this.nextFrame();
-        System.out.println("entrande");
         
 
     }

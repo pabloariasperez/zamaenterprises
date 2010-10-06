@@ -115,6 +115,10 @@ public class MenuCanvas extends GameCanvas {
 
     }
 
+    public Animador getAnimador(){
+        return this.animador;
+    }
+
 
     public void dibujar(){
 
