@@ -17,7 +17,7 @@ public class Juego extends GameCanvas {
        private AppAnimacion midlet;
        private Animador animador; 
        private Graphics g;
-       
+      
        
         private ManejadorTeclado manejadorTec;
         private ManejadorColision colisionEnemigo;
