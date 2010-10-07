@@ -5,7 +5,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 
-public class SpriteEfectos extends Sprite implements Animable {
+public class SpriteEspada extends Sprite implements Animable {
 
     public int[] secuenciaIzq;
     int[] secuenciaDer;
@@ -13,7 +13,7 @@ public class SpriteEfectos extends Sprite implements Animable {
     private int poscionX;
     private int poscionY;
     private int secuenciaSeleccionada;
-    public SpriteEfectos(String archivoEfectos, int posicionX, int posicionY) throws IOException{
+    public SpriteEspada(String archivoEfectos, int posicionX, int posicionY) throws IOException{
 
         super(Image.createImage(archivoEfectos), 480/8, 180/3);
 

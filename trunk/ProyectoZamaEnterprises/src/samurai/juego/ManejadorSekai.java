@@ -7,7 +7,7 @@ public class ManejadorSekai implements Animable{
     private final int NUMERO_FRAMES_ATAQUE = 14;
 
     private SpriteSekai sekai;
-    private SpriteEfectos efectosEspada;
+    private SpriteEspada efectosEspada;
     private ManejadorTeclado manejadorTec;
     private boolean estoyAnimandome;
     private final int SECUENCIA_IZQ;
@@ -16,7 +16,7 @@ public class ManejadorSekai implements Animable{
     int frameActual;
 
     //Recibe como parametros al sprite de sekai, al igual que los Sprites de la espada y efecto, y un manejador de teclado
-    public ManejadorSekai(SpriteSekai sekai, SpriteEfectos efectos, ManejadorTeclado manejadorTec){
+    public ManejadorSekai(SpriteSekai sekai, SpriteEspada efectos, ManejadorTeclado manejadorTec){
         this.sekai=sekai;
         this.efectosEspada=efectos;
         this.manejadorTec=manejadorTec;
@@ -51,7 +51,7 @@ public class ManejadorSekai implements Animable{
             //si lo es inicia el ataque
             if(efectosEspada.getSecuencia()==this.SECUENCIA_IZQ){
                 efectosEspada.ataque();
-            //si no es la izquierda cambia la secuencia e inicial el ataque
+            //si no es la izquierda cambia la secuencia e inicia el ataque
             }else{
                 efectosEspada.setAtaqueIzq();
                 efectosEspada.ataque();
@@ -63,19 +63,19 @@ public class ManejadorSekai implements Animable{
             //si lo es inicia el ataque
             if(efectosEspada.getSecuencia()==this.SECUENCIA_DER){
                 efectosEspada.ataque();
-            //si no es la derecha cambia la secuencia e inicial el ataque
+            //si no es la derecha cambia la secuencia e inicia el ataque
             }else{
                 efectosEspada.setAtaqueDer();
                 efectosEspada.ataque();
             }
             estoyAnimandome=true;
           //Pregunta si se presiono la tecla fire
-        } else if(manejadorTec.firePresionado()){
+        } else if(manejadorTec.upPresionado()){
             //pregunta si la secuencia seleccionada del sprite es la correspondiente al ataque frontal
             //si lo es inicia el ataque
             if(efectosEspada.getSecuencia()==this.SECUENCIA_FRONTAL){
                 efectosEspada.ataque();
-            //si no es la frontal cambia la secuencia e inicial el ataque
+            //si no es la frontal cambia la secuencia e inicia el ataque
             }else{
                 efectosEspada.setAtaqueFrontal();
                 efectosEspada.ataque();
