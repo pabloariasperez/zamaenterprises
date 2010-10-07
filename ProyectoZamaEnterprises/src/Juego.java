@@ -73,8 +73,9 @@ public class Juego extends GameCanvas {
         // if(this.inicio){
       //       this.inicio = false;
        //  }
-         g.fillRect(0, 0, ANCHO, ALTO);
-
+         
+         //g.fillRect(0, 0, ANCHO, ALTO);
+         luna.dibujar(g);
          manejadorSekai.dibujar(g);
          flushGraphics();
     }
