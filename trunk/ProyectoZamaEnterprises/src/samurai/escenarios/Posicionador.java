@@ -23,7 +23,12 @@ public class Posicionador {
     //Parámetro "parametro" marca que tanto se marca la curva exponencial.
     public int exponencial( Coordenada y, float parametro){
         //Mi súper mega función patentada por la UNAM.
-        return Posicionador.redondearEntero( ( parametro * Posicionador.potencia(Math.E , (ALTO_PANTALLA - y.valor) / ALTO_PANTALLA ) ) * ( ALTO_PANTALLA - y.valor ) / ALTO_PANTALLA );
+        float soyExponente = ((float)ALTO_PANTALLA - (float)y.valor) / (float)ALTO_PANTALLA;
+        Real soyReal = new Real( String.valueOf( soyExponente )) ;
+        soyReal.exp();
+        soyReal.mul(new Real( String.valueOf(parametro * ( ALTO_PANTALLA - y.valor ) / ALTO_PANTALLA)));
+
+        return soyReal.toInteger();
     }
 
     //Desarrollamos el posicionador para casos recta
@@ -51,17 +56,17 @@ public class Posicionador {
     }
 
     //Función potencia que cubrirá con las necesidades de las funciones de posicion
-    private static int potencia( double base, int exponente){
+    private static float potencia( double base, int exponente){
         //Se pregunta si es positivo o negativo. Si es positivo se procede con el algoritmo común.
         if( exponente >= 0){
             float potencia = 1;         //Guardaremos el acumulado de la potencia. El que valga 1 es importante. { a^0 = 1 | a != 0 }
             for( int i = 0; i < exponente; i++){
                 potencia *= base;       //Vamos multiplicando una tras otra.
             }
-            return redondearEntero(potencia);
+            return potencia;
         //Si es negativo entonces devolvemos 1 entre el valor obtenico con exponente positivo.
         }else{
-            return redondearEntero( 1 / potencia(base, (-1)*exponente));
+            return 1 / potencia(base, (-1)*exponente);
         }
     }
 }

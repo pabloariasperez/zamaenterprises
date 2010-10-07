@@ -32,6 +32,9 @@ public class Juego extends GameCanvas {
         int colorLaterales;
         Coordenada yAlto;
         Coordenada xDeFuncion;
+        Coordenada[][] arregloCoordenadasX;
+        int retrasoCamino;
+
         private Posicionador posicionador;
         private SpriteSekai sekai;
         private SpriteEspada efectos;
@@ -56,9 +59,17 @@ public class Juego extends GameCanvas {
 
         manejadorTec = new ManejadorTeclado(this);
         manejadorEnemigos = new ManejadorEnemigos();
+
         variante = 10;
         colorLaterales = 0x0;
         yAlto = new Coordenada( 0 );
+        retrasoCamino = 0;
+        arregloCoordenadasX = new Coordenada[ALTO - 50][2];
+        for( int y=0; y < ALTO - 50; y++ ){
+            arregloCoordenadasX[y][0] = new Coordenada( 0 );
+            arregloCoordenadasX[y][1] = new Coordenada( 0 );
+        }
+        
         try {
             enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png",60,60);
             posicionador = new Posicionador(this);
@@ -84,7 +95,7 @@ public class Juego extends GameCanvas {
 
 
     void dibujar() {
-         g.setColor(0x00FFFFFF);
+         g.setColor(0x00654321);
 
          g.fillRect(0, 0, ANCHO, ALTO);
 
@@ -92,23 +103,38 @@ public class Juego extends GameCanvas {
          manejadorSekai.dibujar(g);
          manejadorEnemigos.dibujar(g);
 
+         //PRUEBA DE ESCENARIO
+         colorLaterales = 0x336600;
 
-         colorLaterales = 0x33FF00;
+         if( variante < 1200 ){
+            variante++;
+        }else{
+            variante = 10;
+        }
+
+        if(retrasoCamino%12==0){
+            for( int y = 50; y < ALTO; y++ ){ //60 DEBERÍA SER ALTO_FONDO
+                yAlto.setValor( y );
+                arregloCoordenadasX[y-50][0].setValor( posicionador.exponencial(  yAlto, (float) variante/10) + 30 );
+                arregloCoordenadasX[y-50][1].setValor( posicionador.incrementoAncho( yAlto, 180, 40, 50) +arregloCoordenadasX[y-50][0].valor );
+            }
+            retrasoCamino = 0;
+            System.gc();
+        }
+        retrasoCamino++;
 
          for( int y = 50; y < ALTO; y++ ){ //60 DEBERÍA SER ALTO_FONDO
             g.setColor( colorLaterales );
-            colorLaterales += 0x1;
-            if( variante < 60 ){
-                variante++;
-            }else{
-                variante = 10;
+            if( y%3 == 0){
+                colorLaterales += 0x100;
             }
             yAlto.setValor( y );
-            xDeFuncion = new Coordenada( posicionador.recta(  yAlto, (float) variante) + 30 );
-            g.drawLine( 0 , y, xDeFuncion.valor , y);
 
-            g.drawLine( ANCHO , yAlto.valor, posicionador.incrementoAncho( yAlto, 180, 40, 50) + xDeFuncion.valor , yAlto.valor);
+            g.drawLine( 0 , y, arregloCoordenadasX[y-50][0].valor , y);
+            g.drawLine( ANCHO , yAlto.valor, arregloCoordenadasX[y-50][1].valor, yAlto.valor);
         }
+
+         //FIN PRUEBA DE ESCENARIO
          
          flushGraphics();
     }
