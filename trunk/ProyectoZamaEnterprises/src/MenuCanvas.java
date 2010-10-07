@@ -30,6 +30,7 @@ public class MenuCanvas extends GameCanvas {
     private int pantallaActual;
     private final int PANTALLA_PRINCIPAL;
     private final int PANTALLA_OPCIONES;
+    private boolean inicio;
 
     public MenuCanvas(AppAnimacion midlet){
         super(true);
@@ -43,7 +44,7 @@ public class MenuCanvas extends GameCanvas {
         this.pantallaActual = this.PANTALLA_PRINCIPAL;
 
         manejadorTec = new ManejadorTeclado(this);
-       
+       this.inicio=true;
         
         
 
@@ -53,7 +54,9 @@ public class MenuCanvas extends GameCanvas {
         fondo=new Fondo("/samurai/imagenes/fondo.png");
         this.creaBotones();
         this.creaBotonesOpciones();
-        logoTec = new Logo("/samurai/imagenes/tecsi.gif", 0, 0);
+        System.out.println("creando logo");
+        logoTec = new Logo("/samurai/imagenes/tecsi.gif", -40, 0);
+       System.out.println("logo creado");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -97,7 +100,7 @@ public class MenuCanvas extends GameCanvas {
         //menu.agregarBoton(botonTutorial);
         //menu.agregarBoton(botonCreditos);
         menu.agregarBoton(botonSalir);
-
+        
 
     }
     public void cambiarPantalla(){
@@ -124,15 +127,24 @@ public class MenuCanvas extends GameCanvas {
 
         g.setColor(0x00FFFFFF);
         g.fillRect(0, 0, ANCHO, ALTO);
+
+        
+        
+        
+            
         this.fondo.dibujar(g);
         this.menuActual.dibujar(g);
-
+        this.logoTec.dibujar(g);
         this.flushGraphics();
 
     }
 // ahi va
     public void actualizar(){
-
+        try {
+            logoTec.actualizar();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
         if( manejadorTec.upPresionado()){
             //arribaPresionado = true;
             System.out.println("ARRIBA");

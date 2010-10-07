@@ -17,14 +17,18 @@ public class Logo
         imagen = Image.createImage(archivo);
         this.x = x;
         this.y = y;
+
     }
 
     public void actualizar() throws InterruptedException {
 
         if(inicio){
-     //   Thread.sleep(2000);
+
+        Thread.sleep(3000);
         x= x-3000;
         this.inicio = false;
+        
+
         }
        
     }
@@ -33,5 +37,6 @@ public class Logo
 
         
         g.drawImage(imagen, x, y, Graphics.LEFT|Graphics.TOP);
+        
     }
 }

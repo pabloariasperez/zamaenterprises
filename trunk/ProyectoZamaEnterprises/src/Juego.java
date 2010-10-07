@@ -57,7 +57,7 @@ public class Juego extends GameCanvas {
        escenario=new Escenario(manejadorEnemigos);
        escenario.agregarFondo(fondo);
         manejadorTec = new ManejadorTeclado(this);
-        variante = 10;
+        variante = 0;
         colorLaterales = 0x0;
         yAlto = new Coordenada( 0 );
         retrasoCamino = 0;
@@ -102,16 +102,16 @@ public class Juego extends GameCanvas {
          //PRUEBA DE ESCENARIO
          colorLaterales = 0x336600;
 
-         if( variante < 1200 ){
+         if( variante < 100 ){
             variante++;
         }else{
-            variante = 10;
+            variante = 00;
         }
 
         if(retrasoCamino%12==0){
             for( int y = 50; y < ALTO; y++ ){ //60 DEBERÍA SER ALTO_FONDO
                 yAlto.setValor( y );
-                arregloCoordenadasX[y-50][0].setValor( posicionador.exponencial(  yAlto, (float) variante/10) + 30 );
+                arregloCoordenadasX[y-50][0].setValor( posicionador.recta(  yAlto, (float) variante - (yAlto.valor*yAlto.valor)/ALTO) + 30 );
                 arregloCoordenadasX[y-50][1].setValor( posicionador.incrementoAncho( yAlto, 180, 40, 50) +arregloCoordenadasX[y-50][0].valor );
             }
             retrasoCamino = 0;
