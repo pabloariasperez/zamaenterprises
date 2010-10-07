@@ -1,3 +1,8 @@
+package samurai.juego;
+
+
+import samurai.juego.*;
+
 
 public class Animador implements Runnable
 {
