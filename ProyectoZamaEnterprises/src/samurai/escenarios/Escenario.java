@@ -19,10 +19,10 @@ public class Escenario {
     private ManejadorEnemigos manejadorEnemigos;
     private ManejadorSekai manejadorSekai;
 
-    public Escenario(){
+    public Escenario(ManejadorEnemigos manejadorEnemigos){
 
         manejadorFondos = new ManejadorFondos();
-        manejadorEnemigos = new ManejadorEnemigos();
+        this.manejadorEnemigos = manejadorEnemigos;
         manejadorSekai = null;
 
     }
@@ -64,8 +64,12 @@ public class Escenario {
         }
         if(!manejadorEnemigos.isEmpty()){
             manejadorEnemigos.actualizar();
-        }
-    }
 
+        }
+
+    }
+    public int getSizeEnemigos(){
+        return manejadorEnemigos.getSize();
+    }
 
 }

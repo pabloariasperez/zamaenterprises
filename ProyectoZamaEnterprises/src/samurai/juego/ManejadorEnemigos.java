@@ -21,6 +21,7 @@ public class ManejadorEnemigos {
     }
     public void kill(SpriteEnemigo enemigo){
         enemigosEnPantalla.removeElement(enemigo);
+        enemigo=null;
         System.gc();
     }
     public void dibujar(Graphics g){
@@ -36,5 +37,8 @@ public class ManejadorEnemigos {
 
     public boolean isEmpty(){
         return this.enemigosEnPantalla.isEmpty();
+    }
+    public int getSize(){
+        return enemigosEnPantalla.size();
     }
 }

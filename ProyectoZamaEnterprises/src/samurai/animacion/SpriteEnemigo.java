@@ -25,8 +25,6 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         this.setFrameSequence(this.secuenciaFondo);
 
        this.setPosition(posicionX, posicionY);
-       this.posicionX = posicionX;
-       this.posicionY = posicionY;
     }
 
     public void dibujar(Graphics g) {
@@ -46,6 +44,13 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         }
         this.setPosition(posicionX, posicionY);
         this.nextFrame();
+    }
+
+    public void cambiarPosicion(int posicionX, int posicionY){
+        this.posicionX=posicionX;
+        this.posicionY=posicionY;
+        this.setPosition(posicionX, posicionY);
+        this.setFrameSequence(secuenciaFondo);
     }
 
 }
