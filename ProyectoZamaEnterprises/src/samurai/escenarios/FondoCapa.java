@@ -38,5 +38,17 @@ public class FondoCapa implements Animable{
                     this.posicionX=0;
         g.drawImage(imagen,posicionX,posicionY, g.LEFT|g.TOP);
     }
-
+//public void actualizar(){
+//        x--;
+//
+//        if ( x<=-imagen.getWidth()) { // Si ya se salió completamente la imagen
+//            x=0;    // Reinicia
+//
+//        }
+//    }
+//    public void dibujar(Graphics g){
+//        g.drawImage(imagen, x, y, Graphics.LEFT|Graphics.TOP);
+//        if(x<-(imagen.getWidth()-Juego1.ANCHO))
+//            g.drawImage(imagen, x+imagen.getWidth(), y, Graphics.LEFT|Graphics.TOP);
+//    }
 }
