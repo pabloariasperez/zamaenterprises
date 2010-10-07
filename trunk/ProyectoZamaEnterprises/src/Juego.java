@@ -26,6 +26,9 @@ public class Juego extends GameCanvas {
         private SpriteEnemigo enemigo;
         private ManejadorEnemigos manejadorEnemigos;
 
+
+        private FondoCapa luna;
+
         private SpriteSekai sekai;
         private SpriteEspada efectos;
         private ManejadorSekai manejadorSekai;
@@ -40,7 +43,7 @@ public class Juego extends GameCanvas {
         this.ALTO = this.getHeight();
 
         g = this.getGraphics();
-       
+       luna = new FondoCapa("/samurai/imagenes/fondoLuna.png",-1,0);
         manejadorTec = new ManejadorTeclado(this);
         manejadorEnemigos = new ManejadorEnemigos();
         try {

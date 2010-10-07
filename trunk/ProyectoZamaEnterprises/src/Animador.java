@@ -5,7 +5,7 @@ public class Animador implements Runnable
     private MenuCanvas menu;
     private boolean corriendo;
     private Thread thread;
-
+    long tiempoInicial,tiempoFinal;
     private final int FPS = 60;
     private final int RETARDO = 1000/FPS;
 //
@@ -31,7 +31,7 @@ public class Animador implements Runnable
 
         while ( corriendo ) {
 
-            long ini = System.currentTimeMillis();
+            tiempoInicial = System.currentTimeMillis();
             try {
                 if(this.juego!=null){
                 juego.actualizar();
@@ -48,11 +48,11 @@ public class Animador implements Runnable
             else{
             menu.dibujar();
             }
-            long fin = System.currentTimeMillis();
+            tiempoFinal = System.currentTimeMillis();
 
             try {
-                if ( RETARDO - (fin-ini) >= 0 ) 
-                    Thread.sleep(RETARDO - (fin-ini));
+                if ( RETARDO - (tiempoFinal-tiempoInicial) >= 0 )
+                    Thread.sleep(RETARDO - (tiempoFinal-tiempoInicial));
             } catch (InterruptedException ex) { }
         }
     }
