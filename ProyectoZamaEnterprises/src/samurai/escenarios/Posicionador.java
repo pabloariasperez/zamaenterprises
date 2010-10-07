@@ -41,20 +41,19 @@ public class Posicionador {
     //Desarrollamos un posicionador en función de mla reducción del camino
     public int incrementoAncho( Coordenada y, int anchoInicial, int porcentajeAnchoFinal, int alturaFondo){
         //Mi súper mega función patentada por el IPN. Sin corolarios.
-        return anchoInicial*(1-((100-porcentajeAnchoFinal)/100)*((ALTO_PANTALLA - y.valor)/(ALTO_PANTALLA-alturaFondo)));
+        return Posicionador.redondearEntero( (float)anchoInicial*((float)1-(((float)100-(float)porcentajeAnchoFinal)/(float)100)*((float)(ALTO_PANTALLA-y.valor)/(float)(ALTO_PANTALLA-alturaFondo))) );
     }
 
     //Función para redondear enteros
     public static int redondearEntero( float numeroReal ){
         numeroReal *= 10;       //Multiplicamos nuestro número por 10 para obtener a favor un decimal.
-        int entero = (int) (numeroReal-(numeroReal%10))/10;         //Aplicamos el algoritmo de la división para obtener el puro entero de división. Hay riesgo de perder precisión.
-        return entero;
+        return (int) (numeroReal-(numeroReal%10))/10;         //Aplicamos el algoritmo de la división para obtener el puro entero de división. Hay riesgo de perder precisión.;
     }
 
     //Función potencia que cubrirá con las necesidades de las funciones de posicion
     private static int potencia( double base, int exponente){
         //Se pregunta si es positivo o negativo. Si es positivo se procede con el algoritmo común.
-        if( exponente > 0){
+        if( exponente >= 0){
             float potencia = 1;         //Guardaremos el acumulado de la potencia. El que valga 1 es importante. { a^0 = 1 | a != 0 }
             for( int i = 0; i < exponente; i++){
                 potencia *= base;       //Vamos multiplicando una tras otra.
@@ -62,7 +61,7 @@ public class Posicionador {
             return redondearEntero(potencia);
         //Si es negativo entonces devolvemos 1 entre el valor obtenico con exponente positivo.
         }else{
-            return redondearEntero( 1 / potencia(base, -exponente));
+            return redondearEntero( 1 / potencia(base, (-1)*exponente));
         }
     }
 }
