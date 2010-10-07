@@ -37,15 +37,15 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     public void mover() {
 
         this.posicionY++;
-        if(this.posicionY>70)
+        if(this.posicionY==90){
             this.setFrameSequence(secuenciaMedia);
-        if(this.posicionY>90)
+        }else if(this.posicionY==120){
             this.setFrameSequence(secuenciaMediaFrente);
-
+        }else if(this.posicionY==150){
+            this.setFrameSequence(secuenciaFrente);
+        }
         this.setPosition(posicionX, posicionY);
         this.nextFrame();
-
-
     }
 
 }
