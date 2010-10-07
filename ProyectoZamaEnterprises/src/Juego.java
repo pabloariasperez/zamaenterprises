@@ -18,9 +18,7 @@ public class Juego extends GameCanvas {
        private Animador animador; 
        private Graphics g;
        
-        
-        private int pantalla = 0;
-
+       
         private ManejadorTeclado manejadorTec;
 
         private SpriteEnemigo enemigo;
@@ -48,14 +46,14 @@ public class Juego extends GameCanvas {
         manejadorEnemigos = new ManejadorEnemigos();
         try {
             enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png",60,60);
-
-
             sekai= new SpriteSekai("/samurai/imagenes/sekai.png",(this.getWidth()/2)-20, this.getHeight()-60);
             efectos= new SpriteEspada("/samurai/imagenes/SpritesEfectos.png",(this.getWidth()/2)-20, this.getHeight()-60);
             manejadorSekai= new ManejadorSekai(sekai, efectos, manejadorTec);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        manejadorEnemigos=new ManejadorEnemigos();
+        manejadorEnemigos.agregarEnemigo(enemigo);
         animador = new Animador(this);
         animador.iniciar();
         this.dibujar();
@@ -77,13 +75,14 @@ public class Juego extends GameCanvas {
          //g.fillRect(0, 0, ANCHO, ALTO);
          luna.dibujar(g);
          manejadorSekai.dibujar(g);
+         manejadorEnemigos.dibujar(g);
          flushGraphics();
     }
 
     void actualizar() throws InterruptedException {
           
         manejadorSekai.actualizar();
-       
+        manejadorEnemigos.actualizar();
         this.dibujar();
     }
   
