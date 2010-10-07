@@ -33,4 +33,8 @@ public class ManejadorEnemigos {
             ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).mover();
         }
     }
+
+    public boolean isEmpty(){
+        return this.enemigosEnPantalla.isEmpty();
+    }
 }
