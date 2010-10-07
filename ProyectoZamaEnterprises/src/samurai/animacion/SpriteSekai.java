@@ -39,6 +39,7 @@ public class SpriteSekai extends Sprite implements Animable {
                 this.setPosition(posicionX, posicionY);
                 this.nextFrame();
             }
+            retrasoAnimacion = 0;
         }
         retrasoAnimacion++;
     }
