@@ -20,6 +20,7 @@ public class Juego extends GameCanvas {
        
        
         private ManejadorTeclado manejadorTec;
+        private ManejadorColision colisionEnemigo;
 
         private SpriteEnemigo enemigo;
         private ManejadorEnemigos manejadorEnemigos;
@@ -54,6 +55,7 @@ public class Juego extends GameCanvas {
         }
         manejadorEnemigos=new ManejadorEnemigos();
         manejadorEnemigos.agregarEnemigo(enemigo);
+        colisionEnemigo= new ManejadorColision(efectos, enemigo);
         animador = new Animador(this);
         animador.iniciar();
         this.dibujar();
@@ -68,7 +70,9 @@ public class Juego extends GameCanvas {
 
     void dibujar() {
          g.setColor(0x00FFFFFF);
+
          g.fillRect(0, 0, ANCHO, ALTO);
+
          luna.dibujar(g);
          manejadorSekai.dibujar(g);
          manejadorEnemigos.dibujar(g);
@@ -78,8 +82,12 @@ public class Juego extends GameCanvas {
     void actualizar() throws InterruptedException {
           
         manejadorSekai.actualizar();
-        luna.actualizar();
+        if(colisionEnemigo.colisionArmaEnemigo()==true){
+            manejadorEnemigos.kill(enemigo);
+        }else{
         manejadorEnemigos.actualizar();
+        }
+        luna.actualizar();
         this.dibujar();
     }
   
