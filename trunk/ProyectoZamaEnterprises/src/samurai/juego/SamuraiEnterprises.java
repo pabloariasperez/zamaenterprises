@@ -1,4 +1,8 @@
+package samurai.juego;
 
+
+import samurai.juego.MenuCanvas;
+import samurai.juego.Juego;
 import java.lang.Thread;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;

@@ -1,3 +1,5 @@
+package samurai.juego;
+
 //Proyecto zama enterprises
 // Autores Pablo, Erik y Daniel
 
