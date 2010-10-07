@@ -28,6 +28,11 @@ public class Juego extends GameCanvas {
         private ManejadorFondos manejadorFondos;
         private FondoCapa luna;
 
+        int variante;
+        int colorLaterales;
+        Coordenada yAlto;
+        Coordenada xDeFuncion;
+        private Posicionador posicionador;
         private SpriteSekai sekai;
         private SpriteEspada efectos;
         private ManejadorSekai manejadorSekai;
@@ -51,8 +56,12 @@ public class Juego extends GameCanvas {
 
         manejadorTec = new ManejadorTeclado(this);
         manejadorEnemigos = new ManejadorEnemigos();
+        variante = 10;
+        colorLaterales = 0x0;
+        yAlto = new Coordenada( 0 );
         try {
             enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png",60,60);
+            posicionador = new Posicionador(this);
             sekai= new SpriteSekai("/samurai/imagenes/sekai.png",(this.getWidth()/2)-20, this.getHeight()-60);
             efectos= new SpriteEspada("/samurai/imagenes/SpritesEfectos.png",(this.getWidth()/2)-20, this.getHeight()-60);
             manejadorSekai= new ManejadorSekai(sekai, efectos, manejadorTec);
@@ -82,6 +91,25 @@ public class Juego extends GameCanvas {
          manejadorFondos.dibujar(g);
          manejadorSekai.dibujar(g);
          manejadorEnemigos.dibujar(g);
+
+
+         colorLaterales = 0x33FF00;
+
+         for( int y = 50; y < ALTO; y++ ){ //60 DEBERÍA SER ALTO_FONDO
+            g.setColor( colorLaterales );
+            colorLaterales += 0x1;
+            if( variante < 60 ){
+                variante++;
+            }else{
+                variante = 10;
+            }
+            yAlto.setValor( y );
+            xDeFuncion = new Coordenada( posicionador.recta(  yAlto, (float) variante) + 30 );
+            g.drawLine( 0 , y, xDeFuncion.valor , y);
+
+            g.drawLine( ANCHO , yAlto.valor, posicionador.incrementoAncho( yAlto, 180, 40, 50) + xDeFuncion.valor , yAlto.valor);
+        }
+         
          flushGraphics();
     }
 
