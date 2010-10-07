@@ -5,13 +5,13 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 
-public class Fondo extends Sprite
+public class FondoMenu extends Sprite
 {
     private int posicionX;
     private int posicionY;
 
     //Recibe como parametro el nombre de la imagen a utilizar como fondo
-    public Fondo(String archivoFondo) throws IOException{
+    public FondoMenu(String archivoFondo) throws IOException{
         super(Image.createImage(archivoFondo), 240,320);
         this.posicionX=0;
         this.posicionY=0;

@@ -1,7 +1,7 @@
 //Proyecto zama enterprises
 // Autores Pablo, Erik y Daniel
 
-import samurai.menu.Fondo;
+import samurai.menu.FondoMenu;
 import samurai.menu.Boton;
 import java.io.IOException;
 import javax.microedition.lcdui.Command;
@@ -14,7 +14,7 @@ import samurai.escenarios.*;
 public class Juego extends GameCanvas {
        public static int ALTO;
        public static int ANCHO;
-       private AppAnimacion midlet;
+       private SamuraiEnterprises midlet;
        private Animador animador; 
        private Graphics g;
       
@@ -39,7 +39,7 @@ public class Juego extends GameCanvas {
         private SpriteEspada efectos;
         private ManejadorSekai manejadorSekai;
 
-    public Juego(AppAnimacion midlet) {
+    public Juego(SamuraiEnterprises midlet) {
 
         super(true);
 

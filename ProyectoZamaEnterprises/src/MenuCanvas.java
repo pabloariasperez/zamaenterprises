@@ -20,8 +20,8 @@ public class MenuCanvas extends GameCanvas {
     private Boton opcionSonido, opcionIdioma, opcionBorrar;
     public static int ALTO, ANCHO;
     private Logo logoTec;
-    private Fondo fondo;
-    private AppAnimacion midlet;
+    private FondoMenu fondo;
+    private SamuraiEnterprises midlet;
     private Menu menu, menuActual;
     private Menu menuOpciones;
     private Animador animador; 
@@ -32,7 +32,7 @@ public class MenuCanvas extends GameCanvas {
     private final int PANTALLA_OPCIONES;
     private boolean inicio;
 
-    public MenuCanvas(AppAnimacion midlet){
+    public MenuCanvas(SamuraiEnterprises midlet){
         super(true);
         this.midlet = midlet;
         this.setFullScreenMode(true);
@@ -51,7 +51,7 @@ public class MenuCanvas extends GameCanvas {
         try {
         menu = new Menu(5, this.ALTO,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png");
         menuOpciones = new Menu(3,this.ALTO,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png");
-        fondo=new Fondo("/samurai/imagenes/fondo.png");
+        fondo=new FondoMenu("/samurai/imagenes/fondo.png");
         this.creaBotones();
         this.creaBotonesOpciones();
         System.out.println("creando logo");
