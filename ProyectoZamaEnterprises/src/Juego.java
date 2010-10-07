@@ -24,11 +24,10 @@ public class Juego extends GameCanvas {
         private ManejadorTeclado manejadorTec;
 
         private SpriteEnemigo enemigo;
-        private ManejadorEnemigo manejadorEnemigo;
-
+        private ManejadorEnemigos manejadorEnemigos;
 
         private SpriteSekai sekai;
-        private SpriteEfectos efectos;
+        private SpriteEspada efectos;
         private ManejadorSekai manejadorSekai;
 
     public Juego(AppAnimacion midlet) {
@@ -43,13 +42,13 @@ public class Juego extends GameCanvas {
         g = this.getGraphics();
        
         manejadorTec = new ManejadorTeclado(this);
+        manejadorEnemigos = new ManejadorEnemigos();
         try {
             enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png",60,60);
-            manejadorEnemigo = new ManejadorEnemigo(enemigo,manejadorTec);
 
 
             sekai= new SpriteSekai("/samurai/imagenes/sekai.png",(this.getWidth()/2)-20, this.getHeight()-60);
-            efectos= new SpriteEfectos("/samurai/imagenes/SpritesEfectos.png",(this.getWidth()/2)-20, this.getHeight()-60);
+            efectos= new SpriteEspada("/samurai/imagenes/SpritesEfectos.png",(this.getWidth()/2)-20, this.getHeight()-60);
             manejadorSekai= new ManejadorSekai(sekai, efectos, manejadorTec);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -72,7 +71,6 @@ public class Juego extends GameCanvas {
       //       this.inicio = false;
        //  }
          g.fillRect(0, 0, ANCHO, ALTO);
-         manejadorEnemigo.dibujar(g);
 
          manejadorSekai.dibujar(g);
          flushGraphics();
@@ -81,26 +79,9 @@ public class Juego extends GameCanvas {
     void actualizar() throws InterruptedException {
           
         manejadorSekai.actualizar();
-        manejadorEnemigo.actualizar();
-        if( manejadorTec.upPresionado()){
-
-        }else if(manejadorTec.downPresionado() ){
-
-        }
-        else if(manejadorTec.firePresionado()){
-        }
-        
-        else if(manejadorTec.firePresionado()){
-
-    }
+       
         this.dibujar();
     }
-
-    public void cambiarPantalla(){
-        this.pantalla = 1;
-        this.dibujar();
-    }
-
   
 
 }
