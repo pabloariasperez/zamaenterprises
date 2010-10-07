@@ -18,15 +18,14 @@ public class Juego extends GameCanvas {
        private Animador animador; 
        private Graphics g;
       
-       
+       ManejadorEnemigos manejadorEnemigos;
         private ManejadorTeclado manejadorTec;
         private ManejadorColision colisionEnemigo;
 
         private SpriteEnemigo enemigo;
-        private ManejadorEnemigos manejadorEnemigos;
 
-        private ManejadorFondos manejadorFondos;
-        private FondoCapa luna;
+        Escenario escenario;
+        FondoCapa fondo;
 
         int variante;
         int colorLaterales;
@@ -52,14 +51,12 @@ public class Juego extends GameCanvas {
         g = this.getGraphics();
 
 
-       luna = new FondoCapa("/samurai/imagenes/fondoLuna.png",-1,0);
-       manejadorFondos = new ManejadorFondos();
-       manejadorFondos.agregarFondo(luna);
+       fondo = new FondoCapa("/samurai/imagenes/fondoLuna.png",-1,0);
+        manejadorEnemigos= new ManejadorEnemigos();
 
-
+       escenario=new Escenario(manejadorEnemigos);
+       escenario.agregarFondo(fondo);
         manejadorTec = new ManejadorTeclado(this);
-        manejadorEnemigos = new ManejadorEnemigos();
-
         variante = 10;
         colorLaterales = 0x0;
         yAlto = new Coordenada( 0 );
@@ -71,7 +68,8 @@ public class Juego extends GameCanvas {
         }
         
         try {
-            enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png",60,60);
+            enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png", 60, 60);
+            escenario.leerEnemigos(enemigo);
             posicionador = new Posicionador(this);
             sekai= new SpriteSekai("/samurai/imagenes/sekai.png",(this.getWidth()/2)-20, this.getHeight()-60);
             efectos= new SpriteEspada("/samurai/imagenes/SpritesEfectos.png",(this.getWidth()/2)-20, this.getHeight()-60);
@@ -79,8 +77,7 @@ public class Juego extends GameCanvas {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        manejadorEnemigos=new ManejadorEnemigos();
-        manejadorEnemigos.agregarEnemigo(enemigo);
+        
         colisionEnemigo= new ManejadorColision(efectos, enemigo);
         animador = new Animador(this);
         animador.iniciar();
@@ -98,8 +95,7 @@ public class Juego extends GameCanvas {
          g.setColor(0x00654321);
 
          g.fillRect(0, 0, ANCHO, ALTO);
-
-         manejadorFondos.dibujar(g);
+         escenario.dibujar(g);
          manejadorSekai.dibujar(g);
          manejadorEnemigos.dibujar(g);
 
@@ -140,14 +136,20 @@ public class Juego extends GameCanvas {
     }
 
     void actualizar() throws InterruptedException {
-          
+
         manejadorSekai.actualizar();
         if(colisionEnemigo.colisionArmaEnemigo()==true){
             manejadorEnemigos.kill(enemigo);
+            try {
+                enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png", 60, 60);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            escenario.leerEnemigos(enemigo);
         }else{
-        manejadorEnemigos.actualizar();
+            manejadorEnemigos.actualizar();
         }
-        manejadorFondos.actualizar();
+        escenario.actualizar();
         this.dibujar();
     }
   
