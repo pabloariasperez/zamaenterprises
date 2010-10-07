@@ -22,7 +22,7 @@ public class ManejadorEnemigos {
     public void kill(SpriteEnemigo enemigo){
         enemigosEnPantalla.removeElement(enemigo);
     }
-    public void pintar(Graphics g){
+    public void dibujar(Graphics g){
         for(int i=1; i<=enemigosEnPantalla.size();i++){
             ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).mover();
         }
