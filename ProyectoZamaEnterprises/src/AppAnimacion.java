@@ -19,6 +19,8 @@ public class AppAnimacion extends MIDlet {
         if(Display.getDisplay(this).getCurrent() == menu){
             juego = new Juego(this);
             Display.getDisplay(this).setCurrent(juego);
+            this.menu=null;
+            System.gc();
             
 
         }
