@@ -5,12 +5,12 @@ import javax.microedition.midlet.*;
 import samurai.escenarios.Real;
 import samurai.menu.Logo;
 
-public class AppAnimacion extends MIDlet {
+public class SamuraiEnterprises extends MIDlet {
 
     private Juego juego;
     private MenuCanvas menu;
 
-    public AppAnimacion() {
+    public SamuraiEnterprises() {
 
         menu = new MenuCanvas(this);
 
