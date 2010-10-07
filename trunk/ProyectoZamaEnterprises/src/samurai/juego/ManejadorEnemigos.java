@@ -21,6 +21,7 @@ public class ManejadorEnemigos {
     }
     public void kill(SpriteEnemigo enemigo){
         enemigosEnPantalla.removeElement(enemigo);
+        System.gc();
     }
     public void dibujar(Graphics g){
         for(int i=0; i<enemigosEnPantalla.size();i++){

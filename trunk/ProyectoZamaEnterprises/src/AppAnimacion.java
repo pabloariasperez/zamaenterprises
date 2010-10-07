@@ -2,6 +2,7 @@
 import java.lang.Thread;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;
+import samurai.escenarios.Real;
 
 public class AppAnimacion extends MIDlet {
 
@@ -10,9 +11,8 @@ public class AppAnimacion extends MIDlet {
 
     public AppAnimacion() {
 
-        
         menu = new MenuCanvas(this);
-
+       
     }
 
     public void switchDisplay(){
