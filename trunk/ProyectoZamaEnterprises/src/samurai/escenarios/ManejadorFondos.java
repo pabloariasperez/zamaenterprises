@@ -40,4 +40,8 @@ public class ManejadorFondos implements Animable {
             ((FondoCapa)fondos.elementAt(i)).actualizar();
         }
     }
+
+    public boolean isEmpty(){
+        return fondos.isEmpty();
+    }
 }
