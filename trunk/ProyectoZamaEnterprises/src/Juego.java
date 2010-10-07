@@ -68,11 +68,7 @@ public class Juego extends GameCanvas {
 
     void dibujar() {
          g.setColor(0x00FFFFFF);
-        // if(this.inicio){
-      //       this.inicio = false;
-       //  }
-         
-         //g.fillRect(0, 0, ANCHO, ALTO);
+         g.fillRect(0, 0, ANCHO, ALTO);
          luna.dibujar(g);
          manejadorSekai.dibujar(g);
          manejadorEnemigos.dibujar(g);
@@ -82,6 +78,7 @@ public class Juego extends GameCanvas {
     void actualizar() throws InterruptedException {
           
         manejadorSekai.actualizar();
+        luna.actualizar();
         manejadorEnemigos.actualizar();
         this.dibujar();
     }
