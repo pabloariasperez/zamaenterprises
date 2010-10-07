@@ -42,6 +42,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         if(this.posicionY>90)
             this.setFrameSequence(secuenciaMediaFrente);
 
+        this.setPosition(posicionX, posicionY);
         this.nextFrame();
 
 

@@ -23,12 +23,12 @@ public class ManejadorEnemigos {
         enemigosEnPantalla.removeElement(enemigo);
     }
     public void dibujar(Graphics g){
-        for(int i=1; i<=enemigosEnPantalla.size();i++){
-            ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).mover();
+        for(int i=0; i<enemigosEnPantalla.size();i++){
+            ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).dibujar(g);
         }
     }
     public void actualizar(){
-        for(int i=1; i<=enemigosEnPantalla.size();i++){
+        for(int i=0; i<enemigosEnPantalla.size();i++){
             ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).mover();
         }
     }
