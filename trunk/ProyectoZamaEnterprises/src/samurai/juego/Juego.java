@@ -3,19 +3,15 @@ package samurai.juego;
 //Proyecto zama enterprises
 // Autores Pablo, Erik y Daniel
 
-import samurai.menu.FondoMenu;
-import samurai.menu.Boton;
 import java.io.IOException;
-import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.animacion.*;
-import samurai.juego.*;
 import samurai.escenarios.*;
 
 public class Juego extends GameCanvas {
-       public static int ALTO;
-       public static int ANCHO;
+       public static int ALTO_PANTALLA;
+       public static int ANCHO_PANTALLA;
        private SamuraiEnterprises midlet;
        private Animador animador; 
        private Graphics g;
@@ -47,8 +43,8 @@ public class Juego extends GameCanvas {
 
         this.midlet = midlet;
         this.setFullScreenMode(true);
-        this.ANCHO = this.getWidth();
-        this.ALTO = this.getHeight();
+        Juego.ANCHO_PANTALLA = this.getWidth();
+        Juego.ALTO_PANTALLA = this.getHeight();
 
         g = this.getGraphics();
 
@@ -63,8 +59,8 @@ public class Juego extends GameCanvas {
         colorLaterales = 0x0;
         yAlto = new Coordenada( 0 );
         retrasoCamino = 0;
-        arregloCoordenadasX = new Coordenada[ALTO - 50][2];
-        for( int y=0; y < ALTO - 50; y++ ){
+        arregloCoordenadasX = new Coordenada[ALTO_PANTALLA - 50][2];
+        for( int y=0; y < ALTO_PANTALLA - 50; y++ ){
             arregloCoordenadasX[y][0] = new Coordenada( 0 );
             arregloCoordenadasX[y][1] = new Coordenada( 0 );
         }
@@ -96,7 +92,7 @@ public class Juego extends GameCanvas {
     void dibujar() {
          g.setColor(0x00654321);
 
-         g.fillRect(0, 0, ANCHO, ALTO);
+         g.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
          escenario.dibujar(g);
          manejadorSekai.dibujar(g);
          manejadorEnemigos.dibujar(g);
@@ -111,9 +107,9 @@ public class Juego extends GameCanvas {
         }
 
         if(retrasoCamino%12==0){
-            for( int y = 50; y < ALTO; y++ ){ //60 DEBERÍA SER ALTO_FONDO
+            for( int y = 50; y < ALTO_PANTALLA; y++ ){ //60 DEBERÍA SER ALTO_FONDO
                 yAlto.setValor( y );
-                arregloCoordenadasX[y-50][0].setValor( posicionador.recta(  yAlto, (float) variante - (yAlto.valor*yAlto.valor)/ALTO) + 30 );
+                arregloCoordenadasX[y-50][0].setValor( posicionador.recta(  yAlto, (float) variante - (yAlto.valor*yAlto.valor)/ALTO_PANTALLA) + 30 );
                 arregloCoordenadasX[y-50][1].setValor( posicionador.incrementoAncho( yAlto, 180, 40, 50) +arregloCoordenadasX[y-50][0].valor );
             }
             retrasoCamino = 0;
@@ -121,7 +117,7 @@ public class Juego extends GameCanvas {
         }
         retrasoCamino++;
 
-         for( int y = 50; y < ALTO; y++ ){ //60 DEBERÍA SER ALTO_FONDO
+         for( int y = 50; y < ALTO_PANTALLA; y++ ){ //60 DEBERÍA SER ALTO_FONDO
             g.setColor( colorLaterales );
             if( y%3 == 0){
                 colorLaterales += 0x100;
@@ -129,7 +125,7 @@ public class Juego extends GameCanvas {
             yAlto.setValor( y );
 
             g.drawLine( 0 , y, arregloCoordenadasX[y-50][0].valor , y);
-            g.drawLine( ANCHO , yAlto.valor, arregloCoordenadasX[y-50][1].valor, yAlto.valor);
+            g.drawLine( ANCHO_PANTALLA , yAlto.valor, arregloCoordenadasX[y-50][1].valor, yAlto.valor);
         }
 
          //FIN PRUEBA DE ESCENARIO
