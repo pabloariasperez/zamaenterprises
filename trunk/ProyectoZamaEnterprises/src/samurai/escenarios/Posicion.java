@@ -1,25 +1,35 @@
 package samurai.escenarios;
 
-import samurai.juego.Coordenada;
-
 /**
  *
  * @author Pablo
+ * Clase posición almacena las dos coordenadas (x, y) de los sprites y otras cosas.
  */
 public class Posicion {
-    private Coordenada x;
-    private Coordenada y;
+    private int x;
+    private int y;
 
-    public Posicion( int coordenadaX, int coordenadaY){
-        this.x = new Coordenada( coordenadaX );
-        this.y = new Coordenada( coordenadaY );
+    //Constructor que recibe las dos coordenadas.
+    public Posicion( int x, int y){
+        this.x = x;
+        this.y = y;
     }
 
-    public Coordenada getX(){
+    //GETTERS
+    public int getX(){
         return this.x;
     }
 
-    public Coordenada getY(){
+    public int getY(){
         return this.y;
+    }
+
+    //SETTERS
+    public void setX( int x ){
+        this.x = x;
+    }
+
+    public void setY( int y ){
+        this.y = y;
     }
 }

@@ -1,49 +1,47 @@
 package samurai.juego;
 
 
-import samurai.juego.MenuCanvas;
-import samurai.juego.Juego;
-import java.lang.Thread;
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.*;
-import samurai.escenarios.Real;
-import samurai.menu.Logo;
 
 public class SamuraiEnterprises extends MIDlet {
 
-    private Juego juego;
-    private MenuCanvas menu;
+    //Atributos de nuestro midlet
+    //Crea un MenuCanvas en primer lugar para que el usuario pueda elegir que quiere hacer.
+    private MenuCanvas menuCanvas;
+    private SplashCanvas splashCanvas;
+    //private Juego juego;
 
+    //Inicializa el MenuCanvas. =D
     public SamuraiEnterprises() {
-
-        menu = new MenuCanvas(this);
-
-       
+        splashCanvas = new SplashCanvas(this);
     }
 
-    public void switchDisplay(){
-        if(Display.getDisplay(this).getCurrent() == menu){
-            juego = new Juego(this);
-            Display.getDisplay(this).setCurrent(juego);
-            this.menu=null;
-            System.gc();
-            
-
-        }
-        else{
-            
-            Display.getDisplay(this).setCurrent(menu);
-           
-        }
-    }
     public void startApp() {
-        Display.getDisplay(this).setCurrent(menu);
+        while( splashCanvas.estoyMostrandome() ){
+            Display.getDisplay(this).setCurrent(splashCanvas);
+        }
+        menuCanvas = new MenuCanvas(this);
+        Display.getDisplay(this).setCurrent(menuCanvas);
+        splashCanvas = null;
     }
 
     public void pauseApp() {
     }
 
     public void destroyApp(boolean unconditional) {
-       
+       splashCanvas = null;
+    }
+
+    void mostrarPuntajes() {
+    }
+
+    void mostrarCreditos() {
+    }
+
+    void continuarJuego() {
+    }
+
+    void correrJuego() {
     }
 }

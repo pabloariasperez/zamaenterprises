@@ -9,10 +9,10 @@ import javax.microedition.lcdui.game.GameCanvas;
 import samurai.animacion.*;
 import samurai.escenarios.*;
 
-public class Juego extends GameCanvas {
+public class Juego extends GameCanvas implements Actualizable {
        public static int ALTO_PANTALLA;
        public static int ANCHO_PANTALLA;
-       private SamuraiEnterprises midlet;
+       private SamuraiEnterprises samuraiMidlet;
        private Animador animador; 
        private Graphics g;
       
@@ -27,9 +27,9 @@ public class Juego extends GameCanvas {
 
         int variante;
         int colorLaterales;
-        Coordenada yAlto;
-        Coordenada xDeFuncion;
-        Coordenada[][] arregloCoordenadasX;
+        int yAlto;
+        int xDeFuncion;
+        int[][] arregloCoordenadasX;
         int retrasoCamino;
 
         private Posicionador posicionador;
@@ -41,7 +41,7 @@ public class Juego extends GameCanvas {
 
         super(true);
 
-        this.midlet = midlet;
+        this.samuraiMidlet = midlet;
         this.setFullScreenMode(true);
         Juego.ANCHO_PANTALLA = this.getWidth();
         Juego.ALTO_PANTALLA = this.getHeight();
@@ -50,24 +50,24 @@ public class Juego extends GameCanvas {
 
 
        fondo = new FondoCapa("/samurai/imagenes/fondoLuna.png",-1,0);
-        manejadorEnemigos= new ManejadorEnemigos();
+        //manejadorEnemigos= new ManejadorEnemigos();
 
-       escenario=new Escenario(manejadorEnemigos);
+       escenario=new Escenario();
        escenario.agregarFondo(fondo);
         manejadorTec = new ManejadorTeclado(this);
         variante = 0;
         colorLaterales = 0x0;
-        yAlto = new Coordenada( 0 );
+        yAlto = 0;
         retrasoCamino = 0;
-        arregloCoordenadasX = new Coordenada[ALTO_PANTALLA - 50][2];
+        arregloCoordenadasX = new int[ALTO_PANTALLA - 50][2];
         for( int y=0; y < ALTO_PANTALLA - 50; y++ ){
-            arregloCoordenadasX[y][0] = new Coordenada( 0 );
-            arregloCoordenadasX[y][1] = new Coordenada( 0 );
+            arregloCoordenadasX[y][0] = 0;
+            arregloCoordenadasX[y][1] = 0;
         }
         
         try {
             enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png", 60, 60);
-            escenario.leerEnemigos(enemigo);
+            escenario.agregarEnemigo(enemigo);
             posicionador = new Posicionador(this);
             sekai= new SpriteSekai("/samurai/imagenes/sekai.png",(this.getWidth()/2)-20, this.getHeight()-60);
             efectos= new SpriteEspada("/samurai/imagenes/SpritesEfectos.png",(this.getWidth()/2)-20, this.getHeight()-60);
@@ -76,7 +76,7 @@ public class Juego extends GameCanvas {
             ex.printStackTrace();
         }
         
-        colisionEnemigo= new ManejadorColision(efectos, enemigo);
+        colisionEnemigo= new ManejadorColision();
         animador = new Animador(this);
         animador.iniciar();
         this.dibujar();
@@ -89,7 +89,7 @@ public class Juego extends GameCanvas {
     }
 
 
-    void dibujar() {
+    public void dibujar() {
          g.setColor(0x00654321);
 
          g.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
@@ -108,9 +108,9 @@ public class Juego extends GameCanvas {
 
         if(retrasoCamino%12==0){
             for( int y = 50; y < ALTO_PANTALLA; y++ ){ //60 DEBERÍA SER ALTO_FONDO
-                yAlto.setValor( y );
-                arregloCoordenadasX[y-50][0].setValor( posicionador.recta(  yAlto, (float) variante - (yAlto.valor*yAlto.valor)/ALTO_PANTALLA) + 30 );
-                arregloCoordenadasX[y-50][1].setValor( posicionador.incrementoAncho( yAlto, 180, 40, 50) +arregloCoordenadasX[y-50][0].valor );
+                yAlto =  y ;
+                arregloCoordenadasX[y-50][0] =  posicionador.recta(  yAlto, (float) variante - (yAlto*yAlto)/ALTO_PANTALLA) + 30 ;
+                arregloCoordenadasX[y-50][1] =  posicionador.incrementoAncho( yAlto, 180, 40, 50) +arregloCoordenadasX[y-50][0];
             }
             retrasoCamino = 0;
             System.gc();
@@ -122,10 +122,10 @@ public class Juego extends GameCanvas {
             if( y%3 == 0){
                 colorLaterales += 0x100;
             }
-            yAlto.setValor( y );
+            yAlto = y;
 
-            g.drawLine( 0 , y, arregloCoordenadasX[y-50][0].valor , y);
-            g.drawLine( ANCHO_PANTALLA , yAlto.valor, arregloCoordenadasX[y-50][1].valor, yAlto.valor);
+            g.drawLine( 0 , y, arregloCoordenadasX[y-50][0] , y);
+            g.drawLine( ANCHO_PANTALLA , yAlto, arregloCoordenadasX[y-50][1], yAlto);
         }
 
          //FIN PRUEBA DE ESCENARIO
@@ -133,22 +133,25 @@ public class Juego extends GameCanvas {
          flushGraphics();
     }
 
-    void actualizar() throws InterruptedException {
-
-        manejadorSekai.actualizar();
-        if(colisionEnemigo.colisionArmaEnemigo()==true){
-            manejadorEnemigos.kill(enemigo);
-            try {
-                enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png", 60, 60);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+    public void actualizar(){
+        try {
+            manejadorSekai.actualizar();
+            if (colisionEnemigo.colisionArmaEnemigo(efectos, enemigo) == true) {
+                manejadorEnemigos.kill(enemigo);
+                try {
+                    enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png", 60, 60);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                escenario.agregarEnemigo(enemigo);
+            } else {
+                manejadorEnemigos.actualizar();
             }
-            escenario.leerEnemigos(enemigo);
-        }else{
-            manejadorEnemigos.actualizar();
+            escenario.actualizar();
+            this.dibujar();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
-        escenario.actualizar();
-        this.dibujar();
     }
   
 
