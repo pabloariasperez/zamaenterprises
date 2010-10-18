@@ -4,92 +4,149 @@ package samurai.menu;
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.lcdui.game.Sprite;
 
 
 public class Menu {
+    private Sprite titulo;
     private Boton[] botones;
+    private FondoMenu[] fondosMenus;
     private Indicador indicador;
     private int numButtons;
-    private int posicion;
-    private Sprite titulo;
-    private final int ALTO;
-    static final int MARGEN_SELECCIONADO = 60;
-    private final int INDICADOR_DEF_X=15;
+    private int indexBotonSeleccionado;
+    private final int ANCHO_PANTALLA;
+    private final int ALTO_PANTALLA;
 
-    public Menu( int totalButtons, int alto, String archivoTitulo, String archivoIndicador) throws IOException{
-        this.ALTO = alto;
-        this.numButtons = 0;
+
+    //Márgenes desde la izquierda de la pantalla.
+    private final int MARGEN_NO_SELECCIONADO = 10;       //La opción NO seleccionada.
+    private final int MARGEN_SELECCIONADO = 60;          //La opción seleccionada.
+    private final int MARGEN_INDICADOR = 15;            //El SPRITE de fondo de la opción seleccionada.
+
+    //Nombre del menú, simulando un ENUM que almacena MenuCanvas
+    public final int nombreMenu;
+
+    /*Constructor
+     *  +Total de Botones
+     *  +Alto de pantalla
+     *  +Dirección del archivo del encabezado
+     *  +Dirección del archivo de la imagen indicadora de selección.
+     */
+    public Menu( int totalButtons, String archivoTitulo, String archivoIndicador, GameCanvas gmCanvas, int nombreMenu) throws IOException{
+        //Se inicializa el arreglo de botones de un tamaño específico según los parámetros del constructor.
+        botones = new Boton[ totalButtons ];
+        fondosMenus = new FondoMenu [ totalButtons ];
+       this.nombreMenu = nombreMenu;
+        
+        //Se guarda el alto y ancho de pantalla que será CONSTANTE.
+        this.ALTO_PANTALLA = gmCanvas.getHeight();
+        this.ANCHO_PANTALLA = gmCanvas.getWidth();
+        //Se crea el Sprite Título y se modifica su posición en pantalla con el que sería dibujado.
         titulo= new Sprite(Image.createImage(archivoTitulo));
         titulo.setPosition(20, 20);
-        botones = new Boton[ totalButtons ];
-        this.indicador= new Indicador (archivoIndicador,INDICADOR_DEF_X,this.MARGEN_SELECCIONADO);
+        //Se crea el sprite delINDICADOR:
+        this.indicador = new Indicador (archivoIndicador,MARGEN_INDICADOR,this.MARGEN_SELECCIONADO, ANCHO_PANTALLA );
+        //Establecemos nuestro total de botones agregados en cero.
+        this.numButtons = 0;
+        this.indexBotonSeleccionado = 0;
     }
-    //Regresa la posicion del boton
+    
+    //Regresa la indexBotonSeleccionado del boton
     public int getPosition(){
-        return this.posicion;
+        return this.indexBotonSeleccionado;
     }
 
-    public void agregarBoton(Boton b){
-        botones[numButtons] = b;
-
-        if( numButtons == 0){
-            b.switchImage();
-            b.setX( MARGEN_SELECCIONADO );
-            this.posicion = 0;
-
+    //Agregaremos botones a nuestro arreglo de botones de nuestro menú.
+    public void agregarBoton(Boton b, String archivoSpriteFondo){
+        //Preguntamos si ya se ha definido el alto de botón al indicador, para centrar correctamente el indicador respecta al botón.
+        if( ! indicador.isDefiniedAltoBoton() ){
+            indicador.setBotonAlto(b.getAlto());
         }
 
-        b.setY(MARGEN_SELECCIONADO + (numButtons*((this.ALTO-MARGEN_SELECCIONADO)/getTotalButtons())));
+        //Según en el número de botones que llevamos guardados metemos nuestro siguiente botón que hemos recibido en el parámetro de nuestro método.
+        botones[numButtons] = b;
+
+        //Preguntamos si es el primer botón en ser agregado, si es así, reasignamos el valor en X del primer botón
+        //a un márgen de seleccionado. Además guardamos que la posición del botón seleccionado es 0.
+        if( numButtons == 0){
+            b.setX( MARGEN_SELECCIONADO );
+            this.indexBotonSeleccionado = 0;
+        }else{
+            b.setX( MARGEN_NO_SELECCIONADO );
+        }
+
+        //Colocamos en su coordenada Y a cada uno de los botones conforme son agragados. La función... está padre.
+        b.setY(MARGEN_SELECCIONADO + (numButtons*((this.ALTO_PANTALLA-MARGEN_SELECCIONADO)/getTotalButtons())));
+        try {
+            //Creamos el sprite de fondo según la opción
+            fondosMenus[numButtons] = new FondoMenu(archivoSpriteFondo, ANCHO_PANTALLA, ALTO_PANTALLA);
+            fondosMenus[numButtons].setPosition(numButtons, numButtons);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println("Error al crear el sprite de fondo del menú.");
+        }
+
+
+        //IMPORTANTE: Se incrementa el número de botones en uno, puesto que ya se ha agragado un nuevo botón al arreglo.
         numButtons++;
     }
+    
     //Regresa el numero total de botones que hay en el menú
     public int getTotalButtons(){
         return this.botones.length;
     }
 
-    public void setDefaultPosition(){
-        this.botones[posicion].switchImage();
-        this.posicion =0;
-        this.botones[posicion].switchImage();
-
-    }
-
+    //Dibuja todo el menú con sus opciones.
+    //Dibuja: Indicador, título y cada uno de los botones en sus respectivas posiciones.
     public void dibujar(Graphics g) {
+        fondosMenus[indexBotonSeleccionado].dibujar(g);
         this.indicador.dibujar(g);
         this.titulo.paint(g);
-        for(int i =0; i<this.numButtons; i++){
-             botones[i].dibujar(g);
+        //Recorre el arreglo de botones para dibujarlos.
+        for(int opcionIndex =0; opcionIndex<this.numButtons; opcionIndex++){
+             botones[opcionIndex].dibujar(g);
          }
     }
-    public void moverIndicador(int posicion){
-        int nuevaY=this.MARGEN_SELECCIONADO+(posicion*((this.ALTO-this.MARGEN_SELECCIONADO)/getTotalButtons()));
-        this.indicador.cambiarPosicion(this.INDICADOR_DEF_X,nuevaY );
+    //Mueve el indicador a la opción actualmente seleccionada indicada por el indexBotonSeleccionado.
+    public void moverIndicador(){
+        int nuevaY = this.MARGEN_SELECCIONADO+(indexBotonSeleccionado*((this.ALTO_PANTALLA-this.MARGEN_SELECCIONADO)/getTotalButtons()));
+        this.indicador.cambiarPosicion(this.MARGEN_INDICADOR, nuevaY);
     }
 
-     public void moverOpcion(int haciaDonde){
-         this.botones[posicion].switchImage();
-         if( haciaDonde == 1){
-            if( posicion + 1 > getTotalButtons() - 1 ){
-                this.botones[0].switchImage();
-                posicion=0;
-                moverIndicador(posicion);
+    //NUestra función le cambia la X al botón de argumento simulando un margen para denotar al suusario si está seleccionado o no lo está.
+    private void cambiarMargen(Boton boton){
+        if( botones[indexBotonSeleccionado].equals( boton ) ){
+            boton.setX(MARGEN_NO_SELECCIONADO);
+        } else{
+            boton.setX(MARGEN_SELECCIONADO);
+        }
+    }
+
+    //El usuario se mueve de opción y animamos para que se de cuenta. Línea indicador y SLASH de fondo.
+     public void moverOpcion(int direccion){
+         //Cambiamos el margen del botón actualmente seleccionado.
+         cambiarMargen( this.botones[indexBotonSeleccionado] );
+         if( direccion == 1){
+            if( indexBotonSeleccionado + 1 > getTotalButtons() - 1 ){
+                cambiarMargen( this.botones[0] );
+                indexBotonSeleccionado=0;
+                moverIndicador();
             }else{
-                this.botones[posicion+1].switchImage();
-                posicion++;
-                moverIndicador(posicion);
+                cambiarMargen( this.botones[indexBotonSeleccionado+1] );
+                indexBotonSeleccionado++;
+                moverIndicador();
             }
          }else{
-            if( posicion - 1 < 0 ){
-                this.botones[getTotalButtons()-1].switchImage();
-                posicion=getTotalButtons()-1;
-                moverIndicador(posicion);
+            if( indexBotonSeleccionado - 1 < 0 ){
+                cambiarMargen( this.botones[getTotalButtons()-1] );
+                indexBotonSeleccionado=getTotalButtons()-1;
+                moverIndicador();
             }else{
-                this.botones[posicion-1].switchImage();
-                posicion--;
-                moverIndicador(posicion);
+                cambiarMargen( this.botones[indexBotonSeleccionado-1] );
+                indexBotonSeleccionado--;
+                moverIndicador();
             }
          }
      }
-
 }

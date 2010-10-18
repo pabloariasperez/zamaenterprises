@@ -10,13 +10,8 @@ import javax.microedition.lcdui.Graphics;
 /**
  *
  * @author mi16
+ * Interface que obliga a nuestros "BICHOS" a que tengan un método Dibujar.
  */
 public interface Animable  {
-
-
     public abstract void dibujar(Graphics g);
-
-
-    
-
 }

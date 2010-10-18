@@ -10,171 +10,261 @@ package samurai.juego;
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
-import samurai.juego.ManejadorTeclado;
 import samurai.menu.*;
 /**
- *
+ *Clase encargada de mostrar en una pantalla independiente el Menú
  * @author mi16
  */
-public class MenuCanvas extends GameCanvas {
-
-    private Boton botonNuevo,botonContinuar,botonPuntajes,botonOpciones,botonSalir;
-    private Boton opcionSonido, opcionIdioma, opcionBorrar;
-    public static int ALTO, ANCHO;
-    private Logo logoTec;
-    private FondoMenu fondo;
-    private SamuraiEnterprises midlet;
-    private Menu menu, menuActual;
-    private Menu menuOpciones;
-    private Animador animador; 
-    private ManejadorTeclado manejadorTec;
+public class MenuCanvas extends GameCanvas implements Actualizable {
+    //Atributos esenciales para la clase: midlet, Graphic, dimensiones de pantalla, teclado.
+    private SamuraiEnterprises samuraiMidlet;
     private Graphics g;
-    private int pantallaActual;
-    private final int PANTALLA_PRINCIPAL;
-    private final int PANTALLA_OPCIONES;
-    private boolean inicio;
+    public final int ALTO_PANTALLA, ANCHO_PANTALLA;
+    private ManejadorTeclado teclado;
 
-    public MenuCanvas(SamuraiEnterprises midlet){
+    //Efectos dentro del Menu
+    private Animador animador;    
+
+    //El menuActual nos dirá a quien debemos pintar en pantalla.
+    private Menu menuActual;
+    //Finals estáticos que definen los Menús que ya tenemos creados y que se pueden asignar
+    public static final int PRINCIPAL = 0;
+    public static final int OPCIONES = 1;
+    public static final int SONIDO = 2;
+    public static final int SALIR = 3;
+
+    //Objetos - Menú Principal.
+    private Menu menuPrincipal;
+    private Boton botonNuevo, botonContinuar, botonPuntajes, botonOpciones, botonSalir;
+    private FondoMenu fondo;
+
+    //Objetos - Menú Opciones
+    private Boton opcionSonido, opcionIdioma, opcionAtras;
+    private Menu menuOpciones;
+
+    //Objetos - Menú Sonido, Salir
+    private Boton opcionSi, opcionNo;
+    private Menu menuSonido, menuSalir;
+    
+
+    public MenuCanvas(SamuraiEnterprises samuraiMidlet){
+        //Se manda TRUE en el constructor de la clase padre (GameCanvas) para decir que cuando se quiera saber si una tecla está presionada
+        //se preguntará.
         super(true);
-        this.midlet = midlet;
         this.setFullScreenMode(true);
-        g = this.getGraphics();
-        this.ALTO = this.getHeight();
-        this.ANCHO = this.getWidth();
-        this.PANTALLA_PRINCIPAL = 1;
-        this.PANTALLA_OPCIONES = 2;
-        this.pantallaActual = this.PANTALLA_PRINCIPAL;
-
-        manejadorTec = new ManejadorTeclado(this);
-       this.inicio=true;
+        this.samuraiMidlet = samuraiMidlet;
         
+        //Asignamos a nuestro parámetro "g" el Graphic del GameCanvas
+        this.g = this.getGraphics();
+
+        //Asginamos el ALTO_PANTALLA y ANCHO_PANTALLA de nuestra pantalla
+        this.ALTO_PANTALLA = this.getHeight();
+        this.ANCHO_PANTALLA = this.getWidth();
+
+        //Creamos nuestro manejador de teclado
+        teclado = new ManejadorTeclado(this);
         
 
+        
+        //Intentamos crear nuestro Menú Principal. De lo contrario regresamos una excepción.
+        try {            
+            menuPrincipal = new Menu(5,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png", this, MenuCanvas.PRINCIPAL );
+            this.crearBotonesMenuPrincipal();
+
+            //Establecemos el Menú Principal como el Menú Actual para ser desplegado.
+            menuActual = menuPrincipal;
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+
+        //Creamos nuestra animador y lo iniciamos.
+        animador = new Animador(this);
+        animador.iniciar();
+    }
+
+    //Método para crear todos los botones del menú principal, a la vez que los agrega al Menú.
+    private void crearBotonesMenuPrincipal(){
         try {
-        menu = new Menu(5, this.ALTO,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png");
-        menuOpciones = new Menu(3,this.ALTO,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png");
-        fondo=new FondoMenu("/samurai/imagenes/fondo.png");
-        this.creaBotones();
-        this.creaBotonesOpciones();
-        System.out.println("creando logo");
-        logoTec = new Logo("/samurai/imagenes/tecsi.gif", -40, 0);
-       System.out.println("logo creado");
+            //Inicializo cada uno de los botones del menú principal.
+            this.botonNuevo = new Boton("/samurai/imagenes/botonNuevo.png");
+            this.botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
+            this.botonPuntajes = new Boton("/samurai/imagenes/botonPuntajes.png");
+            this.botonOpciones = new Boton("/samurai/imagenes/botonOpciones.png");
+            this.botonSalir = new Boton("/samurai/imagenes/botonSalir.png");
+
+            //Los agregamos a nuestro Menú Principal. Además de indicar el fondo que mostrarán de fondo.
+            this.menuPrincipal.agregarBoton(botonNuevo, "/samurai/imagenes/fondosMenu/juegoNuevo.png");
+            this.menuPrincipal.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            this.menuPrincipal.agregarBoton(botonPuntajes, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
+            this.menuPrincipal.agregarBoton(botonOpciones, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            this.menuPrincipal.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        this.menuActual = this.menu;
-        animador = new Animador(this);
-        animador.iniciar();
-        this.dibujar();
     }
 
-
+     //Inicializamos los botones que utilizaremos en nuestro menú de opciones.
      public void creaBotonesOpciones(){
+        //Creamos cada uno de los botones.
         try {
             opcionSonido = new Boton("/samurai/imagenes/botonSonido.png");
             opcionIdioma = new Boton("/samurai/imagenes/botonCreditos.png");
-            opcionBorrar = new Boton("/samurai/imagenes/botonAtras.png");
+            opcionAtras = new Boton("/samurai/imagenes/botonAtras.png");
 
+            //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
+            menuOpciones.agregarBoton(opcionSonido, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
+            menuOpciones.agregarBoton(opcionIdioma, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            menuOpciones.agregarBoton(opcionAtras, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        menuOpciones.agregarBoton(opcionSonido);
-        menuOpciones.agregarBoton(opcionIdioma);
-        menuOpciones.agregarBoton(opcionBorrar);
-
-
     }
 
-    public void creaBotones() throws IOException{
-        botonNuevo = new Boton("/samurai/imagenes/botonNuevo.png");
-        botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
-        botonPuntajes = new Boton("/samurai/imagenes/botonPuntajes.png");
-        botonOpciones = new Boton("/samurai/imagenes/botonOpciones.png");
-        botonSalir = new Boton("/samurai/imagenes/botonSalir.png");
+    private void creaBotonesSonido() {
+        //Creamos cada uno de los botones.
+        try {
+            opcionSi = new Boton("/samurai/imagenes/botonSi.png");
+            opcionNo = new Boton("/samurai/imagenes/botonNo.png");
 
-
-
-        menu.agregarBoton(botonNuevo);
-        menu.agregarBoton(botonContinuar);
-        //menu.agregarBoton(botonMultiplayer);
-        menu.agregarBoton(botonPuntajes);
-        menu.agregarBoton(botonOpciones);
-        //menu.agregarBoton(botonTutorial);
-        //menu.agregarBoton(botonCreditos);
-        menu.agregarBoton(botonSalir);
-        
-
-    }
-    public void cambiarPantalla(){
-       
-        if(this.pantallaActual==this.PANTALLA_PRINCIPAL){
-            this.pantallaActual = this.PANTALLA_OPCIONES;
-            this.menuActual = this.menuOpciones;
-
+            //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
+            menuSonido.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
+            menuSonido.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        else{
-            this.pantallaActual = this.PANTALLA_PRINCIPAL;
-            this.menuActual = this.menu;
+    }
+
+    private void creaBotonesSalir() {
+        //Creamos cada uno de los botones.
+        try {
+            opcionNo = new Boton("/samurai/imagenes/botonNo.png");
+            opcionSi = new Boton("/samurai/imagenes/botonSi.png");
+
+            //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
+            menuSalir.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
+            menuSalir.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        
-
     }
 
-    public Animador getAnimador(){
-        return this.animador;
-    }
-
-
+    //Méotodo que dibujará el Menú Actual.
     public void dibujar(){
+        //Establecemos nuestro color para dibujar. NEGRO
+        g.setColor(0x0);
+        //Limpiamos la pantalla.
+        g.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
 
-        g.setColor(0x00FFFFFF);
-        g.fillRect(0, 0, ANCHO, ALTO);
-
-        
-        
-        
-            
-        this.fondo.dibujar(g);
+        //Dibujamos el Menu Actual
         this.menuActual.dibujar(g);
-        this.logoTec.dibujar(g);
         this.flushGraphics();
-
     }
 // ahi va
     public void actualizar(){
+        //Preguntamos si se ha presionado la tecla arriba para mover hacia arirba una opción.
+        if( teclado.upPresionado()){
+            this.menuActual.moverOpcion(-1);     //Mover hacia arriba.
+        //Preguntamos si se ha presionado la tecla abajo para mover hacia abajo una opción.
+        }else if(teclado.downPresionado() ){
+            this.menuActual.moverOpcion(1);      //Mover hacia abajo.
+        //Preguntamos si estamos en la PRIMERA posición y si fue elegida con FIRE.
+        }else if(this.menuActual.getPosition() == 0 && teclado.firePresionado()){
+            switch(menuActual.nombreMenu){
+                case MenuCanvas.PRINCIPAL:
+                    samuraiMidlet.correrJuego();
+                    break;
+                case MenuCanvas.OPCIONES:
+                    crearMenu(MenuCanvas.SONIDO);
+                    cambiarMenu(menuSonido);
+                    break;
+                case MenuCanvas.SONIDO:
+                    //PENDIENTE se activa si debe sonar o no.
+                    crearMenu(MenuCanvas.OPCIONES);
+                    cambiarMenu(menuOpciones);
+                    break;
+                case MenuCanvas.SALIR:
+                    crearMenu(MenuCanvas.PRINCIPAL);
+                    cambiarMenu(menuPrincipal);
+                    break;
+            }
+        //Preguntamos si estamos en la SEGUNDA posición y si fue elegida con FIRE.
+        }else if(this.menuActual.getPosition() == 1 && teclado.firePresionado()){
+            switch(menuActual.nombreMenu){
+                case MenuCanvas.PRINCIPAL:
+                    samuraiMidlet.continuarJuego();
+                    break;
+                case MenuCanvas.OPCIONES:
+                    samuraiMidlet.mostrarCreditos();
+                    break;
+                case MenuCanvas.SONIDO:
+                    //PENDIENTE se activa si debe sonar o no.
+                    crearMenu(MenuCanvas.OPCIONES);
+                    cambiarMenu(menuOpciones);
+                    break;
+                case MenuCanvas.SALIR:
+                    samuraiMidlet.destroyApp(true);
+                    samuraiMidlet.notifyDestroyed();
+                    break;
+            }
+        //Preguntamos si estamos en la TERCER posición y si fue elegida con FIRE.
+        }else if(this.menuActual.getPosition() == 2 && teclado.firePresionado()){
+            switch(menuActual.nombreMenu){
+                case MenuCanvas.PRINCIPAL:
+                    samuraiMidlet.mostrarPuntajes();
+                    break;
+                case MenuCanvas.OPCIONES:
+                    crearMenu(MenuCanvas.PRINCIPAL);
+                    cambiarMenu(menuPrincipal);
+                    break;
+            }
+        //Preguntamos si estamos en la CUARTA posición y si fue elegida con FIRE.
+        }else if(this.menuActual.getPosition() == 3 && teclado.firePresionado()){
+            switch(menuActual.nombreMenu){
+                case MenuCanvas.PRINCIPAL:
+                    crearMenu(MenuCanvas.OPCIONES);
+                    cambiarMenu(menuOpciones);
+                    break;
+            }
+        //Preguntamos si estamos en la QUINTA posición y si fue elegida con FIRE.
+        }else if(this.menuActual.getPosition() == 4 && teclado.firePresionado()){
+            switch(menuActual.nombreMenu){
+                case MenuCanvas.PRINCIPAL:
+                    crearMenu(MenuCanvas.SALIR);
+                    cambiarMenu(menuSalir);
+                    break;
+            }
+        }
+    }
+
+    private void cambiarMenu(Menu nuevoMenuActual){
+        menuActual = nuevoMenuActual;
+    }
+
+    // Método que creará los Menús si no están reado y a la vez volverá NULLS a aquellos Menús que probablemente no se vuelvan a usar.
+    private void crearMenu(int nombreMenu){
+        //Preguntamos cuál fue el nombre de Menú que fue suministrado, todos declarados desde los nombre de Menú declarados en MenuCanvas
+        //Se debe tener cuidado en siempre volver NULL a los Menús que no se estén utlizando.
         try {
-            logoTec.actualizar();
-        } catch (InterruptedException ex) {
+            switch( nombreMenu ){
+                case MenuCanvas.PRINCIPAL:
+                    menuOpciones = null;
+                    break;
+                case MenuCanvas.OPCIONES:
+                    menuOpciones = new Menu(3, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", this, MenuCanvas.OPCIONES);
+                    this.creaBotonesOpciones();
+                    menuSonido = null;      //Es poco probable que se vuelva a ingresar a él.
+                    break;
+                case MenuCanvas.SONIDO:
+                    menuSonido = new Menu(2, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", this, MenuCanvas.SONIDO);
+                    this.creaBotonesSonido();
+                    break;
+                case MenuCanvas.SALIR:
+                    menuSalir = new Menu(2, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", this, MenuCanvas.SALIR);
+                    this.creaBotonesSalir();
+                    break;
+            }
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
-        if( manejadorTec.upPresionado()){
-            //arribaPresionado = true;
-            System.out.println("ARRIBA");
-            this.menuActual.moverOpcion(-1);
-
-        }else if(manejadorTec.downPresionado() ){
-            //abajoPresionado = true;
-            System.out.println("ABAJO");
-            this.menuActual.moverOpcion(1);
-        }
-
-         else if(this.menu.getPosition() == 0  && manejadorTec.firePresionado()){
-            midlet.switchDisplay();
-        }
-        else if(this.menu.getPosition() == 3  && manejadorTec.firePresionado()){
-            this.cambiarPantalla();
-        }
-          else if(this.menuOpciones.getPosition() == 2  && manejadorTec.firePresionado()){
-            this.cambiarPantalla();
-
-        }
-
-
-        else if(this.menu.getPosition() == 4 && manejadorTec.firePresionado()){
-            midlet.destroyApp(true);
-            midlet.notifyDestroyed();
     }
-        this.dibujar();
-    }
-
 }
