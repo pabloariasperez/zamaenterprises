@@ -23,11 +23,11 @@ public class Posicionador {
     public int exponencial( int y, float parametro){
         //Mi súper mega función patentada por la UNAM.
         float soyExponente = ((float)ALTO_PANTALLA - (float)y) / (float)ALTO_PANTALLA;
-        Real soyReal = new Real( String.valueOf( soyExponente )) ;
-        soyReal.exp();
-        soyReal.mul(new Real( String.valueOf(parametro * ( ALTO_PANTALLA - y ) / ALTO_PANTALLA)));
+//        Real soyReal = new Real( String.valueOf( soyExponente )) ;
+//        soyReal.exp();
+//        soyReal.mul(new Real( String.valueOf(parametro * ( ALTO_PANTALLA - y ) / ALTO_PANTALLA)));
 
-        return soyReal.toInteger();
+        return 0; //OJO el 0 es para que no marque error
     }
 
     //Desarrollamos el posicionador para casos recta

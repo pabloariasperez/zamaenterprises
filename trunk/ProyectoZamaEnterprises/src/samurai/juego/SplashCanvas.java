@@ -28,8 +28,9 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     private boolean estoyMostrandome;
 
 
-    //Declaramos los SPLASHES que vamos a mostrar.
+    //Declaramos los SPLASHES y Colores que vamos a mostrar.
     private Stack splashes;
+    private Stack colores;
 
     
     /**
@@ -55,10 +56,14 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
 
         //Inicializamos nuestro STACK
         splashes = new Stack();
+        colores = new Stack();
 
-        //Metemos a nuestro STACK de Splashes los que queremos mostrar. Atención con el órden en que son ingresados.
+        //Metemos a nuestros STACK's de Splashes y colores los que queremos mostrar. Atención con el órden en que son ingresados.
         splashes.push( new Splash("/samurai/imagenes/sekai.png", this) );
-        splashes.push( new Splash("/samurai/imagenes/tecsi.gif", this) );
+        colores.push(new Integer(0x000000));
+        splashes.push( new Splash("/samurai/imagenes/itesmcel.png", this) );
+        colores.push(new Integer(0xFFFFFF));
+       
         //splashes.push( new Splash("imagenes/splashes/equipoSplash.png", this));
         //splashes.push( new Splash("imagenes/splashes/logoTecCEMSplash.png", this));
 
@@ -85,6 +90,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         //Verificamos que el usuario no haya presionado el botón de acción FIRE para interrumpir el SPLASH
         if( teclado.firePresionado() && tiempo.tiempoActual() > animador.getFPS()/4 ){
             splashes.pop();     //Hacemos el POP para que ya muestre la siguiente imagen.
+            colores.pop();
             tiempo.reiniciarTiempo();
         }
 
@@ -97,6 +103,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
             }else{
                 //Cuando se supera el tiempo de splash hacemos un pop sin guardar el elemento, para que sea el nuevo splash a dibujar
                 splashes.pop();
+                colores.pop();
                 //Reiniciamos nuestro tiempo para comenzar de nuevo el conteo.
                 tiempo.reiniciarTiempo();
             }
@@ -112,11 +119,14 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
      * Metodo que dibuja el SPLASH en punta.
      */
     public void dibujar() {
-        //Establecemos nuestro color para dibujar. NEGRO
-        g.setColor(0x0);
-        //Limpiamos la pantalla.
-        g.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
+
+
         if(!splashes.isEmpty()){
+
+            //Establecemos nuestro color para dibujar. Lo que se obtenga del stack de colores.
+            g.setColor(((Integer)colores.peek()).intValue());
+            //Limpiamos la pantalla.
+            g.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
             ((Splash)splashes.peek()).dibujar(g);
         }
 
