@@ -6,8 +6,9 @@ import javax.microedition.lcdui.game.GameCanvas;
 
 
 /**
- *
- * @author mi16
+ * Clase que anima los GameCanvas
+ * @author Pablo, Erik, Daniel
+ * @version 1.2 Octubre 2010
  */
 public class Animador implements Runnable
 {
@@ -18,14 +19,13 @@ public class Animador implements Runnable
     private boolean corriendo;          //Nos dirá si debe seguir corriendo el Animador, también nos sirve para detenerlo.
 
     //Atributos relacionados con el tiempo haciendo uso de FRAMES.
-    long tiempoInicial, tiempoFinal;
+    private long tiempoInicial, tiempoFinal;
     private final int FPS = 60;
     private final int DURACION_FRAME = 1000/FPS;
 
-    //Nuestro constructor recibe el GameCanvas que estaremos actualizando y dibujando.
     /**
-     *
-     * @param gmCanvas
+     * Constructor que inicializa las variables
+     * @param gmCanvas GameCanvas que se va a animar
      */
     public Animador(GameCanvas gmCanvas) {
         //Preguntamos si el GameCanvas recibido está implementando la interface ACtualizable, que lo obliga a actualizar() y dibujar()
@@ -38,9 +38,9 @@ public class Animador implements Runnable
         }
     }
 
-    //Arrancamos nuestro Animador con iniciar. Crea el Thread y lo arranca. Este Thread será quien use a el método run.
     /**
-     *
+     * Crea el Thread y lo arranca.
+     * Este Thread será quien use a el método run.
      */
     public void iniciar() {
         thread = new Thread(this);
@@ -48,9 +48,9 @@ public class Animador implements Runnable
         corriendo = true;       //Establecemos que el Animador estará corriendo.
     }
 
-    //Método que se estará corriendo mientras Thread esté vivo.
     /**
-     *
+     * Método que se estará corriendo mientras Thread esté vivo.
+     * Dibuja y actualiza el GameCanvas
      */
     public void run() {
         //Mientras corriendo sea TRUE estarán ejecutándose las tareas dentro del bloque.
@@ -76,18 +76,17 @@ public class Animador implements Runnable
         }
     }
 
-    //Con este método terminamos con el Animador. Desde evitar que siga corriendo y hasta interrumpir el Thread que se estaba usando.
     /**
-     *
+     * Metodo con el que se termina el run
      */
     public void terminar() {
         corriendo = false;
     }
 
-    //Método para saber a cuántos FPS (Frames Per Second) se está corriendo la aplicación.
+    //
     /**
-     *
-     * @return
+     * Método para saber a cuántos FPS se está corriendo la aplicación.
+     * @return los FPS a los que corre la aplicación
      */
     public int getFPS(){
         return FPS;
