@@ -5,6 +5,10 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 
 
+/**
+ *
+ * @author mi16
+ */
 public class Animador implements Runnable
 {
     //Atributos
@@ -19,6 +23,10 @@ public class Animador implements Runnable
     private final int DURACION_FRAME = 1000/FPS;
 
     //Nuestro constructor recibe el GameCanvas que estaremos actualizando y dibujando.
+    /**
+     *
+     * @param gmCanvas
+     */
     public Animador(GameCanvas gmCanvas) {
         //Preguntamos si el GameCanvas recibido está implementando la interface ACtualizable, que lo obliga a actualizar() y dibujar()
         if( gmCanvas instanceof Actualizable ){
@@ -31,6 +39,9 @@ public class Animador implements Runnable
     }
 
     //Arrancamos nuestro Animador con iniciar. Crea el Thread y lo arranca. Este Thread será quien use a el método run.
+    /**
+     *
+     */
     public void iniciar() {
         thread = new Thread(this);
         thread.start();
@@ -38,6 +49,9 @@ public class Animador implements Runnable
     }
 
     //Método que se estará corriendo mientras Thread esté vivo.
+    /**
+     *
+     */
     public void run() {
         //Mientras corriendo sea TRUE estarán ejecutándose las tareas dentro del bloque.
         while ( corriendo ) {
@@ -63,11 +77,18 @@ public class Animador implements Runnable
     }
 
     //Con este método terminamos con el Animador. Desde evitar que siga corriendo y hasta interrumpir el Thread que se estaba usando.
+    /**
+     *
+     */
     public void terminar() {
         corriendo = false;
     }
 
     //Método para saber a cuántos FPS (Frames Per Second) se está corriendo la aplicación.
+    /**
+     *
+     * @return
+     */
     public int getFPS(){
         return FPS;
     }

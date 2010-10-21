@@ -7,7 +7,8 @@ package samurai.juego;
 
 /**
  *
- * @author Pablo
+ * @author Pablo, Erik, Daniel
+ * @version 1.0, octubre 2010
  * Clase dedicada a llevar el tiempo transcurrido en cada escenario.
  */
 public class TiempoEscenario {
@@ -15,22 +16,34 @@ public class TiempoEscenario {
     //Aunque es un simple entero, lo metimos dentro de una clase para simular a modo de typedef.
     private int tiempo;
 
-    //El constructor siempre inicilizará el tiempo en CERO, el escenario nunca puede iniciar en algo distinto.
+    
+    /**
+     * Constructor que inicializa el tiempo en Cero
+     */
     public TiempoEscenario(){
         tiempo = 0;
     }
 
-    //El tiempo debe poderse incrementar FRAME a FRAME.
+    
+    /**
+     * Metodo que incrementa el tiempo unitariamente
+     */
     public void incrementarTiempo(){
         tiempo+=1;
     }
 
-    //Las demás clases deben poder saber cuál es el tiempo actual en qué transcurre el ESCENARIO.
+    /**
+     *  Metodo que regresa el tiempo transcurrido.
+     * @return Regresa el tiempo que ha transcurrido desde que se inicializo el tiempo.
+     */
     public int tiempoActual(){
         return tiempo;
     }
 
-    //Vuelve el tiempo a cero.
+   
+    /**
+     * Metodo que vuelve cero el tiempo
+     */
     public void reiniciarTiempo(){
         tiempo = 0;
     }

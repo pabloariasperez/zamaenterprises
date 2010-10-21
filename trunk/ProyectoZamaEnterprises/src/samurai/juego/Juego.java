@@ -9,9 +9,19 @@ import javax.microedition.lcdui.game.GameCanvas;
 import samurai.animacion.*;
 import samurai.escenarios.*;
 
+/**
+ *
+ * @author mi16
+ */
 public class Juego extends GameCanvas implements Actualizable {
-       public static int ALTO_PANTALLA;
-       public static int ANCHO_PANTALLA;
+    /**
+     *
+     */
+    public static int ALTO_PANTALLA;
+    /**
+     *
+     */
+    public static int ANCHO_PANTALLA;
        private SamuraiEnterprises samuraiMidlet;
        private Animador animador; 
        private Graphics g;
@@ -37,7 +47,11 @@ public class Juego extends GameCanvas implements Actualizable {
         private SpriteEspada efectos;
         private ManejadorSekai manejadorSekai;
 
-    public Juego(SamuraiEnterprises midlet) {
+        /**
+         *
+         * @param midlet
+         */
+        public Juego(SamuraiEnterprises midlet) {
 
         super(true);
 
@@ -84,12 +98,19 @@ public class Juego extends GameCanvas implements Actualizable {
        
         
     }
-    public Animador getAnimador(){
+        /**
+         *
+         * @return
+         */
+        public Animador getAnimador(){
         return this.animador;
     }
 
 
-    public void dibujar() {
+        /**
+         *
+         */
+        public void dibujar() {
          g.setColor(0x00654321);
 
          g.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
@@ -133,6 +154,9 @@ public class Juego extends GameCanvas implements Actualizable {
          flushGraphics();
     }
 
+    /**
+     *
+     */
     public void actualizar(){
         try {
             manejadorSekai.actualizar();

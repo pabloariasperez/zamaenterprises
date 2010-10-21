@@ -12,7 +12,8 @@ import samurai.menu.Splash;
 
 /**
  *
- * @author Pablo
+ * @author Pablo, Erik y Daniel
+ * @version 0.1, octubre 2010
  */
 public class SplashCanvas extends GameCanvas implements Actualizable {
     //Declaramos todo lo necesario para hacer funcionar nuestros MIDlets estándar.
@@ -30,7 +31,11 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     //Declaramos los SPLASHES que vamos a mostrar.
     private Stack splashes;
 
-    //Constructor que recibe al Samurai.
+    
+    /**
+     * Constructor que recibe al Samurai
+     * @param samuraiMidlet  midlet que se recibe.
+     */
     public SplashCanvas(SamuraiEnterprises samuraiMidlet){
         //Se manda TRUE en el constructor de la clase padre (GameCanvas) para decir que cuando se quiera saber si una tecla está presionada
         //se preguntará.
@@ -72,7 +77,10 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         animador.iniciar();
     }
 
-    //Método para actualizar
+   
+    /**
+     * Método para actualizar el Canvas
+     */
     public void actualizar() {
         //Verificamos que el usuario no haya presionado el botón de acción FIRE para interrumpir el SPLASH
         if( teclado.firePresionado() && tiempo.tiempoActual() > animador.getFPS()/4 ){
@@ -99,7 +107,10 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         
     }
 
-    //Dibujamos el SPLASH en punta.
+    
+    /**
+     * Metodo que dibuja el SPLASH en punta.
+     */
     public void dibujar() {
         //Establecemos nuestro color para dibujar. NEGRO
         g.setColor(0x0);
@@ -112,6 +123,11 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         this.flushGraphics();
     }
 
+    /**
+     * Metodo que regresa un booleano el cual indica si ya se terminaron de mostrar todos los Splashes.
+     *
+     * @return Regresa un booleano el cual indica si ya se terminaron de mostrar todos los Splashes.
+     */
     public boolean estoyMostrandome(){
         return estoyMostrandome;
     }

@@ -11,6 +11,12 @@ package samurai.juego;
  * Interface que obliga a que se deba actualizar y a que regresen un Graphics los "BICHOS" de una clase.
  */
 public interface Actualizable {
+    /**
+     *
+     */
     public abstract void actualizar();
+    /**
+     *
+     */
     public abstract void dibujar();
 }

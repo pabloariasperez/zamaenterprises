@@ -3,6 +3,11 @@ package samurai.juego;
 import javax.microedition.lcdui.game.GameCanvas;
 
 
+/**
+ * Clase que se encarga de recibir e interpretar todas las señales del teclado
+ * @author Pablo, Erik y Daniel
+ * @version 1.0, septiembre 2010
+ */
 public class ManejadorTeclado{
     private static boolean PRESIONADO = true;
     private static boolean NO_PRESIONADO = false;
@@ -16,7 +21,11 @@ public class ManejadorTeclado{
     private GameCanvas gmCanvas;
 
 
-    public ManejadorTeclado(GameCanvas juego){
+    /**
+     * Constructor que inicializa todas las variables, establaciendo a gmCanvas como el canvas que utilizara al manejador
+     * @param juego Este parametro indica en que GameCanvas se utilizara el Manejador de teclado.
+     */
+    public ManejadorTeclado(GameCanvas gmCanvas){
         this.arribaPresionado=false;
         this.abajoPresionado=false;
         this.firePresionado=false;
@@ -24,8 +33,12 @@ public class ManejadorTeclado{
         this.derPresionado=false;
         this.aPresionado=false;
         this.bPresionado=false;
-        this.gmCanvas = (GameCanvas) juego;
+        this.gmCanvas = gmCanvas;
     }
+    /**
+     * Metodo que obtiene el estado actual de las teclas presionadas del teclado.
+     * @return Regresa el estado fisico del teclado
+     */
     public int checarPresionado(){
         //Obtengo el estado actual de las teclas presionadas del teclado del celular.
         int tecladoActual = gmCanvas.getKeyStates();
@@ -57,9 +70,12 @@ public class ManejadorTeclado{
         return tecladoActual;
     }
 
+    /**
+     *Metodo que verifica que teclas estan presionadas. Tambien actualiza el estado actual de presionada de cada tecla
+     * @return Regresa un booleano que especifica si la tecla ARRIBA esta presionada o no.
+     */
     public boolean upPresionado(){
-        //Se verifica qué teclas están presionadas. Además se actualiza el estado actual de
-        //presionado de cada tecla.
+       
        int tecladoActual = checarPresionado();
        if( !arribaPresionado &  ( tecladoActual & GameCanvas.UP_PRESSED)!=0){
            arribaPresionado=PRESIONADO;
@@ -67,9 +83,12 @@ public class ManejadorTeclado{
         }
            return false;
     }
+      /**
+     *Metodo que verifica que teclas estan presionadas. Tambien actualiza el estado actual de presionada de cada tecla
+     * @return Regresa un booleano que especifica si la tecla ABAJO esta presionada o no.
+     */
     public boolean downPresionado(){
-        //Se verifica qué teclas están presionadas. Además se actualiza el estado actual de
-        //presionado de cada tecla.
+        
        int tecladoActual = checarPresionado();
        if( !abajoPresionado &  ( tecladoActual & GameCanvas.DOWN_PRESSED)!=0){
            abajoPresionado=PRESIONADO;
@@ -77,6 +96,10 @@ public class ManejadorTeclado{
         }
            return false;
     }
+     /**
+     *Metodo que verifica que teclas estan presionadas. Tambien actualiza el estado actual de presionada de cada tecla
+     * @return Regresa un booleano que especifica si la tecla FIRE esta presionada o no.
+     */
     public boolean firePresionado(){
         //Se verifica qué teclas están presionadas. Además se actualiza el estado actual de
         //presionado de cada tecla.
@@ -87,9 +110,12 @@ public class ManejadorTeclado{
         }
            return false;
     }
+    /**
+     *Metodo que verifica que teclas estan presionadas. Tambien actualiza el estado actual de presionada de cada tecla
+     * @return Regresa un booleano que especifica si la tecla IZQUIERDA esta presionada o no.
+     */
     public boolean izqPresionado(){
-        //Se verifica qué teclas están presionadas. Además se actualiza el estado actual de
-        //presionado de cada tecla.
+        
        int tecladoActual = checarPresionado();
        if( !izqPresionado &  ( tecladoActual & GameCanvas.LEFT_PRESSED)!=0){
            izqPresionado=PRESIONADO;
@@ -97,9 +123,12 @@ public class ManejadorTeclado{
         }
            return false;
     }
+    /**
+     *Metodo que verifica que teclas estan presionadas. Tambien actualiza el estado actual de presionada de cada tecla
+     * @return Regresa un booleano que especifica si la tecla DERECHA esta presionada o no.
+     */
     public boolean derPresionado(){
-        //Se verifica qué teclas están presionadas. Además se actualiza el estado actual de
-        //presionado de cada tecla.
+       
        int tecladoActual = checarPresionado();
        if( !derPresionado &  ( tecladoActual & GameCanvas.RIGHT_PRESSED)!=0){
            derPresionado=PRESIONADO;
@@ -107,6 +136,10 @@ public class ManejadorTeclado{
         }
            return false;
     }
+     /**
+     *Metodo que verifica que teclas estan presionadas. Tambien actualiza el estado actual de presionada de cada tecla
+     * @return Regresa un booleano que especifica si la tecla A esta presionada o no.
+     */
     public boolean aPresionado(){
         //Se verifica qué teclas están presionadas. Además se actualiza el estado actual de
         //presionado de cada tecla.
@@ -117,6 +150,10 @@ public class ManejadorTeclado{
         }
            return false;
     }
+   /**
+     *Metodo que verifica que teclas estan presionadas. Tambien actualiza el estado actual de presionada de cada tecla
+     * @return Regresa un booleano que especifica si la tecla B esta presionada o no.
+     */
     public boolean bPresionado(){
         //Se verifica qué teclas están presionadas. Además se actualiza el estado actual de
         //presionado de cada tecla.
