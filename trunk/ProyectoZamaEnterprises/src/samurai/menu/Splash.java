@@ -7,6 +7,11 @@ import javax.microedition.lcdui.game.GameCanvas;
 import samurai.animacion.Animable;
 
 //Clase de Splashes
+/**
+ * Crea la imagen del splash y la coloca
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Octubre 2010
+ */
 public class Splash implements Animable
 {
     //Atributos básicos de un Splash
@@ -16,7 +21,11 @@ public class Splash implements Animable
     private final int ALTO_PANTALLA;
     private final int ANCHO_PANTALLA;
 
-    //Constructor de Splash, recibe el archivo y las coordenadas.
+    /**
+     * crea la imagen del splash
+     * @param archivo direccion de la imagen del splash
+     * @param gmCanvas
+     */
     public Splash(String archivo, GameCanvas gmCanvas) {
         //INtentamos crear nuestra imagen del Splash actual.
         try {
@@ -30,7 +39,10 @@ public class Splash implements Animable
         ANCHO_PANTALLA = gmCanvas.getWidth();
     }
 
-    //Método para dibujar.
+    /**
+     * Método para dibujar.
+     * @param g Graficos donde se dibuja
+     */
     public void dibujar(Graphics g) {
         //Dibujamos la imagen exactamente en el centro respecto a su centro.
         g.drawImage(imagen, ANCHO_PANTALLA/2, ALTO_PANTALLA/2, Graphics.HCENTER|Graphics.VCENTER);
