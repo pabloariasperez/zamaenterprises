@@ -295,5 +295,6 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        System.gc();
     }
 }

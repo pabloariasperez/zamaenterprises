@@ -16,6 +16,8 @@ public class FondoMenu extends Sprite
     private static final int ALTO_SPRITE = 240;
     private final int ANCHO_PANTALLA;
     private final int ALTO_PANTALLA;
+    private int[] secuenciaSprite;
+    private int retrasoAnimacion;
 
     /**
      * Recibe como parametro el nombre de la imagen a utilizar como fondo a la vez que su posición.
@@ -28,6 +30,8 @@ public class FondoMenu extends Sprite
         super(Image.createImage(archivoFondo), FondoMenu.ANCHO_SPRITE, FondoMenu.ALTO_SPRITE);
         ANCHO_PANTALLA = anchoPantalla;
         ALTO_PANTALLA = altoPantalla;
+        this.secuenciaSprite = new int[] {0,1,2};
+        this.retrasoAnimacion = 0;
         this.setPosition( 0, 0);
     }
 
@@ -38,6 +42,17 @@ public class FondoMenu extends Sprite
     public void dibujar(Graphics g){
         //Aquí mismo se posiciona al Fondo Menú porque no tiene caso crearle más atributos y métodos.
         this.setPosition( ANCHO_PANTALLA - this.getWidth() - 10, ( ALTO_PANTALLA - this.getHeight() )/2);
+
+        if(retrasoAnimacion%60==0){
+            if(this.getFrame()==0){
+                this.nextFrame();
+            }else{
+                this.nextFrame();
+            }
+            retrasoAnimacion = 0;
+        }
+        retrasoAnimacion++;
+        
         this.paint(g);
     }
 }

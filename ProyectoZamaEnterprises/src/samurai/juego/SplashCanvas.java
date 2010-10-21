@@ -72,7 +72,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         //Inicializamos nuestro tiempo.
         tiempo = new TiempoEscenario();
         //Establecemos cuánto queremos que dure cada SPLASH.
-        TIEMPO_SPLASH = 3 * animador.getFPS();      //Recuérdese que el tiempo funciona a base de FRAMES como tiempo.
+        TIEMPO_SPLASH = 2 * animador.getFPS();      //Recuérdese que el tiempo funciona a base de FRAMES como tiempo.
 
         animador.iniciar();
     }

@@ -11,7 +11,7 @@ import javax.microedition.midlet.*;
  */
 public class SamuraiEnterprises extends MIDlet {
 
-    //Atributos de nuestro midlet
+    //Atributos de nuestro midlet 
     //Crea un SplashCanvas que muestra el logo del Tec asi como el logo del equipo.
     private MenuCanvas menuCanvas;
     private SplashCanvas splashCanvas;
