@@ -255,7 +255,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     menuSonido = null;      //Es poco probable que se vuelva a ingresar a él.
                     break;
                 case MenuCanvas.SONIDO:
-                    menuSonido = new Menu(2, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", this, MenuCanvas.SONIDO);
+                    menuSonido = new Menu(2, "/samurai/imagenes/tituloSonido.png", "/samurai/imagenes/slash.png", this, MenuCanvas.SONIDO);
                     this.creaBotonesSonido();
                     break;
                 case MenuCanvas.SALIR:
