@@ -13,12 +13,19 @@ import javax.microedition.lcdui.game.GameCanvas;
 import samurai.menu.*;
 /**
  *Clase encargada de mostrar en una pantalla independiente el Menú
- * @author mi16
+ * @author Pablo, Erik y Daniel
+ * @version 1.0, Octubre 2010
  */
 public class MenuCanvas extends GameCanvas implements Actualizable {
     //Atributos esenciales para la clase: midlet, Graphic, dimensiones de pantalla, teclado.
     private SamuraiEnterprises samuraiMidlet;
     private Graphics g;
+    /**
+     * Constante que indica el alto de la pantalla del telefono
+     */
+    /**
+     * Constante que indica el ancho de la pantalla del telefono
+     */
     public final int ALTO_PANTALLA, ANCHO_PANTALLA;
     private ManejadorTeclado teclado;
 
@@ -27,10 +34,22 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
     //El menuActual nos dirá a quien debemos pintar en pantalla.
     private Menu menuActual;
-    //Finals estáticos que definen los Menús que ya tenemos creados y que se pueden asignar
+    
+    /**
+     * Constante entera que define el menu principal que ya esta creado.
+     */
     public static final int PRINCIPAL = 0;
+    /**
+     * Constante entera que define el menu de opciones que ya esta creado.
+     */
     public static final int OPCIONES = 1;
+    /**
+     * Constante entera que define el menu de sonido que ya esta creado.
+     */
     public static final int SONIDO = 2;
+    /**
+     * Constante entera que define el menu de salir que ya esta creado.
+     */
     public static final int SALIR = 3;
 
     //Objetos - Menú Principal.
@@ -47,6 +66,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private Menu menuSonido, menuSalir;
     
 
+    /**
+     * Constructor que recibe al samurai e iniciliza todas las contantes.
+     * @param samuraiMidlet midlet que se recibe.
+     */
     public MenuCanvas(SamuraiEnterprises samuraiMidlet){
         //Se manda TRUE en el constructor de la clase padre (GameCanvas) para decir que cuando se quiera saber si una tecla está presionada
         //se preguntará.
@@ -103,8 +126,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         }
     }
 
-     //Inicializamos los botones que utilizaremos en nuestro menú de opciones.
-     public void creaBotonesOpciones(){
+
+    private void creaBotonesOpciones(){
         //Creamos cada uno de los botones.
         try {
             opcionSonido = new Boton("/samurai/imagenes/botonSonido.png");
@@ -148,7 +171,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         }
     }
 
-    //Méotodo que dibujará el Menú Actual.
+    
+    /**
+     * Méotodo que dibuja el Menú Actual.
+     */
     public void dibujar(){
         //Establecemos nuestro color para dibujar. NEGRO
         g.setColor(0x0);
@@ -159,7 +185,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         this.menuActual.dibujar(g);
         this.flushGraphics();
     }
-// ahi va
+
+    /**
+     * Metodo que actualiza el MenuCanvas de acuerdo a los botones que se hayan presionado en el teclado
+     */
     public void actualizar(){
         //Preguntamos si se ha presionado la tecla arriba para mover hacia arirba una opción.
         if( teclado.upPresionado()){

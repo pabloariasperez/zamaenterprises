@@ -3,6 +3,11 @@ package samurai.juego;
 import javax.microedition.lcdui.Graphics;
 import samurai.animacion.*;
 
+/**
+ * Clase que se encarga de animar a Sekai
+ * @author Pablo, Erik y Daniel
+ * @version 1.0, septiembre 2010
+ */
 public class ManejadorSekai implements Animable{
     private final int NUMERO_FRAMES_ATAQUE = 14;
 
@@ -16,6 +21,12 @@ public class ManejadorSekai implements Animable{
     int frameActual;
 
     //Recibe como parametros al sprite de sekai, al igual que los Sprites de la espada y efecto, y un manejador de teclado
+    /**
+     * Constructor que iniciliza todas las variables
+     * @param sekai Recibe un SpriteSekai que contiene los movimientos del personaje
+     * @param efectos Recibe un SpriteEspada que contiene los efectos de la espada.
+     * @param manejadorTec Recibe un ManejadorTeclado para detectar las teclas presionadas.
+     */
     public ManejadorSekai(SpriteSekai sekai, SpriteEspada efectos, ManejadorTeclado manejadorTec){
         this.sekai=sekai;
         this.efectosEspada=efectos;
@@ -27,12 +38,20 @@ public class ManejadorSekai implements Animable{
         this.SECUENCIA_FRONTAL=3;
     }
 
+    /**
+     *
+     * @param g Graficos donde se dibujan los Sprites
+     */
     public void dibujar(Graphics g) {
         efectosEspada.dibujar(g);
         sekai.dibujar(g);
     }
 
-    public void actualizar() throws InterruptedException {
+    /**
+     * Metodo que actualiza todos los Sprites que contiene el objeto asi como tambien genera la animación cuando se presiona una tecla.
+     * @throws InterruptedException
+     */
+    public void actualizar() throws InterruptedException{
         sekai.actualizar();
         //Pregunta si actualmente esta en medio de una animacion
         //Si se esta animando el efectosEspada avanza un frame en el sprite
