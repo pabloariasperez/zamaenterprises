@@ -8,6 +8,15 @@ import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.lcdui.game.Sprite;
 
 
+/**
+ * Agrega los botones al menu
+ * Mueve la opcion
+ * Mueve los botones
+ * Mueve el indicador
+ * Cambia el fondo del menu
+ * @author Pablo, Erik, Daniel
+ * @version 1.2 Octubre 2010
+ */
 public class Menu {
     private Sprite titulo;
     private Boton[] botones;
@@ -24,14 +33,18 @@ public class Menu {
     private final int MARGEN_SELECCIONADO = 60;          //La opción seleccionada.
     private final int MARGEN_INDICADOR = 15;            //El SPRITE de fondo de la opción seleccionada.
 
-    //Nombre del menú, simulando un ENUM que almacena MenuCanvas
+    /**
+     *Nombre del menú, simulando un ENUM que almacena MenuCanvas
+     */
     public final int nombreMenu;
-
-    /*Constructor
-     *  +Total de Botones
-     *  +Alto de pantalla
-     *  +Dirección del archivo del encabezado
-     *  +Dirección del archivo de la imagen indicadora de selección.
+    /**
+     * Constructor donde se inicializan las variables
+     * @param totalButtons indica el numero total de botones que tendra el manu
+     * @param archivoTitulo direccion de la imagen a usar como titulo
+     * @param archivoIndicador direccion de la imagen a usar como indicador
+     * @param gmCanvas
+     * @param nombreMenu indica que menu es
+     * @throws IOException cuando la direccion de alguna imagen es incorrecta o inexistente
      */
     public Menu( int totalButtons, String archivoTitulo, String archivoIndicador, GameCanvas gmCanvas, int nombreMenu) throws IOException{
         //Se inicializa el arreglo de botones de un tamaño específico según los parámetros del constructor.
@@ -52,12 +65,19 @@ public class Menu {
         this.indexBotonSeleccionado = 0;
     }
     
-    //Regresa la indexBotonSeleccionado del boton
+    /**
+     * Regresa la indexBotonSeleccionado del boton
+     * @return Regresa la indexBotonSeleccionado del boton
+     */
     public int getPosition(){
         return this.indexBotonSeleccionado;
     }
 
-    //Agregaremos botones a nuestro arreglo de botones de nuestro menú.
+    /**
+     * Agregaremos botones a nuestro arreglo de botones de nuestro menú.
+     * @param b boton a agregar
+     * @param archivoSpriteFondo direccion del Fondo
+     */
     public void agregarBoton(Boton b, String archivoSpriteFondo){
         //Preguntamos si ya se ha definido el alto de botón al indicador, para centrar correctamente el indicador respecta al botón.
         if( ! indicador.isDefiniedAltoBoton() ){
@@ -92,13 +112,19 @@ public class Menu {
         numButtons++;
     }
     
-    //Regresa el numero total de botones que hay en el menú
+    /**
+     * Regresa el numero total de botones que hay en el menú
+     * @return Regresa el numero total de botones que hay en el menú
+     */
     public int getTotalButtons(){
         return this.botones.length;
     }
 
-    //Dibuja todo el menú con sus opciones.
-    //Dibuja: Indicador, título y cada uno de los botones en sus respectivas posiciones.
+    /**
+     * Dibuja todo el menú con sus opciones.
+     * Dibuja: Indicador, título y cada uno de los botones en sus respectivas posiciones.
+     * @param g Los graficos donde se dibuja
+     */
     public void dibujar(Graphics g) {
         fondosMenus[indexBotonSeleccionado].dibujar(g);
         this.indicador.dibujar(g);
@@ -108,7 +134,9 @@ public class Menu {
              botones[opcionIndex].dibujar(g);
          }
     }
-    //Mueve el indicador a la opción actualmente seleccionada indicada por el indexBotonSeleccionado.
+    /**
+     * Mueve el indicador a la opción actualmente seleccionada indicada por el indexBotonSeleccionado.
+     */
     public void moverIndicador(){
         int nuevaY = this.MARGEN_SELECCIONADO+(indexBotonSeleccionado*((this.ALTO_PANTALLA-this.MARGEN_SELECCIONADO)/getTotalButtons()));
         this.indicador.cambiarPosicion(this.MARGEN_INDICADOR, nuevaY);
@@ -123,8 +151,11 @@ public class Menu {
         }
     }
 
-    //El usuario se mueve de opción y animamos para que se de cuenta. Línea indicador y SLASH de fondo.
-     public void moverOpcion(int direccion){
+    /**
+     * El usuario se mueve de opción y animamos para que se de cuenta. Línea indicador y SLASH de fondo.
+     * @param direccion hacia donde se va a mover
+     */
+    public void moverOpcion(int direccion){
          //Cambiamos el margen del botón actualmente seleccionado.
          cambiarMargen( this.botones[indexBotonSeleccionado] );
          if( direccion == 1){

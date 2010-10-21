@@ -7,6 +7,11 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
 
+/**
+ * Crea el sprite del indicador, lo mueve, y lo dibuja
+ * @author Pablo, Erik, Daniel
+ * @version 1.1 Octubre 2010
+ */
 public class Indicador extends Sprite {
     private Posicion posicion;
     private int crecimientoAncho;
@@ -22,7 +27,16 @@ public class Indicador extends Sprite {
 
 
 
-    //Recibe como parametros el nombre del archivo a utilizar como indicador, la posicion x y posicion y a utilizar como posiciones iniciales
+    /**
+     * Crea el sprite
+     * Inicializa la posicion, el crecimiento en ancho y alto y el alto del boton
+     * coloca el indicador en su posicion inicial
+     * @param archivoIndicador direccion de la imagen del indicador
+     * @param posicionX posicion inicial en x
+     * @param posicionY posicion inical en y
+     * @param anchoPantalla ancho de la pantalla
+     * @throws IOException si no se encuentra el archivo de la imagen
+     */
     public Indicador(String archivoIndicador, int posicionX, int posicionY, int anchoPantalla) throws IOException{
         //El 135 representa el ancho de la imagen, mientras que el 40 representa lo alto de esta.
         super(Image.createImage(archivoIndicador),ANCHO_SPRITE, ALTO_SPRITE);
@@ -33,8 +47,13 @@ public class Indicador extends Sprite {
         this.ANCHO_PANTALLA = anchoPantalla;
         this.altoBoton=0;
     }
-    //Dibuja una linea que crece desde x=0 hasta x=240, despues dibuja un rectangulo haciendo el efecto de que la linea se ensancha ,
-    //y al final dibuja al sprite del indicador.
+
+    /**
+     * Dibuja una linea que crece desde x=0 hasta x=240,
+     * despues dibuja un rectangulo haciendo el efecto de que la linea se ensancha,
+     * y al final dibuja al sprite del indicador.
+     * @param g Graficos donde se dibuja
+     */
     public void dibujar(Graphics g){
         g.setColor(0x99FF0000);
         //Preguntamos si el crecimiento de nuestro incremento en el ancho es aún menor que el ANCHO DE PANTALLA
@@ -51,7 +70,11 @@ public class Indicador extends Sprite {
         }
     }
     
-    //Cambia la posición x y y del indicador
+    /**
+     * Cambia la posición x y y del indicador
+     * @param nuevaPosicionX nueva x
+     * @param nuevaPosicionY nueva y
+     */
     public void cambiarPosicion(int nuevaPosicionX,int nuevaPosicionY){
         this.posicion.setX(nuevaPosicionX);
         this.posicion.setY(nuevaPosicionY);
@@ -61,12 +84,19 @@ public class Indicador extends Sprite {
 
     }
 
-    //Preguntamos si ya está definido el alto de botón para el indicador. Nos ayuda a centrar el indicador respecto a l botón.
+    /**
+     * Preguntamos si ya está definido el alto de botón para el indicador.
+     * Nos ayuda a centrar el indicador respecto a l botón.
+     * @return un boolean indicando si ya esta definido el alto del botón
+     */
     public boolean isDefiniedAltoBoton(){
         return this.altoBoton != 0;
     }
 
-    //Obtemenos y guardamos el ALTO de los botones.
+    /**
+     * Obtemenos y guardamos el ALTO de los botones.
+     * @param altoBoton alto del boton
+     */
     public void setBotonAlto( int altoBoton ){
         this.altoBoton = altoBoton;
     }
