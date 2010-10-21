@@ -62,5 +62,4 @@ public class SpriteSekai extends Sprite implements Animable {
         }
         retrasoAnimacion++;
     }
-
 }
