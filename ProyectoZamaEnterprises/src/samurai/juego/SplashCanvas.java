@@ -11,7 +11,7 @@ import javax.microedition.lcdui.game.GameCanvas;
 import samurai.menu.Splash;
 
 /**
- *
+ * Clase que se encarga de manejar los Splashes que se muestran antes de iniciar el juego.
  * @author Pablo, Erik y Daniel
  * @version 0.1, octubre 2010
  */
@@ -95,7 +95,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         }
 
         //VAmos incrementando el tiempo mientras el STACK contenga algo.
-        if(! splashes.isEmpty() ){
+        if(! splashes.isEmpty() && !colores.isEmpty() ){
             
             //Comparo el tiempo actual con el tiempo estándar para dejar un SPLASH.
             if( tiempo.tiempoActual() < TIEMPO_SPLASH ){
@@ -121,7 +121,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     public void dibujar() {
 
 
-        if(!splashes.isEmpty()){
+        if(!splashes.isEmpty() && !colores.isEmpty()){
 
             //Establecemos nuestro color para dibujar. Lo que se obtenga del stack de colores.
             g.setColor(((Integer)colores.peek()).intValue());
