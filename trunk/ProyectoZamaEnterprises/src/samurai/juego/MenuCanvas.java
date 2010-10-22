@@ -1,16 +1,10 @@
 package samurai.juego;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.menu.*;
+
 /**
  *Clase encargada de mostrar en una pantalla independiente el Menú
  * @author Pablo, Erik y Daniel
@@ -20,13 +14,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     //Atributos esenciales para la clase: midlet, Graphic, dimensiones de pantalla, teclado.
     private SamuraiEnterprises samuraiMidlet;
     private Graphics g;
-    /**
-     * Constante que indica el alto de la pantalla del telefono
-     */
-    /**
-     * Constante que indica el ancho de la pantalla del telefono
-     */
-    public final int ALTO_PANTALLA, ANCHO_PANTALLA;
+
     private ManejadorTeclado teclado;
 
     //Efectos dentro del Menu
@@ -55,7 +43,6 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     //Objetos - Menú Principal.
     private Menu menuPrincipal;
     private Boton botonNuevo, botonContinuar, botonPuntajes, botonOpciones, botonSalir;
-    private FondoMenu fondo;
 
     //Objetos - Menú Opciones
     private Boton opcionSonido, opcionIdioma, opcionAtras;
@@ -80,18 +67,14 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         //Asignamos a nuestro parámetro "g" el Graphic del GameCanvas
         this.g = this.getGraphics();
 
-        //Asginamos el ALTO_PANTALLA y ANCHO_PANTALLA de nuestra pantalla
-        this.ALTO_PANTALLA = this.getHeight();
-        this.ANCHO_PANTALLA = this.getWidth();
 
         //Creamos nuestro manejador de teclado
         teclado = new ManejadorTeclado(this);
         
-
         
         //Intentamos crear nuestro Menú Principal. De lo contrario regresamos una excepción.
         try {            
-            menuPrincipal = new Menu(5,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png", this, MenuCanvas.PRINCIPAL );
+            menuPrincipal = new Menu(5,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png", MenuCanvas.PRINCIPAL );
             this.crearBotonesMenuPrincipal();
 
             //Establecemos el Menú Principal como el Menú Actual para ser desplegado.
@@ -179,7 +162,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         //Establecemos nuestro color para dibujar. NEGRO
         g.setColor(0x0);
         //Limpiamos la pantalla.
-        g.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
+        g.fillRect(0, 0, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA);
 
         //Dibujamos el Menu Actual
         this.menuActual.dibujar(g);
@@ -279,16 +262,16 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     menuOpciones = null;
                     break;
                 case MenuCanvas.OPCIONES:
-                    menuOpciones = new Menu(3, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", this, MenuCanvas.OPCIONES);
+                    menuOpciones = new Menu(3, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", MenuCanvas.OPCIONES);
                     this.creaBotonesOpciones();
                     menuSonido = null;      //Es poco probable que se vuelva a ingresar a él.
                     break;
                 case MenuCanvas.SONIDO:
-                    menuSonido = new Menu(2, "/samurai/imagenes/tituloSonido.png", "/samurai/imagenes/slash.png", this, MenuCanvas.SONIDO);
+                    menuSonido = new Menu(2, "/samurai/imagenes/tituloSonido.png", "/samurai/imagenes/slash.png", MenuCanvas.SONIDO);
                     this.creaBotonesSonido();
                     break;
                 case MenuCanvas.SALIR:
-                    menuSalir = new Menu(2, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", this, MenuCanvas.SALIR);
+                    menuSalir = new Menu(2, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", MenuCanvas.SALIR);
                     this.creaBotonesSalir();
                     break;
             }

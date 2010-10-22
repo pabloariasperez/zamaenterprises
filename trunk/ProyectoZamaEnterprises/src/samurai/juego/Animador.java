@@ -1,7 +1,6 @@
 package samurai.juego;
 
 
-import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
 
 
@@ -20,14 +19,14 @@ public class Animador implements Runnable
 
     //Atributos relacionados con el tiempo haciendo uso de FRAMES.
     private long tiempoInicial, tiempoFinal;
-    private final int FPS = 60;
-    private final int DURACION_FRAME = 1000/FPS;
+    private final int DURACION_FRAME;
 
     /**
      * Constructor que inicializa las variables
      * @param gmCanvas GameCanvas que se va a animar
      */
     public Animador(GameCanvas gmCanvas) {
+        DURACION_FRAME = 1000/Global.FPS;
         //Preguntamos si el GameCanvas recibido está implementando la interface ACtualizable, que lo obliga a actualizar() y dibujar()
         if( gmCanvas instanceof Actualizable ){
             //Guardamos el GameCanvas del parámetro recibido casteado en el atributo local.
@@ -81,14 +80,5 @@ public class Animador implements Runnable
      */
     public void terminar() {
         corriendo = false;
-    }
-
-    //
-    /**
-     * Método para saber a cuántos FPS se está corriendo la aplicación.
-     * @return los FPS a los que corre la aplicación
-     */
-    public int getFPS(){
-        return FPS;
     }
 }

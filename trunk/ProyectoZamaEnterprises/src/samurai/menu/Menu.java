@@ -4,8 +4,8 @@ package samurai.menu;
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
-import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.lcdui.game.Sprite;
+import samurai.juego.Global;
 
 
 /**
@@ -24,9 +24,6 @@ public class Menu {
     private Indicador indicador;
     private int numButtons;
     private int indexBotonSeleccionado;
-    private final int ANCHO_PANTALLA;
-    private final int ALTO_PANTALLA;
-
 
     //Márgenes desde la izquierda de la pantalla.
     private final int MARGEN_NO_SELECCIONADO = 10;       //La opción NO seleccionada.
@@ -46,20 +43,17 @@ public class Menu {
      * @param nombreMenu indica que menu es
      * @throws IOException cuando la direccion de alguna imagen es incorrecta o inexistente
      */
-    public Menu( int totalButtons, String archivoTitulo, String archivoIndicador, GameCanvas gmCanvas, int nombreMenu) throws IOException{
+    public Menu( int totalButtons, String archivoTitulo, String archivoIndicador, int nombreMenu) throws IOException{
         //Se inicializa el arreglo de botones de un tamaño específico según los parámetros del constructor.
         botones = new Boton[ totalButtons ];
         fondosMenus = new FondoMenu [ totalButtons ];
        this.nombreMenu = nombreMenu;
         
-        //Se guarda el alto y ancho de pantalla que será CONSTANTE.
-        this.ALTO_PANTALLA = gmCanvas.getHeight();
-        this.ANCHO_PANTALLA = gmCanvas.getWidth();
         //Se crea el Sprite Título y se modifica su posición en pantalla con el que sería dibujado.
         titulo= new Sprite(Image.createImage(archivoTitulo));
         titulo.setPosition(20, 20);
         //Se crea el sprite delINDICADOR:
-        this.indicador = new Indicador (archivoIndicador,MARGEN_INDICADOR,this.MARGEN_SELECCIONADO, ANCHO_PANTALLA );
+        this.indicador = new Indicador (archivoIndicador,MARGEN_INDICADOR,this.MARGEN_SELECCIONADO );
         //Establecemos nuestro total de botones agregados en cero.
         this.numButtons = 0;
         this.indexBotonSeleccionado = 0;
@@ -97,10 +91,10 @@ public class Menu {
         }
 
         //Colocamos en su coordenada Y a cada uno de los botones conforme son agragados. La función... está padre.
-        b.setY(MARGEN_SELECCIONADO + (numButtons*((this.ALTO_PANTALLA-MARGEN_SELECCIONADO)/getTotalButtons())));
+        b.setY(MARGEN_SELECCIONADO + (numButtons*((Global.ALTO_PANTALLA-MARGEN_SELECCIONADO)/getTotalButtons())));
         try {
             //Creamos el sprite de fondo según la opción
-            fondosMenus[numButtons] = new FondoMenu(archivoSpriteFondo, ANCHO_PANTALLA, ALTO_PANTALLA);
+            fondosMenus[numButtons] = new FondoMenu(archivoSpriteFondo);
             fondosMenus[numButtons].setPosition(numButtons, numButtons);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -138,7 +132,7 @@ public class Menu {
      * Mueve el indicador a la opción actualmente seleccionada indicada por el indexBotonSeleccionado.
      */
     public void moverIndicador(){
-        int nuevaY = this.MARGEN_SELECCIONADO+(indexBotonSeleccionado*((this.ALTO_PANTALLA-this.MARGEN_SELECCIONADO)/getTotalButtons()));
+        int nuevaY = this.MARGEN_SELECCIONADO+(indexBotonSeleccionado*((Global.ALTO_PANTALLA-this.MARGEN_SELECCIONADO)/getTotalButtons()));
         this.indicador.cambiarPosicion(this.MARGEN_INDICADOR, nuevaY);
     }
 

@@ -22,7 +22,10 @@ public class SamuraiEnterprises extends MIDlet {
      * Constructor del MIDlet que inicializa el SplashCanvas. =D
      */
     public SamuraiEnterprises() {
+        Global.setFPS(20);
         splashCanvas = new SplashCanvas(this);
+        Global.setAltoPantalla(splashCanvas.getHeight());
+        Global.setAnchoPantalla(splashCanvas.getWidth());
     }
 
     /**
@@ -34,6 +37,7 @@ public class SamuraiEnterprises extends MIDlet {
             Display.getDisplay(this).setCurrent(splashCanvas);
         }
         menuCanvas = new MenuCanvas(this);
+        Global.setFPS(40);
         Display.getDisplay(this).setCurrent(menuCanvas);
         splashCanvas = null;
     }

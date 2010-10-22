@@ -1,4 +1,5 @@
 /*
+ *
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -19,12 +20,11 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     //Declaramos todo lo necesario para hacer funcionar nuestros MIDlets estándar.
     private SamuraiEnterprises samuraiMidlet;
     private Graphics g;
-    private final int ALTO_PANTALLA;
-    private final int ANCHO_PANTALLA;
     private ManejadorTeclado teclado;
     private Animador animador;
     private TiempoEscenario tiempo;     //Reutilizamos esta clase, aunque fue concebida para los escenarios.
     private final int TIEMPO_SPLASH;
+    private final int TIEMPO = 2000;        //En milisegundos
     private boolean estoyMostrandome;
 
 
@@ -47,10 +47,6 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         //Asignamos a nuestro parámetro "g" el Graphic del GameCanvas
         this.g = this.getGraphics();
 
-        //Asginamos el ALTO_PANTALLA y ANCHO_PANTALLA de nuestra pantalla
-        this.ALTO_PANTALLA = this.getHeight();
-        this.ANCHO_PANTALLA = this.getWidth();
-
         //Creamos nuestro manejador de teclado
         teclado = new ManejadorTeclado(this);
 
@@ -59,13 +55,11 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         colores = new Stack();
 
         //Metemos a nuestros STACK's de Splashes y colores los que queremos mostrar. Atención con el órden en que son ingresados.
-        splashes.push( new Splash("/samurai/imagenes/sekai.png", this) );
+        splashes.push( new Splash("/samurai/imagenes/sekai.png") );
         colores.push(new Integer(0x000000));
-        splashes.push( new Splash("/samurai/imagenes/itesmcel.png", this) );
+        splashes.push( new Splash("/samurai/imagenes/itesmcel.png") );
         colores.push(new Integer(0xFFFFFF));
        
-        //splashes.push( new Splash("imagenes/splashes/equipoSplash.png", this));
-        //splashes.push( new Splash("imagenes/splashes/logoTecCEMSplash.png", this));
 
 
         //Establecemos TRUE mi estoyMostrandome
@@ -77,7 +71,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         //Inicializamos nuestro tiempo.
         tiempo = new TiempoEscenario();
         //Establecemos cuánto queremos que dure cada SPLASH.
-        TIEMPO_SPLASH = 2 * animador.getFPS();      //Recuérdese que el tiempo funciona a base de FRAMES como tiempo.
+        TIEMPO_SPLASH = (TIEMPO/1000) * Global.FPS;      //Recuérdese que el tiempo funciona a base de FRAMES como tiempo.
 
         animador.iniciar();
     }
@@ -88,7 +82,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
      */
     public void actualizar() {
         //Verificamos que el usuario no haya presionado el botón de acción FIRE para interrumpir el SPLASH
-        if( teclado.firePresionado() && tiempo.tiempoActual() > animador.getFPS()/4 ){
+        if( teclado.firePresionado() && tiempo.tiempoActual() > Global.FPS/4 ){
             splashes.pop();     //Hacemos el POP para que ya muestre la siguiente imagen.
             colores.pop();
             tiempo.reiniciarTiempo();
@@ -120,13 +114,12 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
      */
     public void dibujar() {
 
-
         if(!splashes.isEmpty() && !colores.isEmpty()){
 
             //Establecemos nuestro color para dibujar. Lo que se obtenga del stack de colores.
             g.setColor(((Integer)colores.peek()).intValue());
             //Limpiamos la pantalla.
-            g.fillRect(0, 0, ANCHO_PANTALLA, ALTO_PANTALLA);
+            g.fillRect(0, 0, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA);
             ((Splash)splashes.peek()).dibujar(g);
         }
 
