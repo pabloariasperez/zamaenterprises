@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
+import samurai.juego.Global;
 
 /**
  * Sprite del fondo a usar en el menu y se encarga de posicionarlo
@@ -14,9 +15,7 @@ public class FondoMenu extends Sprite
 {
     private static final int ANCHO_SPRITE = 80;
     private static final int ALTO_SPRITE = 240;
-    private final int ANCHO_PANTALLA;
-    private final int ALTO_PANTALLA;
-    private int[] secuenciaSprite;
+    private static final int MARGEN_DERECHO = 10;
     private int retrasoAnimacion;
 
     /**
@@ -26,13 +25,9 @@ public class FondoMenu extends Sprite
      * @param altoPantalla alto de la pantalla
      * @throws IOException no se encontro el archivo del fondo
      */
-    public FondoMenu(String archivoFondo, int anchoPantalla, int altoPantalla) throws IOException{
+    public FondoMenu(String archivoFondo) throws IOException{
         super(Image.createImage(archivoFondo), FondoMenu.ANCHO_SPRITE, FondoMenu.ALTO_SPRITE);
-        ANCHO_PANTALLA = anchoPantalla;
-        ALTO_PANTALLA = altoPantalla;
-        this.secuenciaSprite = new int[] {0,1,2};
         this.retrasoAnimacion = 0;
-        this.setPosition( 0, 0);
     }
 
     /**
@@ -40,10 +35,10 @@ public class FondoMenu extends Sprite
      * @param g Graficos donde se dibuja
      */
     public void dibujar(Graphics g){
-        //Aquí mismo se posiciona al Fondo Menú porque no tiene caso crearle más atributos y métodos.
-        this.setPosition( ANCHO_PANTALLA - this.getWidth() - 10, ( ALTO_PANTALLA - this.getHeight() )/2);
-
-        if(retrasoAnimacion%60==0){
+        //Lo posiciono =D
+        this.setPosition( Global.ANCHO_PANTALLA - this.getWidth() - MARGEN_DERECHO, ( Global.ALTO_PANTALLA - this.getHeight() )/2);
+        
+        if(retrasoAnimacion%Global.FPS==0){
             if(this.getFrame()==0){
                 this.nextFrame();
             }else{
