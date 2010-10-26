@@ -5,6 +5,8 @@
 
 package samurai.escenarios;
 
+import java.io.IOException;
+import java.util.Stack;
 import javax.microedition.lcdui.Graphics;
 import samurai.animacion.SpriteEnemigo;
 import samurai.juego.*;
@@ -25,6 +27,9 @@ public class Escenario {
     private ManejadorEnemigos manejadorEnemigos;
     private ManejadorSekai manejadorSekai;
     private TiempoEscenario tiempo;
+    private Stack enemigosEnEspera;
+    private int tiempoProxEvento;
+    private int alturaFondo;
 
     //El constructor no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
     public Escenario(){
@@ -48,8 +53,30 @@ public class Escenario {
     }
 
     //Se accede indirectamente al manejador de enemigos del escenario. Se alimenta con la información del atributo.
-    public void agregarEnemigo(SpriteEnemigo enemigo){
-        manejadorEnemigos.agregarEnemigo(enemigo);
+    public void agregarEnemigo(int tipoEnemigo){
+        try {
+            //Obligamos
+            int posicionAleatoria = (int) System.currentTimeMillis() % 3;
+            switch (tipoEnemigo) {
+                case SpriteEnemigo.MURCIELAGO:
+                    manejadorEnemigos.agregarEnemigo(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, 20));
+                    break;
+                case SpriteEnemigo.RATA:
+                    manejadorEnemigos.agregarEnemigo(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, 20));
+                    break;
+                case SpriteEnemigo.FANTASMA:
+                    manejadorEnemigos.agregarEnemigo(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, 20));
+                    break;
+                case SpriteEnemigo.TOPO:
+                    manejadorEnemigos.agregarEnemigo(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, 20));
+                    break;
+                case SpriteEnemigo.CESAR:
+                    manejadorEnemigos.agregarEnemigo(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, 20));
+                    break;
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     //Se dibujan los fondos
@@ -75,14 +102,28 @@ public class Escenario {
 
     //Actualiza el escenario
     public void actualizar(){
+        if( !enemigosEnEspera.isEmpty() ){
+            if( tiempo.actual() == tiempoProxEvento ){
+                agregarEnemigo( ((int[])enemigosEnEspera.pop())[1] );
+            }
+        }
+        
         if(!manejadorFondos.isEmpty()){
             manejadorFondos.actualizar();
         }
         if(!manejadorEnemigos.isEmpty()){
             manejadorEnemigos.actualizar();
-
         }
-
+        tiempo.incrementar();
     }
 
+    public void agregarStackEnemigos( Stack enemigosEnEspera ) {
+        this.enemigosEnEspera = enemigosEnEspera;
+        tiempoProxEvento = ((int[])enemigosEnEspera.peek())[0];
+    }
+
+    private int posicionEnemigo(int posicionAleatoria) {
+        //Dependerá de la función del escenario.
+        return 0;
+    }
 }

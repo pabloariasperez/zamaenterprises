@@ -15,7 +15,13 @@ public class SamuraiEnterprises extends MIDlet {
     //Crea un SplashCanvas que muestra el logo del Tec asi como el logo del equipo.
     private MenuCanvas menuCanvas;
     private SplashCanvas splashCanvas;
-    //private Juego juego;
+    private Juego juego;
+
+
+    //Variable que guarda el estatus actual de la aplicación
+    private int estadoJuego;
+    //Valores de los estatus que se pueden tener a lo largo de la aplicación
+    private final int INICIANDO_JUEGO = 0;
 
     //
     /**
@@ -26,20 +32,20 @@ public class SamuraiEnterprises extends MIDlet {
         splashCanvas = new SplashCanvas(this);
         Global.setAltoPantalla(splashCanvas.getHeight());
         Global.setAnchoPantalla(splashCanvas.getWidth());
+        this.estadoJuego = INICIANDO_JUEGO;
     }
 
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este que entre estado activo.
      * @throws MIDletStateChangeException Esta excepcion es lanzada si el MIDlet no puede iniciar.
-     */
+      */
     public void startApp() {
         while( splashCanvas.estoyMostrandome() ){
             Display.getDisplay(this).setCurrent(splashCanvas);
         }
-        menuCanvas = new MenuCanvas(this);
         Global.setFPS(40);
+        menuCanvas = new MenuCanvas(this);
         Display.getDisplay(this).setCurrent(menuCanvas);
-        splashCanvas = null;
     }
 
     /**
@@ -57,15 +63,17 @@ public class SamuraiEnterprises extends MIDlet {
        splashCanvas = null;
     }
 
-    void mostrarPuntajes() {
+    public void mostrarPuntajes() {
     }
 
-    void mostrarCreditos() {
+    public void mostrarCreditos() {
     }
 
-    void continuarJuego() {
+    public void continuarJuego() {
     }
 
-    void correrJuego() {
+    public void correrJuego() {
+        Global.setFPS(60);
+        juego = new Juego(this);
     }
 }

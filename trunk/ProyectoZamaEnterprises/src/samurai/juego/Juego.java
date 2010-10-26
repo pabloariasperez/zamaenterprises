@@ -14,38 +14,15 @@ import samurai.escenarios.*;
  * @author mi16
  */
 public class Juego extends GameCanvas implements Actualizable {
-    /**
-     *
-     */
-    public static int ALTO_PANTALLA;
-    /**
-     *
-     */
-    public static int ANCHO_PANTALLA;
-       private SamuraiEnterprises samuraiMidlet;
-       private Animador animador; 
-       private Graphics g;
+    
+        private SamuraiEnterprises samuraiMidlet;
+        private Animador animador;
+        private Graphics g;
       
-       ManejadorEnemigos manejadorEnemigos;
         private ManejadorTeclado manejadorTec;
         private ManejadorColision colisionEnemigo;
 
-        private SpriteEnemigo enemigo;
-
         Escenario escenario;
-        FondoCapa fondo;
-
-        int variante;
-        int colorLaterales;
-        int yAlto;
-        int xDeFuncion;
-        int[][] arregloCoordenadasX;
-        int retrasoCamino;
-
-        private Posicionador posicionador;
-        private SpriteSekai sekai;
-        private SpriteEspada efectos;
-        private ManejadorSekai manejadorSekai;
 
         /**
          *
@@ -57,27 +34,14 @@ public class Juego extends GameCanvas implements Actualizable {
 
         this.samuraiMidlet = midlet;
         this.setFullScreenMode(true);
-        Juego.ANCHO_PANTALLA = this.getWidth();
-        Juego.ALTO_PANTALLA = this.getHeight();
-
         g = this.getGraphics();
 
-
-       fondo = new FondoCapa("/samurai/imagenes/fondoLuna.png",-1,0);
         //manejadorEnemigos= new ManejadorEnemigos();
 
        escenario=new Escenario();
        escenario.agregarFondo(fondo);
         manejadorTec = new ManejadorTeclado(this);
-        variante = 0;
-        colorLaterales = 0x0;
-        yAlto = 0;
-        retrasoCamino = 0;
-        arregloCoordenadasX = new int[ALTO_PANTALLA - 50][2];
-        for( int y=0; y < ALTO_PANTALLA - 50; y++ ){
-            arregloCoordenadasX[y][0] = 0;
-            arregloCoordenadasX[y][1] = 0;
-        }
+        
         
         try {
             enemigo = new SpriteEnemigo("/samurai/imagenes/spriteZubat.png", 60, 60);

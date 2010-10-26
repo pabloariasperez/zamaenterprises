@@ -82,24 +82,24 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
      */
     public void actualizar() {
         //Verificamos que el usuario no haya presionado el botón de acción FIRE para interrumpir el SPLASH
-        if( teclado.firePresionado() && tiempo.tiempoActual() > Global.FPS/4 ){
+        if( teclado.firePresionado() && tiempo.actual() > Global.FPS/4 ){
             splashes.pop();     //Hacemos el POP para que ya muestre la siguiente imagen.
             colores.pop();
-            tiempo.reiniciarTiempo();
+            tiempo.reiniciar();
         }
 
         //VAmos incrementando el tiempo mientras el STACK contenga algo.
         if(! splashes.isEmpty() && !colores.isEmpty() ){
             
             //Comparo el tiempo actual con el tiempo estándar para dejar un SPLASH.
-            if( tiempo.tiempoActual() < TIEMPO_SPLASH ){
-                tiempo.incrementarTiempo();
+            if( tiempo.actual() < TIEMPO_SPLASH ){
+                tiempo.incrementar();
             }else{
                 //Cuando se supera el tiempo de splash hacemos un pop sin guardar el elemento, para que sea el nuevo splash a dibujar
                 splashes.pop();
                 colores.pop();
                 //Reiniciamos nuestro tiempo para comenzar de nuevo el conteo.
-                tiempo.reiniciarTiempo();
+                tiempo.reiniciar();
             }
         }else{
             animador.terminar();

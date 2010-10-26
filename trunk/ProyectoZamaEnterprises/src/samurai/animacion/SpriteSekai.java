@@ -24,10 +24,9 @@ public class SpriteSekai extends Sprite implements Animable {
      * @throws IOException si no encuentra la imagen
      */
     public SpriteSekai(String archivoSekai, int posicionX, int posicionY) throws IOException{
-
         super(Image.createImage(archivoSekai),40,60);
-        this.posicionX = posicionX;
-        this.posicionY = posicionY;
+        this.posicionX = posicionX - this.getWidth()/2;
+        this.posicionY = posicionY - this.getHeight();
         this.secuenciaCorrer = new int[] {0,1};
         this.retrasoAnimacion=0;
         this.salto=10;
