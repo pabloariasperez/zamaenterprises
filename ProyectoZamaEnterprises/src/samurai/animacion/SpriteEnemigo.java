@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
+import samurai.escenarios.Posicionador;
 
 /**
  * Crea el sprite del enemigo, cambia sus secuencia de frames y lo mueve
@@ -13,6 +14,14 @@ import javax.microedition.lcdui.game.Sprite;
 public class SpriteEnemigo  extends Sprite implements Animable {
     private int posicionX,posicionY;
     private int[] secuenciaFondo, secuenciaMedia, secuenciaMediaFrente, secuenciaFrente;
+    private int parametroCamino, margenIzquierdo;
+
+    public static final int MURCIELAGO = 0;
+    public static final int RATA = 1;
+    public static final int TOPO = 2;
+    public static final int FANTASMA = 3;
+
+    public static final int CESAR = 10;
 
     /**
      * constructor que inicializa variables
@@ -21,10 +30,11 @@ public class SpriteEnemigo  extends Sprite implements Animable {
      * @param posicionY posicion inicial en y
      * @throws IOException Si no se encuentra el archivo
      */
-    public SpriteEnemigo(String archivoEnemigo, int posicionX, int posicionY) throws IOException{
+    public SpriteEnemigo(String archivoEnemigo, int margenIzquierdo, int posicionY, int parametroCamino) throws IOException{
 
         super(Image.createImage(archivoEnemigo),240/4,240/4);
-        this.posicionX = posicionX;
+        this.parametroCamino = parametroCamino;
+        this.posicionX = margenIzquierdo + Posicionador.recta(posicionY, parametroCamino);
         this.posicionY = posicionY;
         this.secuenciaFondo=new int[]{0,1,2,3};
         this.secuenciaMedia=new int[]{4,5,6,7};
@@ -32,7 +42,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         this.secuenciaFrente = new int[]{12,13,14,15};
         this.setFrameSequence(this.secuenciaFondo);
 
-       this.setPosition(posicionX, posicionY);
+       this.setPosition(this.posicionX, this.posicionY);
     }
 
     /**
@@ -50,6 +60,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     public void mover() {
 
         this.posicionY++;
+        this.posicionX = margenIzquierdo + Posicionador.recta(posicionY, parametroCamino);
         if(this.posicionY==90){
             this.setFrameSequence(secuenciaMedia);
         }else if(this.posicionY==120){

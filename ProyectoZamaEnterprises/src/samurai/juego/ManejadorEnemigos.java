@@ -72,4 +72,5 @@ public class ManejadorEnemigos {
     public int getSize(){
         return enemigosEnPantalla.size();
     }
+
 }

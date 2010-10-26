@@ -28,7 +28,7 @@ public class TiempoEscenario {
     /**
      * Metodo que incrementa el tiempo unitariamente
      */
-    public void incrementarTiempo(){
+    public void incrementar(){
         tiempo+=1;
     }
 
@@ -36,7 +36,7 @@ public class TiempoEscenario {
      *  Metodo que regresa el tiempo transcurrido.
      * @return Regresa el tiempo que ha transcurrido desde que se inicializo el tiempo.
      */
-    public int tiempoActual(){
+    public int actual(){
         return tiempo;
     }
 
@@ -44,7 +44,7 @@ public class TiempoEscenario {
     /**
      * Metodo que vuelve cero el tiempo
      */
-    public void reiniciarTiempo(){
+    public void reiniciar(){
         tiempo = 0;
     }
 }
