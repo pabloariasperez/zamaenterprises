@@ -17,12 +17,14 @@ import samurai.animacion.SpriteEnemigo;
 public class ManejadorEnemigos {
 
     private Vector enemigosEnPantalla;
-
+    private ManejadorSekai sekai;
+    private int enemigosMuertos;
     /**
      * Constructor que inicializa el Vector como un Vector vacio.
      */
     public ManejadorEnemigos(){
         enemigosEnPantalla= new Vector();
+        this.enemigosMuertos=0;
     }
     /**
      * Metodo que agrega los enemigos al Vector.
@@ -38,7 +40,11 @@ public class ManejadorEnemigos {
     public void kill(SpriteEnemigo enemigo){
         enemigosEnPantalla.removeElement(enemigo);
         enemigo=null;
-        System.gc();
+        this.enemigosMuertos++;
+        if(this.enemigosMuertos==5){
+            System.gc();
+            this.enemigosMuertos=0;
+        }
     }
     /**
      * Metodo que dibuja todos los elementos del vector en el el parametro que se le da.
@@ -55,9 +61,11 @@ public class ManejadorEnemigos {
     public void actualizar(){
         for(int i=0; i<enemigosEnPantalla.size();i++){
             ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).mover();
+            if(((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).collidesWith(ManejadorSekai.efectosEspada, true)){
+                this.kill((SpriteEnemigo)enemigosEnPantalla.elementAt(i));
+            }
         }
     }
-
     /**
      * Metodo que regresa un booleano que dice si el Vector enemigos esta vacio o no.
      * @return Booleano que dice si el Vector esta vacio o no.
