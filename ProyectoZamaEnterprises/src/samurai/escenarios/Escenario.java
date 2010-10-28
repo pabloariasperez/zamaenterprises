@@ -105,6 +105,7 @@ public class Escenario {
         if( !enemigosEnEspera.isEmpty() ){
             if( tiempo.actual() == tiempoProxEvento ){
                 agregarEnemigo( ((int[])enemigosEnEspera.pop())[1] );
+                tiempoProxEvento = ((int[])enemigosEnEspera.peek())[0];
             }
         }
         
