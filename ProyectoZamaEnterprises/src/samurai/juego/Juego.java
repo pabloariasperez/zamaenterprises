@@ -43,6 +43,7 @@ public class Juego extends GameCanvas implements Actualizable {
         animador = new Animador(this);
         animador.iniciar();
     }
+
 /**
  *
  * @return

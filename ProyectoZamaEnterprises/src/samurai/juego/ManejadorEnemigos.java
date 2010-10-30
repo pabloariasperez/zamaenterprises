@@ -7,6 +7,7 @@ package samurai.juego;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import samurai.animacion.SpriteEnemigo;
+import samurai.animacion.SpriteEspada;
 
 
 /**
@@ -18,6 +19,7 @@ public class ManejadorEnemigos {
 
     private Vector enemigosEnPantalla;
     private ManejadorSekai sekai;
+    private SpriteEspada espada;
     private int enemigosMuertos;
     /**
      * Constructor que inicializa el Vector como un Vector vacio.
@@ -61,7 +63,7 @@ public class ManejadorEnemigos {
     public void actualizar(){
         for(int i=0; i<enemigosEnPantalla.size();i++){
             ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).mover();
-            if(((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).collidesWith(ManejadorSekai.efectosEspada, true)){
+            if(((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).collidesWith(this.espada, true)){
                 this.kill((SpriteEnemigo)enemigosEnPantalla.elementAt(i));
             }
         }
@@ -80,5 +82,7 @@ public class ManejadorEnemigos {
     public int getSize(){
         return enemigosEnPantalla.size();
     }
-
+    public void setEspada(SpriteEspada espada){
+        this.espada=espada;
+    }
 }

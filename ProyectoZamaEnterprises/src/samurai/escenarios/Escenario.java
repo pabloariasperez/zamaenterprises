@@ -45,6 +45,7 @@ public class Escenario {
     //Guardamos en nuestro atributo manejadorSekai el alimentado en el atributo.
     public void crearSekai(ManejadorSekai manejadorSekai){
         this.manejadorSekai = manejadorSekai;
+        this.manejadorEnemigos.setEspada(manejadorSekai.getEspada());
     }
 
     //Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
