@@ -12,7 +12,7 @@ public class ManejadorSekai implements Animable{
     private final int NUMERO_FRAMES_ATAQUE = 14;
 
     private SpriteSekai sekai;
-    public static SpriteEspada efectosEspada;
+    private SpriteEspada efectosEspada;
     private ManejadorTeclado manejadorTec;
     private boolean estoyAnimandome;
     private final int SECUENCIA_IZQ;
@@ -103,4 +103,7 @@ public class ManejadorSekai implements Animable{
         }
 
 }
+    public SpriteEspada getEspada(){
+        return this.efectosEspada;
     }
+}
