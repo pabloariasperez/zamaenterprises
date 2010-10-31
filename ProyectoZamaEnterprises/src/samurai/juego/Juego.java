@@ -75,6 +75,7 @@ public class Juego extends GameCanvas implements Actualizable {
         this.dibujar();
         flushGraphics();
     }
+    
 
 /**
  *

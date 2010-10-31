@@ -13,26 +13,30 @@ public class SamuraiEnterprises extends MIDlet {
 
     //Atributos de nuestro midlet 
     //Crea un SplashCanvas que muestra el logo del Tec asi como el logo del equipo.
-    private MenuCanvas menuCanvas;
+    //private MenuCanvas menuCanvas;
     private SplashCanvas splashCanvas;
-    private Juego juego;
+    //private Juego juego;
 
 
     //Variable que guarda el estatus actual de la aplicación
-    private int estadoJuego;
+    //private int estadoJuego;
     //Valores de los estatus que se pueden tener a lo largo de la aplicación
-    private final int INICIANDO_JUEGO = 0;
+    //private final int INICIANDO_JUEGO = 0;
+
+    Camino caminoPrueba;
 
     //
     /**
      * Constructor del MIDlet que inicializa el SplashCanvas. =D
      */
     public SamuraiEnterprises() {
-        Global.setFPS(20);
+        Global.setFPS(60);
         splashCanvas = new SplashCanvas(this);
         Global.setAltoPantalla(splashCanvas.getHeight());
         Global.setAnchoPantalla(splashCanvas.getWidth());
-        this.estadoJuego = INICIANDO_JUEGO;
+        System.out.println("Alto:"+Global.ALTO_PANTALLA);
+        System.out.println("Ancho:"+Global.ANCHO_PANTALLA);
+        caminoPrueba = new Camino(this);
     }
 
     /**
@@ -40,12 +44,7 @@ public class SamuraiEnterprises extends MIDlet {
      * @throws MIDletStateChangeException Esta excepcion es lanzada si el MIDlet no puede iniciar.
       */
     public void startApp() {
-        while( splashCanvas.estoyMostrandome() ){
-            Display.getDisplay(this).setCurrent(splashCanvas);
-        }
-        Global.setFPS(40);
-        menuCanvas = new MenuCanvas(this);
-        Display.getDisplay(this).setCurrent(menuCanvas);
+        Display.getDisplay(this).setCurrent(caminoPrueba);
     }
 
     /**
@@ -60,7 +59,7 @@ public class SamuraiEnterprises extends MIDlet {
      * @throws MIDletStateChangeException Se lanza esta excepcion si el MIDlet no ha entrado al estado de destruido
      */
     public void destroyApp(boolean unconditional) {
-       splashCanvas = null;
+       caminoPrueba = null;
     }
 
     public void mostrarPuntajes() {
@@ -74,6 +73,6 @@ public class SamuraiEnterprises extends MIDlet {
 
     public void correrJuego() {
         Global.setFPS(60);
-        juego = new Juego(this);
+        //juego = new Juego(this);
     }
 }
