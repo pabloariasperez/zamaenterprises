@@ -18,7 +18,9 @@ public class ManejadorSekai implements Animable{
     private final int SECUENCIA_IZQ;
     private final int SECUENCIA_DER;
     private final int SECUENCIA_FRONTAL;
-    int frameActual;
+    private int frameActual;
+    private final int puntosVidaTotal;
+    private int puntosVidaActual;
 
     //Recibe como parametros al sprite de sekai, al igual que los Sprites de la espada y efecto, y un manejador de teclado
     /**
@@ -32,10 +34,12 @@ public class ManejadorSekai implements Animable{
         this.efectosEspada=efectos;
         this.manejadorTec=manejadorTec;
         this.estoyAnimandome=false;
-        frameActual = 0;
+        this.frameActual = 0;
         this.SECUENCIA_IZQ=1;
         this.SECUENCIA_DER=2;
         this.SECUENCIA_FRONTAL=3;
+        this.puntosVidaTotal=(3/8)*Global.ANCHO_PANTALLA;
+        this.puntosVidaActual=this.puntosVidaTotal;
     }
 
     /**
@@ -105,5 +109,32 @@ public class ManejadorSekai implements Animable{
 }
     public SpriteEspada getEspada(){
         return this.efectosEspada;
+    }
+    public void reducirVida(int enemigo){
+         switch (enemigo) {
+                case SpriteEnemigo.MURCIELAGO:
+                    this.puntosVidaActual-=this.puntosVidaTotal*.10;
+                    break;
+                case SpriteEnemigo.RATA:
+                    this.puntosVidaActual-=this.puntosVidaTotal*.05;
+                    break;
+                case SpriteEnemigo.FANTASMA:
+                    this.puntosVidaActual-=this.puntosVidaTotal*.15;
+                    break;
+                case SpriteEnemigo.TOPO:
+                    this.puntosVidaActual-=this.puntosVidaTotal*.20;
+                    break;
+                case SpriteEnemigo.CESAR:
+                    this.puntosVidaActual=0;
+                    break;
+            }
+    }
+
+    public boolean colisionSekai(SpriteEnemigo spriteEnemigo) {
+        return this.sekai.collidesWith(spriteEnemigo, true);
+    }
+
+    public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
+        return this.sekai.collidesWith(spriteEnemigo, true);
     }
 }
