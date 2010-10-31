@@ -5,14 +5,8 @@
 
 package samurai.escenarios;
 
-import java.io.IOException;
 import java.util.Stack;
 import samurai.animacion.SpriteEnemigo;
-import samurai.animacion.SpriteEspada;
-import samurai.animacion.SpriteSekai;
-import samurai.juego.Global;
-import samurai.juego.ManejadorSekai;
-import samurai.juego.ManejadorTeclado;
 
 /**
  *
@@ -23,22 +17,12 @@ public class Nivel{
     public static final int NIVEL_2=2;
     public static final int NIVEL_3=3;
 
-    public  static void inicializar( ManejadorTeclado teclado, int nivel, Escenario escenario){
+    public  static void inicializar(int nivel, Escenario escenario){
        switch(nivel){
            case NIVEL_1:
-                try {
-                    //Creamos el escenario que tendrá el primer nivel
-                    //Comenzamos a llenar el escenario con todos los elementos que hemos decidido, que lo describen
-                    //Agregamos nuestros fondos
-                    escenario.agregarFondo(new FondoCapa("/samurai/imagenes/fondoLuna.png", -1, 0));
-                    //Metemos al manejador Sekai a nuestro escenario
-                    SpriteSekai sekai = new SpriteSekai("/samurai/imagenes/sekai.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA );
-                    SpriteEspada efectos = new SpriteEspada("/samurai/imagenes/SpritesEfectos.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA );
-                    ManejadorSekai manejadorSekai = new ManejadorSekai(sekai, efectos,teclado);
-                    escenario.crearSekai(manejadorSekai);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                //Agregamos nuestros fondos
+                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/fondoLuna.png", -1, 0));
+
                 break;
            case NIVEL_2:
                break;

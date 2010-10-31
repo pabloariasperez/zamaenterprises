@@ -4,6 +4,7 @@
  */
 
 package samurai.juego;
+import java.io.IOException;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import samurai.animacion.SpriteEnemigo;
@@ -32,8 +33,30 @@ public class ManejadorEnemigos {
      * Metodo que agrega los enemigos al Vector.
      * @param enemigo recibe un SpriteEnemigo para agregarlo al Vector.
      */
-    public void agregarEnemigo(SpriteEnemigo enemigo){
-        enemigosEnPantalla.addElement(enemigo);
+    public void agregarEnemigo(int tipoEnemigo){
+        try {
+            //Obligamos
+            int posicionAleatoria = (int) System.currentTimeMillis() % 3;
+            switch (tipoEnemigo) {
+                case SpriteEnemigo.MURCIELAGO:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, tipoEnemigo));
+                    break;
+                case SpriteEnemigo.RATA:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, tipoEnemigo));
+                    break;
+                case SpriteEnemigo.FANTASMA:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, tipoEnemigo));
+                    break;
+                case SpriteEnemigo.TOPO:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60,tipoEnemigo));
+                    break;
+                case SpriteEnemigo.CESAR:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", posicionEnemigo(posicionAleatoria), 60, tipoEnemigo));
+                    break;
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     /**
      * Metodo que remueve del Vector el enemigo que se manda como parametro y lo declara como null.
@@ -63,26 +86,14 @@ public class ManejadorEnemigos {
     public void actualizar(){
         for(int i=0; i<enemigosEnPantalla.size();i++){
             ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).mover();
-            if(((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).collidesWith(this.espada, true)){
-                this.kill((SpriteEnemigo)enemigosEnPantalla.elementAt(i));
-            }
         }
     }
-    /**
-     * Metodo que regresa un booleano que dice si el Vector enemigos esta vacio o no.
-     * @return Booleano que dice si el Vector esta vacio o no.
-     */
-    public boolean isEmpty(){
-        return this.enemigosEnPantalla.isEmpty();
+    public Vector getVectorEnemigo(){
+        return this.enemigosEnPantalla;
     }
-    /**
-     * Metodo que regresa el tamaño del Vector enemigos.
-     * @return Regresa un entero igual al tamaño del Vector.
-     */
-    public int getSize(){
-        return enemigosEnPantalla.size();
+        private int posicionEnemigo(int posicionAleatoria) {
+        //Dependerá de la función del escenario.
+        return 0;
     }
-    public void setEspada(SpriteEspada espada){
-        this.espada=espada;
-    }
+
 }
