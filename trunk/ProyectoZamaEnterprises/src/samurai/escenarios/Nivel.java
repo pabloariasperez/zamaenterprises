@@ -5,8 +5,13 @@
 
 package samurai.escenarios;
 
+import java.io.IOException;
 import java.util.Stack;
+import javax.microedition.media.Manager;
+import javax.microedition.media.MediaException;
+import javax.microedition.midlet.MIDlet;
 import samurai.animacion.SpriteEnemigo;
+import samurai.multimedia.SFX;
 
 /**
  *
@@ -29,7 +34,22 @@ public class Nivel{
            case NIVEL_3:
                break;
        }
-
+    }
+    public static void cargarSFX(int nivel, SFX sfx){
+        sfx.agregarSFX(SFX.ESPADA);
+        sfx.agregarSFX(SFX.GOLPE_SEKAI);
+        sfx.agregarSFX(SFX.MUERTE_SEKAI);
+        switch(nivel){
+            case NIVEL_1:
+                sfx.agregarSFX(SFX.MUERTE_TOPO);
+                sfx.agregarSFX(SFX.MUERTE_RATA);
+                sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
+                break;
+            case NIVEL_2:
+                break;
+            case NIVEL_3:
+                break;
+        }
     }
     public static Stack llenarStackEnemigos(int escenario){
         switch(escenario){
