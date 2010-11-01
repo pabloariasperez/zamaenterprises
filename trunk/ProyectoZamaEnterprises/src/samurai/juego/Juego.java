@@ -11,6 +11,8 @@ import samurai.animacion.SpriteEnemigo;
 import samurai.animacion.SpriteEspada;
 import samurai.animacion.SpriteSekai;
 import samurai.escenarios.*;
+import samurai.multimedia.Musica;
+import samurai.multimedia.SFX;
 
 /**
  *
@@ -24,6 +26,8 @@ public class Juego extends GameCanvas implements Actualizable {
     private ManejadorSekai manejadorSekai;
     private ManejadorEnemigos manejadorEnemigos;
     private ManejadorTeclado manejadorTec;
+    private Musica musica;
+    private SFX sfx;
     private TiempoEscenario tiempo;
     private Stack enemigosEnEspera;
     private int tiempoProxEvento;
@@ -51,7 +55,12 @@ public class Juego extends GameCanvas implements Actualizable {
             manejadorEnemigos=new ManejadorEnemigos();
             Nivel.inicializar(escenarioActual, escenario);
             agregarStackEnemigos(Nivel.llenarStackEnemigos(escenarioActual));
+            this.musica=new Musica("/tema.mp3");
+            musica.reproducir();
+            this.sfx=new SFX();
+            Nivel.cargarSFX(escenarioActual, sfx);
             animador = new Animador(this);
+            enemigo=null;
             animador.iniciar();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -72,10 +81,11 @@ public class Juego extends GameCanvas implements Actualizable {
         g.setColor(0x00654321);
         g.fillRect(0, 0, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA);
         escenario.dibujar(g);
+        manejadorSekai.dibujar(g);
+        manejadorEnemigos.dibujar(g);
         this.dibujar();
         flushGraphics();
     }
-    
 
 /**
  *
@@ -88,13 +98,16 @@ public class Juego extends GameCanvas implements Actualizable {
          for(int i=0; i<manejadorEnemigos.getVectorEnemigo().size();i++){
              this.enemigo=(SpriteEnemigo)(manejadorEnemigos.getVectorEnemigo().elementAt(i));
             if( manejadorSekai.colisionEspada(this.enemigo)){
-                manejadorEnemigos.kill((SpriteEnemigo)(manejadorEnemigos.getVectorEnemigo().elementAt(i)));
+                this.reproducir(enemigo.getTipoEnemigo());
+                sfx.reproducir(SFX.ESPADA);
+                manejadorEnemigos.kill(this.enemigo);
             }
              if(manejadorSekai.colisionSekai(this.enemigo)){
                  manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
              }
          }
         escenario.actualizar();
+        tiempo.incrementar();
     }
     private void agregarStackEnemigos( Stack enemigosEnEspera ) {
         this.enemigosEnEspera = enemigosEnEspera;
@@ -102,5 +115,24 @@ public class Juego extends GameCanvas implements Actualizable {
     }
     private void agregarEnemigo(int enemigo){
         this.manejadorEnemigos.agregarEnemigo(enemigo);
+    }
+    private void reproducir(int tipoEnemigo){
+        switch(tipoEnemigo){
+            case SpriteEnemigo.CESAR:
+                sfx.reproducir(SFX.MUERTE_CESAR);
+                break;
+            case SpriteEnemigo.FANTASMA:
+                sfx.reproducir(SFX.MUERTE_FANTASMA);
+                break;
+            case SpriteEnemigo.MURCIELAGO:
+                sfx.reproducir(SFX.MUERTE_MURCIELAGO);
+                break;
+            case SpriteEnemigo.RATA:
+                sfx.reproducir(SFX.MUERTE_RATA);
+                break;
+            case SpriteEnemigo.TOPO:
+                sfx.reproducir(SFX.MUERTE_TOPO);
+                break;
+        }
     }
 }
