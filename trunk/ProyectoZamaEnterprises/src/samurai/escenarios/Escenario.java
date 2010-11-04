@@ -36,6 +36,8 @@ public class Escenario {
         this.manejadorFondos.agregarFondo(fondo);
     }
 
+    
+
     //Se dibujan los fondos
     public void dibujarFondos(Graphics g){
         if(!manejadorFondos.isEmpty()){
@@ -43,6 +45,9 @@ public class Escenario {
         }
     }
 
+    public int getAltoFondos() {
+        return manejadorFondos.getAlto();
+    }
 
 
     //Se dibuja el escenario. Se tiene delegado el dibujar fondos y enemigos a otros métodos.
@@ -55,6 +60,6 @@ public class Escenario {
         
         if(!manejadorFondos.isEmpty()){
             manejadorFondos.actualizar();
+        }
     }
-}
 }

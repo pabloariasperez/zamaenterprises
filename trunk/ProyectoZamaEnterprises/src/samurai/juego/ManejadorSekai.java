@@ -135,6 +135,6 @@ public class ManejadorSekai implements Animable{
     }
 
     public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
-        return this.sekai.collidesWith(spriteEnemigo, true);
+        return this.efectosEspada.collidesWith(spriteEnemigo, true);
     }
 }

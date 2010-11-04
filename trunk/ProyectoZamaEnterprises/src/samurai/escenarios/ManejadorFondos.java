@@ -44,4 +44,9 @@ public class ManejadorFondos implements Animable {
     public boolean isEmpty(){
         return fondos.isEmpty();
     }
+
+    public int getAlto() {
+        //El fondo más alto siempre se deberá ingresar primero en el vector, razón misma por la que será el primero en dibujarse para que quede hasta atrás.
+        return ((FondoCapa)fondos.elementAt(0)).getAlto();
+    }
 }

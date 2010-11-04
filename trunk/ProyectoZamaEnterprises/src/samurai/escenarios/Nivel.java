@@ -50,21 +50,21 @@ public class Nivel{
         switch(escenario){
             case NIVEL_1:
                 Stack aparicionEnemigos = new Stack();  //En qué momento y qué enemigo.
-                aparicionEnemigos.push( new int[]{ 64, SpriteEnemigo.TOPO} );
-                aparicionEnemigos.push( new int[]{ 60, SpriteEnemigo.TOPO} );
-                aparicionEnemigos.push( new int[]{ 56, SpriteEnemigo.TOPO} );
-                aparicionEnemigos.push( new int[]{ 53, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 47, SpriteEnemigo.RATA} );
-                aparicionEnemigos.push( new int[]{ 45, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 40, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 36, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 32, SpriteEnemigo.RATA} );
-                aparicionEnemigos.push( new int[]{ 30, SpriteEnemigo.RATA} );
-                aparicionEnemigos.push( new int[]{ 25, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 20, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 18, SpriteEnemigo.TOPO} );
-                aparicionEnemigos.push( new int[]{ 15, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 10, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 900, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 800, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 700, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 530, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 470, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 450, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 400, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 360, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 320, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 300, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 250, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 200, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 180, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 150, SpriteEnemigo.MURCIELAGO} );
+                aparicionEnemigos.push( new int[]{ 100, SpriteEnemigo.MURCIELAGO} );
                 return aparicionEnemigos;
             case NIVEL_2:
                 return null;
@@ -72,6 +72,6 @@ public class Nivel{
                 return null;
             default:
                 return null;
-        }        
+        }
     }
 }
