@@ -22,7 +22,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
     //El menuActual nos dirá a quien debemos pintar en pantalla.
     private Menu menuActual;
-    
+
     /**
      * Constante entera que define el menu principal que ya esta creado.
      */
@@ -63,10 +63,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         super(true);
         this.setFullScreenMode(true);
         this.samuraiMidlet = samuraiMidlet;
-        
         //Asignamos a nuestro parámetro "g" el Graphic del GameCanvas
         this.g = this.getGraphics();
-
 
         //Creamos nuestro manejador de teclado
         teclado = new ManejadorTeclado(this);
@@ -158,7 +156,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     /**
      * Méotodo que dibuja el Menú Actual.
      */
-    public void dibujar(){
+    public void dibujar(){    
         //Establecemos nuestro color para dibujar. NEGRO
         g.setColor(0x0);
         //Limpiamos la pantalla.
@@ -166,7 +164,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
         //Dibujamos el Menu Actual
         this.menuActual.dibujar(g);
-        this.flushGraphics();
+        this.flushGraphics();   
     }
 
     /**
@@ -180,7 +178,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         }else if(teclado.downPresionado() ){
             this.menuActual.moverOpcion(1);      //Mover hacia abajo.
         //Preguntamos si estamos en la PRIMERA posición y si fue elegida con FIRE.
-        }else if(this.menuActual.getPosition() == 0 && teclado.firePresionado()){
+        } else if (this.menuActual.getPosition() == 0 && teclado.firePresionado()) {
             switch(menuActual.nombreMenu){
                 case MenuCanvas.PRINCIPAL:
                     samuraiMidlet.correrJuego();
