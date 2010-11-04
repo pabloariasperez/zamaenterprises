@@ -2,7 +2,9 @@ package samurai.juego;
 
 
 import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.midlet.*;
+import samurai.presentacion.Diapositiva;
 
 /**
  * Clase MIDlet que controla los elementos que se muestran en el Display.
@@ -13,8 +15,12 @@ public class SamuraiEnterprises extends MIDlet {
 
     //Atributos de nuestro midlet 
     //Crea un SplashCanvas que muestra el logo del Tec asi como el logo del equipo.
-    //private MenuCanvas menuCanvas;
+    private MenuCanvas menuCanvas;
     private SplashCanvas splashCanvas;
+    private PresentacionCanvas creditos;
+    private GameCanvas pantallaAnterior;
+    private GameCanvas pantallaActual;
+    private PresentacionCanvas presentacionCanvas;
     //private Juego juego;
 
 
@@ -31,12 +37,15 @@ public class SamuraiEnterprises extends MIDlet {
      */
     public SamuraiEnterprises() {
         Global.setFPS(60);
-        splashCanvas = new SplashCanvas(this);
+        splashCanvas=new SplashCanvas(this);
         Global.setAltoPantalla(splashCanvas.getHeight());
         Global.setAnchoPantalla(splashCanvas.getWidth());
-        System.out.println("Alto:"+Global.ALTO_PANTALLA);
-        System.out.println("Ancho:"+Global.ANCHO_PANTALLA);
-        caminoPrueba = new Camino(this);
+        this.menuCanvas = new MenuCanvas(this);
+        this.pantallaActual = this.menuCanvas;
+        //plashCanvas = new SplashCanvas(this);
+        
+        
+        //caminoPrueba = new Camino(this);
     }
 
     /**
@@ -44,7 +53,13 @@ public class SamuraiEnterprises extends MIDlet {
      * @throws MIDletStateChangeException Esta excepcion es lanzada si el MIDlet no puede iniciar.
       */
     public void startApp() {
-        Display.getDisplay(this).setCurrent(caminoPrueba);
+        while(this.splashCanvas.estoyMostrandome()){
+            Display.getDisplay(this).setCurrent(this.splashCanvas);
+        }
+
+        Display.getDisplay(this).setCurrent(menuCanvas);
+        this.splashCanvas = null;
+        System.gc();
     }
 
     /**
@@ -66,6 +81,13 @@ public class SamuraiEnterprises extends MIDlet {
     }
 
     public void mostrarCreditos() {
+
+        this.pantallaAnterior = this.pantallaActual;
+        this.presentacionCanvas = new PresentacionCanvas(this,Diapositiva.CREDITO);
+        
+        Display.getDisplay(this).setCurrent(this.presentacionCanvas);
+        
+
     }
 
     public void continuarJuego() {
@@ -74,5 +96,13 @@ public class SamuraiEnterprises extends MIDlet {
     public void correrJuego() {
         Global.setFPS(60);
         //juego = new Juego(this);
+    }
+
+    public void mostrarMenu() {
+        System.out.println("entrando mostrar menu");
+    this.pantallaActual = this.pantallaAnterior;
+    this.presentacionCanvas = null;
+     Display.getDisplay(this).setCurrent(this.pantallaActual);
+     System.gc();
     }
 }
