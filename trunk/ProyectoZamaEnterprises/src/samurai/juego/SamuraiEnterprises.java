@@ -82,10 +82,14 @@ public class SamuraiEnterprises extends MIDlet {
 
     public void mostrarCreditos() {
 
-        this.pantallaAnterior = this.pantallaActual;
-        this.presentacionCanvas = new PresentacionCanvas(this,Diapositiva.CREDITO);
         
-        Display.getDisplay(this).setCurrent(this.presentacionCanvas);
+        this.presentacionCanvas = new PresentacionCanvas(this,Diapositiva.CREDITO);
+        while(this.presentacionCanvas.estoyMostrandome()){
+            Display.getDisplay(this).setCurrent(this.presentacionCanvas);
+        }
+     this.presentacionCanvas = null;
+     Display.getDisplay(this).setCurrent(this.pantallaActual);
+     System.gc();
         
 
     }
@@ -98,11 +102,5 @@ public class SamuraiEnterprises extends MIDlet {
         //juego = new Juego(this);
     }
 
-    public void mostrarMenu() {
-        System.out.println("entrando mostrar menu");
-    this.pantallaActual = this.pantallaAnterior;
-    this.presentacionCanvas = null;
-     Display.getDisplay(this).setCurrent(this.pantallaActual);
-     System.gc();
-    }
+  
 }
