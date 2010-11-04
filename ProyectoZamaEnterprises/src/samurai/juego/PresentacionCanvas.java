@@ -119,12 +119,7 @@ public class PresentacionCanvas  extends GameCanvas implements Actualizable {
                 }else {
                     this.animador.terminar();
                     System.out.println("entrando al switch");
-                    switch(this.tipo){
-                        case Diapositiva.CREDITO:
-
-                        this.samuraiMidlet.mostrarMenu();
-                        break;
-            }
+                    this.mostrandome = false;
         }
     }
     }
