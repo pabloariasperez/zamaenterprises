@@ -55,9 +55,8 @@ public class SamuraiEnterprises extends MIDlet {
             Display.getDisplay(this).setCurrent(this.splashCanvas);
         }
 
-        correrJuego();
-        //Display.getDisplay(this).setCurrent(menuCanvas);
-        //this.splashCanvas = null;
+        Display.getDisplay(this).setCurrent(menuCanvas);
+        this.splashCanvas = null;
         System.gc();
     }
 
@@ -73,6 +72,7 @@ public class SamuraiEnterprises extends MIDlet {
      * @throws MIDletStateChangeException Se lanza esta excepcion si el MIDlet no ha entrado al estado de destruido
      */
     public void destroyApp(boolean unconditional) {
+        
     }
 
     public void mostrarPuntajes() {

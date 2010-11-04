@@ -132,6 +132,10 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
      * @return Regresa un booleano el cual indica si ya se terminaron de mostrar todos los Splashes.
      */
     public boolean estoyMostrandome(){
+        if(!this.estoyMostrandome){
+            this.animador.terminar();
+            return this.estoyMostrandome;
+        }
         return estoyMostrandome;
     }
 }
