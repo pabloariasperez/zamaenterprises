@@ -78,20 +78,20 @@ public class PresentacionCanvas  extends GameCanvas implements Actualizable {
             Vector texto=new Vector();
             switch(diapositiva){
                 case C_PABLO:
-                    texto.addElement("         Tengo Chinitos");
-                    texto.addElement("         Meloooooon!!!");
-                    texto.addElement("         Osssshhhaaaa");
+                    texto.addElement("     Tengo Chinitos");
+                    texto.addElement("     Meloooooon!!!");
+                    texto.addElement("     Osssshhhaaaa");
                    
                     return texto;
                 case C_ERIK:
                     texto.addElement("");
-                    texto.addElement("                     ...");
+                    texto.addElement("                 ...");
                     texto.addElement("");
                     return texto;
                 case C_DANIEL:
-                    texto.addElement("               (  .  V  .  )");
-                    texto.addElement("                  )   .   (");
-                    texto.addElement("                (    W    )");
+                    texto.addElement("           (  .  V  .  )");
+                    texto.addElement("             )   .   (");
+                    texto.addElement("            (    W    )");
                     return texto;
                 default:
                     return texto;
@@ -100,7 +100,7 @@ public class PresentacionCanvas  extends GameCanvas implements Actualizable {
 
     public void actualizar() {
         
-            if(!estoyCentrado()){
+            if(!diapositivaCentrada()){
                      this.diapositivaActual.actualizar();
                 }
                 else{
@@ -139,7 +139,7 @@ public class PresentacionCanvas  extends GameCanvas implements Actualizable {
     public boolean estoyMostrandome(){
         return this.mostrandome;
     }
- private boolean estoyCentrado(){
+ private boolean diapositivaCentrada(){
        if(this.camine && (this.diapositivaActual.posicionXImagen()<=(Global.ANCHO_PANTALLA/2)) && !(this.pare)){
            this.pare=true;
            return true;
