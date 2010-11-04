@@ -44,4 +44,8 @@ public class FondoCapa implements Animable{
             g.drawImage(imagen, posicionX+imagen.getWidth(), posicionY, Graphics.LEFT|Graphics.TOP);
    }
 
+    public int getAlto() {
+        return imagen.getHeight();
+    }
+
 }

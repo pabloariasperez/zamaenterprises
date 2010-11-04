@@ -21,7 +21,7 @@ public class SamuraiEnterprises extends MIDlet {
     private GameCanvas pantallaAnterior;
     private GameCanvas pantallaActual;
     private PresentacionCanvas presentacionCanvas;
-    //private Juego juego;
+    private Juego juego;
 
 
     //Variable que guarda el estatus actual de la aplicación
@@ -29,7 +29,6 @@ public class SamuraiEnterprises extends MIDlet {
     //Valores de los estatus que se pueden tener a lo largo de la aplicación
     //private final int INICIANDO_JUEGO = 0;
 
-    Camino caminoPrueba;
 
     //
     /**
@@ -45,7 +44,6 @@ public class SamuraiEnterprises extends MIDlet {
         //plashCanvas = new SplashCanvas(this);
         
         
-        //caminoPrueba = new Camino(this);
     }
 
     /**
@@ -57,8 +55,9 @@ public class SamuraiEnterprises extends MIDlet {
             Display.getDisplay(this).setCurrent(this.splashCanvas);
         }
 
-        Display.getDisplay(this).setCurrent(menuCanvas);
-        this.splashCanvas = null;
+        correrJuego();
+        //Display.getDisplay(this).setCurrent(menuCanvas);
+        //this.splashCanvas = null;
         System.gc();
     }
 
@@ -74,7 +73,6 @@ public class SamuraiEnterprises extends MIDlet {
      * @throws MIDletStateChangeException Se lanza esta excepcion si el MIDlet no ha entrado al estado de destruido
      */
     public void destroyApp(boolean unconditional) {
-       caminoPrueba = null;
     }
 
     public void mostrarPuntajes() {
@@ -99,7 +97,8 @@ public class SamuraiEnterprises extends MIDlet {
 
     public void correrJuego() {
         Global.setFPS(60);
-        //juego = new Juego(this);
+        juego = new Juego(this);
+        Display.getDisplay(this).setCurrent(this.juego);
     }
 
   

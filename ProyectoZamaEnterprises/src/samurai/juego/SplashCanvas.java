@@ -82,7 +82,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
      */
     public void actualizar() {
         //Verificamos que el usuario no haya presionado el botón de acción FIRE para interrumpir el SPLASH
-        if( teclado.firePresionado() && tiempo.actual() > Global.FPS/4 ){
+        if( teclado.firePresionado() && tiempo.actual() > Global.FPS/100 ){
             splashes.pop();     //Hacemos el POP para que ya muestre la siguiente imagen.
             colores.pop();
             tiempo.reiniciar();
