@@ -6,13 +6,12 @@
 package samurai.juego;
 
 import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.game.GameCanvas;
 
 /**
  *
  * @author Pablo
  */
-public class Camino extends GameCanvas implements Actualizable{
+public class Camino {
     private SamuraiEnterprises samuraiMidlet;
     private Graphics g;
     private ManejadorTeclado teclado;
@@ -30,18 +29,6 @@ public class Camino extends GameCanvas implements Actualizable{
 
 
     public Camino(SamuraiEnterprises samuraiMidlet){
-        //Se manda TRUE en el constructor de la clase padre (GameCanvas) para decir que cuando se quiera saber si una tecla está presionada
-        //se preguntará.
-        super(true);
-        this.setFullScreenMode(true);
-        this.samuraiMidlet = samuraiMidlet;
-
-        //Asignamos a nuestro parámetro "g" el Graphic del GameCanvas
-        this.g = this.getGraphics();
-
-        //Creamos nuestro manejador de teclado
-        teclado = new ManejadorTeclado(this);
-
 
         ALTO_LINEA = 10;       //Pixeles de altura de la línea
         ALTO_FONDO = 60;
@@ -54,11 +41,6 @@ public class Camino extends GameCanvas implements Actualizable{
             numeroLineas++;
          }
         posicionLineas = new int[numeroLineas];
-
-
-        //Creamos nuestra animador y lo iniciamos.
-        animador = new Animador(this);
-        animador.iniciar();
     }
 
     public void posicionador(){
@@ -91,12 +73,6 @@ public class Camino extends GameCanvas implements Actualizable{
         if( teclado.derPresionado() ){
             PARAMETRO+=10;
         }
-        if( teclado.upPresionado() ){
-            ALTO_LINEA +=1;
-        }
-        if( teclado.downPresionado() && ALTO_LINEA!=1){
-            ALTO_LINEA -=1;
-        }
         //Inicializo lo que requiera para el camino
         numeroLineas = (Global.ALTO_PANTALLA - ALTO_FONDO)/ALTO_LINEA;
         //Agregamos uno en caso de que haya residuo.
@@ -108,7 +84,7 @@ public class Camino extends GameCanvas implements Actualizable{
         posicionador(  );
     }
 
-    public void dibujar() {
+    public void dibujar(Graphics g) {
         //Establecemos nuestro color para dibujar. NEGRO
         g.setColor(0x0);
         //Limpiamos la pantalla.
@@ -133,6 +109,5 @@ public class Camino extends GameCanvas implements Actualizable{
                     ALTO_LINEA
                      );
         }
-        flushGraphics();
     }
 }

@@ -57,7 +57,7 @@ public class Juego extends GameCanvas implements Actualizable {
             agregarStackEnemigos(Nivel.llenarStackEnemigos(escenarioActual));
             this.musica=new Musica("/tema.mp3");
             musica.reproducir();
-            this.sfx=new SFX();
+            this.sfx=new SFX(midlet);
             Nivel.cargarSFX(escenarioActual, sfx);
             animador = new Animador(this);
             enemigo=null;

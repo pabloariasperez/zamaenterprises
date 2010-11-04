@@ -5,11 +5,7 @@
 
 package samurai.escenarios;
 
-import java.io.IOException;
 import java.util.Stack;
-import javax.microedition.media.Manager;
-import javax.microedition.media.MediaException;
-import javax.microedition.midlet.MIDlet;
 import samurai.animacion.SpriteEnemigo;
 import samurai.multimedia.SFX;
 
@@ -27,7 +23,6 @@ public class Nivel{
            case NIVEL_1:
                 //Agregamos nuestros fondos
                 escenario.agregarFondo(new FondoCapa("/samurai/imagenes/fondoLuna.png", -1, 0));
-
                 break;
            case NIVEL_2:
                break;
@@ -77,7 +72,6 @@ public class Nivel{
                 return null;
             default:
                 return null;
-        }
-        
+        }        
     }
 }
