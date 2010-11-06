@@ -56,7 +56,7 @@ public class SamuraiEnterprises extends MIDlet {
         }
 
         Display.getDisplay(this).setCurrent(menuCanvas);
-        this.splashCanvas = null;
+        this.splashCanvas=null;
         System.gc();
     }
 

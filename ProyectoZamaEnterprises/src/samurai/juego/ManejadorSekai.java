@@ -49,6 +49,10 @@ public class ManejadorSekai implements Animable{
     public void dibujar(Graphics g) {
         efectosEspada.dibujar(g);
         sekai.dibujar(g);
+        g.setColor(0x0000AA00);
+        g.fillArc(20, 220-1, 10+1, 10+1, 90, 180);
+        g.fillRect(25, 220, 50, 10);
+        g.fillArc(55, 220-1, 10+1, 10+1, 180, 360);
     }
 
     /**
