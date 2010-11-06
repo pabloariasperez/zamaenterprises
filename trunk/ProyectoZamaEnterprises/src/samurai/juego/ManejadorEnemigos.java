@@ -87,6 +87,10 @@ public class ManejadorEnemigos {
             this.enemigosMuertos=0;
         }
     }
+    public void desaparecer(SpriteEnemigo enemigo){
+        enemigosEnPantalla.removeElement(enemigo);
+        enemigo=null;
+    }
     /**
      * Metodo que dibuja todos los elementos del vector en el el parametro que se le da.
      * @param g Graficos donde se dibujan los elementos del vector.

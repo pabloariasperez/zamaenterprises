@@ -145,9 +145,12 @@ public class Juego extends GameCanvas implements Actualizable {
 
             if(manejadorSekai.colisionSekai(this.enemigo)){
                 manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
-                manejadorEnemigos.kill(this.enemigo);
+                manejadorEnemigos.desaparecer(this.enemigo);
             }
-
+            if(this.enemigo.getY() >= Global.ALTO_PANTALLA-this.enemigo.getHeight()/2){
+                manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
+                manejadorEnemigos.desaparecer(this.enemigo);
+            }
         }
         
         escenario.actualizar();

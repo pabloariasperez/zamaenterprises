@@ -70,7 +70,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, 1);
         this.setPosition(posicion.getX(), posicion.getY()*Juego.ALTO_LINEA + Juego.altoFondo);
 
-        /*
+        
         if(this.getY() < 80){
             this.setFrameSequence(secuenciaFondo);
         }
@@ -80,8 +80,6 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         }else if(this.getY()<160){
             this.setFrameSequence(secuenciaMediaFrente);
         }
-         * 
-         */
         this.nextFrame();
         alturaActual+=5;
     }
