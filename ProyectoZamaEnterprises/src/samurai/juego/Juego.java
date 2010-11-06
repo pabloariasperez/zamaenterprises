@@ -154,7 +154,7 @@ public class Juego extends GameCanvas implements Actualizable {
         }
         }
         if(!this.pausado){
-            int rnd=random.nextInt(20);
+            int rnd=random.nextInt(100);
             if( rnd == 0){
             agregarEnemigo( Nivel.generarEnemigo(escenarioActual, random));
             for(int i=0; i<manejadorEnemigos.getVectorEnemigo().size(); i++){
