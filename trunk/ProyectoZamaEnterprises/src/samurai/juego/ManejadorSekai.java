@@ -62,7 +62,7 @@ public class ManejadorSekai implements Animable{
         g.fillRect(this.X_VIDA+5, Y_VIDA,ANCHO_VIDA , ALTO_VIDA);
         g.fillArc(this.X_VIDA+this.ANCHO_VIDA-2, Y_VIDA-1, 10+1, ALTO_VIDA+1, 270, 180);
 
-        if(puntosVidaActual > puntosVidaTotal*0.25){
+        if(puntosVidaActual > puntosVidaTotal*0.3){
             g.setColor(0x0);
         }else{
             g.setColor(0xFF0000);
