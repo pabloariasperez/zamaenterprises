@@ -36,7 +36,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
      * @throws IOException Si no se encuentra el archivo
      */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo) throws IOException{
-        super(Image.createImage(archivoEnemigo),240/4,240/4);
+        super(Image.createImage(archivoEnemigo),160/4,160/4);
         
         this.tipoEnemigo = tipoEnemigo;
         this.secuenciaFondo=new int[]{0,1,2,3};
