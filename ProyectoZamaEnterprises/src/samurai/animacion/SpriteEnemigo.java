@@ -22,11 +22,11 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     private int centesimo;
 
     public static final int MURCIELAGO = 0;
-    public static final int RATA = 1;
-    public static final int TOPO = 2;
+    public static final int RATA = 2;
+    public static final int TOPO = 1;
     public static final int FANTASMA = 3;
 
-    public static final int CESAR = 10;
+    public static final int CESAR = 4;
 
     /**
      * constructor que inicializa variables

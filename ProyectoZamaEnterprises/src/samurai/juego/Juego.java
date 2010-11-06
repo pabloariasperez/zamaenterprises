@@ -4,6 +4,7 @@ package samurai.juego;
 // Autores Pablo, Erik y Daniel
 
 import java.io.IOException;
+import java.util.Random;
 import java.util.Stack;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
@@ -33,10 +34,9 @@ public class Juego extends GameCanvas implements Actualizable {
     private boolean pausado;
 
     private TiempoEscenario tiempo;
-    private Stack enemigosEnEspera;
-    private int tiempoProxEvento;
     private SpriteEnemigo enemigo;
     int escenarioActual;
+    private Random random;
     Escenario escenario;
     private  boolean imagenDibujada;
 
@@ -87,7 +87,6 @@ public class Juego extends GameCanvas implements Actualizable {
 
                 //Manejador Enemigos
                 manejadorEnemigos=new ManejadorEnemigos();
-                agregarStackEnemigos(Nivel.llenarStackEnemigos(escenarioActual));
                 enemigo=null;       //Para no crear mil "BICHOS" enemigo
                 
 //            this.musica=new Musica("/tema.mp3");
@@ -106,6 +105,7 @@ public class Juego extends GameCanvas implements Actualizable {
             ex.printStackTrace();
         }
         posicionador.generarNuevoEje(parametro);
+        random=new Random();
         animador.iniciar();
     }
 /**
@@ -144,6 +144,7 @@ public class Juego extends GameCanvas implements Actualizable {
  *
  */
     public void actualizar(){
+        
         if(this.manejadorTec.downPresionado()){
             if(this.pausado){
                 this.continuarJuego();
@@ -153,20 +154,15 @@ public class Juego extends GameCanvas implements Actualizable {
         }
         }
         if(!this.pausado){
-        if( tiempo.actual() == tiempoProxEvento && !enemigosEnEspera.isEmpty() ){
-            agregarEnemigo( ((int[])enemigosEnEspera.pop())[1] );
-            if(!enemigosEnEspera.isEmpty()){
-                tiempoProxEvento = ((int[])enemigosEnEspera.peek())[0];
-                System.out.println("PE:"+tiempoProxEvento);
-            }
-        }
-        
-        for(int i=0; i<manejadorEnemigos.getVectorEnemigo().size(); i++){
+            int rnd=random.nextInt(20);
+            if( rnd == 0){
+            agregarEnemigo( Nivel.generarEnemigo(escenarioActual, random));
+            for(int i=0; i<manejadorEnemigos.getVectorEnemigo().size(); i++){
             this.enemigo=(SpriteEnemigo)(manejadorEnemigos.getVectorEnemigo().elementAt(i));
             if( manejadorSekai.colisionEspada(this.enemigo)){
                 /*this.reproducir(enemigo.getTipoEnemigo());
                 sfx.reproducir(SFX.ESPADA);
-                 * 
+                 *
                  */
                 manejadorEnemigos.kill(this.enemigo);
             }
@@ -180,7 +176,7 @@ public class Juego extends GameCanvas implements Actualizable {
                 manejadorEnemigos.desaparecer(this.enemigo);
             }
         }
-        
+
         escenario.actualizar();
         manejadorEnemigos.actualizar();
         try {
@@ -196,15 +192,12 @@ public class Juego extends GameCanvas implements Actualizable {
             posicionador.generarNuevoEje(parametro);
         }
         }
+        }
+        
+        
     
     }
 
-
-
-    private void agregarStackEnemigos( Stack enemigosEnEspera ) {
-        this.enemigosEnEspera = enemigosEnEspera;
-        tiempoProxEvento = ((int[])enemigosEnEspera.peek())[0];
-    }
 
     private void agregarEnemigo(int enemigo){
         this.manejadorEnemigos.agregarEnemigo(enemigo);

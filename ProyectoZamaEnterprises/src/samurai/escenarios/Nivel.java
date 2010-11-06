@@ -5,6 +5,7 @@
 
 package samurai.escenarios;
 
+import java.util.Random;
 import java.util.Stack;
 import samurai.animacion.SpriteEnemigo;
 import samurai.multimedia.SFX;
@@ -46,32 +47,16 @@ public class Nivel{
                 break;
         }
     }
-    public static Stack llenarStackEnemigos(int escenario){
+    public static int generarEnemigo(int escenario, Random random){
         switch(escenario){
             case NIVEL_1:
-                Stack aparicionEnemigos = new Stack();  //En qué momento y qué enemigo.
-                aparicionEnemigos.push( new int[]{ 900, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 800, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 700, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 530, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 470, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 450, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 400, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 360, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 320, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 300, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 250, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 200, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 180, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 150, SpriteEnemigo.MURCIELAGO} );
-                aparicionEnemigos.push( new int[]{ 100, SpriteEnemigo.MURCIELAGO} );
-                return aparicionEnemigos;
+                return random.nextInt(2);
             case NIVEL_2:
-                return null;
+                return random.nextInt(3);
             case NIVEL_3:
-                return null;
+                return random.nextInt(4);
             default:
-                return null;
+                return random.nextInt(2);
         }
     }
 }

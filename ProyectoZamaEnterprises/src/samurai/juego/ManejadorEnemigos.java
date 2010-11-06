@@ -51,7 +51,7 @@ public class ManejadorEnemigos {
                     enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo(rndm.nextInt(3)), tipoEnemigo));
                     break;
                 case SpriteEnemigo.TOPO:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo(rndm.nextInt(3)),tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteTopo.png", centesimo(rndm.nextInt(3)),tipoEnemigo));
                     break;
                 case SpriteEnemigo.CESAR:
                     enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo(rndm.nextInt(3)), tipoEnemigo));
