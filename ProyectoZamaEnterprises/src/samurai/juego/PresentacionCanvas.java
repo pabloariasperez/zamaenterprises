@@ -41,7 +41,7 @@ public class PresentacionCanvas  extends GameCanvas implements Actualizable {
         g = this.getGraphics();
         this.setFullScreenMode(true);
         this.samuraiMidlet = samuraiMidlet;
-        timer = new Timor(2,3);
+        timer = new Timor(2);
         this.pare=false;
         this.camine=true;
         this.tipo=tipo;

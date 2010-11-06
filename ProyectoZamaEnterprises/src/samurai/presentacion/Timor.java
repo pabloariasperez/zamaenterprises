@@ -16,13 +16,11 @@ public class Timor {
 
     private TiempoEscenario reloj;
     private final  int intervalo;
-    private final int iteraciones;
-    private int iteracionesActuales;
+   
 
-    public Timor(int intervalo, int iteraciones){
+    public Timor(int intervalo){
         this.intervalo = intervalo*Global.FPS;
-        this.iteraciones = iteraciones;
-        this.iteracionesActuales=0;
+        
         this.reloj = new TiempoEscenario();
 
     }
@@ -37,12 +35,7 @@ public class Timor {
         return false;
 
     }
-    public boolean timerTerminado(){
-        if(this.iteracionesActuales>=this.iteraciones)
-            return true;
-        return false;
-
-    }
+   
     public void tik(){
         this.reloj.incrementar();
     }
