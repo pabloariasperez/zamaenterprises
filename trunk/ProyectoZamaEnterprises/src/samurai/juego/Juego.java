@@ -142,12 +142,12 @@ public class Juego extends GameCanvas implements Actualizable {
                  */
                 manejadorEnemigos.kill(this.enemigo);
             }
-            /*
+
             if(manejadorSekai.colisionSekai(this.enemigo)){
                 manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
+                manejadorEnemigos.kill(this.enemigo);
             }
-             * 
-             */
+
         }
         
         escenario.actualizar();

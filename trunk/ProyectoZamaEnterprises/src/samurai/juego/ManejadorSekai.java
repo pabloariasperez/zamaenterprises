@@ -21,6 +21,10 @@ public class ManejadorSekai implements Animable{
     private int frameActual;
     private final int puntosVidaTotal;
     private int puntosVidaActual;
+    private final int X_VIDA;
+    private final int Y_VIDA;
+    private final int ALTO_VIDA;
+    private final int ANCHO_VIDA;
 
     //Recibe como parametros al sprite de sekai, al igual que los Sprites de la espada y efecto, y un manejador de teclado
     /**
@@ -38,7 +42,11 @@ public class ManejadorSekai implements Animable{
         this.SECUENCIA_IZQ=1;
         this.SECUENCIA_DER=2;
         this.SECUENCIA_FRONTAL=3;
-        this.puntosVidaTotal=(3/8)*Global.ANCHO_PANTALLA;
+        this.puntosVidaTotal=50;
+        this.ANCHO_VIDA=this.puntosVidaTotal;
+        this.X_VIDA=Global.ANCHO_PANTALLA-this.ANCHO_VIDA-15;
+        this.Y_VIDA=10;
+        this.ALTO_VIDA=10;
         this.puntosVidaActual=this.puntosVidaTotal;
     }
 
@@ -50,9 +58,17 @@ public class ManejadorSekai implements Animable{
         efectosEspada.dibujar(g);
         sekai.dibujar(g);
         g.setColor(0x0000AA00);
-        g.fillArc(20, 220-1, 10+1, 10+1, 90, 180);
-        g.fillRect(25, 220, 50, 10);
-        g.fillArc(55, 220-1, 10+1, 10+1, 180, 360);
+        g.fillArc(this.X_VIDA, Y_VIDA-1, 10+1, ALTO_VIDA+1, 90, 180);
+        g.fillRect(this.X_VIDA+5, Y_VIDA,ANCHO_VIDA , ALTO_VIDA);
+        g.fillArc(this.X_VIDA+this.ANCHO_VIDA-2, Y_VIDA-1, 10+1, ALTO_VIDA+1, 270, 180);
+
+        if(puntosVidaActual > puntosVidaTotal*0.25){
+            g.setColor(0x0);
+        }else{
+            g.setColor(0xFF0000);
+        }
+        g.fillRect(this.X_VIDA+5, Y_VIDA+1,puntosVidaActual , ALTO_VIDA-2);
+
     }
 
     /**
