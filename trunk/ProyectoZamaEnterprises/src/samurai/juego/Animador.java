@@ -20,6 +20,7 @@ public class Animador implements Runnable
     //Atributos relacionados con el tiempo haciendo uso de FRAMES.
     private long tiempoInicial, tiempoFinal;
     private final int DURACION_FRAME;
+    private boolean pausado;
 
     /**
      * Constructor que inicializa las variables
@@ -54,6 +55,8 @@ public class Animador implements Runnable
     public void run() {
         //Mientras corriendo sea TRUE estarán ejecutándose las tareas dentro del bloque.
         while ( corriendo ) {
+            if(!this.pausado){
+
             //Obtenemos un tiempo actual en milisegundos que después habremos de restar al final.
             tiempoInicial = System.currentTimeMillis();
             //Actualizamos y dibujamos el GameCanvas, de aquí la importancia que implementen Actualizable.
@@ -72,6 +75,16 @@ public class Animador implements Runnable
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
+            }
+             else{
+                    this.gmCanvas.actualizar();
+                    this.gmCanvas.dibujar();
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+             }
         }
     }
 
@@ -80,5 +93,13 @@ public class Animador implements Runnable
      */
     public void terminar() {
         corriendo = false;
+    }
+
+    public void continuar() {
+        this.pausado = false;
+    }
+
+    public void pausar() {
+        this.pausado = true;
     }
 }

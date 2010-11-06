@@ -6,6 +6,7 @@ package samurai.juego;
 import java.io.IOException;
 import java.util.Stack;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.animacion.SpriteEnemigo;
 import samurai.animacion.SpriteEspada;
@@ -28,13 +29,16 @@ public class Juego extends GameCanvas implements Actualizable {
     private ManejadorTeclado manejadorTec;
     private Musica musica;
     private SFX sfx;
+    private Image imagenPausa;
+    private boolean pausado;
+
     private TiempoEscenario tiempo;
     private Stack enemigosEnEspera;
     private int tiempoProxEvento;
     private SpriteEnemigo enemigo;
     int escenarioActual;
     Escenario escenario;
-
+    private  boolean imagenDibujada;
 
     private static Posicionador posicionador;
         private final int ANCHO_INICIAL = 170;
@@ -42,6 +46,7 @@ public class Juego extends GameCanvas implements Actualizable {
         public static final int ALTO_LINEA = 4;
         public static int altoFondo = 0;
         private int parametro = -100;
+
 
 /**
  *
@@ -52,7 +57,8 @@ public class Juego extends GameCanvas implements Actualizable {
         this.samuraiMidlet = midlet;
         this.setFullScreenMode(true);
         g = this.getGraphics();
-
+        this.pausado = false;
+        this.imagenDibujada = false;
         escenario = new Escenario();
         escenario.agregarFondo(new FondoCapa("/samurai/imagenes/fondoLuna.png", 5, 0));
         altoFondo = escenario.getAltoFondos();
@@ -71,6 +77,8 @@ public class Juego extends GameCanvas implements Actualizable {
             //Creamos los manejadores
                 //Manejador de Teclado
                 manejadorTec = new ManejadorTeclado(this);
+
+                this.imagenPausa = Image.createImage("/samurai/imagenes/pausa.png");
 
                 //Manejador Sekai
                 SpriteSekai sekai = new SpriteSekai("/samurai/imagenes/sekai.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA);
@@ -118,13 +126,33 @@ public class Juego extends GameCanvas implements Actualizable {
         posicionador.dibujarCamino(g);
         manejadorSekai.dibujar(g);
         manejadorEnemigos.dibujar(g);
+        if(this.pausado){
+           // if(this.imagenDibujada){
+
+           // }else{
+            g.drawImage(imagenPausa, 0, 0, Graphics.LEFT|Graphics.TOP);
+            g.setColor(0xFFFFFF);
+            g.drawString("PAUSADO", (Global.ANCHO_PANTALLA/2)-40, (Global.ALTO_PANTALLA/2)-10, Graphics.LEFT|Graphics.TOP);
+            this.imagenDibujada = true;
+           // }
+        }
         flushGraphics();
+
     }
 
 /**
  *
  */
     public void actualizar(){
+        if(this.manejadorTec.downPresionado()){
+            if(this.pausado){
+                this.continuarJuego();
+            }else{
+                this.pausarJuego();
+                
+        }
+        }
+        if(!this.pausado){
         if( tiempo.actual() == tiempoProxEvento && !enemigosEnEspera.isEmpty() ){
             agregarEnemigo( ((int[])enemigosEnEspera.pop())[1] );
             if(!enemigosEnEspera.isEmpty()){
@@ -167,6 +195,8 @@ public class Juego extends GameCanvas implements Actualizable {
             parametro+=1;
             posicionador.generarNuevoEje(parametro);
         }
+        }
+    
     }
 
 
@@ -206,5 +236,14 @@ public class Juego extends GameCanvas implements Actualizable {
         }else{
             return null;
         }
+    }
+
+    public void pausarJuego(){
+        this.pausado = true;
+        this.animador.pausar();
+    }
+    public void continuarJuego(){
+        this.pausado = false;
+        this.animador.continuar();
     }
 }

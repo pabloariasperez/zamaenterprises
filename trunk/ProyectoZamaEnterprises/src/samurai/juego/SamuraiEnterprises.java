@@ -64,6 +64,9 @@ public class SamuraiEnterprises extends MIDlet {
      * Metodo que manda una señal al MIDlet para avisarle a este entre al estado  de pausa.
      */
     public void pauseApp() {
+        if(this.pantallaActual== this.juego){
+            this.juego.pausarJuego();
+        }
     }
 
     /**
