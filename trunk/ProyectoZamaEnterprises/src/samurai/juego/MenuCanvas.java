@@ -181,7 +181,6 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         } else if (this.menuActual.getPosition() == 0 && teclado.firePresionado()) {
             switch(menuActual.nombreMenu){
                 case MenuCanvas.PRINCIPAL:
-                    this.animador.terminar();
                     samuraiMidlet.correrJuego();
                     break;
                 case MenuCanvas.OPCIONES:
