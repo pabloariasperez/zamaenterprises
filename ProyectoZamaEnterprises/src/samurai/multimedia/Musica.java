@@ -6,10 +6,13 @@
 package samurai.multimedia;
 
 import java.io.IOException;
+import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.media.Manager;
 import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
 import javax.microedition.media.PlayerListener;
+import javax.microedition.midlet.MIDlet;
+import samurai.juego.Juego;
 
 /**
  *
@@ -18,12 +21,12 @@ import javax.microedition.media.PlayerListener;
 public class Musica implements PlayerListener{
     private Player p;
 
-    public Musica(String archivo){
+    public Musica(String archivo,GameCanvas canvas){
         try {
-            p = Manager.createPlayer(getClass().getResourceAsStream(archivo), "audio/mp3");
+            p = Manager.createPlayer(getClass().getResourceAsStream(archivo), "audio/midi");
             p.realize();
             p.prefetch();
-            p.addPlayerListener(this);
+           // p.addPlayerListener(this);
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (MediaException ex) {
@@ -53,5 +56,8 @@ public class Musica implements PlayerListener{
                 ex.printStackTrace();
             }
        }
+    }
+    public Player getPlayer(){
+        return this.p;
     }
 }

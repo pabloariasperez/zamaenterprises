@@ -9,6 +9,9 @@ import java.util.Stack;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
+import javax.microedition.media.Manager;
+import javax.microedition.media.MediaException;
+import javax.microedition.media.Player;
 import samurai.animacion.SpriteEnemigo;
 import samurai.animacion.SpriteEspada;
 import samurai.animacion.SpriteSekai;
@@ -32,6 +35,7 @@ public class Juego extends GameCanvas implements Actualizable {
     private SFX sfx;
     private Image imagenPausa;
     private boolean pausado;
+    private boolean reproduciendo;
 
     private TiempoEscenario tiempo;
     private SpriteEnemigo enemigo;
@@ -46,7 +50,6 @@ public class Juego extends GameCanvas implements Actualizable {
         public static final int ALTO_LINEA = 4;
         public static int altoFondo = 0;
         private int parametro = -100;
-
 
 /**
  *
@@ -88,12 +91,12 @@ public class Juego extends GameCanvas implements Actualizable {
                 //Manejador Enemigos
                 manejadorEnemigos=new ManejadorEnemigos();
                 enemigo=null;       //Para no crear mil "BICHOS" enemigo
-                
-//            this.musica=new Musica("/tema.mp3");
-//            musica.reproducir();
-//            this.sfx=new SFX(midlet);
-//            Nivel.cargarSFX(escenarioActual, sfx);
-
+            this.musica=new Musica("/samurai/sonidos/koopa.mid", this);
+            this.reproduciendo=false;
+            
+            this.sfx=new SFX(this);
+            Nivel.cargarSFX(escenarioActual, sfx);
+           
 
             tiempo = new TiempoEscenario();
             animador = new Animador(this);
@@ -101,12 +104,12 @@ public class Juego extends GameCanvas implements Actualizable {
 
             //animador.iniciar();
         } catch (IOException ex) {
-            System.out.println("Aquí fue =(");
             ex.printStackTrace();
         }
         posicionador.generarNuevoEje(parametro);
         random=new Random();
         animador.iniciar();
+        
     }
 /**
  *
@@ -149,29 +152,40 @@ public class Juego extends GameCanvas implements Actualizable {
             if(this.pausado){
                 this.continuarJuego();
             }else{
+                musica.parar();
+                this.reproduciendo=false;
                 this.pausarJuego();
                 
         }
         }
         if(!this.pausado){
+            if(!this.reproduciendo){
+             musica.reproducir();
+             this.reproduciendo=true;
+            }
+            musica.playerUpdate(musica.getPlayer(), musica.END_OF_MEDIA, g);
             int rnd=random.nextInt(100);
             if( rnd == 0){
             agregarEnemigo( Nivel.generarEnemigo(escenarioActual, random));
+            }
             for(int i=0; i<manejadorEnemigos.getVectorEnemigo().size(); i++){
             this.enemigo=(SpriteEnemigo)(manejadorEnemigos.getVectorEnemigo().elementAt(i));
+
             if( manejadorSekai.colisionEspada(this.enemigo)){
-                /*this.reproducir(enemigo.getTipoEnemigo());
+                //this.reproducir(enemigo.getTipoEnemigo());
                 sfx.reproducir(SFX.ESPADA);
-                 *
-                 */
+                
+                
                 manejadorEnemigos.kill(this.enemigo);
             }
 
             if(manejadorSekai.colisionSekai(this.enemigo)){
+                sfx.reproducir(SFX.GOLPE_SEKAI);
                 manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
                 manejadorEnemigos.desaparecer(this.enemigo);
             }
             if(this.enemigo.getY() >= Global.ALTO_PANTALLA-this.enemigo.getHeight()/2){
+                sfx.reproducir(SFX.GOLPE_SEKAI);
                 manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
                 manejadorEnemigos.desaparecer(this.enemigo);
             }
@@ -194,10 +208,6 @@ public class Juego extends GameCanvas implements Actualizable {
         }
         }
         
-        
-    
-    }
-
 
     private void agregarEnemigo(int enemigo){
         this.manejadorEnemigos.agregarEnemigo(enemigo);
