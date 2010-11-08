@@ -40,7 +40,7 @@ public class Juego extends GameCanvas implements Actualizable {
     private static Posicionador posicionador;
     private final int ANCHO_INICIAL = 170;
     private final int PORCENTAJE_ANCHO_FINAL = 20;
-    public static final int ALTO_LINEA = 4;
+    public static final int ALTO_LINEA = 5;
     public static int altoFondo = 0;
     private int parametro;
 
