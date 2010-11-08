@@ -5,7 +5,12 @@
 
 package samurai.escenarios;
 
+import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.game.Sprite;
+import samurai.juego.Global;
+import samurai.juego.Juego;
 
 /**
  *
@@ -22,13 +27,23 @@ public class Escenario {
     private ManejadorFondos manejadorFondos;
 
     private int alturaFondo;
+    private Sprite piedra;
+    private int incremento;
+    private int velocidad;
+    private int estadoYActual;
 
     //El constructor no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
     public Escenario(){
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
-
-        //En el caso de manejadorSekai el objeto se recibirá enteramente por medio de otro método: crearSekai();
+        velocidad = 2;
+        estadoYActual = 0;
+        incremento = 0;
+        try {
+            piedra = new Sprite(Image.createImage("/samurai/imagenes/piedra.png"), 20, 18);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     //Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
@@ -52,14 +67,53 @@ public class Escenario {
 
     //Se dibuja el escenario. Se tiene delegado el dibujar fondos y enemigos a otros métodos.
     public void dibujar(Graphics g){
+        this.dibujarBackground(g);
+        Juego.getPosicionador().dibujarCamino(g);
         this.dibujarFondos(g);
+        this.dibujarPiedras(g);
+    }
+
+    //
+    private void dibujarPiedras(Graphics g){
+        int correccionDesfaseX = piedra.getWidth()/3;
+        int correccionDesfaseY = piedra.getWidth()/2;
+        int posiciones[][] = Juego.getPosicionador().posiciones;
+        for(int lineaActual = 0; lineaActual<posiciones.length; lineaActual+=3){
+            piedra.setPosition(     posiciones[lineaActual + incremento ][0] - correccionDesfaseX,
+                                    lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseY);
+            piedra.paint(g);
+            
+            piedra.setPosition(     posiciones[lineaActual + incremento ][0] + posiciones[lineaActual + incremento ][1] - correccionDesfaseX,
+                                    lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseY);
+            piedra.paint(g);
+        }
     }
 
     //Actualiza el escenario
     public void actualizar(){
-        
+        estadoYActual++;
+        if( estadoYActual == velocidad){
+            estadoYActual = 0;
+            incremento++;
+            if( incremento == 3){
+                incremento = 0;
+            }
+        }
         if(!manejadorFondos.isEmpty()){
             manejadorFondos.actualizar();
         }
+    }
+
+    private void dibujarBackground(Graphics g) {
+        g.setColor(0x00002200);
+        g.fillRect(0, Juego.altoFondo, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*1/10);
+        g.setColor(0x00003300);
+        g.fillRect(0, Juego.altoFondo + Global.ALTO_PANTALLA*1/10, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*1/10);
+        g.setColor(0x00004400);
+        g.fillRect(0, Juego.altoFondo + Global.ALTO_PANTALLA*2/10, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*2/10);
+        g.setColor(0x00006600);
+        g.fillRect(0, Juego.altoFondo + Global.ALTO_PANTALLA*4/10, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*2/10);
+        g.setColor(0x00008800);
+        g.fillRect(0, Juego.altoFondo + Global.ALTO_PANTALLA*6/10, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*4/10);
     }
 }

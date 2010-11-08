@@ -52,7 +52,7 @@ public class Posicionador {
     }
 
     public void dibujarCamino(Graphics g){
-        g.setColor(0x00ffffff);
+        g.setColor(0x00964B00);
         for(  int lineaActual=0; lineaActual<posiciones.length; lineaActual++ ){
             g.fillRect(
                     posiciones[lineaActual][0],

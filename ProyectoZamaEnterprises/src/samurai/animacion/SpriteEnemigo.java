@@ -5,7 +5,6 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
-import samurai.juego.Global;
 import samurai.juego.Juego;
 
 /**
@@ -22,8 +21,8 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     private int centesimo;
 
     public static final int MURCIELAGO = 0;
-    public static final int RATA = 2;
     public static final int TOPO = 1;
+    public static final int RATA = 2;
     public static final int FANTASMA = 3;
 
     public static final int CESAR = 4;
@@ -36,13 +35,20 @@ public class SpriteEnemigo  extends Sprite implements Animable {
      * @throws IOException Si no se encuentra el archivo
      */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo) throws IOException{
-        super(Image.createImage(archivoEnemigo),160/4,160/4);
+        super(Image.createImage(archivoEnemigo),SpriteEnemigo.anchoTotalSprites(tipoEnemigo)/4,anchoTotalSprites(tipoEnemigo)/4);
         
         this.tipoEnemigo = tipoEnemigo;
-        this.secuenciaFondo=new int[]{0,1,2,3};
-        this.secuenciaMedia=new int[]{4,5,6,7};
-        this.secuenciaMediaFrente=new int[]{8,9,10,11};
-        this.secuenciaFrente = new int[]{12,13,14,15};
+        switch( tipoEnemigo ){
+            case SpriteEnemigo.MURCIELAGO:
+            case SpriteEnemigo.TOPO:
+            case SpriteEnemigo.RATA:
+                this.secuenciaFondo=new int[]{0,1,2,3};
+                this.secuenciaMedia=new int[]{4,5,6,7};
+                this.secuenciaMediaFrente=new int[]{8,9,10,11};
+                this.secuenciaFrente = new int[]{12,13,14,15};
+                break;
+        }
+        
         this.setFrameSequence(this.secuenciaFondo);
 
         alturaActual = 0;
@@ -68,7 +74,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     public void mover() {
 
         Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, 1);
-        this.setPosition(posicion.getX(), posicion.getY()*Juego.ALTO_LINEA + Juego.altoFondo);
+        this.setPosition(posicion.getX() - this.getWidth()/2, posicion.getY()*Juego.ALTO_LINEA + Juego.altoFondo - this.getHeight()/2);
 
         
         if(this.getY() < 80){
@@ -81,12 +87,21 @@ public class SpriteEnemigo  extends Sprite implements Animable {
             this.setFrameSequence(secuenciaMediaFrente);
         }
         this.nextFrame();
-        alturaActual+=5;
+        alturaActual+=2;
     }
 
     public int getTipoEnemigo() {
         return tipoEnemigo;
     }
 
-
+    private static int anchoTotalSprites( int tipoEnemigo) {
+        switch( tipoEnemigo ){
+            case SpriteEnemigo.MURCIELAGO:
+                return 160;
+            case SpriteEnemigo.TOPO:
+                return 160;
+            default:
+                return 0;
+        }
+    }
 }
