@@ -9,7 +9,7 @@ import samurai.animacion.*;
  * @version 1.0, septiembre 2010
  */
 public class ManejadorSekai implements Animable{
-    private final int NUMERO_FRAMES_ATAQUE = 14;
+    private final int NUMERO_FRAMES_ATAQUE = 5;
 
     private SpriteSekai sekai;
     private SpriteEspada efectosEspada;
@@ -79,12 +79,12 @@ public class ManejadorSekai implements Animable{
         sekai.actualizar();
         //Pregunta si actualmente esta en medio de una animacion
         //Si se esta animando el efectosEspada avanza un frame en el sprite
-        if(estoyAnimandome == true & frameActual<=NUMERO_FRAMES_ATAQUE){
+        if(estoyAnimandome == true && frameActual<=NUMERO_FRAMES_ATAQUE-1){
             efectosEspada.ataque();
             frameActual++;
             //si el frame actual del sprite es igual al numero de frames que tien
             //entonces se cambia el estado de animacion y se pasa al frame 0
-            if(frameActual == NUMERO_FRAMES_ATAQUE ){
+            if(frameActual == NUMERO_FRAMES_ATAQUE-1 ){
                 estoyAnimandome = false;
                 frameActual=0;
             }
@@ -155,6 +155,9 @@ public class ManejadorSekai implements Animable{
     }
 
     public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
-        return this.efectosEspada.collidesWith(spriteEnemigo, true);
+        if(spriteEnemigo.getY() > Global.ALTO_PANTALLA*2/3){
+            return this.efectosEspada.collidesWith(spriteEnemigo, true);
+        }
+        return false;
     }
 }

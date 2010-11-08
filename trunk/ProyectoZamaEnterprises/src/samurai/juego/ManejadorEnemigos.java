@@ -42,19 +42,19 @@ public class ManejadorEnemigos {
 
             switch (tipoEnemigo) {
                 case SpriteEnemigo.MURCIELAGO:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo(rndm.nextInt(3)), tipoEnemigo));
-                    break;
-                case SpriteEnemigo.RATA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo(rndm.nextInt(3)), tipoEnemigo));
-                    break;
-                case SpriteEnemigo.FANTASMA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo(rndm.nextInt(3)), tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
                 case SpriteEnemigo.TOPO:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteTopo.png", centesimo(rndm.nextInt(3)),tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteTopo.png", rndm.nextInt(60) + 20,tipoEnemigo));
+                    break;
+                case SpriteEnemigo.RATA:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteRata.png", rndm.nextInt(60) + 20, tipoEnemigo));
+                    break;
+                case SpriteEnemigo.FANTASMA:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
                 case SpriteEnemigo.CESAR:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo(rndm.nextInt(3)), tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
             }
         } catch (IOException ex) {
@@ -62,19 +62,7 @@ public class ManejadorEnemigos {
         }
     }
 
-    private int centesimo(int aleatorio){
-        switch(aleatorio){
-            case 0:
-                return 0;
-            case 1:
-                return 50;
-            case 2:
-                return 85;
-            default:
-                return 0;
-        }
-    }
-    /**
+            /**
      * Metodo que remueve del Vector el enemigo que se manda como parametro y lo declara como null.
      * @param enemigo Recibe el SpriteEnemigo que se desea borrar del Vector.
      */
