@@ -24,6 +24,7 @@ public class Animador implements Runnable {
      */
     public Animador(GameCanvas gmCanvas) {
         DURACION_FRAME = 1000 / Global.FPS;
+        pausado = false;
         //Preguntamos si el GameCanvas recibido está implementando la interface ACtualizable, que lo obliga a actualizar() y dibujar()
         if (gmCanvas instanceof Actualizable) {
             //Guardamos el GameCanvas del parámetro recibido casteado en el atributo local.
@@ -41,7 +42,6 @@ public class Animador implements Runnable {
     public void iniciar() {
         thread = new Thread(this);
         thread.start();
-        corriendo = true;       //Establecemos que el Animador estará corriendo.
     }
 
     /**
@@ -49,6 +49,7 @@ public class Animador implements Runnable {
      * Dibuja y actualiza el GameCanvas
      */
     public void run() {
+        corriendo = true;       //Establecemos que el Animador estará corriendo.
         //Mientras corriendo sea TRUE estarán ejecutándose las tareas dentro del bloque.
         while (corriendo) {
             if (!this.pausado) {

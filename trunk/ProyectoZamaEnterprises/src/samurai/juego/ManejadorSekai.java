@@ -25,6 +25,8 @@ public class ManejadorSekai implements Animable{
     private final int Y_VIDA;
     private final int ALTO_VIDA;
     private final int ANCHO_VIDA;
+    private int DIFERENCIAL_COLISION_ESPADA;
+    private int DIFERENCIAL_COLISION_SEKAI;
 
     //Recibe como parametros al sprite de sekai, al igual que los Sprites de la espada y efecto, y un manejador de teclado
     /**
@@ -48,6 +50,8 @@ public class ManejadorSekai implements Animable{
         this.Y_VIDA=10;
         this.ALTO_VIDA=10;
         this.puntosVidaActual=this.puntosVidaTotal;
+        this.DIFERENCIAL_COLISION_ESPADA = Global.ALTO_PANTALLA - sekai.getHeight() - efectosEspada.getHeight() - 5;
+        this.DIFERENCIAL_COLISION_SEKAI = Global.ALTO_PANTALLA - sekai.getHeight();
     }
 
     /**
@@ -62,13 +66,15 @@ public class ManejadorSekai implements Animable{
         g.fillRect(this.X_VIDA+5, Y_VIDA,ANCHO_VIDA , ALTO_VIDA);
         g.fillArc(this.X_VIDA+this.ANCHO_VIDA-2, Y_VIDA-1, 10+1, ALTO_VIDA+1, 270, 180);
 
-        if(puntosVidaActual > puntosVidaTotal*0.3){
-            g.setColor(0x0);
-        }else{
+        g.setColor(0x00000000);
+        g.fillRect(this.X_VIDA+5, Y_VIDA+1,ANCHO_VIDA, ALTO_VIDA-2);
+
+        g.setColor(0x0000AA00);
+        if(puntosVidaActual < puntosVidaTotal*0.3){
             g.setColor(0xFF0000);
         }
-        g.fillRect(this.X_VIDA+5, Y_VIDA+1,puntosVidaActual , ALTO_VIDA-2);
-
+        
+        g.fillRect(this.X_VIDA+6, Y_VIDA+2,puntosVidaActual -2, ALTO_VIDA-4);
     }
 
     /**
@@ -151,16 +157,20 @@ public class ManejadorSekai implements Animable{
     }
 
     public boolean colisionSekai(SpriteEnemigo spriteEnemigo) {
-        if(spriteEnemigo.getY() > Global.ALTO_PANTALLA*4/5){
+        if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_SEKAI ){
             return this.sekai.collidesWith(spriteEnemigo, true);
         }
         return false;
     }
 
     public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
-        if(spriteEnemigo.getY() > Global.ALTO_PANTALLA*2/3){
+        if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_ESPADA ){
             return this.efectosEspada.collidesWith(spriteEnemigo, true);
         }
         return false;
+    }
+
+    public int getHeight() {
+        return this.sekai.getHeight();
     }
 }

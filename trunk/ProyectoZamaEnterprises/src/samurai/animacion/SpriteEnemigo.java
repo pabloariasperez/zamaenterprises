@@ -81,7 +81,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
             this.setFrameSequence(secuenciaMediaFrente);
         }
         this.nextFrame();
-        alturaActual+=4;
+        alturaActual+=3;
     }
 
     public int getTipoEnemigo() {

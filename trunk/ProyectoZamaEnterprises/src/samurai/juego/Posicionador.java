@@ -19,6 +19,8 @@ public class Posicionador {
     private int altoLinea;
     private int altoFondo;
 
+    private int colorCamino;
+
     public int posiciones[][];
 
     public Posicionador( int anchoInicial, int porcentajeAnchoFinal, int altoLinea, int altoFondo ){
@@ -52,14 +54,17 @@ public class Posicionador {
     }
 
     public void dibujarCamino(Graphics g){
-        g.setColor(0x00964B00);
+        colorCamino = 0x00900B00;
+
         for(  int lineaActual=0; lineaActual<posiciones.length; lineaActual++ ){
+            g.setColor(colorCamino);
             g.fillRect(
                     posiciones[lineaActual][0],
                     lineaActual*altoLinea+altoFondo,
                     posiciones[lineaActual][1],
                     altoLinea
                      );
+            colorCamino += 0x00000100;
         }
     }
 
