@@ -3,7 +3,6 @@ package samurai.juego;
 
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.midlet.*;
 import samurai.presentacion.Diapositiva;
 
@@ -37,13 +36,6 @@ public class SamuraiEnterprises extends MIDlet {
     public SamuraiEnterprises() {
         Global.setFPS(60);
         splashCanvas=new SplashCanvas(this);
-        Global.setAltoPantalla(splashCanvas.getHeight());
-        Global.setAnchoPantalla(splashCanvas.getWidth());
-        this.menuCanvas = new MenuCanvas(this);
-        this.pantallaActual = this.splashCanvas;
-        //plashCanvas = new SplashCanvas(this);
-        
-        
     }
 
     /**
@@ -51,15 +43,14 @@ public class SamuraiEnterprises extends MIDlet {
      * @throws MIDletStateChangeException Esta excepcion es lanzada si el MIDlet no puede iniciar.
      */
     public void startApp() {
-        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
-        pantallaActual.iniciar();
+        Display.getDisplay(this).setCurrent(splashCanvas);
     }
 
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este entre al estado  de pausa.
      */
     public void pauseApp() {
-        if(this.pantallaActual== this.juego){
+        if(this.pantallaActual==this.juego){
             this.juego.pausarJuego();
         }
     }
@@ -76,31 +67,22 @@ public class SamuraiEnterprises extends MIDlet {
     }
 
     public void mostrarCreditos() {
-
-        
         this.presentacionCanvas = new PresentacionCanvas(this,Diapositiva.CREDITO);
-        while(this.presentacionCanvas.estoyMostrandome()){
-            Display.getDisplay(this).setCurrent(this.presentacionCanvas);
-        }
-     this.presentacionCanvas = null;
-     Display.getDisplay(this).setCurrent((Displayable) this.pantallaActual);
-     System.gc();
-        
-
+        Global.setFPS(50);
+        Display.getDisplay(this).setCurrent(this.presentacionCanvas);
     }
 
     public void continuarJuego() {
     }
 
     public void mostrarMenu(){
+        presentacionCanvas = null;
         splashCanvas = null;
         if(menuCanvas==null){
             menuCanvas = new MenuCanvas(this);
         }
         Global.setFPS(30);
-        pantallaActual = menuCanvas;
-        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
-        pantallaActual.iniciar();
+        Display.getDisplay(this).setCurrent(menuCanvas);
     }
 
     public void correrJuego() {
@@ -109,9 +91,7 @@ public class SamuraiEnterprises extends MIDlet {
             juego = new Juego(this);
         }
         Global.setFPS(60);
-        pantallaActual = juego;
-        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
-        pantallaActual.iniciar();
+        Display.getDisplay(this).setCurrent(juego);
     }
 
   

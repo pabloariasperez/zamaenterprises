@@ -82,7 +82,7 @@ public class Escenario {
         int posiciones[][] = Juego.getPosicionador().posiciones;
         int x1;
         for(int lineaActual = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+= DISTANCIADOR_PIEDRAS){
-            x1 =posiciones[lineaActual + incremento ][0] - correccionDesfaseX;
+            x1 =posiciones[lineaActual + incremento ][0] - correccionDesfaseX*2;
             piedra.setPosition(     x1,
                                     lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseY);
             piedra.paint(g);

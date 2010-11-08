@@ -83,6 +83,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
         //Creamos nuestra animador y lo iniciamos.
         animador = new Animador(this);
+        animador.iniciar();
     }
 
     //Método para crear todos los botones del menú principal, a la vez que los agrega al Menú.
@@ -276,9 +277,5 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             ex.printStackTrace();
         }
         System.gc();
-    }
-
-    public void iniciar() {
-        animador.iniciar();
     }
 }

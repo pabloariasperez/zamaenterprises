@@ -99,6 +99,7 @@ public class Juego extends GameCanvas implements Actualizable {
 
             tiempo = new TiempoEscenario();
             animador = new Animador(this);
+            animador.iniciar();
 
 
         } catch (IOException ex) {
@@ -157,7 +158,7 @@ public class Juego extends GameCanvas implements Actualizable {
             }
             musica.playerUpdate(musica.getPlayer(), musica.END_OF_MEDIA, g);
 
-            int rnd = random.nextInt(Global.FPS / 2);
+            int rnd = random.nextInt(Global.FPS/2);
             if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10) {
                 agregarEnemigo(Nivel.generarEnemigo(escenarioActual, random));
             }
@@ -170,7 +171,7 @@ public class Juego extends GameCanvas implements Actualizable {
                     manejadorEnemigos.kill(this.enemigo);
                 }
                 if (    manejadorSekai.colisionSekai(this.enemigo)  ||
-                        this.enemigo.getY() >= Global.ALTO_PANTALLA - this.enemigo.getHeight() / 2
+                        this.enemigo.getY() >= Global.ALTO_PANTALLA - this.manejadorSekai.getHeight() / 2
                 ) {
                     //sfx.reproducir(SFX.GOLPE_SEKAI);
                     manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
@@ -179,7 +180,7 @@ public class Juego extends GameCanvas implements Actualizable {
             }
 
             if (posicionador.hayNuevoEje()) {
-                parametro += 8;
+                parametro += 1;
                 posicionador.generarNuevoEje(parametro);
             }
             escenario.actualizar();
@@ -247,9 +248,5 @@ public class Juego extends GameCanvas implements Actualizable {
 
         this.animador.continuar();
 
-    }
-
-    public void iniciar() {
-        animador.iniciar();
     }
 }

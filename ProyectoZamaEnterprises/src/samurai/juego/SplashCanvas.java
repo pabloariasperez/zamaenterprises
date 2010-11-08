@@ -45,6 +45,8 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
 
         //Asignamos a nuestro parámetro "g" el Graphic del GameCanvas
         this.g = this.getGraphics();
+        Global.setAltoPantalla(this.getHeight());
+        Global.setAnchoPantalla(this.getWidth());
 
         //Creamos nuestro manejador de teclado
         teclado = new ManejadorTeclado(this);
@@ -58,14 +60,20 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         colores.push(new Integer(0x000000));
         splashes.push( new Splash("/samurai/imagenes/itesmcel.png") );
         colores.push(new Integer(0xFFFFFF));
-       
-        //Creamos nuestra animador y lo iniciamos.
-        animador = new Animador(this);
 
         //Inicializamos nuestro tiempo.
         tiempo = new TiempoEscenario();
         //Establecemos cuánto queremos que dure cada SPLASH.
         TIEMPO_SPLASH = (TIEMPO/1000) * Global.FPS;      //Recuérdese que el tiempo funciona a base de FRAMES como tiempo.
+
+        g.setColor(0x0000aabb);
+        g.fillRect(0, 0, 10, 10);
+
+        //Creamos nuestra animador y lo iniciamos.
+        animador = new Animador(this);
+        animador.iniciar();
+
+        g.fillRect(20, 20, 10, 10);
     }
 
    

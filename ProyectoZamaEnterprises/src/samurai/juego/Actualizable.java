@@ -19,8 +19,4 @@ public interface Actualizable {
      * Dibuja
      */
     public abstract void dibujar();
-    /**
-     * Inicia el animador del Actualizable
-     */
-    public abstract void iniciar();
 }
