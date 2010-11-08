@@ -25,7 +25,6 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     private TiempoEscenario tiempo;     //Reutilizamos esta clase, aunque fue concebida para los escenarios.
     private final int TIEMPO_SPLASH;
     private final int TIEMPO = 2000;        //En milisegundos
-    private boolean estoyMostrandome;
 
 
     //Declaramos los SPLASHES y Colores que vamos a mostrar.
@@ -60,11 +59,6 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         splashes.push( new Splash("/samurai/imagenes/itesmcel.png") );
         colores.push(new Integer(0xFFFFFF));
        
-
-
-        //Establecemos TRUE mi estoyMostrandome
-        estoyMostrandome = true;
-
         //Creamos nuestra animador y lo iniciamos.
         animador = new Animador(this);
 
@@ -72,8 +66,6 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         tiempo = new TiempoEscenario();
         //Establecemos cuánto queremos que dure cada SPLASH.
         TIEMPO_SPLASH = (TIEMPO/1000) * Global.FPS;      //Recuérdese que el tiempo funciona a base de FRAMES como tiempo.
-
-        animador.iniciar();
     }
 
    
@@ -103,19 +95,15 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
             }
         }else{
             animador.terminar();
-            estoyMostrandome = false;
-        }
-        
+            samuraiMidlet.mostrarMenu();
+        }       
     }
-
     
     /**
      * Metodo que dibuja el SPLASH en punta.
      */
     public void dibujar() {
-
         if(!splashes.isEmpty() && !colores.isEmpty()){
-
             //Establecemos nuestro color para dibujar. Lo que se obtenga del stack de colores.
             g.setColor(((Integer)colores.peek()).intValue());
             //Limpiamos la pantalla.
@@ -131,8 +119,8 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
      *
      * @return Regresa un booleano el cual indica si ya se terminaron de mostrar todos los Splashes.
      */
-    public boolean estoyMostrandome(){
-       
-        return estoyMostrandome;
+
+    public void iniciar(){
+        animador.iniciar();
     }
 }

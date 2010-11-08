@@ -151,7 +151,10 @@ public class ManejadorSekai implements Animable{
     }
 
     public boolean colisionSekai(SpriteEnemigo spriteEnemigo) {
-        return this.sekai.collidesWith(spriteEnemigo, true);
+        if(spriteEnemigo.getY() > Global.ALTO_PANTALLA*4/5){
+            return this.sekai.collidesWith(spriteEnemigo, true);
+        }
+        return false;
     }
 
     public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {

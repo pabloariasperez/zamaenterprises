@@ -106,8 +106,6 @@ public class Juego extends GameCanvas implements Actualizable {
         }
         posicionador.generarNuevoEje(parametro);
         random = new Random();
-        animador.iniciar();
-
     }
 
     /**
@@ -249,5 +247,9 @@ public class Juego extends GameCanvas implements Actualizable {
 
         this.animador.continuar();
 
+    }
+
+    public void iniciar() {
+        animador.iniciar();
     }
 }

@@ -51,8 +51,6 @@ public class PresentacionCanvas  extends GameCanvas implements Actualizable {
         diapositivaActual = (Diapositiva)this.diapositivas.pop();
 
         animador = new Animador(this);
-        animador.iniciar();
-
     }
     private void agregarDiapositivas(){
         switch(this.tipo){
@@ -143,5 +141,9 @@ public class PresentacionCanvas  extends GameCanvas implements Actualizable {
        }else
            return false;
 
+    }
+
+    public void iniciar() {
+        animador.iniciar();
     }
 }
