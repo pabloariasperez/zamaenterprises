@@ -2,6 +2,7 @@ package samurai.juego;
 
 
 import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.midlet.*;
 import samurai.presentacion.Diapositiva;
@@ -18,8 +19,7 @@ public class SamuraiEnterprises extends MIDlet {
     private MenuCanvas menuCanvas;
     private SplashCanvas splashCanvas;
     private PresentacionCanvas creditos;
-    private GameCanvas pantallaAnterior;
-    private GameCanvas pantallaActual;
+    private Actualizable pantallaActual;
     private PresentacionCanvas presentacionCanvas;
     private Juego juego;
 
@@ -40,7 +40,7 @@ public class SamuraiEnterprises extends MIDlet {
         Global.setAltoPantalla(splashCanvas.getHeight());
         Global.setAnchoPantalla(splashCanvas.getWidth());
         this.menuCanvas = new MenuCanvas(this);
-        this.pantallaActual = this.menuCanvas;
+        this.pantallaActual = this.splashCanvas;
         //plashCanvas = new SplashCanvas(this);
         
         
@@ -49,15 +49,10 @@ public class SamuraiEnterprises extends MIDlet {
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este que entre estado activo.
      * @throws MIDletStateChangeException Esta excepcion es lanzada si el MIDlet no puede iniciar.
-      */
+     */
     public void startApp() {
-        while(this.splashCanvas.estoyMostrandome()){
-            Display.getDisplay(this).setCurrent(this.splashCanvas);
-        }
-
-        Display.getDisplay(this).setCurrent(menuCanvas);
-        this.splashCanvas=null;
-        System.gc();
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+        pantallaActual.iniciar();
     }
 
     /**
@@ -74,8 +69,7 @@ public class SamuraiEnterprises extends MIDlet {
      * @param unconditional Booleano que indica si la aplicacion se debe detener o no.
      * @throws MIDletStateChangeException Se lanza esta excepcion si el MIDlet no ha entrado al estado de destruido
      */
-    public void destroyApp(boolean unconditional) {
-        
+    public void destroyApp(boolean unconditional) {    
     }
 
     public void mostrarPuntajes() {
@@ -89,7 +83,7 @@ public class SamuraiEnterprises extends MIDlet {
             Display.getDisplay(this).setCurrent(this.presentacionCanvas);
         }
      this.presentacionCanvas = null;
-     Display.getDisplay(this).setCurrent(this.pantallaActual);
+     Display.getDisplay(this).setCurrent((Displayable) this.pantallaActual);
      System.gc();
         
 
@@ -98,10 +92,26 @@ public class SamuraiEnterprises extends MIDlet {
     public void continuarJuego() {
     }
 
+    public void mostrarMenu(){
+        splashCanvas = null;
+        if(menuCanvas==null){
+            menuCanvas = new MenuCanvas(this);
+        }
+        Global.setFPS(30);
+        pantallaActual = menuCanvas;
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+        pantallaActual.iniciar();
+    }
+
     public void correrJuego() {
+        menuCanvas = null;
+        if(juego==null){
+            juego = new Juego(this);
+        }
         Global.setFPS(60);
-        juego = new Juego(this);
-        Display.getDisplay(this).setCurrent(this.juego);
+        pantallaActual = juego;
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+        pantallaActual.iniciar();
     }
 
   

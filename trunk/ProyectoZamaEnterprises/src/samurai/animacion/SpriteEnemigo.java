@@ -35,19 +35,13 @@ public class SpriteEnemigo  extends Sprite implements Animable {
      * @throws IOException Si no se encuentra el archivo
      */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo) throws IOException{
-        super(Image.createImage(archivoEnemigo),SpriteEnemigo.anchoTotalSprites(tipoEnemigo)/4,anchoTotalSprites(tipoEnemigo)/4);
+        super(Image.createImage(archivoEnemigo),160/4,160/4);
         
         this.tipoEnemigo = tipoEnemigo;
-        switch( tipoEnemigo ){
-            case SpriteEnemigo.MURCIELAGO:
-            case SpriteEnemigo.TOPO:
-            case SpriteEnemigo.RATA:
                 this.secuenciaFondo=new int[]{0,1,2,3};
                 this.secuenciaMedia=new int[]{4,5,6,7};
                 this.secuenciaMediaFrente=new int[]{8,9,10,11};
                 this.secuenciaFrente = new int[]{12,13,14,15};
-                break;
-        }
         
         this.setFrameSequence(this.secuenciaFondo);
 
@@ -87,21 +81,10 @@ public class SpriteEnemigo  extends Sprite implements Animable {
             this.setFrameSequence(secuenciaMediaFrente);
         }
         this.nextFrame();
-        alturaActual+=2;
+        alturaActual+=4;
     }
 
     public int getTipoEnemigo() {
         return tipoEnemigo;
-    }
-
-    private static int anchoTotalSprites( int tipoEnemigo) {
-        switch( tipoEnemigo ){
-            case SpriteEnemigo.MURCIELAGO:
-                return 160;
-            case SpriteEnemigo.TOPO:
-                return 160;
-            default:
-                return 0;
-        }
     }
 }

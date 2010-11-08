@@ -32,6 +32,8 @@ public class Escenario {
     private int velocidad;
     private int estadoYActual;
 
+    public int DISTANCIADOR_PIEDRAS = 8;
+
     //El constructor no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
     public Escenario(){
         //Inicializamos cada uno de los atributos.
@@ -79,7 +81,7 @@ public class Escenario {
         int correccionDesfaseY = piedra.getWidth()/2;
         int posiciones[][] = Juego.getPosicionador().posiciones;
         int x1;
-        for(int lineaActual = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+=10){
+        for(int lineaActual = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+= DISTANCIADOR_PIEDRAS){
             x1 =posiciones[lineaActual + incremento ][0] - correccionDesfaseX;
             piedra.setPosition(     x1,
                                     lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseY);
@@ -97,7 +99,7 @@ public class Escenario {
         if( estadoYActual == velocidad){
             estadoYActual = 0;
             incremento++;
-            if( incremento == 10 - 1){
+            if( incremento == DISTANCIADOR_PIEDRAS - 1){
                 incremento = 0;
             }
         }
