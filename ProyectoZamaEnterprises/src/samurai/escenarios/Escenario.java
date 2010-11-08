@@ -36,7 +36,7 @@ public class Escenario {
     public Escenario(){
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
-        velocidad = 2;
+        velocidad = 3;
         estadoYActual = 0;
         incremento = 0;
         try {
@@ -78,12 +78,14 @@ public class Escenario {
         int correccionDesfaseX = piedra.getWidth()/3;
         int correccionDesfaseY = piedra.getWidth()/2;
         int posiciones[][] = Juego.getPosicionador().posiciones;
-        for(int lineaActual = 0; lineaActual<posiciones.length; lineaActual+=3){
-            piedra.setPosition(     posiciones[lineaActual + incremento ][0] - correccionDesfaseX,
+        int x1;
+        for(int lineaActual = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+=10){
+            x1 =posiciones[lineaActual + incremento ][0] - correccionDesfaseX;
+            piedra.setPosition(     x1,
                                     lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseY);
             piedra.paint(g);
             
-            piedra.setPosition(     posiciones[lineaActual + incremento ][0] + posiciones[lineaActual + incremento ][1] - correccionDesfaseX,
+            piedra.setPosition(     x1 + posiciones[lineaActual + incremento ][1],
                                     lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseY);
             piedra.paint(g);
         }
@@ -95,7 +97,7 @@ public class Escenario {
         if( estadoYActual == velocidad){
             estadoYActual = 0;
             incremento++;
-            if( incremento == 3){
+            if( incremento == 10 - 1){
                 incremento = 0;
             }
         }
