@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package samurai.juego;
 
 import java.util.Stack;
@@ -12,8 +8,9 @@ import javax.microedition.lcdui.game.GameCanvas;
 import samurai.presentacion.Diapositiva;
 
 /**
- *
- * @author mi16
+ * 
+ * @author Pablo, Erik, Daniel
+ * @version 1.1
  */
 public class PresentacionCanvas extends GameCanvas implements Actualizable {
 
@@ -31,6 +28,11 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private final int C_DANIEL = 2;
     private boolean mostrandome;
 
+    /**
+     *
+     * @param samuraiMidlet
+     * @param tipo
+     */
     public PresentacionCanvas(SamuraiEnterprises samuraiMidlet, int tipo) {
 
         super(true);
@@ -131,6 +133,10 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
         this.flushGraphics();
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean estoyMostrandome() {
         return this.mostrandome;
     }

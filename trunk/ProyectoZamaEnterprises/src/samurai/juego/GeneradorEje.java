@@ -12,10 +12,25 @@ public class GeneradorEje implements Runnable {
 
     private Thread hiloSegundoPlano;
     private int estado;
+    /**
+     *
+     */
     public static int PARADO = 0;
+    /**
+     *
+     */
     public static int GENERANDO = 1;
+    /**
+     *
+     */
     public static int TERMINADO = 2;
+    /**
+     *
+     */
     public static int TIEMPO_DORMIDO = 1;
+    /**
+     *
+     */
     public static int OPERACIONES_PARA_DORMIR = 30;
     private int anchoInicial;
     private int porcentajeAnchoFinal;
@@ -26,6 +41,13 @@ public class GeneradorEje implements Runnable {
     private int numeroLineas;
     private int[][] posiciones;
 
+    /**
+     *
+     * @param anchoInicial
+     * @param porcentajeAnchoFinal
+     * @param altoLinea
+     * @param altoFondo
+     */
     public GeneradorEje(int anchoInicial, int porcentajeAnchoFinal, int altoLinea, int altoFondo) {
         this.anchoInicial = anchoInicial;
         this.porcentajeAnchoFinal = porcentajeAnchoFinal;
@@ -37,6 +59,9 @@ public class GeneradorEje implements Runnable {
         estado = GeneradorEje.PARADO;
     }
 
+    /**
+     *
+     */
     public void run() {
         //Inicializo lo que requiera para el camino
         numeroLineas = (Global.ALTO_PANTALLA - altoFondo) / altoLinea;
@@ -83,6 +108,10 @@ public class GeneradorEje implements Runnable {
         System.gc();
     }
 
+    /**
+     *
+     * @param parametro
+     */
     public void generarEje(int parametro) {
         this.parametro = parametro;
         hiloSegundoPlano = new Thread(this);
@@ -90,6 +119,10 @@ public class GeneradorEje implements Runnable {
         hiloSegundoPlano.start();
     }
 
+    /**
+     *
+     * @return
+     */
     public int[][] getEje() {
         if (estado == GeneradorEje.TERMINADO) {
             estado = GeneradorEje.PARADO;
@@ -99,14 +132,25 @@ public class GeneradorEje implements Runnable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNumeroLineas() {
         return numeroLineas;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getEstado() {
         return estado;
     }
 
+    /**
+     *
+     */
     public void pararGenerador() {
         hiloSegundoPlano.interrupt();
     }

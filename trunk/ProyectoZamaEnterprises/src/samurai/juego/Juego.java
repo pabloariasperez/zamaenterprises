@@ -1,7 +1,5 @@
 package samurai.juego;
 
-//Proyecto zama enterprises
-// Autores Pablo, Erik y Daniel
 import java.io.IOException;
 import java.util.Random;
 import javax.microedition.lcdui.Graphics;
@@ -15,8 +13,9 @@ import samurai.multimedia.Musica;
 import samurai.multimedia.SFX;
 
 /**
- *
- * @author mi16
+ * Se encarga de manejar la logica del juego
+ * @author Pablo, Erik, Daniel
+ * @version 2.0
  */
 public class Juego extends GameCanvas implements Actualizable {
 
@@ -40,17 +39,18 @@ public class Juego extends GameCanvas implements Actualizable {
     private static Posicionador posicionador;
     private final int ANCHO_INICIAL = 170;
     private final int PORCENTAJE_ANCHO_FINAL = 20;
+    /**
+     * tamaño de la linea
+     */
     public static final int ALTO_LINEA = 5;
+    /**
+     * tamaño del fondo
+     */
     public static int altoFondo = 0;
     private int parametro;
-
     /**
-     *
-     * @param midlet
-     */
-    /**
-     *
-     * @param midlet
+     * Contructor de juego; inicicaliza todo lo necesario
+     * @param midlet midlet que maneja a juego
      */
     public Juego(SamuraiEnterprises midlet) {
         super(true);
@@ -110,15 +110,15 @@ public class Juego extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
-     * @return
+     * regresa el animador
+     * @return animador
      */
     public Animador getAnimador() {
         return this.animador;
     }
 
     /**
-     *
+     * dibuja todos los componentes de juego
      */
     public void dibujar() {
         g.setColor(0x0);
@@ -136,7 +136,7 @@ public class Juego extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
+     * actualiza todos los coponentes de juego
      */
     public void actualizar() {
 
@@ -221,11 +221,13 @@ public class Juego extends GameCanvas implements Actualizable {
         }
     }
 
+    /**
+     * Regresa un posicionador
+     * @return posicionador
+     */
     public static Posicionador getPosicionador() {
         if (Juego.posicionador != null) {
             return Juego.posicionador;
-
-
         } else {
             return null;
 
@@ -233,6 +235,9 @@ public class Juego extends GameCanvas implements Actualizable {
         }
     }
 
+    /**
+     * pausa el juego
+     */
     public void pausarJuego() {
         this.pausado = true;
 
@@ -242,6 +247,9 @@ public class Juego extends GameCanvas implements Actualizable {
 
     }
 
+    /**
+     * continua el juego
+     */
     public void continuarJuego() {
         this.pausado = false;
 

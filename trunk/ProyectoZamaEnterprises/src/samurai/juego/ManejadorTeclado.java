@@ -23,7 +23,7 @@ public class ManejadorTeclado{
 
     /**
      * Constructor que inicializa todas las variables, establaciendo a gmCanvas como el canvas que utilizara al manejador
-     * @param juego Este parametro indica en que GameCanvas se utilizara el Manejador de teclado.
+     * @param gmCanvas
      */
     public ManejadorTeclado(GameCanvas gmCanvas){
         this.arribaPresionado=false;

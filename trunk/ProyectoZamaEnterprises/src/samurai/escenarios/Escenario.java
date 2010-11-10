@@ -13,17 +13,12 @@ import samurai.juego.Global;
 import samurai.juego.Juego;
 
 /**
- *
- * @author mi16
+  Se encarga de colocar la ambientación y de dibujar el camino
+ * @author Pablo, Erik, Daniel
+ * @version 1.3 Noviebre 2010
  */
 public class Escenario {
-    /*El escenario dibujará y administrará en conjunto
-     *      +Fondos
-     *      +Enemigos
-     *      +Camino del Escenario
-     *      +El tiempo
-     *      +Sekai
-     */
+ 
     private ManejadorFondos manejadorFondos;
 
     private int alturaFondo;
@@ -32,9 +27,14 @@ public class Escenario {
     private int velocidad;
     private int estadoYActual;
 
+    /**
+     * la distancia que hay entre cada piedra
+     */
     public int DISTANCIADOR_PIEDRAS = 8;
 
-    //El constructor no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
+    /**
+     * Constructor: no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
+     */
     public Escenario(){
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
@@ -47,27 +47,35 @@ public class Escenario {
             ex.printStackTrace();
         }
     }
-
-    //Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
+    /**
+     * Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
+     * @param fondo : fondo a agregar al escenario
+     */
     public void agregarFondo(FondoCapa fondo){
         this.manejadorFondos.agregarFondo(fondo);
     }
-
-    
-
-    //Se dibujan los fondos
+    /**
+     * Se dibujan los fondos
+     * @param g Graficos
+     */
     public void dibujarFondos(Graphics g){
         if(!manejadorFondos.isEmpty()){
             manejadorFondos.dibujar(g);
         }
     }
 
+    /**
+     * regresa el alto de los fondos
+     * @return alto de los fondos
+     */
     public int getAltoFondos() {
         return manejadorFondos.getAlto();
     }
-
-
-    //Se dibuja el escenario. Se tiene delegado el dibujar fondos y enemigos a otros métodos.
+    /**
+     * Se dibuja el escenario.
+     * Se dibuja el camino
+     * @param g Graficos
+     */
     public void dibujar(Graphics g){
         this.dibujarBackground(g);
         Juego.getPosicionador().dibujarCamino(g);
@@ -75,7 +83,6 @@ public class Escenario {
         this.dibujarPiedras(g);
     }
 
-    //
     private void dibujarPiedras(Graphics g){
         int correccionDesfaseX = piedra.getWidth()/3;
         int correccionDesfaseY = piedra.getWidth()/2;
@@ -92,8 +99,10 @@ public class Escenario {
             piedra.paint(g);
         }
     }
-
-    //Actualiza el escenario
+    
+    /**
+     * Actualiza el escenario
+     */
     public void actualizar(){
         estadoYActual++;
         if( estadoYActual == velocidad){

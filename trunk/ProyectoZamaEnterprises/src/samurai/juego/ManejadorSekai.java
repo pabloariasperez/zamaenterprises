@@ -133,9 +133,17 @@ public class ManejadorSekai implements Animable{
         }
 
 }
+    /**
+     *
+     * @return
+     */
     public SpriteEspada getEspada(){
         return this.efectosEspada;
     }
+    /**
+     *
+     * @param enemigo
+     */
     public void reducirVida(int enemigo){
          switch (enemigo) {
                 case SpriteEnemigo.MURCIELAGO:
@@ -156,6 +164,11 @@ public class ManejadorSekai implements Animable{
             }
     }
 
+    /**
+     *
+     * @param spriteEnemigo
+     * @return
+     */
     public boolean colisionSekai(SpriteEnemigo spriteEnemigo) {
         if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_SEKAI ){
             return this.sekai.collidesWith(spriteEnemigo, true);
@@ -163,6 +176,11 @@ public class ManejadorSekai implements Animable{
         return false;
     }
 
+    /**
+     *
+     * @param spriteEnemigo
+     * @return
+     */
     public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
         if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_ESPADA ){
             return this.efectosEspada.collidesWith(spriteEnemigo, true);
@@ -170,6 +188,10 @@ public class ManejadorSekai implements Animable{
         return false;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getHeight() {
         return this.sekai.getHeight();
     }

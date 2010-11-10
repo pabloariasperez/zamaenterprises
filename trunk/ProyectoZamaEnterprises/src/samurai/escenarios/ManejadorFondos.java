@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package samurai.escenarios;
 
 import java.util.Vector;
@@ -10,20 +5,28 @@ import javax.microedition.lcdui.Graphics;
 import samurai.animacion.Animable;
 
 /**
- *
- * @author mi16
+ * Se encarga de manejar los fondos
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Octubre 2010
  */
 public class ManejadorFondos implements Animable {
 
     private Vector fondos;
 
+    /**
+     * inicializa el vector de los fondos
+     */
     public ManejadorFondos(){
 
        fondos = new Vector();
 
     }
 
-     public void agregarFondo(FondoCapa fondo){
+    /**
+     * agrega un fondo al vector
+     * @param fondo fondo a ser agregado
+     */
+    public void agregarFondo(FondoCapa fondo){
      fondos.addElement(fondo);
      }
 
@@ -34,6 +37,9 @@ public class ManejadorFondos implements Animable {
         }
     }
 
+    /**
+     * recorre el vector para actualizar cada fondo
+     */
     public void actualizar()
     {
         for(int i =0; i<fondos.size(); i++){
@@ -41,10 +47,18 @@ public class ManejadorFondos implements Animable {
         }
     }
 
+    /**
+     * regresa si esta vacio el vector
+     * @return booleano de si esta vacio el vector
+     */
     public boolean isEmpty(){
         return fondos.isEmpty();
     }
 
+    /**
+     * regresa el alto de los fondos
+     * @return alto de los fondos
+     */
     public int getAlto() {
         //El fondo más alto siempre se deberá ingresar primero en el vector, razón misma por la que será el primero en dibujarse para que quede hasta atrás.
         return ((FondoCapa)fondos.elementAt(0)).getAlto();
