@@ -40,7 +40,6 @@ public class SamuraiEnterprises extends MIDlet {
 
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este que entre estado activo.
-     * @throws MIDletStateChangeException Esta excepcion es lanzada si el MIDlet no puede iniciar.
      */
     public void startApp() {
         Display.getDisplay(this).setCurrent(splashCanvas);
@@ -58,23 +57,34 @@ public class SamuraiEnterprises extends MIDlet {
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este que entre al estado de destruido.
      * @param unconditional Booleano que indica si la aplicacion se debe detener o no.
-     * @throws MIDletStateChangeException Se lanza esta excepcion si el MIDlet no ha entrado al estado de destruido
      */
     public void destroyApp(boolean unconditional) {    
     }
 
+    /**
+     *
+     */
     public void mostrarPuntajes() {
     }
 
+    /**
+     *
+     */
     public void mostrarCreditos() {
         this.presentacionCanvas = new PresentacionCanvas(this,Diapositiva.CREDITO);
         Global.setFPS(50);
         Display.getDisplay(this).setCurrent(this.presentacionCanvas);
     }
 
+    /**
+     *
+     */
     public void continuarJuego() {
     }
 
+    /**
+     *
+     */
     public void mostrarMenu(){
         presentacionCanvas = null;
         splashCanvas = null;
@@ -85,6 +95,9 @@ public class SamuraiEnterprises extends MIDlet {
         Display.getDisplay(this).setCurrent(menuCanvas);
     }
 
+    /**
+     *
+     */
     public void correrJuego() {
         menuCanvas = null;
         if(juego==null){

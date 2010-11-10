@@ -34,12 +34,10 @@ public class ManejadorEnemigos {
     }
     /**
      * Metodo que agrega los enemigos al Vector.
-     * @param enemigo recibe un SpriteEnemigo para agregarlo al Vector.
+     * @param tipoEnemigo enemigo que se desea agregar
      */
     public void agregarEnemigo(int tipoEnemigo){
         try {
-            //Obligamos
-
             switch (tipoEnemigo) {
                 case SpriteEnemigo.MURCIELAGO:
                     enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
@@ -62,7 +60,7 @@ public class ManejadorEnemigos {
         }
     }
 
-            /**
+    /**
      * Metodo que remueve del Vector el enemigo que se manda como parametro y lo declara como null.
      * @param enemigo Recibe el SpriteEnemigo que se desea borrar del Vector.
      */
@@ -75,6 +73,10 @@ public class ManejadorEnemigos {
             this.enemigosMuertos=0;
         }
     }
+    /**
+     * hace desaparecer al enemigo
+     * @param enemigo Sprite que se desea desaparecer
+     */
     public void desaparecer(SpriteEnemigo enemigo){
         enemigosEnPantalla.removeElement(enemigo);
         enemigo=null;
@@ -97,6 +99,10 @@ public class ManejadorEnemigos {
             ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).mover();
         }
     }
+    /**
+     * regresa el vector que contiene a los enemigos
+     * @return vector que contiene a los enemigos
+     */
     public Vector getVectorEnemigo(){
         return this.enemigosEnPantalla;
     }

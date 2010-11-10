@@ -21,8 +21,18 @@ public class Posicionador {
 
     private int colorCamino;
 
+    /**
+     *
+     */
     public int posiciones[][];
 
+    /**
+     *
+     * @param anchoInicial
+     * @param porcentajeAnchoFinal
+     * @param altoLinea
+     * @param altoFondo
+     */
     public Posicionador( int anchoInicial, int porcentajeAnchoFinal, int altoLinea, int altoFondo ){
         this.anchoInicial = anchoInicial;
         this.porcentajeAnchoFinal = porcentajeAnchoFinal;
@@ -33,6 +43,10 @@ public class Posicionador {
         posiciones = new int[3][];
     }
 
+    /**
+     *
+     * @param nuevoParametro
+     */
     public void generarNuevoEje( int nuevoParametro ){
         if( generadorEje.getEstado() == GeneradorEje.PARADO ){
             generadorEje.generarEje(nuevoParametro);
@@ -44,6 +58,10 @@ public class Posicionador {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean hayNuevoEje(){
         if( generadorEje.getEstado() == GeneradorEje.TERMINADO ){
             posiciones = generadorEje.getEje();
@@ -53,6 +71,10 @@ public class Posicionador {
         }
     }
 
+    /**
+     *
+     * @param g
+     */
     public void dibujarCamino(Graphics g){
         colorCamino = 0x00900B00;
 
@@ -68,6 +90,13 @@ public class Posicionador {
         }
     }
 
+    /**
+     *
+     * @param posicion
+     * @param altura
+     * @param centesimal
+     * @param region
+     */
     public void getPorcion( Posicion posicion, int altura, int centesimal, int region){
         posicion.setY((int)((float)((posiciones.length-1)*(altura)/(float)(Global.ALTO_PANTALLA - altoFondo))) );
 

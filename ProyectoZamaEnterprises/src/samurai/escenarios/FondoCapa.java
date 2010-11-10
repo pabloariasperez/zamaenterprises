@@ -11,12 +11,23 @@ import javax.microedition.lcdui.Image;
 import samurai.animacion.Animable;
 
 
+/**
+ * se encarga de mover el fondo y dibujarlo
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Octubre 2010
+ */
 public class FondoCapa implements Animable{
 
     private Image imagen;
     private int mover;
     private int posicionX, posicionY;
 
+    /**
+     * crea la imagen a ser utilizada, e inicializa variables
+     * @param archivoImagen direccion de la imagen
+     * @param velocidad : velocidad a la que se movera
+     * @param posicionY : posicion y
+     */
     public FondoCapa(String archivoImagen, int velocidad, int posicionY){
        
         try {
@@ -32,11 +43,13 @@ public class FondoCapa implements Animable{
     }
 
 
+    /**
+     * mueve el fondo
+     */
     public void actualizar() {
         posicionX+=this.mover;
-                if(this.posicionX<=-imagen.getWidth())
-                    this.posicionX=0;
-        
+        if(this.posicionX<=-imagen.getWidth())
+            this.posicionX=0;
     }
     public void dibujar(Graphics g){
         g.drawImage(imagen, posicionX, posicionY, Graphics.LEFT|Graphics.TOP);
@@ -44,6 +57,10 @@ public class FondoCapa implements Animable{
             g.drawImage(imagen, posicionX+imagen.getWidth(), posicionY, Graphics.LEFT|Graphics.TOP);
    }
 
+    /**
+     * regresa el alto de la imagen
+     * @return alto de la imagen
+     */
     public int getAlto() {
         return imagen.getHeight();
     }

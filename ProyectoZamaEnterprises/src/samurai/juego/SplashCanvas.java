@@ -125,7 +125,6 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     /**
      * Metodo que regresa un booleano el cual indica si ya se terminaron de mostrar todos los Splashes.
      *
-     * @return Regresa un booleano el cual indica si ya se terminaron de mostrar todos los Splashes.
      */
 
     public void iniciar(){

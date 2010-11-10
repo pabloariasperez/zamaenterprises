@@ -20,18 +20,33 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     private int alturaActual;
     private int centesimo;
 
+    /**
+     * Enum del Murcielago
+     */
     public static final int MURCIELAGO = 0;
+    /**
+     * Enum del Topo
+     */
     public static final int TOPO = 1;
+    /**
+     * Enum del Rata
+     */
     public static final int RATA = 2;
+    /**
+     * Enum del Fantasma
+     */
     public static final int FANTASMA = 3;
 
+    /**
+     * Enum del Cesar
+     */
     public static final int CESAR = 4;
 
     /**
      * constructor que inicializa variables
      * @param archivoEnemigo direccion de la imagen del enemigo
-     * @param posicionX posicion inicial en x
-     * @param posicionY posicion inicial en y
+     * @param centesimo
+     * @param tipoEnemigo
      * @throws IOException Si no se encuentra el archivo
      */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo) throws IOException{
@@ -63,7 +78,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     }
 
     /**
-     * Cambia la secuencia del sprite dependiendo de su y
+     * Cambia la secuencia del sprite dependiendo de su posicion
      */
     public void mover() {
 
@@ -84,6 +99,10 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         alturaActual+=3;
     }
 
+    /**
+     * regresa el tipo de enemigo
+     * @return tipo del enemigo
+     */
     public int getTipoEnemigo() {
         return tipoEnemigo;
     }

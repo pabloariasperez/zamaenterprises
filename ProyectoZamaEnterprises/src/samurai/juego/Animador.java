@@ -92,10 +92,16 @@ public class Animador implements Runnable {
         corriendo = false;
     }
 
+    /**
+     *
+     */
     public void continuar() {
         this.pausado = false;
     }
 
+    /**
+     *
+     */
     public void pausar() {
         this.pausado = true;
     }
