@@ -170,10 +170,7 @@ public class ManejadorSekai implements Animable{
      * @return
      */
     public boolean colisionSekai(SpriteEnemigo spriteEnemigo) {
-        if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_SEKAI ){
             return this.sekai.collidesWith(spriteEnemigo, true);
-        }
-        return false;
     }
 
     /**
@@ -182,10 +179,7 @@ public class ManejadorSekai implements Animable{
      * @return
      */
     public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
-        if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_ESPADA ){
             return this.efectosEspada.collidesWith(spriteEnemigo, true);
-        }
-        return false;
     }
 
     /**

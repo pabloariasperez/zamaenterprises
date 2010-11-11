@@ -52,8 +52,6 @@ public class Animador implements Runnable {
         corriendo = true;       //Establecemos que el Animador estará corriendo.
         //Mientras corriendo sea TRUE estarán ejecutándose las tareas dentro del bloque.
         while (corriendo) {
-            if (!this.pausado) {
-
                 //Obtenemos un tiempo actual en milisegundos que después habremos de restar al final.
                 tiempoInicial = System.currentTimeMillis();
                 //Actualizamos y dibujamos el GameCanvas, de aquí la importancia que implementen Actualizable.
@@ -73,15 +71,7 @@ public class Animador implements Runnable {
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
-            } else {
-                this.gmCanvas.actualizar();
-                this.gmCanvas.dibujar();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            
         }
     }
 
@@ -103,6 +93,6 @@ public class Animador implements Runnable {
      *
      */
     public void pausar() {
-        this.pausado = true;
+        this.pausado = false;
     }
 }

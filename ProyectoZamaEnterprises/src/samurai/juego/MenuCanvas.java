@@ -39,6 +39,11 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
      * Constante entera que define el menu de salir que ya esta creado.
      */
     public static final int SALIR = 3;
+     /**
+     * Constante entera que define el menu de salir que ya esta creado.
+     */
+
+
 
     //Objetos - Menú Principal.
     private Menu menuPrincipal;
