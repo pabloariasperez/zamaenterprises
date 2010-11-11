@@ -2,6 +2,7 @@ package samurai.juego;
 
 import java.io.IOException;
 import java.util.Random;
+import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
@@ -9,6 +10,8 @@ import samurai.animacion.SpriteEnemigo;
 import samurai.animacion.SpriteEspada;
 import samurai.animacion.SpriteSekai;
 import samurai.escenarios.*;
+import samurai.menu.Boton;
+import samurai.menu.Menu;
 import samurai.multimedia.Musica;
 import samurai.multimedia.SFX;
 
@@ -48,6 +51,10 @@ public class Juego extends GameCanvas implements Actualizable {
      */
     public static int altoFondo = 0;
     private int parametro;
+    private Menu menuPausa;
+    private Boton botonSalir;
+    private Boton botonContinuar;
+
     /**
      * Contructor de juego; inicicaliza todo lo necesario
      * @param midlet midlet que maneja a juego
@@ -117,6 +124,25 @@ public class Juego extends GameCanvas implements Actualizable {
         return this.animador;
     }
 
+    public void creaBotones(){
+      
+        try {
+              if(this.menuPausa==null){
+                 this.menuPausa = new Menu(2,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png", 1);
+             
+                  this.botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
+                  this.botonSalir = new Boton("/samurai/imagenes/botonSalir.png");
+                  this.menuPausa.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+                  this.menuPausa.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        
+    }
+
     /**
      * dibuja todos los componentes de juego
      */
@@ -128,8 +154,7 @@ public class Juego extends GameCanvas implements Actualizable {
         manejadorSekai.dibujar(g);
         if (this.pausado) {
             g.drawImage(imagenPausa, 0, 0, Graphics.LEFT | Graphics.TOP);
-            g.setColor(0xFFFFFF);
-            g.drawString("PAUSADO", (Global.ANCHO_PANTALLA / 2) - 40, (Global.ALTO_PANTALLA / 2) - 10, Graphics.LEFT | Graphics.TOP);
+            this.menuPausa.dibujar(g);
             this.imagenDibujada = true;
         }
         flushGraphics();
@@ -142,12 +167,30 @@ public class Juego extends GameCanvas implements Actualizable {
 
         if (this.manejadorTec.downPresionado()) {
             if (this.pausado) {
-                this.continuarJuego();
+                this.menuPausa.moverOpcion(1);
             } else {
                 musica.parar();
                 this.reproduciendo = false;
                 this.pausarJuego();
 
+            }
+        }
+         if (this.manejadorTec.upPresionado()) {
+            if (this.pausado) {
+                this.menuPausa.moverOpcion(-1);
+            }
+        }
+          if (this.manejadorTec.firePresionado()) {
+            if (this.pausado) {
+                switch(this.menuPausa.getPosition()){
+                    case 0:
+                        this.continuarJuego();
+                        break;
+                    case 1:
+                        this.samuraiMidlet.mostrarMenu();
+                        break;
+                }
+                
             }
         }
 
@@ -166,15 +209,16 @@ public class Juego extends GameCanvas implements Actualizable {
                 this.enemigo = (SpriteEnemigo) (manejadorEnemigos.getVectorEnemigo().elementAt(i));
 
                 if (manejadorSekai.colisionEspada(this.enemigo)) {
-                    //this.reproducir(enemigo.getTipoEnemigo());
-                    //sfx.reproducir(SFX.ESPADA);
+
+                    //reproducir(SFX.ESPADA);
                     manejadorEnemigos.kill(this.enemigo);
                 }
                 if (    manejadorSekai.colisionSekai(this.enemigo)  ||
-                        this.enemigo.getY() >= Global.ALTO_PANTALLA - this.manejadorSekai.getHeight() / 2
+                        this.enemigo.getY() >= Global.ALTO_PANTALLA - this.enemigo.getHeight() / 2
                 ) {
                     //sfx.reproducir(SFX.GOLPE_SEKAI);
                     manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
+                    Display.getDisplay(samuraiMidlet).vibrate(90);
                     manejadorEnemigos.desaparecer(this.enemigo);
                 }
             }
@@ -240,9 +284,7 @@ public class Juego extends GameCanvas implements Actualizable {
      */
     public void pausarJuego() {
         this.pausado = true;
-
-
-        this.animador.pausar();
+        this.creaBotones();
 
 
     }
@@ -252,9 +294,5 @@ public class Juego extends GameCanvas implements Actualizable {
      */
     public void continuarJuego() {
         this.pausado = false;
-
-
-        this.animador.continuar();
-
     }
 }
