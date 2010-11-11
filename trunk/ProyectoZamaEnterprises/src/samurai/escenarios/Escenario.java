@@ -30,7 +30,7 @@ public class Escenario {
     /**
      * la distancia que hay entre cada piedra
      */
-    public int DISTANCIADOR_PIEDRAS = 8;
+    public int DISTANCIADOR_PIEDRAS = 6;
 
     /**
      * Constructor: no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
