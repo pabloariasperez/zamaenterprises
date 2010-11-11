@@ -13,23 +13,23 @@ public class GeneradorEje implements Runnable {
     private Thread hiloSegundoPlano;
     private int estado;
     /**
-     *
+     *Valor de estado del GeneradorEje cuando no está trabajando.
      */
     public static int PARADO = 0;
     /**
-     *
+     *Valor de estado del GeneradorEje cuando está generando un nuevo eje.
      */
     public static int GENERANDO = 1;
     /**
-     *
+     *Valor de estado del GeneradorEje cuando se ha terminado de calcular un nuevo eje.
      */
     public static int TERMINADO = 2;
     /**
-     *
+     *Tiempo que indica cuánto tiempo debe dormirse el thread para no dejar que sature el procesador consigo mismo.
      */
     public static int TIEMPO_DORMIDO = 1;
     /**
-     *
+     *Indica el número de bloques de operaciones que debe de hacer para que se mande dormir el thread.
      */
     public static int OPERACIONES_PARA_DORMIR = 30;
     private int anchoInicial;
@@ -60,7 +60,7 @@ public class GeneradorEje implements Runnable {
     }
 
     /**
-     *
+     *Comenzará a generar el nuevo eje. Es mandado llamar por el Thread.
      */
     public void run() {
         //Inicializo lo que requiera para el camino
@@ -109,8 +109,8 @@ public class GeneradorEje implements Runnable {
     }
 
     /**
-     *
-     * @param parametro
+     *Recibe la petición de crear un nuevo eje. Es quien arranca el thread.
+     * @param parametro Indica el grado de curvatura del nuevo eje. 0 implica una recta, valores negativos indican curvatura hacia la izquierda, y valores positivos indican una curvatura a la derecha.
      */
     public void generarEje(int parametro) {
         this.parametro = parametro;
@@ -120,8 +120,8 @@ public class GeneradorEje implements Runnable {
     }
 
     /**
-     *
-     * @return
+     *Devuelve el nuevo eje generado solamente si ya se ha terminado de generar. Devolverlo sino está terminado podría implicar un arreglo de enteros incompletos.
+     * @return Devuelve el nuevo arreglo de posiciones si ya fue generado correctamente o se devuelve null si aún no se ha terminado de generar.
      */
     public int[][] getEje() {
         if (estado == GeneradorEje.TERMINADO) {
@@ -133,25 +133,26 @@ public class GeneradorEje implements Runnable {
     }
 
     /**
-     *
-     * @return
+     *Devuelve el número de líneas que contiene el arreglo de posiciones. Este varía por los parámetros de construcción: alto pantalla, alto fondo, alto línea.
+     * @return Devuelve un entero con el número de líneas en el arreglo.
      */
     public int getNumeroLineas() {
         return numeroLineas;
     }
 
     /**
-     *
-     * @return
+     *Devuelve el estado actual del Thread GeneradorEje.
+     * @return Devuelve alguno de los estado actual del GeneradorEje.
      */
     public int getEstado() {
         return estado;
     }
 
     /**
-     *
+     *Si se desea terminar con el Thread, se llama a esta función para interrumpir.
      */
     public void pararGenerador() {
         hiloSegundoPlano.interrupt();
+        estado = GeneradorEje.PARADO;
     }
 }
