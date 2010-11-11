@@ -20,7 +20,6 @@ public class Splash implements Animable
     /**
      * crea la imagen del splash
      * @param archivo direccion de la imagen del splash
-     * @param gmCanvas
      */
     public Splash(String archivo) {
         //INtentamos crear nuestra imagen del Splash actual.

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package samurai.multimedia;
 
 import java.io.IOException;
@@ -10,29 +5,61 @@ import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.media.Manager;
 import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
-import javax.microedition.midlet.MIDlet;
 
 /**
- *
- * @author zama
+ * Clase encargada de los SFX de cada enemigo y sekai
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Noviembre 2010
  */
 public class SFX {
     private Player[] players;
     private GameCanvas canvas;
+    /**
+     * Enum de sfx de espada
+     */
     public static final int ESPADA=0;
+    /**
+     * Enum de sfx de golpe a sekai
+     */
     public static final int GOLPE_SEKAI=1;
+    /**
+     * Enum de sfx de muerte de sekai
+     */
     public static final int MUERTE_SEKAI=2;
+    /**
+     * Enum de sfx de muerte murcielago
+     */
     public static final int MUERTE_MURCIELAGO=3;
+    /**
+     * Enum de sfx de muerte topo
+     */
     public static final int MUERTE_TOPO=4;
+    /**
+     * Enum de sfx de muerte rata
+     */
     public static final int MUERTE_RATA=5;
+    /**
+     * Enum de sfx de muerte fantasma
+     */
     public static final int MUERTE_FANTASMA=6;
+    /**
+     * Enum de sfx de muerte cesar
+     */
     public static final int MUERTE_CESAR=7;
 
 
+    /**
+     * Constructor SFX iniciliza players y asigna canvas
+     * @param canvas Gamecanvas donde se correra el sonido
+     */
     public SFX(GameCanvas canvas){
         this.canvas=canvas;
         this.players= new Player[8];
     }
+    /**
+     * agreaga un player al arreglo players
+     * @param tipo player a agregar
+     */
     public void agregarSFX(int tipo){
         try {
             switch(tipo){
@@ -69,6 +96,10 @@ public class SFX {
             ex.printStackTrace();
         }
     }
+    /**
+     * reproduce un sfx determinado
+     * @param sfx sfx a reproducir
+     */
     public void reproducir(int sfx){
         try {
             Player p = players[sfx];

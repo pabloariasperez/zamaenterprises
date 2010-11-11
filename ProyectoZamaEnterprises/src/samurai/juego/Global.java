@@ -6,51 +6,45 @@
 package samurai.juego;
 
 /**
- *
- * @author Pablo
+ * Clase que contiene variables globales
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Octubre 2010
  */
 public class Global {
-    //Variables globales
     /**
-     *
+     * Ancho de la pantalla
      */
     public static int ANCHO_PANTALLA = 0;
     /**
-     *
+     * alto de la pantalla
      */
     public static int ALTO_PANTALLA = 0;
     /**
-     *
+     * los frames per second
      */
     public static int FPS;
 
-    //Hacemos que la variable estática pueda ser modificada por un método estático.
-    //El valor del ANCHO no puede ser modificado más que una sola vez para toda la ejecución.
     /**
-     *
-     * @param nuevoAnchoPantalla
+     * modifica ANCHO_PANTALLA solo una vez
+     * @param nuevoAnchoPantalla nuevo valor
      */
     public static void setAnchoPantalla( int nuevoAnchoPantalla ){
         if( ANCHO_PANTALLA == 0){
             ANCHO_PANTALLA = nuevoAnchoPantalla;
         }
     }
-
-    //El valor del ALTO no puede ser modificado más que una sola vez para toda la ejecución.
     /**
-     *
-     * @param nuevoAltoPantalla
+     * modifica ALTO_PANTALLA solo una vez
+     * @param nuevoAltoPantalla nuevo valor
      */
     public static void setAltoPantalla( int nuevoAltoPantalla ){
         if( ALTO_PANTALLA == 0 ){
             ALTO_PANTALLA = nuevoAltoPantalla;
         }
     }
-
-    //Los FPS pueden ser moficados varias  veces en la aplicación según lo requiera cada Canvas.
     /**
-     *
-     * @param nuevoFPS
+     * Los FPS pueden ser moficados varias  veces en la aplicación según lo requiera cada Canvas.
+     * @param nuevoFPS nuevo valor
      */
     public static void setFPS( int nuevoFPS ){
         FPS = nuevoFPS;

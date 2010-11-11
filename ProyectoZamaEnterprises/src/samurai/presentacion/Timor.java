@@ -9,8 +9,9 @@ import samurai.juego.Global;
 import samurai.juego.TiempoEscenario;
 
 /**
- *
- * @author mi16
+ * Clase encargada mandar una señal cada vez que termine un tiempo determinado
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Octubre 2010
  */
 public class Timor {
 
@@ -18,6 +19,10 @@ public class Timor {
     private final  int intervalo;
    
 
+    /**
+     * constructor inicializa variables
+     * @param intervalo tiempo antes de dar señal
+     */
     public Timor(int intervalo){
         this.intervalo = intervalo*Global.FPS;
         
@@ -25,6 +30,10 @@ public class Timor {
 
     }
 
+    /**
+     * chaca si el intervalo se a cumplido
+     * @return true si se cumple el tiempo de intevalo
+     */
     public boolean activarIteracion(){
 
         if(this.reloj.actual() == this.intervalo){
@@ -36,6 +45,9 @@ public class Timor {
 
     }
    
+    /**
+     * incrementa el tiempo del reloj
+     */
     public void tik(){
         this.reloj.incrementar();
     }
