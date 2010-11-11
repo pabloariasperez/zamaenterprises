@@ -35,7 +35,6 @@ public class Indicador extends Sprite {
      * @param archivoIndicador direccion de la imagen del indicador
      * @param posicionX posicion inicial en x
      * @param posicionY posicion inical en y
-     * @param anchoPantalla ancho de la pantalla
      * @throws IOException si no se encuentra el archivo de la imagen
      */
     public Indicador(String archivoIndicador, int posicionX, int posicionY ) throws IOException{

@@ -28,7 +28,6 @@ public class ManejadorSekai implements Animable{
     private int DIFERENCIAL_COLISION_ESPADA;
     private int DIFERENCIAL_COLISION_SEKAI;
 
-    //Recibe como parametros al sprite de sekai, al igual que los Sprites de la espada y efecto, y un manejador de teclado
     /**
      * Constructor que iniciliza todas las variables
      * @param sekai Recibe un SpriteSekai que contiene los movimientos del personaje
@@ -55,7 +54,7 @@ public class ManejadorSekai implements Animable{
     }
 
     /**
-     *
+     * Dibuja a sekai, al igual que su vida
      * @param g Graficos donde se dibujan los Sprites
      */
     public void dibujar(Graphics g) {
@@ -134,15 +133,15 @@ public class ManejadorSekai implements Animable{
 
 }
     /**
-     *
-     * @return
+     * regresa un SpriteEspada
+     * @return efectosEspada
      */
     public SpriteEspada getEspada(){
         return this.efectosEspada;
     }
     /**
-     *
-     * @param enemigo
+     * Reduce la vida dependiendo de que tipo de enemigo fue el que se la bajo
+     * @param enemigo tipo de enemigo
      */
     public void reducirVida(int enemigo){
          switch (enemigo) {
@@ -165,26 +164,26 @@ public class ManejadorSekai implements Animable{
     }
 
     /**
-     *
-     * @param spriteEnemigo
-     * @return
+     * indica si hubo una colision entre un enemigo y sekai
+     * @param spriteEnemigo enemigo que efectua colision
+     * @return true si la colision fue efectuada
      */
     public boolean colisionSekai(SpriteEnemigo spriteEnemigo) {
             return this.sekai.collidesWith(spriteEnemigo, true);
     }
 
     /**
-     *
-     * @param spriteEnemigo
-     * @return
+     * Indca si hubo colision entre la espada y un enemigo
+     * @param spriteEnemigo enemigo que efectua colision
+     * @return true sii la colision fue efectuada
      */
     public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
             return this.efectosEspada.collidesWith(spriteEnemigo, true);
     }
 
     /**
-     *
-     * @return
+     * regresa la altura de sekai
+     * @return la altura de sekai
      */
     public int getHeight() {
         return this.sekai.getHeight();

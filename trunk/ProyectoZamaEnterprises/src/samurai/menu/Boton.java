@@ -35,7 +35,6 @@ public class Boton {
             g.drawImage(this.image, this.posicion.getX(), this.posicion.getY(), Graphics.LEFT|Graphics.TOP);
       }
 
-      //SETTERS
       /**
        * cambia el paramentro x de la posicion
        * @param x nueva x
@@ -52,7 +51,6 @@ public class Boton {
           this.posicion.setY(y);
       }
 
-      //GETTERS
       /**
        * regresa el parametro x de la posicion
        * @return regresa el parametro x de la posicion

@@ -39,7 +39,6 @@ public class Menu {
      * @param totalButtons indica el numero total de botones que tendra el manu
      * @param archivoTitulo direccion de la imagen a usar como titulo
      * @param archivoIndicador direccion de la imagen a usar como indicador
-     * @param gmCanvas
      * @param nombreMenu indica que menu es
      * @throws IOException cuando la direccion de alguna imagen es incorrecta o inexistente
      */

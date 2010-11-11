@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package samurai.multimedia;
 
 import java.io.IOException;
@@ -11,28 +6,35 @@ import javax.microedition.media.Manager;
 import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
 import javax.microedition.media.PlayerListener;
-import javax.microedition.midlet.MIDlet;
-import samurai.juego.Juego;
 
 /**
- *
- * @author zama
+ * Clase encargada de la musica del juego
+ * @author Erik, pablo, Daniel
+ * @version 1.0 Noviembre 2010
  */
 public class Musica implements PlayerListener{
     private Player p;
 
+    /**
+     * carga el archivo de musica y lo prepara para ser escuchado
+     * @param archivo direccion del archivo
+     * @param canvas canvas al cual va a ser colocado
+     */
     public Musica(String archivo,GameCanvas canvas){
         try {
             p = Manager.createPlayer(getClass().getResourceAsStream(archivo), "audio/midi");
             p.realize();
             p.prefetch();
-           // p.addPlayerListener(this);
+            p.addPlayerListener(this);
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (MediaException ex) {
             ex.printStackTrace();
         }
     }
+    /**
+     * Reproduce la musica
+     */
     public void reproducir(){
         try {
             p.start();
@@ -40,6 +42,9 @@ public class Musica implements PlayerListener{
             ex.printStackTrace();
         }
     }
+    /**
+     * Para la musica
+     */
     public void parar(){
         try {
             p.stop();
@@ -48,6 +53,12 @@ public class Musica implements PlayerListener{
         }
     }
 
+    /**
+     * Si el player termina vuelve a empezar la musica
+     * @param player player a checar estado
+     * @param string estado a comparar
+     * @param o
+     */
     public void playerUpdate(Player player, String string, Object o) {
        if(string.equals(PlayerListener.END_OF_MEDIA)){
             try {
@@ -57,6 +68,10 @@ public class Musica implements PlayerListener{
             }
        }
     }
+    /**
+     * regresa el player
+     * @return player
+     */
     public Player getPlayer(){
         return this.p;
     }

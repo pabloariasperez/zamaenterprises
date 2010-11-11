@@ -8,7 +8,7 @@ import javax.microedition.lcdui.game.GameCanvas;
 import samurai.presentacion.Diapositiva;
 
 /**
- * 
+ * Maneja las diapositivas
  * @author Pablo, Erik, Daniel
  * @version 1.1
  */
@@ -29,9 +29,9 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private boolean mostrandome;
 
     /**
-     *
-     * @param samuraiMidlet
-     * @param tipo
+     * Constructor inicializa variables
+     * @param samuraiMidlet midlet que usa
+     * @param tipo tipo de presentacion que es
      */
     public PresentacionCanvas(SamuraiEnterprises samuraiMidlet, int tipo) {
 
@@ -134,8 +134,8 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
-     * @return
+     * regresa si se esta mostrando
+     * @return mostrandome
      */
     public boolean estoyMostrandome() {
         return this.mostrandome;

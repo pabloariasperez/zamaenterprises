@@ -83,14 +83,14 @@ public class Animador implements Runnable {
     }
 
     /**
-     *
+     * Metodo con el que se quita la pausa
      */
     public void continuar() {
         this.pausado = false;
     }
 
     /**
-     *
+     * Metodo con el cual se pausa el animador
      */
     public void pausar() {
         this.pausado = false;

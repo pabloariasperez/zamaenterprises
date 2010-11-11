@@ -21,8 +21,6 @@ public class FondoMenu extends Sprite
     /**
      * Recibe como parametro el nombre de la imagen a utilizar como fondo a la vez que su posición.
      * @param archivoFondo direccion de la imagen del fondo
-     * @param anchoPantalla ancho de la pantalla
-     * @param altoPantalla alto de la pantalla
      * @throws IOException no se encontro el archivo del fondo
      */
     public FondoMenu(String archivoFondo) throws IOException{
