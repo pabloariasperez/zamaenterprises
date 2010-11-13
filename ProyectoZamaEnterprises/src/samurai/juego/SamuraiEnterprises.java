@@ -41,10 +41,21 @@ public class SamuraiEnterprises extends MIDlet {
     public SamuraiEnterprises() {
         Global.setFPS(60);
         t = new TextBox("Prueba Manejador de datos", null, 256, TextField.ANY);
-        d = new AdministradorData("prueba");
+        d = new AdministradorData("prueba1");
         d.agregarRegistro("prosopopeya");
         d.agregarRegistro("wola");
-        t.setString(d.regresarRegistro());
+        String completo = d.regresarRegistroCompleto();
+        String dato4 = d.regresarDato(2);
+
+        d.borrarTodo();
+
+        d.agregarRegistro("lafrance");
+        d.agregarRegistro("borrego");
+        String completo2 = d.regresarRegistroCompleto();
+        String dato2 = d.regresarDato(2);
+        d.cambiarRegistro("bifurcacion", 2);
+
+        t.setString(completo + "\n"+ dato4 + "\n" +  completo2 + "\n" + dato2 + d.regresarDato(2));
        // splashCanvas=new SplashCanvas(this);
     }
 

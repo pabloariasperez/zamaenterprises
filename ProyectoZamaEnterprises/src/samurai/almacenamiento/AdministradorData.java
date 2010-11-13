@@ -48,6 +48,25 @@ public class AdministradorData {
             }
       }
     }
+      public void cambiarRegistro(String registro, int index){
+        try{
+        rs = RecordStore.openRecordStore(this.nombreData, false);
+         byte data[] = this.convertirAByte(registro);
+         rs.addRecord(data, 0, data.length);
+         rs.setRecord(index, data, 0, data.length);
+
+
+      } catch (Exception e) {
+      } finally {
+            try {
+                rs.closeRecordStore();
+            } catch (RecordStoreNotOpenException ex) {
+                ex.printStackTrace();
+            } catch (RecordStoreException ex) {
+                ex.printStackTrace();
+            }
+      }
+    }
 
     private byte[] convertirAByte(String string){
         byte data[]= new byte[string.length()];
@@ -58,7 +77,7 @@ public class AdministradorData {
 
     }
 
-    public String regresarRegistro(){
+    public String regresarRegistroCompleto(){
         String registro = "";
         try {
 
@@ -82,5 +101,39 @@ public class AdministradorData {
         }
         return registro;
     }
+    public String regresarDato(int index){
+        String dato = "";
+        try {
+            rs = RecordStore.openRecordStore(this.nombreData, false);
+            if(index>0 && index<=rs.getNumRecords()){
+            dato = new String(rs.getRecord(index));
+            }
+             else{
+             dato = "vacio";
+             }
+        } catch (RecordStoreException ex) {
+            ex.printStackTrace();
+        }finally{
+            try {
+                rs.closeRecordStore();
+            } catch (RecordStoreNotOpenException ex) {
+                ex.printStackTrace();
+            } catch (RecordStoreException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return dato;
+    }
 
+    public void borrarTodo(){
+        try {
+           RecordStore.deleteRecordStore(nombreData);
+           rs = RecordStore.openRecordStore(nombreData, true);
+           rs.closeRecordStore();
+        } catch (RecordStoreException ex) {
+            ex.printStackTrace();
+        }
+
+    }
 }
+
