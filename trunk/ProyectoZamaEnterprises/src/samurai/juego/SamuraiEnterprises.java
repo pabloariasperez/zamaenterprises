@@ -3,7 +3,10 @@ package samurai.juego;
 
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
+import javax.microedition.lcdui.TextBox;
+import javax.microedition.lcdui.TextField;
 import javax.microedition.midlet.*;
+import samurai.almacenamiento.AdministradorData;
 import samurai.presentacion.Diapositiva;
 
 /**
@@ -21,6 +24,8 @@ public class SamuraiEnterprises extends MIDlet {
     private Actualizable pantallaActual;
     private PresentacionCanvas presentacionCanvas;
     private Juego juego;
+    TextBox t;
+    AdministradorData d;
 
 
     //Variable que guarda el estatus actual de la aplicación
@@ -35,14 +40,20 @@ public class SamuraiEnterprises extends MIDlet {
      */
     public SamuraiEnterprises() {
         Global.setFPS(60);
-        splashCanvas=new SplashCanvas(this);
+        t = new TextBox("Prueba Manejador de datos", null, 256, TextField.ANY);
+        d = new AdministradorData("prueba");
+        d.agregarRegistro("prosopopeya");
+        d.agregarRegistro("wola");
+        t.setString(d.regresarRegistro());
+       // splashCanvas=new SplashCanvas(this);
     }
 
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este que entre estado activo.
      */
     public void startApp() {
-        Display.getDisplay(this).setCurrent(splashCanvas);
+       // Display.getDisplay(this).setCurrent(splashCanvas);
+        Display.getDisplay(this).setCurrent(t);
     }
 
     /**
