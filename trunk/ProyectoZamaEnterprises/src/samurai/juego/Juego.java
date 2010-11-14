@@ -195,11 +195,11 @@ public class Juego extends GameCanvas implements Actualizable {
         }
 
         if (!this.pausado) {
-            if (!this.reproduciendo) {
+            if (!this.reproduciendo && Global.SONIDO_ACTIVADO) {
                 musica.reproducir();
                 this.reproduciendo = true;
             }
-            musica.playerUpdate(musica.getPlayer(), musica.END_OF_MEDIA, g);
+            musica.playerUpdate(musica.getPlayer(), Musica.END_OF_MEDIA, null);
 
             int rnd = random.nextInt(Global.FPS/2);
             if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10) {
@@ -222,7 +222,9 @@ public class Juego extends GameCanvas implements Actualizable {
                     manejadorEnemigos.desaparecer(this.enemigo);
                 }
             }
-
+            if(manejadorSekai.muerteSekai()){
+                this.samuraiMidlet.mostrarGameOver();
+            }
             if (posicionador.hayNuevoEje()) {
                 parametro += 1;
                 posicionador.generarNuevoEje(parametro);

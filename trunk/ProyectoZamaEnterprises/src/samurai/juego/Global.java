@@ -24,6 +24,8 @@ public class Global {
      */
     public static int FPS;
 
+    public static boolean SONIDO_ACTIVADO=true;
+
     /**
      * modifica ANCHO_PANTALLA solo una vez
      * @param nuevoAnchoPantalla nuevo valor
@@ -48,5 +50,11 @@ public class Global {
      */
     public static void setFPS( int nuevoFPS ){
         FPS = nuevoFPS;
+    }
+    public static void sonidoOn(){
+        SONIDO_ACTIVADO=true;
+    }
+    public static void sonidoOff(){
+        SONIDO_ACTIVADO=false;
     }
 }
