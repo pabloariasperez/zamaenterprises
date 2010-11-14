@@ -74,12 +74,15 @@ public class Juego extends GameCanvas implements Actualizable {
 
         parametro = -120;
         posicionador.generarNuevoEje(parametro);
-        while (!posicionador.hayNuevoEje());
+        while (!posicionador.hayNuevoEje()){
+            posicionador.sleep(100);
+        }
+        escenario.setRazonCambioPiedra(posicionador.posiciones.length);
+
 
         try {
             //Relacionado con Nivel
             escenarioActual = Nivel.NIVEL_1;
-            escenario = new Escenario();
             Nivel.inicializar(escenarioActual, escenario);
 
             //Creamos los manejadores
@@ -300,7 +303,29 @@ public class Juego extends GameCanvas implements Actualizable {
         this.pausado = false;
     }
 
-    public String tipo() {
+    public String tipoCanvas() {
         return Actualizable.JUEGO;
+    }
+
+    public void destruir() {
+        musica.parar();
+        animador.terminar();
+        animador = null;
+
+        samuraiMidlet = null;
+        g = null;
+        manejadorSekai = null;
+        manejadorEnemigos = null;
+        manejadorTec = null;
+        musica = null;
+        sfx = null;
+        imagenPausa = null;
+        tiempo = null;
+        enemigo = null;
+        random = null;
+        escenario = null;
+        menuPausa = null;
+        botonSalir = null;
+        botonContinuar = null;
     }
 }

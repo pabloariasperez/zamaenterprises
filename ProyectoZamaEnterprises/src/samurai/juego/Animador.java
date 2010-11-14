@@ -52,26 +52,31 @@ public class Animador implements Runnable {
         corriendo = true;       //Establecemos que el Animador estará corriendo.
         //Mientras corriendo sea TRUE estarán ejecutándose las tareas dentro del bloque.
         while (corriendo) {
-                //Obtenemos un tiempo actual en milisegundos que después habremos de restar al final.
-                tiempoInicial = System.currentTimeMillis();
-                //Actualizamos y dibujamos el GameCanvas, de aquí la importancia que implementen Actualizable.
-                this.gmCanvas.actualizar();
-                this.gmCanvas.dibujar();
-                //Obtenemos el tiempo final, para comparar.
-                tiempoFinal = System.currentTimeMillis();
+            //Obtenemos un tiempo actual en milisegundos que después habremos de restar al final.
+            tiempoInicial = System.currentTimeMillis();
 
-                //Intentamos dormir el Thread si así es necesario.
-                try {
-                    //Preguntamos si el DURACION_FRAME - TIEMPO EN QUE SE ACTUALIZÓ Y DIBUJÓ  es mayor o igual a cero; para dormir el THREAD.
-                    //Es decir, el tiempo que nos sobre nos permanecemos quietos. En caso de que estas acciones tomen más tiempo
-                    //se debe seguir de inmediato con la ejecución.
-                    if (DURACION_FRAME - (tiempoFinal - tiempoInicial) >= 0) {
-                        Thread.sleep(DURACION_FRAME - (tiempoFinal - tiempoInicial));
-                    }
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
+            //Actualizamos y dibujamos el GameCanvas, de aquí la importancia que implementen Actualizable.
+            this.gmCanvas.actualizar();
+            if (!corriendo) {
+                //Nos salimos =D!!
+                return;
+            }
+            this.gmCanvas.dibujar();
+
+            //Obtenemos el tiempo final, para comparar.
+            tiempoFinal = System.currentTimeMillis();
+
+            //Intentamos dormir el Thread si así es necesario.
+            try {
+                //Preguntamos si el DURACION_FRAME - TIEMPO EN QUE SE ACTUALIZÓ Y DIBUJÓ  es mayor o igual a cero; para dormir el THREAD.
+                //Es decir, el tiempo que nos sobre nos permanecemos quietos. En caso de que estas acciones tomen más tiempo
+                //se debe seguir de inmediato con la ejecución.
+                if (DURACION_FRAME - (tiempoFinal - tiempoInicial) >= 0) {
+                    Thread.sleep(DURACION_FRAME - (tiempoFinal - tiempoInicial));
                 }
-            
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

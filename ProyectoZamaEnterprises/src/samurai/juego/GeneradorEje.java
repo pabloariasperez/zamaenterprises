@@ -155,4 +155,12 @@ public class GeneradorEje implements Runnable {
         hiloSegundoPlano.interrupt();
         estado = GeneradorEje.PARADO;
     }
+
+    public void sleep(int tiempoADormir) {
+        try {
+            hiloSegundoPlano.sleep((long) tiempoADormir);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
