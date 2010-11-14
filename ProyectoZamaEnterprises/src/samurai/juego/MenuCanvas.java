@@ -283,4 +283,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         }
         System.gc();
     }
+
+    public String tipo() {
+        return Actualizable.MENU;
+    }
 }

@@ -1,6 +1,7 @@
 package samurai.juego;
 
 import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.*;
 
 /**
@@ -12,34 +13,29 @@ public class SamuraiEnterprises extends MIDlet {
 
     //Atributos de nuestro midlet 
     //Crea un SplashCanvas que muestra el logo del Tec asi como el logo del equipo.
-    private MenuCanvas menuCanvas;
-    private SplashCanvas splashCanvas;
-    private PresentacionCanvas creditos;
     private Actualizable pantallaActual;
-    private PresentacionCanvas presentacionCanvas;
-    private Juego juego;
 
     /**
      * Constructor del MIDlet que inicializa el SplashCanvas. =D
      */
     public SamuraiEnterprises() {
         Global.setFPS(60);
-        splashCanvas=new SplashCanvas(this);
+        pantallaActual=new SplashCanvas(this);
     }
 
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este que entre estado activo.
      */
     public void startApp() {
-        Display.getDisplay(this).setCurrent(splashCanvas);
+        Display.getDisplay(this).setCurrent((Displayable)pantallaActual);
     }
 
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este entre al estado  de pausa.
      */
     public void pauseApp() {
-        if(this.pantallaActual==this.juego){
-            this.juego.pausarJuego();
+        if(this.pantallaActual.tipo().equals(Actualizable.JUEGO)){
+            ((Juego) pantallaActual).pausarJuego();
         }
     }
 
@@ -60,9 +56,10 @@ public class SamuraiEnterprises extends MIDlet {
      *
      */
     public void mostrarCreditos() {
-        this.presentacionCanvas = new PresentacionCanvas(this,PresentacionCanvas.CREDITO);
+        pantallaActual=null;
+        pantallaActual= new PresentacionCanvas(this,PresentacionCanvas.CREDITO);
         Global.setFPS(50);
-        Display.getDisplay(this).setCurrent(this.presentacionCanvas);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
@@ -75,30 +72,25 @@ public class SamuraiEnterprises extends MIDlet {
      *
      */
     public void mostrarMenu(){
-        presentacionCanvas = null;
-        splashCanvas = null;
-        if(menuCanvas==null){
-            menuCanvas = new MenuCanvas(this);
-        }
+        pantallaActual=null;
+        pantallaActual = new MenuCanvas(this);
         Global.setFPS(30);
-        Display.getDisplay(this).setCurrent(menuCanvas);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
      *
      */
     public void correrJuego() {
-        menuCanvas = null;
-        if(juego==null){
-            juego = new Juego(this);
-        }
+        pantallaActual=null;
+        pantallaActual = new Juego(this);
         Global.setFPS(60);
-        Display.getDisplay(this).setCurrent(juego);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
     public void mostrarGameOver(){
-        juego=null;
-        this.presentacionCanvas = new PresentacionCanvas(this,PresentacionCanvas.GAMEOVER);
+        pantallaActual=null;
+        pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.GAMEOVER);
         Global.setFPS(50);
-        Display.getDisplay(this).setCurrent(this.presentacionCanvas);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 }
