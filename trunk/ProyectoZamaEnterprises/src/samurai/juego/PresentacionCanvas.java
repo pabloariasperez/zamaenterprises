@@ -29,6 +29,23 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private boolean mostrandome;
 
     /**
+     * Enum de credito
+     */
+    public static final int CREDITO = 0;
+    /**
+     * Enum de tutorial
+     */
+    public static final int TUTORIAL = 1;
+    /**
+     * Enum de prologo
+     */
+    public static final int PROLOGO = 2;
+    /**
+     * Enum de epilogo
+     */
+    public static final int EPILOGO = 3;
+
+    /**
      * Constructor inicializa variables
      * @param samuraiMidlet midlet que usa
      * @param tipo tipo de presentacion que es
@@ -56,7 +73,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
 
     private void agregarDiapositivas() {
         switch (this.tipo) {
-            case Diapositiva.CREDITO:
+            case PresentacionCanvas.CREDITO:
                 Diapositiva creditoDaniel = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(C_DANIEL));
                 Diapositiva creditoErik = new Diapositiva("/samurai/imagenes/creditos/Erik.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(C_ERIK));
                 Diapositiva creditoPablo = new Diapositiva("/samurai/imagenes/creditos/Pablo.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(C_PABLO));
@@ -64,11 +81,11 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.diapositivas.push(creditoErik);
                 this.diapositivas.push(creditoPablo);
                 break;
-            case Diapositiva.TUTORIAL:
+            case PresentacionCanvas.TUTORIAL:
                 break;
-            case Diapositiva.PROLOGO:
+            case PresentacionCanvas.PROLOGO:
                 break;
-            case Diapositiva.EPILOGO:
+            case PresentacionCanvas.EPILOGO:
                 break;
             default:
                 break;

@@ -7,8 +7,6 @@ package samurai.almacenamiento;
 
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
-import javax.microedition.rms.RecordStoreFullException;
-import javax.microedition.rms.RecordStoreNotFoundException;
 import javax.microedition.rms.RecordStoreNotOpenException;
 
 /**
@@ -57,6 +55,7 @@ public class AdministradorData {
 
 
       } catch (Exception e) {
+          e.printStackTrace();
       } finally {
             try {
                 rs.closeRecordStore();
@@ -133,7 +132,5 @@ public class AdministradorData {
         } catch (RecordStoreException ex) {
             ex.printStackTrace();
         }
-
     }
 }
-
