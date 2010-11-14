@@ -131,7 +131,19 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         animador.iniciar();
     }
 
-    public String tipo() {
+    public String tipoCanvas() {
         return Actualizable.SPLASH;
+    }
+
+    public void destruir() {
+        animador.terminar();
+        animador = null;
+
+        samuraiMidlet = null;
+        g = null;
+        teclado = null;
+        tiempo = null;
+        splashes = null;
+        colores = null;
     }
 }

@@ -51,7 +51,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     /**
      * Constructor inicializa variables
      * @param samuraiMidlet midlet que usa
-     * @param tipo tipo de presentacion que es
+     * @param tipoCanvas tipoCanvas de presentacion que es
      */
     public PresentacionCanvas(SamuraiEnterprises samuraiMidlet, int tipo) {
 
@@ -177,7 +177,18 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
 
     }
 
-    public String tipo() {
+    public String tipoCanvas() {
         return Actualizable.PRESENTACION;
+    }
+
+    public void destruir() {
+        animador.terminar();
+        animador = null;
+
+        samuraiMidlet = null;
+        diapositivas = null;
+        g = null;
+        timer = null;
+        diapositivaActual = null;
     }
 }

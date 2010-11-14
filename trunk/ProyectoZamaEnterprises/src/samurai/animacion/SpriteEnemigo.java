@@ -100,8 +100,8 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     }
 
     /**
-     * regresa el tipo de enemigo
-     * @return tipo del enemigo
+     * regresa el tipoCanvas de enemigo
+     * @return tipoCanvas del enemigo
      */
     public int getTipoEnemigo() {
         return tipoEnemigo;

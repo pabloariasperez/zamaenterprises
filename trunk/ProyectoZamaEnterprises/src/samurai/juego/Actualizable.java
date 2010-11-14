@@ -16,6 +16,7 @@ package samurai.juego;
     public static final String MENU="MENU";
     public static final String PRESENTACION="PRESENTACION";
     public static final String SPLASH="SPLASH";
+
     /**
      * Actualiza
      */
@@ -25,5 +26,7 @@ package samurai.juego;
      */
     public abstract void dibujar();
 
-    public abstract String tipo();
+    public abstract String tipoCanvas();
+
+    public abstract void destruir();
 }

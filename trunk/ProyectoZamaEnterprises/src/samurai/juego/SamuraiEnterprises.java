@@ -34,7 +34,7 @@ public class SamuraiEnterprises extends MIDlet {
      * Metodo que manda una señal al MIDlet para avisarle a este entre al estado  de pausa.
      */
     public void pauseApp() {
-        if(this.pantallaActual.tipo().equals(Actualizable.JUEGO)){
+        if(this.pantallaActual.tipoCanvas().equals(Actualizable.JUEGO)){
             ((Juego) pantallaActual).pausarJuego();
         }
     }
@@ -56,6 +56,7 @@ public class SamuraiEnterprises extends MIDlet {
      *
      */
     public void mostrarCreditos() {
+        pantallaActual.destruir();
         pantallaActual=null;
         pantallaActual= new PresentacionCanvas(this,PresentacionCanvas.CREDITO);
         Global.setFPS(50);
@@ -72,6 +73,7 @@ public class SamuraiEnterprises extends MIDlet {
      *
      */
     public void mostrarMenu(){
+        pantallaActual.destruir();
         pantallaActual=null;
         pantallaActual = new MenuCanvas(this);
         Global.setFPS(30);
@@ -82,12 +84,14 @@ public class SamuraiEnterprises extends MIDlet {
      *
      */
     public void correrJuego() {
+        pantallaActual.destruir();
         pantallaActual=null;
         pantallaActual = new Juego(this);
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
     public void mostrarGameOver(){
+        pantallaActual.destruir();
         pantallaActual=null;
         pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.GAMEOVER);
         Global.setFPS(50);

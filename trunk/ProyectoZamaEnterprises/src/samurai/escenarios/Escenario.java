@@ -23,6 +23,7 @@ public class Escenario {
 
     private int alturaFondo;
     private Sprite piedra;
+    private Image fondoCamino;
     private int incremento;
     private int velocidad;
     private int estadoYActual;
@@ -30,22 +31,33 @@ public class Escenario {
     /**
      * la distancia que hay entre cada piedra
      */
-    public int DISTANCIADOR_PIEDRAS = 5;
+    public int DISTANCIADOR_PIEDRAS = 4;
+    private int correccionDesfaseXPiedra;
+    private int correccionDesfaseYPiedra;
+    private final int numeroFramesPiedra;
+    private int razonCambioPiedra;
 
     /**
      * Constructor: no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
      */
     public Escenario(){
+        
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
         velocidad = 3;
         estadoYActual = 0;
         incremento = 0;
         try {
-            piedra = new Sprite(Image.createImage("/samurai/imagenes/piedra.png"), 20, 18);
+            fondoCamino = Image.createImage("/samurai/imagenes/fondoCamino.png");
+            piedra = new Sprite(Image.createImage("/samurai/imagenes/spritePiedra.png"), 20, 20);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
+        //Cositas de las piedras
+        correccionDesfaseXPiedra = piedra.getWidth()/2;
+        correccionDesfaseYPiedra = piedra.getWidth()/2;
+        numeroFramesPiedra = piedra.getFrameSequenceLength();
     }
     /**
      * Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
@@ -71,32 +83,37 @@ public class Escenario {
     public int getAltoFondos() {
         return manejadorFondos.getAlto();
     }
+    
     /**
      * Se dibuja el escenario.
      * Se dibuja el camino
      * @param g Graficos
      */
     public void dibujar(Graphics g){
-        this.dibujarBackground(g);
+        this.dibujarFondoCamino(g);
         Juego.getPosicionador().dibujarCamino(g);
         this.dibujarFondos(g);
         this.dibujarPiedras(g);
     }
 
     private void dibujarPiedras(Graphics g){
-        int correccionDesfaseX = piedra.getWidth()/3;
-        int correccionDesfaseY = piedra.getWidth()/2;
         int posiciones[][] = Juego.getPosicionador().posiciones;
         int x1;
-        for(int lineaActual = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+= DISTANCIADOR_PIEDRAS){
-            x1 =posiciones[lineaActual + incremento ][0] - correccionDesfaseX*2;
+        piedra.setFrame(0);
+        for(int lineaActual = 0, razonCambio = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+= DISTANCIADOR_PIEDRAS, razonCambio++){
+            x1 =posiciones[lineaActual + incremento ][0] - correccionDesfaseXPiedra;
             piedra.setPosition(     x1,
-                                    lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseY);
+                                    lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseYPiedra);
             piedra.paint(g);
             
             piedra.setPosition(     x1 + posiciones[lineaActual + incremento ][1],
-                                    lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseY);
+                                    lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseYPiedra);
             piedra.paint(g);
+
+            if( razonCambio == razonCambioPiedra - 1 ){
+                piedra.nextFrame();
+                razonCambio = 0;
+            }
         }
     }
     
@@ -117,16 +134,18 @@ public class Escenario {
         }
     }
 
-    private void dibujarBackground(Graphics g) {
-        g.setColor(0x00002200);
-        g.fillRect(0, Juego.altoFondo, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*1/10);
-        g.setColor(0x00003300);
-        g.fillRect(0, Juego.altoFondo + Global.ALTO_PANTALLA*1/10, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*1/10);
-        g.setColor(0x00004400);
-        g.fillRect(0, Juego.altoFondo + Global.ALTO_PANTALLA*2/10, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*2/10);
-        g.setColor(0x00006600);
-        g.fillRect(0, Juego.altoFondo + Global.ALTO_PANTALLA*4/10, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*2/10);
-        g.setColor(0x00008800);
-        g.fillRect(0, Juego.altoFondo + Global.ALTO_PANTALLA*6/10, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA*4/10);
+    /**
+     * Dibuja el fondo del camino
+     * @param g Graficos
+     */
+    private void dibujarFondoCamino(Graphics g) {
+        g.setColor(0x0000AA00);
+        g.fillRect(0, Juego.altoFondo, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA - Juego.altoFondo);
+        g.drawImage(fondoCamino, 0, Juego.altoFondo, Graphics.LEFT|Graphics.TOP);
+    }
+
+    public void setRazonCambioPiedra(int longitudPosiciones){
+        razonCambioPiedra = ( longitudPosiciones/DISTANCIADOR_PIEDRAS)/numeroFramesPiedra/(velocidad-1);
+        System.out.println(razonCambioPiedra);
     }
 }

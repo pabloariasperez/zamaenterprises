@@ -110,4 +110,8 @@ public class Posicionador {
             posicion.setX(posicion.getX() + posiciones[posicion.getY()][region]);
         }
     }
+
+    public void sleep(int tiempoADormir) {
+         generadorEje.sleep(tiempoADormir);
+    }
 }
