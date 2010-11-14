@@ -23,23 +23,6 @@ public class Diapositiva implements Animable{
     private final int SALTO=18;
     private int Ystring, Xstring, Xcuadro;
     private Image imagenCuadro;
-    /**
-     * Enum de credito
-     */
-    public static final int CREDITO = 0;
-    /**
-     * Enum de tutorial
-     */
-    public static final int TUTORIAL = 1;
-    /**
-     * Enum de prologo
-     */
-    public static final int PROLOGO = 2;
-    /**
-     * Enum de epilogo
-     */
-    public static final int EPILOGO = 3;
-    
 
 
     /**

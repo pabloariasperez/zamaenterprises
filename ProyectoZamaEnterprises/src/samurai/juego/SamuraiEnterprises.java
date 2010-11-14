@@ -1,13 +1,7 @@
 package samurai.juego;
 
-
 import javax.microedition.lcdui.Display;
-import javax.microedition.lcdui.Displayable;
-import javax.microedition.lcdui.TextBox;
-import javax.microedition.lcdui.TextField;
 import javax.microedition.midlet.*;
-import samurai.almacenamiento.AdministradorData;
-import samurai.presentacion.Diapositiva;
 
 /**
  * Clase MIDlet que controla los elementos que se muestran en el Display.
@@ -24,47 +18,20 @@ public class SamuraiEnterprises extends MIDlet {
     private Actualizable pantallaActual;
     private PresentacionCanvas presentacionCanvas;
     private Juego juego;
-    TextBox t;
-    AdministradorData d;
 
-
-    //Variable que guarda el estatus actual de la aplicación
-    //private int estadoJuego;
-    //Valores de los estatus que se pueden tener a lo largo de la aplicación
-    //private final int INICIANDO_JUEGO = 0;
-
-
-    //
     /**
      * Constructor del MIDlet que inicializa el SplashCanvas. =D
      */
     public SamuraiEnterprises() {
         Global.setFPS(60);
-        t = new TextBox("Prueba Manejador de datos", null, 256, TextField.ANY);
-        d = new AdministradorData("prueba1");
-        d.agregarRegistro("prosopopeya");
-        d.agregarRegistro("wola");
-        String completo = d.regresarRegistroCompleto();
-        String dato4 = d.regresarDato(2);
-
-        d.borrarTodo();
-
-        d.agregarRegistro("lafrance");
-        d.agregarRegistro("borrego");
-        String completo2 = d.regresarRegistroCompleto();
-        String dato2 = d.regresarDato(2);
-        d.cambiarRegistro("bifurcacion", 2);
-
-        t.setString(completo + "\n"+ dato4 + "\n" +  completo2 + "\n" + dato2 + d.regresarDato(2));
-       // splashCanvas=new SplashCanvas(this);
+        splashCanvas=new SplashCanvas(this);
     }
 
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este que entre estado activo.
      */
     public void startApp() {
-       // Display.getDisplay(this).setCurrent(splashCanvas);
-        Display.getDisplay(this).setCurrent(t);
+        Display.getDisplay(this).setCurrent(splashCanvas);
     }
 
     /**
@@ -93,7 +60,7 @@ public class SamuraiEnterprises extends MIDlet {
      *
      */
     public void mostrarCreditos() {
-        this.presentacionCanvas = new PresentacionCanvas(this,Diapositiva.CREDITO);
+        this.presentacionCanvas = new PresentacionCanvas(this,PresentacionCanvas.CREDITO);
         Global.setFPS(50);
         Display.getDisplay(this).setCurrent(this.presentacionCanvas);
     }
@@ -128,6 +95,4 @@ public class SamuraiEnterprises extends MIDlet {
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent(juego);
     }
-
-  
 }
