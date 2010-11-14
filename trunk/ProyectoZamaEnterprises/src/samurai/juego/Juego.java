@@ -199,7 +199,9 @@ public class Juego extends GameCanvas implements Actualizable {
                 musica.reproducir();
                 this.reproduciendo = true;
             }
-            musica.playerUpdate(musica.getPlayer(), Musica.END_OF_MEDIA, null);
+            if(Global.SONIDO_ACTIVADO){
+                musica.repetirMusica();
+            }
 
             int rnd = random.nextInt(Global.FPS/2);
             if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10) {
@@ -296,5 +298,9 @@ public class Juego extends GameCanvas implements Actualizable {
      */
     public void continuarJuego() {
         this.pausado = false;
+    }
+
+    public String tipo() {
+        return Actualizable.JUEGO;
     }
 }

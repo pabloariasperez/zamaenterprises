@@ -130,4 +130,8 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     public void iniciar(){
         animador.iniciar();
     }
+
+    public String tipo() {
+        return Actualizable.SPLASH;
+    }
 }

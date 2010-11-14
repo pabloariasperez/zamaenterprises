@@ -138,15 +138,12 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
             }
         }
         if (!this.diapositivaActual.estoyMostrandome()) {
-            System.out.println("entrando a la condicion");
             if (!this.diapositivas.isEmpty()) {
                 this.diapositivaActual = (Diapositiva) this.diapositivas.pop();
                 this.pare = false;
                 this.camine = true;
             } else {
                 this.animador.terminar();
-                System.out.println("entrando al switch");
-                animador.terminar();
                 samuraiMidlet.mostrarMenu();
             }
         }
@@ -178,5 +175,9 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
             return false;
         }
 
+    }
+
+    public String tipo() {
+        return Actualizable.PRESENTACION;
     }
 }

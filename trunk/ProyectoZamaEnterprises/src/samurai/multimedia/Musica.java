@@ -68,11 +68,7 @@ public class Musica implements PlayerListener{
             }
        }
     }
-    /**
-     * regresa el player
-     * @return player
-     */
-    public Player getPlayer(){
-        return this.p;
+    public void repetirMusica(){
+        this.playerUpdate(this.p, PlayerListener.END_OF_MEDIA, null);
     }
 }

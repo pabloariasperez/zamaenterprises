@@ -10,7 +10,12 @@ package samurai.juego;
  * @author Pablo, Erik, Daniel
  * @version 1.0 Octubre 2010
  */
-public interface Actualizable {
+    public interface Actualizable {
+
+    public static final String JUEGO="JUEGO";
+    public static final String MENU="MENU";
+    public static final String PRESENTACION="PRESENTACION";
+    public static final String SPLASH="SPLASH";
     /**
      * Actualiza
      */
@@ -19,4 +24,6 @@ public interface Actualizable {
      * Dibuja
      */
     public abstract void dibujar();
+
+    public abstract String tipo();
 }
