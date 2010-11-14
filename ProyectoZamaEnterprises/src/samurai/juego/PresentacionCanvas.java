@@ -26,6 +26,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private final int C_PABLO = 0;
     private final int C_ERIK = 1;
     private final int C_DANIEL = 2;
+    private final int S_GAMEOVER = 3;
     private boolean mostrandome;
 
     /**
@@ -44,6 +45,8 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
      * Enum de epilogo
      */
     public static final int EPILOGO = 3;
+
+    public static final int GAMEOVER = 4;
 
     /**
      * Constructor inicializa variables
@@ -87,6 +90,10 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 break;
             case PresentacionCanvas.EPILOGO:
                 break;
+            case PresentacionCanvas.GAMEOVER:
+                Diapositiva gameOver = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_GAMEOVER));
+                this.diapositivas.push(gameOver);
+                break;
             default:
                 break;
         }
@@ -111,6 +118,9 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 texto.addElement("             )   .   (");
                 texto.addElement("            (    W    )");
                 return texto;
+            case S_GAMEOVER:
+                texto.addElement("Moriste");
+                texto.addElement("  ...  ");
             default:
                 return texto;
         }

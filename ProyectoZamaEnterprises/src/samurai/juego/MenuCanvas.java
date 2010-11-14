@@ -193,7 +193,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     cambiarMenu(menuSonido);
                     break;
                 case MenuCanvas.SONIDO:
-                    //PENDIENTE se activa si debe sonar o no.
+                    Global.sonidoOn();
                     crearMenu(MenuCanvas.OPCIONES);
                     cambiarMenu(menuOpciones);
                     break;
@@ -212,7 +212,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     samuraiMidlet.mostrarCreditos();
                     break;
                 case MenuCanvas.SONIDO:
-                    //PENDIENTE se activa si debe sonar o no.
+                    Global.sonidoOff();
                     crearMenu(MenuCanvas.OPCIONES);
                     cambiarMenu(menuOpciones);
                     break;

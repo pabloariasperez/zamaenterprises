@@ -188,4 +188,7 @@ public class ManejadorSekai implements Animable{
     public int getHeight() {
         return this.sekai.getHeight();
     }
+    public boolean muerteSekai(){
+        return this.puntosVidaActual<=0;
+    }
 }

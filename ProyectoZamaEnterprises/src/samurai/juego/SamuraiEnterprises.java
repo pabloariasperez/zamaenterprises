@@ -95,4 +95,10 @@ public class SamuraiEnterprises extends MIDlet {
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent(juego);
     }
+    public void mostrarGameOver(){
+        juego=null;
+        this.presentacionCanvas = new PresentacionCanvas(this,PresentacionCanvas.GAMEOVER);
+        Global.setFPS(50);
+        Display.getDisplay(this).setCurrent(this.presentacionCanvas);
+    }
 }
