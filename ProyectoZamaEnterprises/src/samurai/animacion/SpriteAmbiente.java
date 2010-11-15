@@ -31,8 +31,8 @@ public class SpriteAmbiente extends Sprite{
      * @param tipoEnemigo
      * @throws IOException Si no se encuentra el archivo
      */
-    public SpriteAmbiente(String archivoAmbiente, int centesimo) throws IOException{
-        super(Image.createImage(archivoAmbiente),25,40);
+    public SpriteAmbiente(Image imagenAmbiente, int centesimo) throws IOException{
+        super(imagenAmbiente,25,40);
 
         this.secuenciaFondo=new int[]{0};
         this.secuenciaMedia=new int[]{0};
@@ -77,6 +77,6 @@ public class SpriteAmbiente extends Sprite{
         }else if(this.getY()<160){
             this.setFrameSequence(secuenciaMediaFrente);
         }
-        alturaActual+=3;
+        alturaActual+=1;
     }
 }

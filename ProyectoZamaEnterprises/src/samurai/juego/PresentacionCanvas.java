@@ -191,4 +191,18 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
         timer = null;
         diapositivaActual = null;
     }
+
+    public Animador getAnimador() {
+        return animador;
+    }
+
+    public void pausar() {
+        animador.terminar();
+    }
+
+    public void correr() {
+        if( !animador.estaCorriendo() ){
+            animador.iniciar();
+        }
+    }
 }

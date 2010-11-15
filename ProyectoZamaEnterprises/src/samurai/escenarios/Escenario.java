@@ -13,7 +13,6 @@ import javax.microedition.lcdui.game.Sprite;
 import samurai.juego.Global;
 import samurai.juego.Juego;
 import samurai.juego.TiempoEscenario;
-import samurai.juego.ManejadorAmbiente;
 
 /**
   Se encarga de colocar la ambientación y de dibujar el camino
