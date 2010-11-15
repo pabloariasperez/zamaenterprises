@@ -7,8 +7,6 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.animacion.SpriteEnemigo;
-import samurai.animacion.SpriteEspada;
-import samurai.animacion.SpriteSekai;
 import samurai.escenarios.*;
 import samurai.menu.Boton;
 import samurai.menu.Menu;
@@ -353,5 +351,15 @@ public class Juego extends GameCanvas implements Actualizable {
 
     public int getEscenarioActual(){
         return escenarioActual;
+    }
+
+    public void pausar() {
+        animador.terminar();
+    }
+
+    public void correr() {
+        if( !animador.estaCorriendo() ){
+            animador.iniciar();
+        }
     }
 }

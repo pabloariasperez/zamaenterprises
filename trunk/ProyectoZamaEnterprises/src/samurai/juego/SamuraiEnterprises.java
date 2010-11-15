@@ -29,6 +29,7 @@ public class SamuraiEnterprises extends MIDlet {
      */
     public void startApp() {
         Display.getDisplay(this).setCurrent((Displayable)pantallaActual);
+        pantallaActual.correr();
     }
 
     /**
@@ -38,6 +39,8 @@ public class SamuraiEnterprises extends MIDlet {
         if(this.pantallaActual.tipoCanvas().equals(Actualizable.JUEGO)){
             ((Juego) pantallaActual).pausarJuego();
         }
+
+        pantallaActual.pausar();
     }
 
     /**

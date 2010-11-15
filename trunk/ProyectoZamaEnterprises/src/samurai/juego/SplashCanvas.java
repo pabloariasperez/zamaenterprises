@@ -146,4 +146,18 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         splashes = null;
         colores = null;
     }
+
+    public Animador getAnimador() {
+        return animador;
+    }
+
+    public void pausar() {
+        animador.terminar();
+    }
+
+    public void correr() {
+        if( !animador.estaCorriendo() ){
+            animador.iniciar();
+        }
+    }
 }

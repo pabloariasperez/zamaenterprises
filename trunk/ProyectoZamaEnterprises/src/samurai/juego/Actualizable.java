@@ -29,4 +29,8 @@ package samurai.juego;
     public abstract String tipoCanvas();
 
     public abstract void destruir();
+
+    public void pausar();
+
+    public void correr();
 }

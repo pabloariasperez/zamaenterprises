@@ -16,7 +16,6 @@ public class Animador implements Runnable {
     //Atributos relacionados con el tiempo haciendo uso de FRAMES.
     private long tiempoInicial, tiempoFinal;
     private final int DURACION_FRAME;
-    private boolean pausado;
 
     /**
      * Constructor que inicializa las variables
@@ -24,7 +23,6 @@ public class Animador implements Runnable {
      */
     public Animador(GameCanvas gmCanvas) {
         DURACION_FRAME = 1000 / Global.FPS;
-        pausado = false;
         //Preguntamos si el GameCanvas recibido está implementando la interface ACtualizable, que lo obliga a actualizar() y dibujar()
         if (gmCanvas instanceof Actualizable) {
             //Guardamos el GameCanvas del parámetro recibido casteado en el atributo local.
@@ -87,17 +85,7 @@ public class Animador implements Runnable {
         corriendo = false;
     }
 
-    /**
-     * Metodo con el que se quita la pausa
-     */
-    public void continuar() {
-        this.pausado = false;
-    }
-
-    /**
-     * Metodo con el cual se pausa el animador
-     */
-    public void pausar() {
-        this.pausado = false;
+    public boolean estaCorriendo(){
+        return thread.isAlive();
     }
 }

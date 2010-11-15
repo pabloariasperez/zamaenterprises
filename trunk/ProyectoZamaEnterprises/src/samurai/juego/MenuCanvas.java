@@ -303,4 +303,18 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         opcionSi=null; opcionNo=null;
         menuSonido=null; menuSalir=null;
     }
+
+    public Animador getAnimador() {
+        return animador;
+    }
+
+    public void pausar() {
+        animador.terminar();
+    }
+
+    public void correr() {
+        if( !animador.estaCorriendo() ){
+            animador.iniciar();
+        }
+    }
 }
