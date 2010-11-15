@@ -38,14 +38,13 @@ public class Juego extends GameCanvas implements Actualizable {
     int escenarioActual;
     private Random random;
     Escenario escenario;
-    private boolean imagenDibujada;
     private static Posicionador posicionador;
     private final int ANCHO_INICIAL = 170;
     private final int PORCENTAJE_ANCHO_FINAL = 20;
     /**
      * tamaño de la linea
      */
-    public static final int ALTO_LINEA = 5;
+    public static final int ALTO_LINEA = 4;
     /**
      * tamaño del fondo
      */
@@ -54,7 +53,6 @@ public class Juego extends GameCanvas implements Actualizable {
     private Menu menuPausa;
     private Boton botonSalir;
     private Boton botonContinuar;
-
     private int score;
 
     /**
@@ -67,7 +65,6 @@ public class Juego extends GameCanvas implements Actualizable {
         this.setFullScreenMode(true);
         g = this.getGraphics();
         this.pausado = false;
-        this.imagenDibujada = false;
         escenario = new Escenario();
         escenario.agregarFondo(new FondoCapa("/samurai/imagenes/fondoLuna.png", 5, 0));
         altoFondo = escenario.getAltoFondos();
@@ -76,7 +73,7 @@ public class Juego extends GameCanvas implements Actualizable {
 
         parametro = -120;
         posicionador.generarNuevoEje(parametro);
-        while (!posicionador.hayNuevoEje()){
+        while (!posicionador.hayNuevoEje()) {
             posicionador.sleep(100);
         }
         escenario.setRazonCambioPiedra(posicionador.posiciones.length);
@@ -108,7 +105,7 @@ public class Juego extends GameCanvas implements Actualizable {
             this.sfx = new SFX(this);
             Nivel.cargarSFX(escenarioActual, sfx);
 
-            this.score=0;
+            this.score = 0;
 
             tiempo = new TiempoEscenario();
             animador = new Animador(this);
@@ -122,30 +119,18 @@ public class Juego extends GameCanvas implements Actualizable {
         random = new Random();
     }
 
-    /**
-     * regresa el animador
-     * @return animador
-     */
-    public Animador getAnimador() {
-        return this.animador;
-    }
-
-    public void creaBotones(){
-      
+    public void creaBotones() {
         try {
-              if(this.menuPausa==null){
-                  this.menuPausa = new Menu(2,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png", 1);
-                  this.botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
-                  this.botonSalir = new Boton("/samurai/imagenes/botonSalir.png");
-                  this.menuPausa.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
-                  this.menuPausa.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
-
+            if (this.menuPausa == null) {
+                this.menuPausa = new Menu(2, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", 1);
+                this.botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
+                this.botonSalir = new Boton("/samurai/imagenes/botonSalir.png");
+                this.menuPausa.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+                this.menuPausa.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-        
     }
 
     /**
@@ -157,10 +142,9 @@ public class Juego extends GameCanvas implements Actualizable {
         escenario.dibujar(g);
         manejadorEnemigos.dibujar(g);
         manejadorSekai.dibujar(g);
-        if (this.pausado) {
+        if (this.pausado && menuPausa != null) {
             g.drawImage(imagenPausa, 0, 0, Graphics.LEFT | Graphics.TOP);
             this.menuPausa.dibujar(g);
-            this.imagenDibujada = true;
         }
         flushGraphics();
     }
@@ -169,23 +153,21 @@ public class Juego extends GameCanvas implements Actualizable {
      * actualiza todos los coponentes de juego
      */
     public void actualizar() {
-
-        if (this.manejadorTec.downPresionado()) {
-            if (this.pausado) {
-                this.menuPausa.moverOpcion(1);
-            } else {
+        if (!this.pausado) {
+            if (this.manejadorTec.downPresionado()) {
                 this.pausarJuego();
-
             }
-        }
-         if (this.manejadorTec.upPresionado()) {
-            if (this.pausado) {
+
+        } else {
+            if (this.manejadorTec.downPresionado()) {
+                this.menuPausa.moverOpcion(1);
+            }
+            if (this.manejadorTec.upPresionado()) {
                 this.menuPausa.moverOpcion(-1);
             }
-        }
-          if (this.manejadorTec.firePresionado()) {
-            if (this.pausado) {
-                switch(this.menuPausa.getPosition()){
+
+            if (this.manejadorTec.firePresionado()) {
+                switch (this.menuPausa.getPosition()) {
                     case 0:
                         this.continuarJuego();
                         break;
@@ -193,20 +175,22 @@ public class Juego extends GameCanvas implements Actualizable {
                         this.samuraiMidlet.mostrarMenu();
                         break;
                 }
-                
             }
         }
+
+
+
 
         if (!this.pausado) {
             if (!this.reproduciendo && Global.SONIDO_ACTIVADO) {
                 musica.reproducir();
                 this.reproduciendo = true;
             }
-            if(Global.SONIDO_ACTIVADO){
+            if (Global.SONIDO_ACTIVADO) {
                 musica.repetirMusica();
             }
 
-            int rnd = random.nextInt(Global.FPS/2);
+            int rnd = random.nextInt(Global.FPS / 2);
             if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10) {
                 agregarEnemigo(Nivel.generarEnemigo(escenarioActual, random));
             }
@@ -214,7 +198,7 @@ public class Juego extends GameCanvas implements Actualizable {
                 this.enemigo = (SpriteEnemigo) (manejadorEnemigos.getVectorEnemigo().elementAt(i));
 
                 if (manejadorSekai.colisionEspada(this.enemigo)) {
-                    if(Global.SONIDO_ACTIVADO){
+                    if (Global.SONIDO_ACTIVADO) {
                         sfx.reproducir(SFX.ESPADA);
                         this.reproducir(this.enemigo.getTipoEnemigo());
                     }
@@ -222,10 +206,9 @@ public class Juego extends GameCanvas implements Actualizable {
                     System.out.println(this.score);
                     manejadorEnemigos.kill(this.enemigo);
                 }
-                if (    manejadorSekai.colisionSekai(this.enemigo)  ||
-                        this.enemigo.getY() >= Global.ALTO_PANTALLA - this.enemigo.getHeight() / 2
-                ) {
-                    if (Global.SONIDO_ACTIVADO){
+                if (manejadorSekai.colisionSekai(this.enemigo)
+                        || this.enemigo.getY() >= Global.ALTO_PANTALLA - this.enemigo.getHeight() / 2) {
+                    if (Global.SONIDO_ACTIVADO) {
                         sfx.reproducir(SFX.GOLPE_SEKAI);
                     }
                     manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
@@ -233,7 +216,7 @@ public class Juego extends GameCanvas implements Actualizable {
                     manejadorEnemigos.desaparecer(this.enemigo);
                 }
             }
-            if(manejadorSekai.muerteSekai()){
+            if (manejadorSekai.muerteSekai()) {
                 this.samuraiMidlet.mostrarGameOver();
             }
             if (posicionador.hayNuevoEje()) {
@@ -274,24 +257,25 @@ public class Juego extends GameCanvas implements Actualizable {
                 break;
         }
     }
-    private void aumentarScore(int tipoEnemigo){
+
+    private void aumentarScore(int tipoEnemigo) {
         switch (tipoEnemigo) {
-                case SpriteEnemigo.MURCIELAGO:
-                    this.score+=10;
-                    break;
-                case SpriteEnemigo.RATA:
-                    this.score+=5;
-                    break;
-                case SpriteEnemigo.FANTASMA:
-                    this.score+=15;
-                    break;
-                case SpriteEnemigo.TOPO:
-                    this.score+=20;
-                    break;
-                case SpriteEnemigo.CESAR:
-                    this.score+=100;
-                    break;
-            }
+            case SpriteEnemigo.MURCIELAGO:
+                this.score += 10;
+                break;
+            case SpriteEnemigo.RATA:
+                this.score += 5;
+                break;
+            case SpriteEnemigo.FANTASMA:
+                this.score += 15;
+                break;
+            case SpriteEnemigo.TOPO:
+                this.score += 20;
+                break;
+            case SpriteEnemigo.CESAR:
+                this.score += 100;
+                break;
+        }
     }
 
     /**

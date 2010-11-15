@@ -34,7 +34,6 @@ public class Escenario {
     public int DISTANCIADOR_PIEDRAS = 4;
     private int correccionDesfaseXPiedra;
     private int correccionDesfaseYPiedra;
-    private final int numeroFramesPiedra;
     private int razonCambioPiedra;
 
     /**
@@ -50,6 +49,7 @@ public class Escenario {
         try {
             fondoCamino = Image.createImage("/samurai/imagenes/fondoCamino.png");
             piedra = new Sprite(Image.createImage("/samurai/imagenes/spritePiedra.png"), 20, 20);
+            piedra.setFrameSequence(new int[]{0,1,2,3});
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -57,7 +57,6 @@ public class Escenario {
         //Cositas de las piedras
         correccionDesfaseXPiedra = piedra.getWidth()/2;
         correccionDesfaseYPiedra = piedra.getWidth()/2;
-        numeroFramesPiedra = piedra.getFrameSequenceLength();
     }
     /**
      * Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
@@ -100,7 +99,7 @@ public class Escenario {
         int posiciones[][] = Juego.getPosicionador().posiciones;
         int x1;
         piedra.setFrame(0);
-        for(int lineaActual = 0, razonCambio = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+= DISTANCIADOR_PIEDRAS, razonCambio++){
+        for(int lineaActual = 0, razonCambio = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+= DISTANCIADOR_PIEDRAS){
             x1 =posiciones[lineaActual + incremento ][0] - correccionDesfaseXPiedra;
             piedra.setPosition(     x1,
                                     lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseYPiedra);
@@ -110,9 +109,11 @@ public class Escenario {
                                     lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseYPiedra);
             piedra.paint(g);
 
-            if( razonCambio == razonCambioPiedra - 1 ){
+            if( lineaActual >= razonCambioPiedra*(razonCambio+1) ){
+                System.out.println(lineaActual);
+                System.out.println(razonCambio);
                 piedra.nextFrame();
-                razonCambio = 0;
+                razonCambio++;
             }
         }
     }
@@ -145,7 +146,8 @@ public class Escenario {
     }
 
     public void setRazonCambioPiedra(int longitudPosiciones){
-        razonCambioPiedra = ( longitudPosiciones/DISTANCIADOR_PIEDRAS)/numeroFramesPiedra/(velocidad-1);
-        System.out.println(razonCambioPiedra);
+        //Este número representa el número de puntos que deberán ser representados por CADA frame de la piedra.
+        // Al total de mis posiciones lo divido entre la distancia que deben guardar entre ellos, y luego entre el número de frames en piedra.
+        razonCambioPiedra = longitudPosiciones/piedra.getFrameSequenceLength();
     }
 }
