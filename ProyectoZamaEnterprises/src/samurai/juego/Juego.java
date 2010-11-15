@@ -7,6 +7,8 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.animacion.SpriteEnemigo;
+import samurai.animacion.SpriteEspada;
+import samurai.animacion.SpriteSekai;
 import samurai.escenarios.*;
 import samurai.menu.Boton;
 import samurai.menu.Menu;
@@ -31,14 +33,13 @@ public class Juego extends GameCanvas implements Actualizable {
     private Image imagenPausa;
     private boolean pausado;
     private boolean reproduciendo;
-    private TiempoEscenario tiempo;
     private SpriteEnemigo enemigo;
     int escenarioActual;
     private Random random;
     Escenario escenario;
     private static Posicionador posicionador;
     private final int ANCHO_INICIAL = 170;
-    private final int PORCENTAJE_ANCHO_FINAL = 10;
+    private final int PORCENTAJE_ANCHO_FINAL = 20;
     /**
      * tamaño de la linea
      */
@@ -64,14 +65,14 @@ public class Juego extends GameCanvas implements Actualizable {
         this.setFullScreenMode(true);
         g = this.getGraphics();
         this.pausado = false;
-        escenario = new Escenario();
+        escenario = new Escenario(escenarioActual);
 
         this.agregarFondos(escenarioActual);
         altoFondo = escenario.getAltoFondos();
 
         posicionador = new Posicionador(ANCHO_INICIAL, PORCENTAJE_ANCHO_FINAL, ALTO_LINEA, altoFondo);
 
-        parametro = -120;
+        parametro = 0;
         posicionador.generarNuevoEje(parametro);
         while (!posicionador.hayNuevoEje()) {
             posicionador.sleep(100);
@@ -90,7 +91,7 @@ public class Juego extends GameCanvas implements Actualizable {
             this.imagenPausa = Image.createImage("/samurai/imagenes/pausa.png");
 
             //Manejador Sekai
-            this.manejadorSekai = new ManejadorSekai(manejadorTec);
+            this.manejadorSekai = new ManejadorSekai(manejadorTec );
 
 
             //Manejador Enemigos
@@ -104,15 +105,10 @@ public class Juego extends GameCanvas implements Actualizable {
             Nivel.cargarSFX(escenarioActual, sfx);
 
             this.score = 0;
-
-            tiempo = new TiempoEscenario();
-            
-
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        posicionador.generarNuevoEje(parametro);
+        
         random = new Random();
 
         animador = new Animador(this);
@@ -179,8 +175,6 @@ public class Juego extends GameCanvas implements Actualizable {
         }
 
 
-
-
         if (!this.pausado) {
             if (!this.reproduciendo && Global.SONIDO_ACTIVADO) {
                 musica.reproducir();
@@ -218,15 +212,11 @@ public class Juego extends GameCanvas implements Actualizable {
             if (manejadorSekai.muerteSekai()) {
                 this.samuraiMidlet.mostrarGameOver();
             }
-            if (posicionador.hayNuevoEje()) {
-                parametro += 1;
-                posicionador.generarNuevoEje(parametro);
-            }
+
             escenario.actualizar();
             manejadorEnemigos.actualizar();
             try {
                 manejadorSekai.actualizar();
-                tiempo.incrementar();
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -325,7 +315,6 @@ public class Juego extends GameCanvas implements Actualizable {
         musica = null;
         sfx = null;
         imagenPausa = null;
-        tiempo = null;
         enemigo = null;
         random = null;
         escenario = null;
@@ -360,5 +349,9 @@ public class Juego extends GameCanvas implements Actualizable {
             default:
                 break;
         }
+    }
+
+    public int getEscenarioActual(){
+        return escenarioActual;
     }
 }

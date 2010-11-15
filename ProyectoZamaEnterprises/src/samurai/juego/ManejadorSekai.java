@@ -36,14 +36,13 @@ public class ManejadorSekai implements Animable{
      * @param manejadorTec Recibe un ManejadorTeclado para detectar las teclas presionadas.
      */
     public ManejadorSekai( ManejadorTeclado manejadorTec){
-        SpriteSekai sekai;
         try {
             this.sekai = new SpriteSekai("/samurai/imagenes/sekai.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA);
-            this.efectosEspada = new SpriteEspada("/samurai/imagenes/SpritesEfectos.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA - this.sekai.getHeight());
+            this.efectosEspada = new SpriteEspada("/samurai/imagenes/SpritesEfectos.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA - getHeight());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
+ 
         this.manejadorTec=manejadorTec;
         this.estoyAnimandome=false;
         this.frameActual = 0;

@@ -6,11 +6,13 @@
 package samurai.escenarios;
 
 import java.io.IOException;
+import java.util.Stack;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.juego.Global;
 import samurai.juego.Juego;
+import samurai.juego.TiempoEscenario;
 import samurai.juego.ManejadorAmbiente;
 
 /**
@@ -22,12 +24,14 @@ public class Escenario {
  
     private ManejadorFondos manejadorFondos;
 
-    private int alturaFondo;
     private Sprite piedra;
     private Image fondoCamino;
     private int incremento;
     private int velocidad;
     private int estadoYActual;
+    private TiempoEscenario tiempo;
+    private Stack parametrosCamino;
+    private int tiempoProxEvento;
     private ManejadorAmbiente Ambiente;
     /**
      * la distancia que hay entre cada piedra
@@ -40,7 +44,7 @@ public class Escenario {
     /**
      * Constructor: no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
      */
-    public Escenario(){
+    public Escenario(int escenarioActual){
         
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
@@ -59,6 +63,11 @@ public class Escenario {
         //Cositas de las piedras
         correccionDesfaseXPiedra = piedra.getWidth()/2;
         correccionDesfaseYPiedra = piedra.getWidth()/2;
+
+        tiempoProxEvento = 0;
+        tiempo = new TiempoEscenario();
+        parametrosCamino = Nivel.llenarStackParametro(escenarioActual);
+        tiempoProxEvento = ((int[])parametrosCamino.peek())[0];
     }
     /**
      * Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
@@ -134,6 +143,15 @@ public class Escenario {
         if(!manejadorFondos.isEmpty()){
             manejadorFondos.actualizar();
         }
+
+        if( tiempo.actual() == tiempoProxEvento && !parametrosCamino.isEmpty() ){
+            Juego.getPosicionador().generarNuevoEje(((int[])parametrosCamino.pop())[1] );
+            if(!parametrosCamino.isEmpty()){
+                tiempoProxEvento = ((int[])parametrosCamino.peek())[0];
+            }
+        }
+        Juego.getPosicionador().hayNuevoEje();
+        tiempo.incrementar();
         this.Ambiente.actualizar();
     }
 
