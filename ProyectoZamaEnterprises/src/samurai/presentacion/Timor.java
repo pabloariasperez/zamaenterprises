@@ -35,14 +35,11 @@ public class Timor {
      * @return true si se cumple el tiempo de intevalo
      */
     public boolean activarIteracion(){
-
         if(this.reloj.actual() == this.intervalo){
            this.reloj.reiniciar();
-           //this.iteracionesActuales++;
            return true;
         }
         return false;
-
     }
    
     /**

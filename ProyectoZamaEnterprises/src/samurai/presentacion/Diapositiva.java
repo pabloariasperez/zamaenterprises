@@ -43,7 +43,7 @@ public class Diapositiva implements Animable{
         this.tituloY = (titulo.getHeight()*2)/3;
         this.imagenX = -(imagenRelativa.getWidth());
         this.imagenY = Global.ALTO_PANTALLA/2;
-        this.textos=textos;
+        this.textos = textos;
         this.Ystring=this.imagenY+this.imagenRelativa.getHeight()-20;
         this.Xstring = Global.ANCHO_PANTALLA;
         this.Xcuadro = -(this.imagenCuadro.getWidth());

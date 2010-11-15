@@ -57,14 +57,14 @@ public class Juego extends GameCanvas implements Actualizable {
      * Contructor de juego; inicicaliza todo lo necesario
      * @param midlet midlet que maneja a juego
      */
-    public Juego(SamuraiEnterprises midlet, int nivel, int score, int vida) {
+    public Juego(SamuraiEnterprises midlet, int nivel, int score, int vida, int tiempo) {
         super(true);
         escenarioActual = nivel;
         this.samuraiMidlet = midlet;
         this.setFullScreenMode(true);
         g = this.getGraphics();
         this.pausado = false;
-        escenario = new Escenario(escenarioActual);
+        escenario = new Escenario(escenarioActual, tiempo);
 
         this.agregarFondos(escenarioActual);
         altoFondo = escenario.getAltoFondos();
@@ -95,7 +95,7 @@ public class Juego extends GameCanvas implements Actualizable {
             //Manejador Enemigos
             manejadorEnemigos = new ManejadorEnemigos();
             enemigo = null;       //Para no crear mil "BICHOS" enemigo
-            
+                        
             this.cargarMusica(escenarioActual);
             this.reproduciendo = false;
 
@@ -185,9 +185,16 @@ public class Juego extends GameCanvas implements Actualizable {
             }
 
             int rnd = random.nextInt(Global.FPS / 2);
-            if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10) {
+            if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10 && !escenario.esFinEscenario()) {
                 agregarEnemigo(Nivel.generarEnemigo(escenarioActual, random));
             }
+
+            if( escenario.esFinEscenario() ){
+                if( manejadorEnemigos.getVectorEnemigo().isEmpty() ){
+                    samuraiMidlet.mostrarMenu();
+                }
+            }
+            
             for (int i = 0; i < manejadorEnemigos.getVectorEnemigo().size(); i++) {
                 this.enemigo = (SpriteEnemigo) (manejadorEnemigos.getVectorEnemigo().elementAt(i));
 
@@ -277,8 +284,6 @@ public class Juego extends GameCanvas implements Actualizable {
             return Juego.posicionador;
         } else {
             return null;
-
-
         }
     }
 
@@ -371,5 +376,6 @@ public class Juego extends GameCanvas implements Actualizable {
         data.agregarRegistro(""+score);
         data.agregarRegistro("" + manejadorSekai.getVida());
         data.agregarRegistro(""+escenarioActual);
+        data.agregarRegistro(""+escenario.tiempoActual());
     }
 }

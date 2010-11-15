@@ -47,4 +47,8 @@ public class TiempoEscenario {
     public void reiniciar(){
         tiempo = 0;
     }
+
+    public void setTiempo(int tiempoNuevo) {
+        tiempo = tiempoNuevo;
+    }
 }

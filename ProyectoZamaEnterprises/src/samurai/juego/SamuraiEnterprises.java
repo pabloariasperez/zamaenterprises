@@ -62,8 +62,8 @@ public class SamuraiEnterprises extends MIDlet {
     public void mostrarCreditos() {
         pantallaActual.destruir();
         pantallaActual=null;
-        pantallaActual= new PresentacionCanvas(this,PresentacionCanvas.CREDITO);
         Global.setFPS(50);
+        pantallaActual= new PresentacionCanvas(this,PresentacionCanvas.CREDITO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
@@ -77,7 +77,8 @@ public class SamuraiEnterprises extends MIDlet {
         int score = Integer.valueOf(data.regresarDato(AdministradorData.REGISTRO_SCORE)).intValue();
         int vida = Integer.valueOf(data.regresarDato(AdministradorData.REGISTRO_VIDA)).intValue();
         int nivel = Integer.valueOf(data.regresarDato(AdministradorData.REGISTRO_NIVEL)).intValue();
-        pantallaActual = new Juego(this, nivel,score, vida);
+        int tiempo = Integer.valueOf(data.regresarDato(AdministradorData.REGISTRO_TIEMPO)).intValue();
+        pantallaActual = new Juego(this, nivel,score, vida, tiempo);
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
@@ -88,8 +89,8 @@ public class SamuraiEnterprises extends MIDlet {
     public void mostrarMenu(){
         pantallaActual.destruir();
         pantallaActual=null;
+        Global.setFPS(10);
         pantallaActual = new MenuCanvas(this);
-        Global.setFPS(30);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
@@ -99,23 +100,23 @@ public class SamuraiEnterprises extends MIDlet {
     public void correrNivelUno() {
         pantallaActual.destruir();
         pantallaActual=null;
-        pantallaActual = new Juego(this, Nivel.NIVEL_1,0,50);
+        pantallaActual = new Juego(this, Nivel.NIVEL_1,0,50, 0);
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
     public void mostrarGameOver(){
         pantallaActual.destruir();
         pantallaActual=null;
-        pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.GAMEOVER);
         Global.setFPS(50);
+        pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.GAMEOVER);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     void mostrarPrologo() {
         pantallaActual.destruir();
         pantallaActual=null;
-        pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.PROLOGO);
         Global.setFPS(50);
+        pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.PROLOGO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
     private void cargarDatos() {

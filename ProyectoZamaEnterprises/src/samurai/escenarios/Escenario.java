@@ -39,11 +39,13 @@ public class Escenario {
     private int correccionDesfaseXPiedra;
     private int correccionDesfaseYPiedra;
     private int razonCambioPiedra;
+    private boolean esFinEscenario;
+    private Mapa mapaAvance;
 
     /**
      * Constructor: no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
      */
-    public Escenario(int escenarioActual){
+    public Escenario(int escenarioActual, int tiempoInicio ){
         
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
@@ -65,8 +67,12 @@ public class Escenario {
 
         tiempoProxEvento = 0;
         tiempo = new TiempoEscenario();
+        tiempo.setTiempo(tiempoInicio);
         parametrosCamino = Nivel.llenarStackParametro(escenarioActual);
-        tiempoProxEvento = ((int[])parametrosCamino.peek())[0];
+        obtenerPrimerEvento();
+
+        esFinEscenario = false;
+        mapaAvance = new Mapa(320, tiempo);
     }
     /**
      * Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
@@ -104,6 +110,7 @@ public class Escenario {
         this.dibujarFondos(g);
         this.dibujarPiedras(g);
         this.Ambiente.dibujar(g);
+        this.mapaAvance.dibujar(g);
     }
 
     private void dibujarPiedras(Graphics g){
@@ -145,10 +152,13 @@ public class Escenario {
 
         if( tiempo.actual() == tiempoProxEvento && !parametrosCamino.isEmpty() ){
             Juego.getPosicionador().generarNuevoEje(((int[])parametrosCamino.pop())[1] );
-            if(!parametrosCamino.isEmpty()){
-                tiempoProxEvento = ((int[])parametrosCamino.peek())[0];
-            }
         }
+        if(!parametrosCamino.isEmpty() && !esFinEscenario ){
+            tiempoProxEvento = ((int[])parametrosCamino.peek())[0];
+        }else{
+            esFinEscenario = true;
+        }
+
         Juego.getPosicionador().hayNuevoEje();
         tiempo.incrementar();
         this.Ambiente.actualizar();
@@ -168,5 +178,19 @@ public class Escenario {
         //Este número representa el número de puntos que deberán ser representados por CADA frame de la piedra.
         // Al total de mis posiciones lo divido entre la distancia que deben guardar entre ellos, y luego entre el número de frames en piedra.
         razonCambioPiedra = longitudPosiciones/piedra.getFrameSequenceLength()/(DISTANCIADOR_PIEDRAS-1);
+    }
+
+    public boolean esFinEscenario(){
+        return esFinEscenario;
+    }
+
+    public int tiempoActual(){
+        return tiempo.actual();
+    }
+
+    private void obtenerPrimerEvento() {
+        while( ((int[])parametrosCamino.peek())[0] < tiempo.actual() ){
+            parametrosCamino.pop();
+        }
     }
 }
