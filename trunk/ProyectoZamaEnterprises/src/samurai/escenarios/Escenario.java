@@ -11,6 +11,7 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.juego.Global;
 import samurai.juego.Juego;
+import samurai.juego.ManejadorAmbiente;
 
 /**
   Se encarga de colocar la ambientación y de dibujar el camino
@@ -27,7 +28,7 @@ public class Escenario {
     private int incremento;
     private int velocidad;
     private int estadoYActual;
-
+    private ManejadorAmbiente Ambiente;
     /**
      * la distancia que hay entre cada piedra
      */
@@ -43,6 +44,7 @@ public class Escenario {
         
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
+        this.Ambiente= new ManejadorAmbiente();
         velocidad = 3;
         estadoYActual = 0;
         incremento = 0;
@@ -93,6 +95,7 @@ public class Escenario {
         Juego.getPosicionador().dibujarCamino(g);
         this.dibujarFondos(g);
         this.dibujarPiedras(g);
+        this.Ambiente.dibujar(g);
     }
 
     private void dibujarPiedras(Graphics g){
@@ -131,6 +134,7 @@ public class Escenario {
         if(!manejadorFondos.isEmpty()){
             manejadorFondos.actualizar();
         }
+        this.Ambiente.actualizar();
     }
 
     /**
