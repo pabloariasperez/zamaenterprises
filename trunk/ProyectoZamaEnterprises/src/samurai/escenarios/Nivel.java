@@ -6,6 +6,7 @@
 package samurai.escenarios;
 
 import java.util.Random;
+import java.util.Stack;
 import samurai.multimedia.SFX;
 
 /**
@@ -83,4 +84,34 @@ public class Nivel{
                 return random.nextInt(2);
         }
     }
+
+    public static Stack llenarStackParametro(int escenario){
+        switch(escenario){
+            case NIVEL_1:
+                Stack aparicionEnemigos = new Stack();  //En qué momento y qué enemigo.
+                aparicionEnemigos.push( new int[]{ 900, 1} );
+                aparicionEnemigos.push( new int[]{ 800, 2} );
+                aparicionEnemigos.push( new int[]{ 700, 3} );
+                aparicionEnemigos.push( new int[]{ 530, 4} );
+                aparicionEnemigos.push( new int[]{ 470, 5} );
+                aparicionEnemigos.push( new int[]{ 450, 6} );
+                aparicionEnemigos.push( new int[]{ 400, 7} );
+                aparicionEnemigos.push( new int[]{ 360, 8} );
+                aparicionEnemigos.push( new int[]{ 320, 9} );
+                aparicionEnemigos.push( new int[]{ 300, 10} );
+                aparicionEnemigos.push( new int[]{ 250, 20} );
+                aparicionEnemigos.push( new int[]{ 200, 30} );
+                aparicionEnemigos.push( new int[]{ 180, 40} );
+                aparicionEnemigos.push( new int[]{ 150, 50} );
+                aparicionEnemigos.push( new int[]{ 0, 80} );
+                return aparicionEnemigos;
+            case NIVEL_2:
+                return null;
+            case NIVEL_3:
+                return null;
+            default:
+                return null;
+        }
+    }
+
 }
