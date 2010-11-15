@@ -72,7 +72,7 @@ public class SpriteEspada extends Sprite implements Animable {
      */
     public void setAtaqueIzq(){
         this.setFrameSequence(secuenciaIzq);
-        this.setPosition(poscionX-getWidth()*4/5, poscionY-20);
+        this.setPosition(poscionX-getWidth()*5/4, poscionY - getHeight()*1/5);
         this.secuenciaSeleccionada=1;
     }
    /**
@@ -80,7 +80,7 @@ public class SpriteEspada extends Sprite implements Animable {
     */
    public void setAtaqueDer(){
         this.setFrameSequence(secuenciaDer);
-        this.setPosition(poscionX+getWidth()*2/5, poscionY-20);
+        this.setPosition(poscionX+getWidth()/5, poscionY - getHeight()*1/5);
         this.secuenciaSeleccionada=2;
     }
 
@@ -89,7 +89,7 @@ public class SpriteEspada extends Sprite implements Animable {
      */
     public void setAtaqueFrontal(){
         this.setFrameSequence(secuenciaFrente);
-        this.setPosition(poscionX-10, poscionY-40);
+        this.setPosition(poscionX-getWidth()/2, poscionY-getHeight()*2/5);
         this.secuenciaSeleccionada=3;
     }
     /**
