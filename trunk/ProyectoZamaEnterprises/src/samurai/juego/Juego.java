@@ -6,6 +6,7 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
+import samurai.almacenamiento.AdministradorData;
 import samurai.animacion.SpriteEnemigo;
 import samurai.escenarios.*;
 import samurai.menu.Boton;
@@ -56,7 +57,7 @@ public class Juego extends GameCanvas implements Actualizable {
      * Contructor de juego; inicicaliza todo lo necesario
      * @param midlet midlet que maneja a juego
      */
-    public Juego(SamuraiEnterprises midlet, int nivel) {
+    public Juego(SamuraiEnterprises midlet, int nivel, int score, int vida) {
         super(true);
         escenarioActual = nivel;
         this.samuraiMidlet = midlet;
@@ -89,8 +90,7 @@ public class Juego extends GameCanvas implements Actualizable {
             this.imagenPausa = Image.createImage("/samurai/imagenes/pausa.png");
 
             //Manejador Sekai
-            this.manejadorSekai = new ManejadorSekai(manejadorTec );
-
+            this.manejadorSekai = new ManejadorSekai(manejadorTec, vida );
 
             //Manejador Enemigos
             manejadorEnemigos = new ManejadorEnemigos();
@@ -102,7 +102,7 @@ public class Juego extends GameCanvas implements Actualizable {
             this.sfx = new SFX(this);
             Nivel.cargarSFX(escenarioActual, sfx);
 
-            this.score = 0;
+            this.score = score;
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -136,6 +136,7 @@ public class Juego extends GameCanvas implements Actualizable {
         escenario.dibujar(g);
         manejadorEnemigos.dibujar(g);
         manejadorSekai.dibujar(g);
+        g.drawString(""+score, 10, 10, Graphics.LEFT|Graphics.TOP);
         if (this.pausado && menuPausa != null) {
             g.drawImage(imagenPausa, 0, 0, Graphics.LEFT | Graphics.TOP);
             this.menuPausa.dibujar(g);
@@ -166,6 +167,7 @@ public class Juego extends GameCanvas implements Actualizable {
                         this.continuarJuego();
                         break;
                     case 1:
+                        this.guardarDatos();
                         this.samuraiMidlet.mostrarMenu();
                         break;
                 }
@@ -195,6 +197,7 @@ public class Juego extends GameCanvas implements Actualizable {
                         this.reproducir(this.enemigo.getTipoEnemigo());
                     }
                     this.aumentarScore(this.enemigo.getTipoEnemigo());
+                    System.out.println("score: "+this.score);
                     manejadorEnemigos.kill(this.enemigo);
                 }
                 if (manejadorSekai.colisionSekai(this.enemigo)
@@ -361,5 +364,11 @@ public class Juego extends GameCanvas implements Actualizable {
         if( !animador.estaCorriendo() ){
             animador.iniciar();
         }
+    }
+
+    private void guardarDatos() {
+        AdministradorData data=new AdministradorData("continuar");
+        data.agregarRegistro(""+score);
+        data.agregarRegistro("" + manejadorSekai.getVida());
     }
 }

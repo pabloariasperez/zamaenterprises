@@ -3,6 +3,7 @@ package samurai.juego;
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
+import samurai.almacenamiento.AdministradorData;
 import samurai.menu.*;
 
 /**
@@ -206,7 +207,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         }else if(this.menuActual.getPosition() == 1 && teclado.firePresionado()){
             switch(menuActual.nombreMenu){
                 case MenuCanvas.PRINCIPAL:
-                    samuraiMidlet.continuarJuego();
+                    this.cargarJuego();
                     break;
                 case MenuCanvas.OPCIONES:
                     samuraiMidlet.mostrarCreditos();
@@ -316,5 +317,12 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         if( !animador.estaCorriendo() ){
             animador.iniciar();
         }
+    }
+
+    private void cargarJuego() {
+        AdministradorData data=new AdministradorData("continuar");
+        String score = data.regresarDato(1);
+        String vida = data.regresarDato(2);
+        samuraiMidlet.continuarJuego(Integer.parseInt(score),Integer.parseInt(vida));
     }
 }
