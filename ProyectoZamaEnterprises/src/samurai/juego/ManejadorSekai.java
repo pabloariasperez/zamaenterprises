@@ -35,7 +35,7 @@ public class ManejadorSekai implements Animable{
      * @param efectos Recibe un SpriteEspada que contiene los efectos de la espada.
      * @param manejadorTec Recibe un ManejadorTeclado para detectar las teclas presionadas.
      */
-    public ManejadorSekai( ManejadorTeclado manejadorTec){
+    public ManejadorSekai( ManejadorTeclado manejadorTec, int vida){
         try {
             this.sekai = new SpriteSekai("/samurai/imagenes/sekai.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA);
             this.efectosEspada = new SpriteEspada("/samurai/imagenes/SpritesEfectos.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA - getHeight());
@@ -51,7 +51,7 @@ public class ManejadorSekai implements Animable{
         this.X_VIDA=Global.ANCHO_PANTALLA-this.ANCHO_VIDA-15;
         this.Y_VIDA=10;
         this.ALTO_VIDA=10;
-        this.puntosVidaActual=this.puntosVidaTotal;
+        this.puntosVidaActual=vida;
         this.DIFERENCIAL_COLISION_SEKAI = (int) (Global.ALTO_PANTALLA - this.sekai.getHeight() * 0.9);
         this.DIFERENCIAL_COLISION_ESPADA = this.DIFERENCIAL_COLISION_SEKAI - efectosEspada.getHeight();
     }
@@ -203,5 +203,9 @@ public class ManejadorSekai implements Animable{
             g.setColor(0xFF0000);
         }
         g.fillRect(this.X_VIDA+6, Y_VIDA+2,puntosVidaActual -2, ALTO_VIDA-4);
+    }
+
+    public int getVida() {
+        return this.puntosVidaActual;
     }
 }

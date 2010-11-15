@@ -15,7 +15,6 @@ public class SamuraiEnterprises extends MIDlet {
     //Atributos de nuestro midlet 
     //Crea un SplashCanvas que muestra el logo del Tec asi como el logo del equipo.
     private Actualizable pantallaActual;
-    private boolean inicilice=false;
     /**
      * Constructor del MIDlet que inicializa el SplashCanvas. =D
      */
@@ -28,11 +27,7 @@ public class SamuraiEnterprises extends MIDlet {
      * Metodo que manda una señal al MIDlet para avisarle a este que entre estado activo.
      */
     public void startApp() {
-        if(!inicilice){
-            Display.getDisplay(this).setCurrent((Displayable)pantallaActual);
-            inicilice=true;
-        }
-        
+        Display.getDisplay(this).setCurrent((Displayable)pantallaActual);
         pantallaActual.correr();
     }
 
@@ -74,7 +69,12 @@ public class SamuraiEnterprises extends MIDlet {
     /**
      *
      */
-    public void continuarJuego() {
+    public void continuarJuego(int scoreAcumulado, int vida) {
+        pantallaActual.destruir();
+        pantallaActual=null;
+        pantallaActual = new Juego(this, Nivel.NIVEL_1,scoreAcumulado, vida);
+        Global.setFPS(60);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
@@ -94,7 +94,7 @@ public class SamuraiEnterprises extends MIDlet {
     public void correrNivelUno() {
         pantallaActual.destruir();
         pantallaActual=null;
-        pantallaActual = new Juego(this, Nivel.NIVEL_1);
+        pantallaActual = new Juego(this, Nivel.NIVEL_1,0,50);
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
