@@ -27,6 +27,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private final int C_ERIK = 1;
     private final int C_DANIEL = 2;
     private final int S_GAMEOVER = 3;
+    private final int S_PROLOGO_1 = 4;
     private boolean mostrandome;
 
     /**
@@ -87,6 +88,8 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
             case PresentacionCanvas.TUTORIAL:
                 break;
             case PresentacionCanvas.PROLOGO:
+                Diapositiva prologo1 = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_PROLOGO_1));
+                this.diapositivas.push(prologo1);
                 break;
             case PresentacionCanvas.EPILOGO:
                 break;
@@ -121,6 +124,9 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
             case S_GAMEOVER:
                 texto.addElement("Moriste");
                 texto.addElement("  ...  ");
+            case S_PROLOGO_1:
+                texto.addElement("Empezando");
+                texto.addElement("  ...  ");
             default:
                 return texto;
         }
@@ -143,8 +149,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.pare = false;
                 this.camine = true;
             } else {
-                this.animador.terminar();
-                samuraiMidlet.mostrarMenu();
+                cambiarPantalla(tipo);
             }
         }
     }
@@ -192,6 +197,27 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
         diapositivaActual = null;
     }
 
+    private void cambiarPantalla(int tipo) {
+        switch(tipo){
+            case PresentacionCanvas.CREDITO:
+                samuraiMidlet.mostrarMenu();
+                break;
+            case PresentacionCanvas.EPILOGO:
+                samuraiMidlet.mostrarMenu();
+                break;
+            case PresentacionCanvas.GAMEOVER:
+                samuraiMidlet.mostrarMenu();
+                break;
+            case PresentacionCanvas.PROLOGO:
+                samuraiMidlet.correrNivelUno();
+                break;
+            case PresentacionCanvas.TUTORIAL:
+                samuraiMidlet.mostrarMenu();
+                break;
+            default:
+                break;
+        }
+    }
     public Animador getAnimador() {
         return animador;
     }
