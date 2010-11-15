@@ -370,5 +370,6 @@ public class Juego extends GameCanvas implements Actualizable {
         AdministradorData data=new AdministradorData("continuar");
         data.agregarRegistro(""+score);
         data.agregarRegistro("" + manejadorSekai.getVida());
+        data.agregarRegistro(""+escenarioActual);
     }
 }

@@ -3,6 +3,7 @@ package samurai.juego;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.*;
+import samurai.almacenamiento.AdministradorData;
 import samurai.escenarios.Nivel;
 
 /**
@@ -69,10 +70,14 @@ public class SamuraiEnterprises extends MIDlet {
     /**
      *
      */
-    public void continuarJuego(int scoreAcumulado, int vida) {
+    public void continuarJuego() {
         pantallaActual.destruir();
         pantallaActual=null;
-        pantallaActual = new Juego(this, Nivel.NIVEL_1,scoreAcumulado, vida);
+        AdministradorData data=new AdministradorData("continuar");
+        int score = Integer.valueOf(data.regresarDato(AdministradorData.REGISTRO_SCORE)).intValue();
+        int vida = Integer.valueOf(data.regresarDato(AdministradorData.REGISTRO_VIDA)).intValue();
+        int nivel = Integer.valueOf(data.regresarDato(AdministradorData.REGISTRO_NIVEL)).intValue();
+        pantallaActual = new Juego(this, nivel,score, vida);
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
@@ -112,5 +117,8 @@ public class SamuraiEnterprises extends MIDlet {
         pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.PROLOGO);
         Global.setFPS(50);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+    }
+    private void cargarDatos() {
+
     }
 }
