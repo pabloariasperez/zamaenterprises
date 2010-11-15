@@ -3,6 +3,7 @@ package samurai.juego;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.*;
+import samurai.escenarios.Nivel;
 
 /**
  * Clase MIDlet que controla los elementos que se muestran en el Display.
@@ -83,10 +84,10 @@ public class SamuraiEnterprises extends MIDlet {
     /**
      *
      */
-    public void correrJuego() {
+    public void correrNivelUno() {
         pantallaActual.destruir();
         pantallaActual=null;
-        pantallaActual = new Juego(this);
+        pantallaActual = new Juego(this, Nivel.NIVEL_1);
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }

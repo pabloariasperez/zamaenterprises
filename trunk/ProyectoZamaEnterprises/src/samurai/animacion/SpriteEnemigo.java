@@ -14,7 +14,6 @@ import samurai.juego.Juego;
  */
 public class SpriteEnemigo  extends Sprite implements Animable {
     private int[] secuenciaFondo, secuenciaMedia, secuenciaMediaFrente, secuenciaFrente;
-    private int parametroCamino, margenIzquierdo;
     private int tipoEnemigo;
     private Posicion posicion;
     private int alturaActual;

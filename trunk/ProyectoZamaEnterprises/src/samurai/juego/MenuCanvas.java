@@ -186,7 +186,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         } else if (this.menuActual.getPosition() == 0 && teclado.firePresionado()) {
             switch(menuActual.nombreMenu){
                 case MenuCanvas.PRINCIPAL:
-                    samuraiMidlet.correrJuego();
+                    samuraiMidlet.correrNivelUno();
                     break;
                 case MenuCanvas.OPCIONES:
                     crearMenu(MenuCanvas.SONIDO);
