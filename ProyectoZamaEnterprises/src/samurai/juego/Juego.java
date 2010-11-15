@@ -59,14 +59,16 @@ public class Juego extends GameCanvas implements Actualizable {
      * Contructor de juego; inicicaliza todo lo necesario
      * @param midlet midlet que maneja a juego
      */
-    public Juego(SamuraiEnterprises midlet) {
+    public Juego(SamuraiEnterprises midlet, int nivel) {
         super(true);
+        escenarioActual = nivel;
         this.samuraiMidlet = midlet;
         this.setFullScreenMode(true);
         g = this.getGraphics();
         this.pausado = false;
         escenario = new Escenario();
-        escenario.agregarFondo(new FondoCapa("/samurai/imagenes/fondoLuna.png", 5, 0));
+
+        this.agregarFondos(escenarioActual);
         altoFondo = escenario.getAltoFondos();
 
         posicionador = new Posicionador(ANCHO_INICIAL, PORCENTAJE_ANCHO_FINAL, ALTO_LINEA, altoFondo);
@@ -81,7 +83,6 @@ public class Juego extends GameCanvas implements Actualizable {
 
         try {
             //Relacionado con Nivel
-            escenarioActual = Nivel.NIVEL_1;
             Nivel.inicializar(escenarioActual, escenario);
 
             //Creamos los manejadores
@@ -99,7 +100,8 @@ public class Juego extends GameCanvas implements Actualizable {
             //Manejador Enemigos
             manejadorEnemigos = new ManejadorEnemigos();
             enemigo = null;       //Para no crear mil "BICHOS" enemigo
-            this.musica = new Musica("/samurai/sonidos/tema.mid", this);
+            
+            this.cargarMusica(escenarioActual);
             this.reproduciendo = false;
 
             this.sfx = new SFX(this);
@@ -108,8 +110,7 @@ public class Juego extends GameCanvas implements Actualizable {
             this.score = 0;
 
             tiempo = new TiempoEscenario();
-            animador = new Animador(this);
-            animador.iniciar();
+            
 
 
         } catch (IOException ex) {
@@ -117,6 +118,9 @@ public class Juego extends GameCanvas implements Actualizable {
         }
         posicionador.generarNuevoEje(parametro);
         random = new Random();
+
+        animador = new Animador(this);
+        animador.iniciar();
     }
 
     public void creaBotones() {
@@ -203,7 +207,7 @@ public class Juego extends GameCanvas implements Actualizable {
                         this.reproducir(this.enemigo.getTipoEnemigo());
                     }
                     this.aumentarScore(this.enemigo.getTipoEnemigo());
-                    System.out.println(this.score);
+                    System.out.println("score: "+this.score);
                     manejadorEnemigos.kill(this.enemigo);
                 }
                 if (manejadorSekai.colisionSekai(this.enemigo)
@@ -333,5 +337,33 @@ public class Juego extends GameCanvas implements Actualizable {
         menuPausa = null;
         botonSalir = null;
         botonContinuar = null;
+    }
+
+    private void agregarFondos(int escenarioActual) {
+        switch(escenarioActual){
+            case Nivel.NIVEL_1:
+                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/fondoLuna.png", 5, 0));
+                break;
+            case Nivel.NIVEL_2:
+                break;
+            case Nivel.NIVEL_3:
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void cargarMusica(int escenarioActual) {
+        switch(escenarioActual){
+            case Nivel.NIVEL_1:
+                this.musica = new Musica("/samurai/sonidos/tema.mid", this);
+                break;
+            case Nivel.NIVEL_2:
+                break;
+            case Nivel.NIVEL_3:
+                break;
+            default:
+                break;
+        }
     }
 }
