@@ -9,7 +9,6 @@ import java.util.Random;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import samurai.animacion.SpriteEnemigo;
-import samurai.animacion.SpriteEspada;
 
 
 /**
@@ -20,8 +19,6 @@ import samurai.animacion.SpriteEspada;
 public class ManejadorEnemigos {
 
     private Vector enemigosEnPantalla;
-    private ManejadorSekai sekai;
-    private SpriteEspada espada;
     private int enemigosMuertos;
     private Random rndm;
     /**

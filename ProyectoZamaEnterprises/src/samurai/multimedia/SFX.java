@@ -72,15 +72,15 @@ public class SFX {
 //                case SFX.MUERTE_SEKAI:
 //                    players[tipo]= Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/muerte.mp3"), "audio/mp3");
 //                    break;
-//                case SFX.MUERTE_MURCIELAGO:
-//                    players[tipo]= Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/murcielago.mp3"), "audio/mp3");
-//                    break;
+                case SFX.MUERTE_MURCIELAGO:
+                    players[tipo]= Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/murcielago.wav"), "audio/wav");
+                    break;
 //                case SFX.MUERTE_TOPO:
 //                    players[tipo]= Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/topo.mp3"), "audio/mp3");
 //                    break;
-//                case SFX.MUERTE_RATA:
-//                    players[tipo] = Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/rata.mp3"), "audio/mp3");
-//                    break;
+                case SFX.MUERTE_RATA:
+                    players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/rata.wav"), "audio/wav");
+                    break;
 //                case SFX.MUERTE_FANTASMA:
 //                    players[tipo] = Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/fantasma.mp3"), "audio/mp3");
 //                    break;

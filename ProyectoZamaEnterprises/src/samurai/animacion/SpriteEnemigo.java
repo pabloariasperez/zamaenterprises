@@ -24,14 +24,17 @@ public class SpriteEnemigo  extends Sprite implements Animable {
      * Enum del Murcielago
      */
     public static final int MURCIELAGO = 0;
-    /**
-     * Enum del Topo
-     */
-    public static final int TOPO = 1;
+
     /**
      * Enum del Rata
      */
-    public static final int RATA = 2;
+    public static final int RATA = 1;
+
+    /**
+     * Enum del Topo
+     */
+    public static final int TOPO = 2;
+
     /**
      * Enum del Fantasma
      */
