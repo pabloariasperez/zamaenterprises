@@ -15,9 +15,9 @@ public class ManejadorSekai implements Animable{
     private SpriteEspada efectosEspada;
     private ManejadorTeclado manejadorTec;
     private boolean estoyAnimandome;
-    private final int SECUENCIA_IZQ;
-    private final int SECUENCIA_DER;
-    private final int SECUENCIA_FRONTAL;
+    private final int SECUENCIA_IZQ=1;
+    private final int SECUENCIA_DER=2;
+    private final int SECUENCIA_FRONTAL=3;
     private int frameActual;
     private final int puntosVidaTotal;
     private int puntosVidaActual;
@@ -40,9 +40,6 @@ public class ManejadorSekai implements Animable{
         this.manejadorTec=manejadorTec;
         this.estoyAnimandome=false;
         this.frameActual = 0;
-        this.SECUENCIA_IZQ=1;
-        this.SECUENCIA_DER=2;
-        this.SECUENCIA_FRONTAL=3;
         this.puntosVidaTotal=50;
         this.ANCHO_VIDA=this.puntosVidaTotal;
         this.X_VIDA=Global.ANCHO_PANTALLA-this.ANCHO_VIDA-15;
@@ -172,7 +169,10 @@ public class ManejadorSekai implements Animable{
      * @return true si la colision fue efectuada
      */
     public boolean colisionSekai(SpriteEnemigo spriteEnemigo) {
+        if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_SEKAI ){
             return this.sekai.collidesWith(spriteEnemigo, true);
+        }
+        return false;
     }
 
     /**
@@ -181,7 +181,10 @@ public class ManejadorSekai implements Animable{
      * @return true sii la colision fue efectuada
      */
     public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
+         if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_ESPADA ){
             return this.efectosEspada.collidesWith(spriteEnemigo, true);
+        }
+         return false;
     }
 
     /**

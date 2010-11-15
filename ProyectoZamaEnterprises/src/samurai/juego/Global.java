@@ -24,7 +24,7 @@ public class Global {
      */
     public static int FPS;
 
-    public static boolean SONIDO_ACTIVADO=true;
+    public static boolean SONIDO_ACTIVADO = false;
 
     /**
      * modifica ANCHO_PANTALLA solo una vez
