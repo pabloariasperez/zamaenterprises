@@ -1,5 +1,6 @@
 package samurai.juego;
 
+import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import samurai.animacion.*;
 
@@ -34,9 +35,15 @@ public class ManejadorSekai implements Animable{
      * @param efectos Recibe un SpriteEspada que contiene los efectos de la espada.
      * @param manejadorTec Recibe un ManejadorTeclado para detectar las teclas presionadas.
      */
-    public ManejadorSekai(SpriteSekai sekai, SpriteEspada efectos, ManejadorTeclado manejadorTec){
-        this.sekai=sekai;
-        this.efectosEspada=efectos;
+    public ManejadorSekai( ManejadorTeclado manejadorTec){
+        SpriteSekai sekai;
+        try {
+            this.sekai = new SpriteSekai("/samurai/imagenes/sekai.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA);
+            this.efectosEspada = new SpriteEspada("/samurai/imagenes/SpritesEfectos.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA - this.sekai.getHeight());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
         this.manejadorTec=manejadorTec;
         this.estoyAnimandome=false;
         this.frameActual = 0;
@@ -46,8 +53,8 @@ public class ManejadorSekai implements Animable{
         this.Y_VIDA=10;
         this.ALTO_VIDA=10;
         this.puntosVidaActual=this.puntosVidaTotal;
-        this.DIFERENCIAL_COLISION_ESPADA = Global.ALTO_PANTALLA - sekai.getHeight() - efectosEspada.getHeight() - 5;
-        this.DIFERENCIAL_COLISION_SEKAI = Global.ALTO_PANTALLA - sekai.getHeight();
+        this.DIFERENCIAL_COLISION_SEKAI = (int) (Global.ALTO_PANTALLA - this.sekai.getHeight() * 0.9);
+        this.DIFERENCIAL_COLISION_ESPADA = this.DIFERENCIAL_COLISION_SEKAI - efectosEspada.getHeight();
     }
 
     /**
@@ -57,20 +64,8 @@ public class ManejadorSekai implements Animable{
     public void dibujar(Graphics g) {
         efectosEspada.dibujar(g);
         sekai.dibujar(g);
-        g.setColor(0x0000AA00);
-        g.fillArc(this.X_VIDA, Y_VIDA-1, 10+1, ALTO_VIDA+1, 90, 180);
-        g.fillRect(this.X_VIDA+5, Y_VIDA,ANCHO_VIDA , ALTO_VIDA);
-        g.fillArc(this.X_VIDA+this.ANCHO_VIDA-2, Y_VIDA-1, 10+1, ALTO_VIDA+1, 270, 180);
-
-        g.setColor(0x00000000);
-        g.fillRect(this.X_VIDA+5, Y_VIDA+1,ANCHO_VIDA, ALTO_VIDA-2);
-
-        g.setColor(0x0000AA00);
-        if(puntosVidaActual < puntosVidaTotal*0.3){
-            g.setColor(0xFF0000);
-        }
+        dibujarBarraVida(g);
         
-        g.fillRect(this.X_VIDA+6, Y_VIDA+2,puntosVidaActual -2, ALTO_VIDA-4);
     }
 
     /**
@@ -118,13 +113,10 @@ public class ManejadorSekai implements Animable{
         } else if(manejadorTec.upPresionado()){
             //pregunta si la secuencia seleccionada del sprite es la correspondiente al ataque frontal
             //si lo es inicia el ataque
-            System.out.println("Me here");
             if(efectosEspada.getSecuencia()==this.SECUENCIA_FRONTAL){
-                System.out.println("Me here2");
                 efectosEspada.ataque();
             //si no es la frontal cambia la secuencia e inicia el ataque
             }else{
-                System.out.println("Me here3");
                 efectosEspada.setAtaqueFrontal();
                 efectosEspada.ataque();
             }
@@ -196,5 +188,21 @@ public class ManejadorSekai implements Animable{
     }
     public boolean muerteSekai(){
         return this.puntosVidaActual<=0;
+    }
+
+    private void dibujarBarraVida(Graphics g) {
+        g.setColor(0x0000AA00);
+        g.fillArc(this.X_VIDA, Y_VIDA-1, 10+1, ALTO_VIDA+1, 90, 180);
+        g.fillRect(this.X_VIDA+5, Y_VIDA,ANCHO_VIDA , ALTO_VIDA);
+        g.fillArc(this.X_VIDA+this.ANCHO_VIDA-2, Y_VIDA-1, 10+1, ALTO_VIDA+1, 270, 180);
+
+        g.setColor(0x00000000);
+        g.fillRect(this.X_VIDA+5, Y_VIDA+1,ANCHO_VIDA, ALTO_VIDA-2);
+
+        g.setColor(0x0000AA00);
+        if(puntosVidaActual < puntosVidaTotal*0.3){
+            g.setColor(0xFF0000);
+        }
+        g.fillRect(this.X_VIDA+6, Y_VIDA+2,puntosVidaActual -2, ALTO_VIDA-4);
     }
 }

@@ -7,8 +7,6 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.animacion.SpriteEnemigo;
-import samurai.animacion.SpriteEspada;
-import samurai.animacion.SpriteSekai;
 import samurai.escenarios.*;
 import samurai.menu.Boton;
 import samurai.menu.Menu;
@@ -40,7 +38,7 @@ public class Juego extends GameCanvas implements Actualizable {
     Escenario escenario;
     private static Posicionador posicionador;
     private final int ANCHO_INICIAL = 170;
-    private final int PORCENTAJE_ANCHO_FINAL = 20;
+    private final int PORCENTAJE_ANCHO_FINAL = 10;
     /**
      * tamaño de la linea
      */
@@ -92,9 +90,7 @@ public class Juego extends GameCanvas implements Actualizable {
             this.imagenPausa = Image.createImage("/samurai/imagenes/pausa.png");
 
             //Manejador Sekai
-            SpriteSekai sekai = new SpriteSekai("/samurai/imagenes/sekai.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA);
-            SpriteEspada efectos = new SpriteEspada("/samurai/imagenes/SpritesEfectos.png", Global.ANCHO_PANTALLA / 2 - sekai.getWidth() / 2, Global.ALTO_PANTALLA - sekai.getHeight());
-            this.manejadorSekai = new ManejadorSekai(sekai, efectos, manejadorTec);
+            this.manejadorSekai = new ManejadorSekai(manejadorTec);
 
 
             //Manejador Enemigos
@@ -207,7 +203,6 @@ public class Juego extends GameCanvas implements Actualizable {
                         this.reproducir(this.enemigo.getTipoEnemigo());
                     }
                     this.aumentarScore(this.enemigo.getTipoEnemigo());
-                    System.out.println("score: "+this.score);
                     manejadorEnemigos.kill(this.enemigo);
                 }
                 if (manejadorSekai.colisionSekai(this.enemigo)

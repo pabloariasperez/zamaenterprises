@@ -110,8 +110,6 @@ public class Escenario {
             piedra.paint(g);
 
             if( lineaActual >= razonCambioPiedra*(razonCambio+1) ){
-                System.out.println(lineaActual);
-                System.out.println(razonCambio);
                 piedra.nextFrame();
                 razonCambio++;
             }
@@ -148,6 +146,6 @@ public class Escenario {
     public void setRazonCambioPiedra(int longitudPosiciones){
         //Este número representa el número de puntos que deberán ser representados por CADA frame de la piedra.
         // Al total de mis posiciones lo divido entre la distancia que deben guardar entre ellos, y luego entre el número de frames en piedra.
-        razonCambioPiedra = longitudPosiciones/piedra.getFrameSequenceLength();
+        razonCambioPiedra = longitudPosiciones/piedra.getFrameSequenceLength()/(DISTANCIADOR_PIEDRAS-1);
     }
 }
