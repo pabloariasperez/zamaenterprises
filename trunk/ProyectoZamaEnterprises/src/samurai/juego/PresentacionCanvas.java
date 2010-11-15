@@ -29,7 +29,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private final int S_GAMEOVER = 3;
     private final int S_PROLOGO_1 = 4;
     private boolean mostrandome;
-
+    private ManejadorTeclado teclado;
     /**
      * Enum de credito
      */
@@ -46,7 +46,6 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
      * Enum de epilogo
      */
     public static final int EPILOGO = 3;
-
     public static final int GAMEOVER = 4;
 
     /**
@@ -66,6 +65,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
         this.pare = false;
         this.camine = true;
         this.tipo = tipo;
+        this.teclado = new ManejadorTeclado(this);
 
 
         this.agregarDiapositivas();
@@ -133,9 +133,18 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     }
 
     public void actualizar() {
-
         if (!diapositivaCentrada()) {
             this.diapositivaActual.actualizar();
+            if (teclado.firePresionado()) {
+                if (!this.diapositivas.isEmpty()) {
+                    this.diapositivaActual = (Diapositiva) this.diapositivas.pop();
+                    this.pare = false;
+                    this.camine = true;
+                } else {
+                    cambiarPantalla(tipo);
+                    return;
+                }
+            }
         } else {
             timer.tik();
             if (timer.activarIteracion()) {
@@ -143,6 +152,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.pare = !this.pare;
             }
         }
+
         if (!this.diapositivaActual.estoyMostrandome()) {
             if (!this.diapositivas.isEmpty()) {
                 this.diapositivaActual = (Diapositiva) this.diapositivas.pop();
@@ -198,7 +208,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     }
 
     private void cambiarPantalla(int tipo) {
-        switch(tipo){
+        switch (tipo) {
             case PresentacionCanvas.CREDITO:
                 samuraiMidlet.mostrarMenu();
                 break;
@@ -218,16 +228,13 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 break;
         }
     }
-    public Animador getAnimador() {
-        return animador;
-    }
 
     public void pausar() {
         animador.terminar();
     }
 
     public void correr() {
-        if( !animador.estaCorriendo() ){
+        if (!animador.estaCorriendo()) {
             animador.iniciar();
         }
     }

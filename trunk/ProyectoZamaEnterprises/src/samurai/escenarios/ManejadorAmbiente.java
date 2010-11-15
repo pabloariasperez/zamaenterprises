@@ -71,7 +71,7 @@ public class ManejadorAmbiente {
      * @param g Graficos donde se dibujan los elementos del vector.
      */
     public void dibujar(Graphics g) {
-        for (int i = 0; i < ambienteEnPantalla.size(); i++) {
+        for (int i = ambienteEnPantalla.size() - 1; i >=0; i--) {
             ((SpriteAmbiente) ambienteEnPantalla.elementAt(i)).dibujar(g);
         }
     }
