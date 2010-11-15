@@ -22,6 +22,7 @@ public class ManejadorAmbiente {
     private Random rndm;
     private SpriteAmbiente elemento;
     private Image arbol_1;
+    private int elemetosEliminados;
 
     /**
      * Constructor que inicializa el Vector como un Vector vacio.
@@ -30,6 +31,7 @@ public class ManejadorAmbiente {
         ambienteEnPantalla = new Vector();
         rndm = new Random();
         elemento = null;
+        elemetosEliminados=0;
         try {
             arbol_1 = Image.createImage("/samurai/imagenes/ambiente/arbol.png");
         } catch (IOException ex) {
@@ -79,17 +81,23 @@ public class ManejadorAmbiente {
      */
     public void actualizar() {
         int size = ambienteEnPantalla.size();
+
         int rnd = rndm.nextInt(1);
-        if ( size < 1000) {
+        if (rnd == 0 && size < 1000) {
             this.agregarElemento(0);
         }
         for (int i = 0; i < ambienteEnPantalla.size(); i++) {
             elemento = (SpriteAmbiente) ambienteEnPantalla.elementAt(i);
             if (elemento.getY() >= Global.ALTO_PANTALLA) {
                 this.desaparecer(elemento);
+                elemetosEliminados++;
             } else {
                 elemento.mover();
             }
+        }
+        if(elemetosEliminados>= 10){
+            elemetosEliminados=0;
+            System.gc();
         }
     }
 
