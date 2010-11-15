@@ -121,10 +121,13 @@ public class ManejadorSekai implements Animable{
         } else if(manejadorTec.upPresionado()){
             //pregunta si la secuencia seleccionada del sprite es la correspondiente al ataque frontal
             //si lo es inicia el ataque
+            System.out.println("Me here");
             if(efectosEspada.getSecuencia()==this.SECUENCIA_FRONTAL){
+                System.out.println("Me here2");
                 efectosEspada.ataque();
             //si no es la frontal cambia la secuencia e inicia el ataque
             }else{
+                System.out.println("Me here3");
                 efectosEspada.setAtaqueFrontal();
                 efectosEspada.ataque();
             }

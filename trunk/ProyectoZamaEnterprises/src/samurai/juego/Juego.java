@@ -55,6 +55,8 @@ public class Juego extends GameCanvas implements Actualizable {
     private Boton botonSalir;
     private Boton botonContinuar;
 
+    private int score;
+
     /**
      * Contructor de juego; inicicaliza todo lo necesario
      * @param midlet midlet que maneja a juego
@@ -100,12 +102,13 @@ public class Juego extends GameCanvas implements Actualizable {
             //Manejador Enemigos
             manejadorEnemigos = new ManejadorEnemigos();
             enemigo = null;       //Para no crear mil "BICHOS" enemigo
-            this.musica = new Musica("/samurai/sonidos/koopa.mid", this);
+            this.musica = new Musica("/samurai/sonidos/tema.mid", this);
             this.reproduciendo = false;
 
             this.sfx = new SFX(this);
             Nivel.cargarSFX(escenarioActual, sfx);
 
+            this.score=0;
 
             tiempo = new TiempoEscenario();
             animador = new Animador(this);
@@ -131,8 +134,7 @@ public class Juego extends GameCanvas implements Actualizable {
       
         try {
               if(this.menuPausa==null){
-                 this.menuPausa = new Menu(2,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png", 1);
-             
+                  this.menuPausa = new Menu(2,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png", 1);
                   this.botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
                   this.botonSalir = new Boton("/samurai/imagenes/botonSalir.png");
                   this.menuPausa.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
@@ -172,8 +174,6 @@ public class Juego extends GameCanvas implements Actualizable {
             if (this.pausado) {
                 this.menuPausa.moverOpcion(1);
             } else {
-                musica.parar();
-                this.reproduciendo = false;
                 this.pausarJuego();
 
             }
@@ -214,14 +214,20 @@ public class Juego extends GameCanvas implements Actualizable {
                 this.enemigo = (SpriteEnemigo) (manejadorEnemigos.getVectorEnemigo().elementAt(i));
 
                 if (manejadorSekai.colisionEspada(this.enemigo)) {
-
-                    //reproducir(SFX.ESPADA);
+                    if(Global.SONIDO_ACTIVADO){
+                        sfx.reproducir(SFX.ESPADA);
+                        this.reproducir(this.enemigo.getTipoEnemigo());
+                    }
+                    this.aumentarScore(this.enemigo.getTipoEnemigo());
+                    System.out.println(this.score);
                     manejadorEnemigos.kill(this.enemigo);
                 }
                 if (    manejadorSekai.colisionSekai(this.enemigo)  ||
                         this.enemigo.getY() >= Global.ALTO_PANTALLA - this.enemigo.getHeight() / 2
                 ) {
-                    //sfx.reproducir(SFX.GOLPE_SEKAI);
+                    if (Global.SONIDO_ACTIVADO){
+                        sfx.reproducir(SFX.GOLPE_SEKAI);
+                    }
                     manejadorSekai.reducirVida(this.enemigo.getTipoEnemigo());
                     Display.getDisplay(samuraiMidlet).vibrate(90);
                     manejadorEnemigos.desaparecer(this.enemigo);
@@ -260,16 +266,32 @@ public class Juego extends GameCanvas implements Actualizable {
             case SpriteEnemigo.MURCIELAGO:
                 sfx.reproducir(SFX.MUERTE_MURCIELAGO);
                 break;
-
-
             case SpriteEnemigo.RATA:
                 sfx.reproducir(SFX.MUERTE_RATA);
                 break;
-
             case SpriteEnemigo.TOPO:
                 sfx.reproducir(SFX.MUERTE_TOPO);
                 break;
         }
+    }
+    private void aumentarScore(int tipoEnemigo){
+        switch (tipoEnemigo) {
+                case SpriteEnemigo.MURCIELAGO:
+                    this.score+=10;
+                    break;
+                case SpriteEnemigo.RATA:
+                    this.score+=5;
+                    break;
+                case SpriteEnemigo.FANTASMA:
+                    this.score+=15;
+                    break;
+                case SpriteEnemigo.TOPO:
+                    this.score+=20;
+                    break;
+                case SpriteEnemigo.CESAR:
+                    this.score+=100;
+                    break;
+            }
     }
 
     /**
@@ -290,10 +312,10 @@ public class Juego extends GameCanvas implements Actualizable {
      * pausa el juego
      */
     public void pausarJuego() {
+        musica.parar();
+        this.reproduciendo = false;
         this.pausado = true;
         this.creaBotones();
-
-
     }
 
     /**

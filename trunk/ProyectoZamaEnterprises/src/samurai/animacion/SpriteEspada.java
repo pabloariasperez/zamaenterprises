@@ -64,8 +64,7 @@ public class SpriteEspada extends Sprite implements Animable {
      * pasa al siguinte frame de la secuencia actual
      */
     public void ataque(){
-       this.nextFrame();      
-
+       this.nextFrame();
    }
 
     /**

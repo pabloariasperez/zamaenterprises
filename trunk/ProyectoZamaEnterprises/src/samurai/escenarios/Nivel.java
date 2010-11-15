@@ -50,20 +50,20 @@ public class Nivel{
      * @param sfx objeto donde se precargaran todos los sfx
      */
     public static void cargarSFX(int nivel, SFX sfx){
-       // sfx.agregarSFX(SFX.ESPADA);
-       // sfx.agregarSFX(SFX.GOLPE_SEKAI);
+        sfx.agregarSFX(SFX.ESPADA);
+        sfx.agregarSFX(SFX.GOLPE_SEKAI);
 //        sfx.agregarSFX(SFX.MUERTE_SEKAI);
-//        switch(nivel){
-//            case NIVEL_1:
-//                sfx.agregarSFX(SFX.MUERTE_TOPO);
-//                sfx.agregarSFX(SFX.MUERTE_RATA);
-//                sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
-//                break;
+        switch(nivel){
+            case NIVEL_1:
+                sfx.agregarSFX(SFX.MUERTE_RATA);
+                sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
+                break;
 //            case NIVEL_2:
+                  //sfx.agregarSFX(SFX.MUERTE_TOPO);
 //                break;
 //            case NIVEL_3:
 //                break;
-//        }
+        }
     }
     /**
      * Genera enemigos aleatoriamente
