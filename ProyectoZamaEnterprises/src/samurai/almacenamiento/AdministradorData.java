@@ -18,6 +18,10 @@ public class AdministradorData {
     RecordStore rs;
     String nombreData;
 
+    public static final int REGISTRO_SCORE=1;
+    public static final int REGISTRO_VIDA=2;
+    public static final int REGISTRO_NIVEL=3;
+
     public AdministradorData(String nombreData){
         this.nombreData = nombreData;
         try {
