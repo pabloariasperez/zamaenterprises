@@ -129,6 +129,12 @@ public class AdministradorData {
         return dato;
     }
 
+    public int regresarValorDato(int index){
+        Integer dato=Integer.valueOf(this.regresarDato(index));
+        return dato.intValue();
+
+    }
+
     public void borrarTodo(){
         try {
            RecordStore.deleteRecordStore(nombreData);

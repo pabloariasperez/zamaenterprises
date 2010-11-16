@@ -28,6 +28,11 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private final int C_DANIEL = 2;
     private final int S_GAMEOVER = 3;
     private final int S_PROLOGO_1 = 4;
+    private final int T_Izquierda = 5;
+    private final int T_Derecha = 6;
+    private final int T_Pausa = 7;
+    private final int T_Adelante = 8;
+
     private boolean mostrandome;
     private ManejadorTeclado teclado;
     /**
@@ -86,6 +91,14 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.diapositivas.push(creditoPablo);
                 break;
             case PresentacionCanvas.TUTORIAL:
+                Diapositiva controlIzquierda = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/tutorial/izquierda.png", agregarString(T_Izquierda));
+                Diapositiva controlDerecha = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/tutorial/derecha.png", agregarString(T_Derecha));
+                Diapositiva controlAdelante = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/tutorial/adelante.png", agregarString(T_Adelante));
+                Diapositiva controlAbajo = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/tutorial/pausa.png", agregarString(T_Pausa));
+                this.diapositivas.push(controlIzquierda);
+                this.diapositivas.push(controlDerecha);
+                this.diapositivas.push(controlAdelante);
+                this.diapositivas.push(controlAbajo);
                 break;
             case PresentacionCanvas.PROLOGO:
                 Diapositiva prologo1 = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_PROLOGO_1));
@@ -118,15 +131,37 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 return texto;
             case C_DANIEL:
                 texto.addElement("           (  .  V  .  )");
-                texto.addElement("             )   .   (");
+                texto.addElement("             )   .    (");
                 texto.addElement("            (    W    )");
                 return texto;
             case S_GAMEOVER:
                 texto.addElement("Moriste");
                 texto.addElement("  ...  ");
+                return texto;
             case S_PROLOGO_1:
                 texto.addElement("Empezando");
                 texto.addElement("  ...  ");
+                return texto;
+            case T_Adelante:
+                texto.addElement("Utilize el boton 2 para");
+                texto.addElement("realizar un ataque");
+                texto.addElement("frontal.");
+                return texto;
+            case T_Derecha:
+                texto.addElement("Utilize el boton 6 para");
+                texto.addElement("realizar un ataque por");
+                texto.addElement("la derecha.");
+                return texto;
+            case T_Izquierda:
+                texto.addElement("Utilize el boton 4 para");
+                texto.addElement("realizar un ataque por");
+                texto.addElement("la izquierda.");
+                return texto;
+            case T_Pausa:
+                texto.addElement("Utilize el boton 8 para");
+                texto.addElement("pausar el juego.");
+
+                return texto;
             default:
                 return texto;
         }
