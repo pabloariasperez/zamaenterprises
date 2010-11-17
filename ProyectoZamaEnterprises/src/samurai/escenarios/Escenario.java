@@ -72,7 +72,7 @@ public class Escenario {
         obtenerPrimerEvento();
 
         esFinEscenario = false;
-        mapaAvance = new Mapa(320, tiempo);
+        mapaAvance = new Mapa( obtenerUltimoEvento() , tiempo);
     }
     /**
      * Se accede indirectamente al manejador de fondos del escenario. Se alimenta con la información del atributo.
@@ -108,8 +108,8 @@ public class Escenario {
         this.dibujarFondoCamino(g);
         Juego.getPosicionador().dibujarCamino(g);
         this.dibujarFondos(g);
-        this.dibujarPiedras(g);
         this.Ambiente.dibujar(g);
+        this.dibujarPiedras(g);
         this.mapaAvance.dibujar(g);
     }
 
@@ -192,5 +192,9 @@ public class Escenario {
         while( ((int[])parametrosCamino.peek())[0] < tiempo.actual() ){
             parametrosCamino.pop();
         }
+    }
+
+    private int obtenerUltimoEvento() {
+        return ((int[])parametrosCamino.elementAt(0))[0];
     }
 }

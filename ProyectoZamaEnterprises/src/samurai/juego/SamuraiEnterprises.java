@@ -89,7 +89,7 @@ public class SamuraiEnterprises extends MIDlet {
     public void mostrarMenu(){
         pantallaActual.destruir();
         pantallaActual=null;
-        Global.setFPS(10);
+        Global.setFPS(20);
         pantallaActual = new MenuCanvas(this);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }

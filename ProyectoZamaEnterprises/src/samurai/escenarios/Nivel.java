@@ -89,21 +89,25 @@ public class Nivel{
         switch(escenario){
             case NIVEL_1:
                 Stack parametros = new Stack();  //En qué momento y qué parámetro.
-//                parametros.push( new int[]{ 900, 1} );
-//                parametros.push( new int[]{ 800, 2} );
-//                parametros.push( new int[]{ 700, 3} );
-//                parametros.push( new int[]{ 530, 4} );
-//                parametros.push( new int[]{ 470, 5} );
-//                parametros.push( new int[]{ 450, 6} );
-//                parametros.push( new int[]{ 400, 7} );
-//                parametros.push( new int[]{ 360, 8} );
-                parametros.push( new int[]{ 320, 9} );
-                parametros.push( new int[]{ 300, 10} );
-                parametros.push( new int[]{ 250, 20} );
-                parametros.push( new int[]{ 200, 30} );
-                parametros.push( new int[]{ 180, 40} );
-                parametros.push( new int[]{ 150, 50} );
-                parametros.push( new int[]{ 0, 80} );
+                parametros.push( new int[]{ 1300, -50} );
+                parametros.push( new int[]{ 1200, -45} );
+                parametros.push( new int[]{ 1100, -40} );
+                parametros.push( new int[]{ 1000, -35} );
+                parametros.push( new int[]{ 900, -30} );
+                parametros.push( new int[]{ 800, -25} );
+                parametros.push( new int[]{ 700, -20} );
+                parametros.push( new int[]{ 530, -15} );
+                parametros.push( new int[]{ 470, -10} );
+                parametros.push( new int[]{ 450, -10} );
+                parametros.push( new int[]{ 400, -20} );
+                parametros.push( new int[]{ 360, -30} );
+                parametros.push( new int[]{ 320, -40} );
+                parametros.push( new int[]{ 300, -50} );
+                parametros.push( new int[]{ 250, -60} );
+                parametros.push( new int[]{ 200, -70} );
+                parametros.push( new int[]{ 180, -80} );
+                parametros.push( new int[]{ 150, -90} );
+                parametros.push( new int[]{ 0, -100 } );
                 return parametros;
             case NIVEL_2:
                 return null;
