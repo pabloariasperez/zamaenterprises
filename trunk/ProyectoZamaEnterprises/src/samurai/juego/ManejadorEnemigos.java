@@ -83,7 +83,7 @@ public class ManejadorEnemigos {
      * @param g Graficos donde se dibujan los elementos del vector.
      */
     public void dibujar(Graphics g){
-        for(int i=0; i<enemigosEnPantalla.size();i++){
+        for(int i=enemigosEnPantalla.size()-1; i>=0;i--){
             ((SpriteEnemigo)enemigosEnPantalla.elementAt(i)).dibujar(g);
         }
     }

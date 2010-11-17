@@ -24,7 +24,7 @@ public class Indicador extends Sprite {
     private static final int ANCHO_SPRITE = 135;
     private static final int ALTO_SPRITE = 40;
     private static final int ALTO_FINAL = 6;
-    private static final int TIEMPO_LLENADO_HORIZONTAL = 150;    //En milisegundos
+    private static final int TIEMPO_LLENADO_HORIZONTAL = 1000;    //En milisegundos
 
 
 
@@ -44,7 +44,7 @@ public class Indicador extends Sprite {
         this.setPosition(this.posicion.getX(), this.posicion.getY());
         this.crecimientoAncho=0;
         this.crecimientoAlto=0;
-        this.INCREMENTO_ANCHO_LINEA = Indicador.TIEMPO_LLENADO_HORIZONTAL * Global.FPS;
+        this.INCREMENTO_ANCHO_LINEA = ( Global.ANCHO_PANTALLA * 1000  ) / (Indicador.TIEMPO_LLENADO_HORIZONTAL * Global.FPS );
         this.altoBoton=0;
     }
 

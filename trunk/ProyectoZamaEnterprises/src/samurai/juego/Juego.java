@@ -37,8 +37,8 @@ public class Juego extends GameCanvas implements Actualizable {
     private Random random;
     Escenario escenario;
     private static Posicionador posicionador;
-    private final int ANCHO_INICIAL = 170;
-    private final int PORCENTAJE_ANCHO_FINAL = 20;
+    private final int ANCHO_INICIAL = 190;
+    private final int PORCENTAJE_ANCHO_FINAL = 15;
     /**
      * tamaño de la linea
      */
@@ -184,13 +184,14 @@ public class Juego extends GameCanvas implements Actualizable {
                 musica.repetirMusica();
             }
 
-            int rnd = random.nextInt(Global.FPS / 2);
+            int rnd = random.nextInt(Global.FPS / 8);
             if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10 && !escenario.esFinEscenario()) {
                 agregarEnemigo(Nivel.generarEnemigo(escenarioActual, random));
             }
 
             if( escenario.esFinEscenario() ){
                 if( manejadorEnemigos.getVectorEnemigo().isEmpty() ){
+
                     samuraiMidlet.mostrarMenu();
                 }
             }
@@ -204,7 +205,6 @@ public class Juego extends GameCanvas implements Actualizable {
                         this.reproducir(this.enemigo.getTipoEnemigo());
                     }
                     this.aumentarScore(this.enemigo.getTipoEnemigo());
-                    System.out.println("score: "+this.score);
                     manejadorEnemigos.kill(this.enemigo);
                 }
                 if (manejadorSekai.colisionSekai(this.enemigo)

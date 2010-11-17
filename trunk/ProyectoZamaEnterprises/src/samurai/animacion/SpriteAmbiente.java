@@ -1,11 +1,11 @@
 package samurai.animacion;
 
 import java.io.IOException;
-import java.util.Random;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
+import samurai.juego.Global;
 import samurai.juego.Juego;
 
 /**
@@ -31,7 +31,7 @@ public class SpriteAmbiente extends Sprite{
      * @param tipoEnemigo
      * @throws IOException Si no se encuentra el archivo
      */
-    public SpriteAmbiente(Image imagenAmbiente, int centesimo) throws IOException{
+    public SpriteAmbiente(Image imagenAmbiente, int centesimo, int region) throws IOException{
         super(imagenAmbiente,25,40);
 
         this.secuenciaFondo=new int[]{0};
@@ -43,10 +43,11 @@ public class SpriteAmbiente extends Sprite{
 
         alturaActual = 0;
         posicion = new Posicion(0, 0);
+        this.region = region;
 
         this.centesimo = centesimo;
-        Random r=new Random();
-        region=r.nextInt(2)== 0 ? 0 : 2;
+//        Random r=new Random();
+//        region=r.nextInt(2)== 0 ? 0 : 2;
         Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, region);
         this.setPosition(posicion.getX(), posicion.getY());
     }
@@ -63,9 +64,12 @@ public class SpriteAmbiente extends Sprite{
      * Cambia la secuencia del sprite dependiendo de su posicion
      */
     public void mover() {
-
-        Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, region);
-        this.setPosition(posicion.getX() - this.getWidth()/2, posicion.getY()*Juego.ALTO_LINEA + Juego.altoFondo - this.getHeight()/2);
+        if(this.getY() > Global.ALTO_PANTALLA*3/4){
+            this.setPosition(this.getX()+Juego.ALTO_LINEA*(region==0 ? -1: 1), this.getY()+Juego.ALTO_LINEA);
+        }else{
+            Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, region);
+            this.setPosition(posicion.getX() - this.getWidth()/2, posicion.getY()*Juego.ALTO_LINEA + Juego.altoFondo - this.getHeight()/2);
+        }
 
 
         if(this.getY() < 80){

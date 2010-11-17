@@ -43,11 +43,11 @@ public class ManejadorAmbiente {
      * Metodo que agrega los elementos del ambiente al Vector.
      * @param tipoAmbiente  elemento que se desea agregar
      */
-    private void agregarElemento(int tipoAmbiente) {
+    private void agregarElemento(int tipoAmbiente, int region) {
         try {
             switch (tipoAmbiente) {
                 case SpriteAmbiente.ARBOL_1:
-                    ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_1, rndm.nextInt(80)+10));
+                    ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_1, rndm.nextInt(80)+10, region));
                     break;
                 default:
                     break;
@@ -83,8 +83,9 @@ public class ManejadorAmbiente {
         int size = ambienteEnPantalla.size();
 
         int rnd = rndm.nextInt(1);
-        if (rnd == 0 && size < 1000) {
-            this.agregarElemento(0);
+        if (rnd == 0 && size < 300) {
+            this.agregarElemento(0, 0);
+            this.agregarElemento(0, 2);
         }
         for (int i = 0; i < ambienteEnPantalla.size(); i++) {
             elemento = (SpriteAmbiente) ambienteEnPantalla.elementAt(i);
