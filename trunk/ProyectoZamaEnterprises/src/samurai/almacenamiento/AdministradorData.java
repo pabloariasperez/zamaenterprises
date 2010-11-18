@@ -17,7 +17,7 @@ public class AdministradorData {
 
     RecordStore rs;
     String nombreData;
-
+    public static final String SVacio = "vacio";
     public static final int REGISTRO_SCORE=1;
     public static final int REGISTRO_VIDA=2;
     public static final int REGISTRO_NIVEL=3;
@@ -113,7 +113,7 @@ public class AdministradorData {
             dato = new String(rs.getRecord(index));
             }
              else{
-             dato = "vacio";
+             dato = AdministradorData.SVacio;
              }
         } catch (RecordStoreException ex) {
             ex.printStackTrace();

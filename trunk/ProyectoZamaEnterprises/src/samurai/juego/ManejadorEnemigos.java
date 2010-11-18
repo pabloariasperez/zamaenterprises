@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
+import samurai.almacenamiento.AdministradorData;
 import samurai.animacion.SpriteEnemigo;
 
 
@@ -50,6 +51,30 @@ public class ManejadorEnemigos {
                     break;
                 case SpriteEnemigo.CESAR:
                     enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
+                    break;
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+     public void agregarEnemigo(int centesimo, int x, int y, int altura, int tipoEnemigo){
+        try {
+            switch (tipoEnemigo) {
+                case SpriteEnemigo.MURCIELAGO:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo, tipoEnemigo, altura,x,y));
+                    break;
+                case SpriteEnemigo.TOPO:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteTopo.png", centesimo,tipoEnemigo, altura,x,y));
+                    break;
+                case SpriteEnemigo.RATA:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteRata.png",centesimo, tipoEnemigo, altura,x,y));
+                    break;
+                case SpriteEnemigo.FANTASMA:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo, tipoEnemigo, altura,x,y));
+                    break;
+                case SpriteEnemigo.CESAR:
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo, tipoEnemigo, altura,x,y));
                     break;
             }
         } catch (IOException ex) {
@@ -102,5 +127,62 @@ public class ManejadorEnemigos {
      */
     public Vector getVectorEnemigo(){
         return this.enemigosEnPantalla;
+    }
+
+    public void cargarDatos(){
+        System.out.println("km1");
+      AdministradorData totalEnemigos = new AdministradorData("totalEnemigos");
+      System.out.println(totalEnemigos.regresarRegistroCompleto());
+     int total = Integer.valueOf(totalEnemigos.regresarRegistroCompleto()).intValue();
+     System.out.println(this.stringNumerada("enemigos", 0));
+      for(int i = 0; i<total; i++){
+           AdministradorData enemigoX = new AdministradorData(this.stringNumerada("enemigos", i));
+           System.out.println(enemigoX.regresarRegistroCompleto());
+           System.out.println(enemigoX.regresarDato(5));
+           this.agregarEnemigo(enemigoX.regresarValorDato(1),
+                               enemigoX.regresarValorDato(2),
+                               enemigoX.regresarValorDato(3),
+                               enemigoX.regresarValorDato(4),
+                               enemigoX.regresarValorDato(5));
+           System.out.println("km3");
+
+      }
+    
+    }
+
+    public void guardarDatos(){
+        AdministradorData totalEnemigos = new AdministradorData("totalEnemigos");
+        totalEnemigos.borrarTodo();
+        totalEnemigos.agregarRegistro("" + this.enemigosEnPantalla.size());
+
+        for(int i =0; i<this.enemigosEnPantalla.size();i++){
+            AdministradorData enemigoX = new AdministradorData(this.stringNumerada("enemigos", i));
+            enemigoX.borrarTodo();
+            for(int j=0; j<5; j++){
+                switch(j){
+                    case 0:
+                       enemigoX.agregarRegistro(String.valueOf(((SpriteEnemigo)(this.enemigosEnPantalla.elementAt(i))).getCentesimo()));
+                        break;
+                    case 1:
+                       enemigoX.agregarRegistro(String.valueOf(((SpriteEnemigo)(this.enemigosEnPantalla.elementAt(i))).getX()));
+                       break;
+                    case 2:
+                        enemigoX.agregarRegistro(String.valueOf(((SpriteEnemigo)(this.enemigosEnPantalla.elementAt(i))).getY()));
+                        break;
+                    case 3:
+                        enemigoX.agregarRegistro(String.valueOf(((SpriteEnemigo)(this.enemigosEnPantalla.elementAt(i))).getAltura()));
+                        break;
+                    case 4:
+                        enemigoX.agregarRegistro(String.valueOf(((SpriteEnemigo)(this.enemigosEnPantalla.elementAt(i))).getTipoEnemigo()));
+                        break;
+                }
+
+            }
+        }
+           
+        }
+    private String stringNumerada(String texto, int numero){
+        return texto + numero;
+
     }
 }
