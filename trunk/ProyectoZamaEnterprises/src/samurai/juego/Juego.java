@@ -8,6 +8,7 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.almacenamiento.AdministradorData;
 import samurai.animacion.SpriteEnemigo;
+import samurai.animacion.SpriteItem;
 import samurai.escenarios.*;
 import samurai.menu.Boton;
 import samurai.menu.Menu;
@@ -26,6 +27,7 @@ public class Juego extends GameCanvas implements Actualizable {
     private Graphics g;
     private ManejadorSekai manejadorSekai;
     private ManejadorEnemigos manejadorEnemigos;
+    private ManejadorItems manejadorItems;
     private ManejadorTeclado manejadorTec;
     private Musica musica;
     private SFX sfx;
@@ -33,10 +35,12 @@ public class Juego extends GameCanvas implements Actualizable {
     private boolean pausado;
     private boolean reproduciendo;
     private SpriteEnemigo enemigo;
+    private SpriteItem item;
     int escenarioActual;
     private Random random;
     Escenario escenario;
     private static Posicionador posicionador;
+
     private final int ANCHO_INICIAL = 190;
     private final int PORCENTAJE_ANCHO_FINAL = 15;
     /**
@@ -96,6 +100,9 @@ public class Juego extends GameCanvas implements Actualizable {
             //Manejador Enemigos
             manejadorEnemigos = new ManejadorEnemigos();
             enemigo = null;       //Para no crear mil "BICHOS" enemigo
+
+            manejadorItems= new ManejadorItems();
+            item=null;
                         
             this.cargarMusica(escenarioActual);
             this.reproduciendo = false;
@@ -138,6 +145,7 @@ public class Juego extends GameCanvas implements Actualizable {
         g.setColor(0x0);
         g.fillRect(0, 0, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA);
         escenario.dibujar(g);
+        manejadorItems.dibujar(g);
         manejadorEnemigos.dibujar(g);
         manejadorSekai.dibujar(g);
         g.drawString(""+score, 10, 10, Graphics.LEFT|Graphics.TOP);
@@ -189,15 +197,18 @@ public class Juego extends GameCanvas implements Actualizable {
             }
 
 
-            int rnd = random.nextInt(Global.FPS / 8);
+            int rndEnemigo = random.nextInt(Global.FPS / 8);
+            int rndItem = random.nextInt(50);
 
-            if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10 && !escenario.esFinEscenario()) {
+            if (rndEnemigo == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10 && !escenario.esFinEscenario()) {
                 agregarEnemigo(Nivel.generarEnemigo(escenarioActual, random));
+            }
+            if (rndItem == 0 && manejadorItems.getVectorItem().size() < 2 && !escenario.esFinEscenario()) {
+                agregarItem(this.random);
             }
 
             if( escenario.esFinEscenario() ){
-                if( manejadorEnemigos.getVectorEnemigo().isEmpty() ){
-
+                if( manejadorEnemigos.getVectorEnemigo().isEmpty() && manejadorItems.getVectorItem().isEmpty()){
                     samuraiMidlet.mostrarMenu();
                     return;
                 }
@@ -224,6 +235,18 @@ public class Juego extends GameCanvas implements Actualizable {
                     manejadorEnemigos.desaparecer(this.enemigo);
                 }
             }
+            for (int i = 0; i < manejadorItems.getVectorItem().size(); i++) {
+                this.item = (SpriteItem) (manejadorItems.getVectorItem().elementAt(i));
+
+                if (manejadorSekai.colisionEspada(this.item)) {
+//                    if (Global.SONIDO_ACTIVADO) {
+//                        sfx.reproducir(SFX.ESPADA);
+//                        //this.reproducir(this.enemigo.getTipoEnemigo());
+//                    }
+                    this.activarItem(this.item.getTipoItem());
+                    manejadorItems.desaparecer(item);
+                }
+            }
             if (manejadorSekai.muerteSekai()) {
                 this.samuraiMidlet.mostrarGameOver();
                 return;
@@ -231,6 +254,7 @@ public class Juego extends GameCanvas implements Actualizable {
 
             escenario.actualizar();
             manejadorEnemigos.actualizar();
+            manejadorItems.actualizar();
             try {
                 manejadorSekai.actualizar();
             } catch (InterruptedException ex) {
@@ -241,6 +265,9 @@ public class Juego extends GameCanvas implements Actualizable {
 
     private void agregarEnemigo(int enemigo) {
         this.manejadorEnemigos.agregarEnemigo(enemigo);
+    }
+    private void agregarItem(Random rnd) {
+        this.manejadorItems.agregarItem(rnd);
     }
 
     private void reproducir(int tipoEnemigo) {
@@ -392,5 +419,15 @@ public class Juego extends GameCanvas implements Actualizable {
         data.agregarRegistro(""+escenarioActual);
         data.agregarRegistro(""+escenario.tiempoActual());
         this.manejadorEnemigos.guardarDatos();
+    }
+
+    private void activarItem(int tipoItem) {
+        switch(tipoItem){
+            case SpriteItem.ITEM_CORAZON:
+                manejadorSekai.aumentarVida(10);
+                break;
+            default:
+                break;
+        }
     }
 }
