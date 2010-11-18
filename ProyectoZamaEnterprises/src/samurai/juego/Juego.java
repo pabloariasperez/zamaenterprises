@@ -371,6 +371,11 @@ public class Juego extends GameCanvas implements Actualizable {
         }
     }
 
+    protected void hideNotify() {
+        super.hideNotify();
+        pausar();
+    }
+
     private void guardarDatos() {
         AdministradorData data=new AdministradorData("continuar");
         data.agregarRegistro(""+score);
