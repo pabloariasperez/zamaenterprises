@@ -19,6 +19,7 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     private int alturaActual;
     private int centesimo;
 
+
     /**
      * Enum del Murcielago
      */
@@ -70,6 +71,25 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, 1);
         this.setPosition(posicion.getX(), posicion.getY());
     }
+      public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo, int altura, int x, int y) throws IOException{
+        super(Image.createImage(archivoEnemigo),160/4,160/4);
+
+                this.tipoEnemigo = tipoEnemigo;
+                this.secuenciaFondo=new int[]{0,1,2,3};
+                this.secuenciaMedia=new int[]{4,5,6,7};
+                this.secuenciaMediaFrente=new int[]{8,9,10,11};
+                this.secuenciaFrente = new int[]{12,13,14,15};
+
+        this.setFrameSequence(this.secuenciaFondo);
+
+        this.centesimo = centesimo;
+        this.alturaActual = altura;
+        posicion = new Posicion(x, y);
+       
+
+        Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, 1);
+        this.setPosition(posicion.getX(), posicion.getY());
+    }
 
     /**
      * Dibuja al enemigo
@@ -99,6 +119,12 @@ public class SpriteEnemigo  extends Sprite implements Animable {
         }
         this.nextFrame();
         alturaActual+=3;
+    }
+    public int getCentesimo(){
+        return this.centesimo;
+    }
+    public int getAltura(){
+        return this.alturaActual;
     }
 
     /**

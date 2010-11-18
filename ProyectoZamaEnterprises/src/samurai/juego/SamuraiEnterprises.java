@@ -71,16 +71,19 @@ public class SamuraiEnterprises extends MIDlet {
      *
      */
     public void continuarJuego() {
-        pantallaActual.destruir();
-        pantallaActual=null;
         AdministradorData data=new AdministradorData("continuar");
-        int score = data.regresarValorDato(AdministradorData.REGISTRO_SCORE);
-        int vida = data.regresarValorDato(AdministradorData.REGISTRO_VIDA);
-        int nivel = data.regresarValorDato(AdministradorData.REGISTRO_NIVEL);
-        int tiempo = data.regresarValorDato(AdministradorData.REGISTRO_TIEMPO);
-        pantallaActual = new Juego(this, nivel,score, vida, tiempo);
-        Global.setFPS(60);
-        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+        if(data.regresarDato(AdministradorData.REGISTRO_SCORE)!=AdministradorData.SVacio){
+            pantallaActual.destruir();
+            pantallaActual=null;
+
+            int score = data.regresarValorDato(AdministradorData.REGISTRO_SCORE);
+            int vida = data.regresarValorDato(AdministradorData.REGISTRO_VIDA);
+            int nivel = data.regresarValorDato(AdministradorData.REGISTRO_NIVEL);
+            int tiempo = data.regresarValorDato(AdministradorData.REGISTRO_TIEMPO);
+            pantallaActual = new Juego(this, nivel,score, vida, tiempo);
+            Global.setFPS(60);
+            Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+        }
     }
 
     /**
@@ -95,6 +98,7 @@ public class SamuraiEnterprises extends MIDlet {
     }
 
     /**
+     *
      *
      */
     public void correrNivelUno() {
@@ -119,7 +123,5 @@ public class SamuraiEnterprises extends MIDlet {
         pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.PROLOGO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
-    private void cargarDatos() {
 
-    }
 }

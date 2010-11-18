@@ -143,22 +143,22 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 texto.addElement("  ...  ");
                 return texto;
             case T_Adelante:
-                texto.addElement("Utilize el boton 2 para");
+                texto.addElement("Utilice el boton 2 para");
                 texto.addElement("realizar un ataque");
                 texto.addElement("frontal.");
                 return texto;
             case T_Derecha:
-                texto.addElement("Utilize el boton 6 para");
+                texto.addElement("Utilice el boton 6 para");
                 texto.addElement("realizar un ataque por");
                 texto.addElement("la derecha.");
                 return texto;
             case T_Izquierda:
-                texto.addElement("Utilize el boton 4 para");
+                texto.addElement("Utilice el boton 4 para");
                 texto.addElement("realizar un ataque por");
                 texto.addElement("la izquierda.");
                 return texto;
             case T_Pausa:
-                texto.addElement("Utilize el boton 8 para");
+                texto.addElement("Utilice el boton 8 para");
                 texto.addElement("pausar el juego.");
 
                 return texto;

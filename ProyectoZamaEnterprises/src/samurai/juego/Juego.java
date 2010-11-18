@@ -64,6 +64,7 @@ public class Juego extends GameCanvas implements Actualizable {
         this.setFullScreenMode(true);
         g = this.getGraphics();
         this.pausado = false;
+
         escenario = new Escenario(escenarioActual, tiempo);
 
         this.agregarFondos(escenarioActual);
@@ -106,7 +107,10 @@ public class Juego extends GameCanvas implements Actualizable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
+        if(tiempo>0){
+            this.manejadorEnemigos.cargarDatos();
+            this.pausarJuego();
+        }
         random = new Random();
 
         animador = new Animador(this);
@@ -169,7 +173,7 @@ public class Juego extends GameCanvas implements Actualizable {
                     case 1:
                         this.guardarDatos();
                         this.samuraiMidlet.mostrarMenu();
-                        break;
+                        return;
                 }
             }
         }
@@ -184,7 +188,9 @@ public class Juego extends GameCanvas implements Actualizable {
                 musica.repetirMusica();
             }
 
+
             int rnd = random.nextInt(Global.FPS / 8);
+
             if (rnd == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10 && !escenario.esFinEscenario()) {
                 agregarEnemigo(Nivel.generarEnemigo(escenarioActual, random));
             }
@@ -193,6 +199,7 @@ public class Juego extends GameCanvas implements Actualizable {
                 if( manejadorEnemigos.getVectorEnemigo().isEmpty() ){
 
                     samuraiMidlet.mostrarMenu();
+                    return;
                 }
             }
             
@@ -219,6 +226,7 @@ public class Juego extends GameCanvas implements Actualizable {
             }
             if (manejadorSekai.muerteSekai()) {
                 this.samuraiMidlet.mostrarGameOver();
+                return;
             }
 
             escenario.actualizar();
@@ -378,9 +386,11 @@ public class Juego extends GameCanvas implements Actualizable {
 
     private void guardarDatos() {
         AdministradorData data=new AdministradorData("continuar");
+        data.borrarTodo();
         data.agregarRegistro(""+score);
         data.agregarRegistro("" + manejadorSekai.getVida());
         data.agregarRegistro(""+escenarioActual);
         data.agregarRegistro(""+escenario.tiempoActual());
+        this.manejadorEnemigos.guardarDatos();
     }
 }
