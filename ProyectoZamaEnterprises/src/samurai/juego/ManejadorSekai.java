@@ -2,6 +2,7 @@ package samurai.juego;
 
 import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.game.Sprite;
 import samurai.animacion.*;
 
 /**
@@ -28,6 +29,8 @@ public class ManejadorSekai implements Animable{
     private final int ANCHO_VIDA;
     private int DIFERENCIAL_COLISION_ESPADA;
     private int DIFERENCIAL_COLISION_SEKAI;
+
+    public static final int VIDA_TOTAL=50;
 
     /**
      * Constructor que iniciliza todas las variables
@@ -171,9 +174,9 @@ public class ManejadorSekai implements Animable{
      * @param spriteEnemigo enemigo que efectua colision
      * @return true sii la colision fue efectuada
      */
-    public boolean colisionEspada(SpriteEnemigo spriteEnemigo) {
-         if(spriteEnemigo.getY() > DIFERENCIAL_COLISION_ESPADA ){
-            return this.efectosEspada.collidesWith(spriteEnemigo, true);
+    public boolean colisionEspada(Sprite sprite) {
+         if(sprite.getY() > DIFERENCIAL_COLISION_ESPADA ){
+            return this.efectosEspada.collidesWith(sprite, true);
         }
          return false;
     }
@@ -207,5 +210,12 @@ public class ManejadorSekai implements Animable{
 
     public int getVida() {
         return this.puntosVidaActual;
+    }
+
+    public void aumentarVida(int aumento) {
+        puntosVidaActual+=aumento;
+        if(puntosVidaActual>ManejadorSekai.VIDA_TOTAL){
+            puntosVidaActual=ManejadorSekai.VIDA_TOTAL;
+        }
     }
 }
