@@ -13,7 +13,11 @@ import samurai.juego.Juego;
  * @author zama
  */
 public class SpriteAmbiente extends Sprite{
-    private int[] secuenciaFondo, secuenciaMedia, secuenciaMediaFrente, secuenciaFrente;
+    private static int[] secuenciaFondo = new int[]{0};
+    private static int[] secuenciaMedia = new int[]{0};
+    private static int[] secuenciaMediaFrente = new int[]{0};
+    private static int[] secuenciaFrente = new int[]{0};
+
     private Posicion posicion;
     private int alturaActual;
     private int centesimo;
@@ -34,10 +38,7 @@ public class SpriteAmbiente extends Sprite{
     public SpriteAmbiente(Image imagenAmbiente, int centesimo, int region) throws IOException{
         super(imagenAmbiente,25,40);
 
-        this.secuenciaFondo=new int[]{0};
-        this.secuenciaMedia=new int[]{0};
-        this.secuenciaMediaFrente=new int[]{0};
-        this.secuenciaFrente = new int[]{0};
+       
 
         this.setFrameSequence(this.secuenciaFondo);
 

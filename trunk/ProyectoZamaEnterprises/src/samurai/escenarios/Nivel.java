@@ -38,6 +38,7 @@ public class Nivel{
            case NIVEL_1:
                 //Agregamos nuestros fondos
                 escenario.agregarFondo(new FondoCapa("/samurai/imagenes/cielogrande.png", -1, 0));
+                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/montanascafes.png", -2, 0));
                 break;
            case NIVEL_2:
                break;

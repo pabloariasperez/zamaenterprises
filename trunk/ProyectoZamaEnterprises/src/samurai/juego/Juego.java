@@ -249,6 +249,8 @@ public class Juego extends GameCanvas implements Actualizable {
             }
             if (manejadorSekai.muerteSekai()) {
                 this.samuraiMidlet.mostrarGameOver();
+                AdministradorData data=new AdministradorData("continuar");
+                data.borrarTodo();
                 return;
             }
 
