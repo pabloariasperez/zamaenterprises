@@ -367,7 +367,7 @@ public class Juego extends GameCanvas implements Actualizable {
     private void agregarFondos(int escenarioActual) {
         switch(escenarioActual){
             case Nivel.NIVEL_1:
-                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/fondoLuna.png", 5, 0));
+                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/cielogrande.png", 5, 0));
                 break;
             case Nivel.NIVEL_2:
                 break;
