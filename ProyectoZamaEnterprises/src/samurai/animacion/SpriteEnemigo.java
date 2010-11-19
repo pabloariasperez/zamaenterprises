@@ -6,6 +6,7 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
 import samurai.juego.Juego;
+import samurai.presentacion.Timor;
 
 /**
  * Crea el sprite del enemigo, cambia sus secuencia de frames y lo mueve
@@ -13,11 +14,16 @@ import samurai.juego.Juego;
  * @version 1.0 Septiembre 2010
  */
 public class SpriteEnemigo  extends Sprite implements Animable {
-    private int[] secuenciaFondo, secuenciaMedia, secuenciaMediaFrente, secuenciaFrente;
+    private static int[] secuenciaFondo = new int[]{0,1,2,3};
+    private static int[] secuenciaMedia = new int[]{4,5,6,7};
+    private static int[] secuenciaMediaFrente = new int[]{8,9,10,11};
+    private static int[] secuenciaFrente = new int[]{12,13,14,15};
+
     private int tipoEnemigo;
     private Posicion posicion;
     private int alturaActual;
     private int centesimo;
+    private Timor timer;
 
 
     /**
@@ -54,14 +60,11 @@ public class SpriteEnemigo  extends Sprite implements Animable {
      */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo) throws IOException{
         super(Image.createImage(archivoEnemigo),160/4,160/4);
-        
+        this.timer = new Timor(1);
         this.tipoEnemigo = tipoEnemigo;
-                this.secuenciaFondo=new int[]{0,1,2,3};
-                this.secuenciaMedia=new int[]{4,5,6,7};
-                this.secuenciaMediaFrente=new int[]{8,9,10,11};
-                this.secuenciaFrente = new int[]{12,13,14,15};
+                
         
-        this.setFrameSequence(this.secuenciaFondo);
+        this.setFrameSequence(SpriteEnemigo.secuenciaFondo);
 
         alturaActual = 0;
         posicion = new Posicion(0, 0);
@@ -73,14 +76,11 @@ public class SpriteEnemigo  extends Sprite implements Animable {
     }
       public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo, int altura, int x, int y) throws IOException{
         super(Image.createImage(archivoEnemigo),160/4,160/4);
-
+                this.timer = new Timor(1);
                 this.tipoEnemigo = tipoEnemigo;
-                this.secuenciaFondo=new int[]{0,1,2,3};
-                this.secuenciaMedia=new int[]{4,5,6,7};
-                this.secuenciaMediaFrente=new int[]{8,9,10,11};
-                this.secuenciaFrente = new int[]{12,13,14,15};
 
-        this.setFrameSequence(this.secuenciaFondo);
+
+        this.setFrameSequence(SpriteEnemigo.secuenciaFondo);
 
         this.centesimo = centesimo;
         this.alturaActual = altura;
@@ -106,16 +106,17 @@ public class SpriteEnemigo  extends Sprite implements Animable {
 
         Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, 1);
         this.setPosition(posicion.getX() - this.getWidth()/2, posicion.getY()*Juego.ALTO_LINEA + Juego.altoFondo - this.getHeight()/2);
-
-        
-        if(this.getY() < 80){
-            this.setFrameSequence(secuenciaFondo);
-        }
-        else if(this.getY() < 120)
-        {
-            this.setFrameSequence(secuenciaMedia);
-        }else if(this.getY()<160){
-            this.setFrameSequence(secuenciaMediaFrente);
+        timer.tik();
+        if(timer.activarIteracion()){
+            if(this.getY() < 80){
+                this.setFrameSequence(SpriteEnemigo.secuenciaFondo);
+            }
+            else if(this.getY() < 120)
+            {
+                this.setFrameSequence(SpriteEnemigo.secuenciaMedia);
+            }else if(this.getY()<160){
+                this.setFrameSequence(SpriteEnemigo.secuenciaMediaFrente);
+            }
         }
         this.nextFrame();
         alturaActual+=3;

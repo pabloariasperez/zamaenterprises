@@ -38,18 +38,11 @@ public class AdministradorData {
         rs = RecordStore.openRecordStore(this.nombreData, false);
          byte data[] = this.convertirAByte(registro);
          rs.addRecord(data, 0, data.length);
-
+          rs.closeRecordStore();
             
-      } catch (Exception e) {
-      } finally {
-            try {
-                rs.closeRecordStore();
-            } catch (RecordStoreNotOpenException ex) {
-                ex.printStackTrace();
-            } catch (RecordStoreException ex) {
-                ex.printStackTrace();
-            }
-      }
+      } catch (RecordStoreException e) {
+          e.printStackTrace();
+      } 
     }
       public void cambiarRegistro(String registro, int index){
         try{
@@ -57,19 +50,11 @@ public class AdministradorData {
          byte data[] = this.convertirAByte(registro);
          rs.addRecord(data, 0, data.length);
          rs.setRecord(index, data, 0, data.length);
+         rs.closeRecordStore();
 
-
-      } catch (Exception e) {
+      } catch (RecordStoreException e) {
           e.printStackTrace();
-      } finally {
-            try {
-                rs.closeRecordStore();
-            } catch (RecordStoreNotOpenException ex) {
-                ex.printStackTrace();
-            } catch (RecordStoreException ex) {
-                ex.printStackTrace();
-            }
-      }
+      } 
     }
 
     private byte[] convertirAByte(String string){
@@ -90,19 +75,10 @@ public class AdministradorData {
             for (int i = 1; i < rs.getNextRecordID(); i++) {
                 registro += new String(rs.getRecord(i));
             }
-        } catch (RecordStoreNotOpenException ex) {
-            ex.printStackTrace();
+            rs.closeRecordStore();
         } catch (RecordStoreException ex) {
             ex.printStackTrace();
-        }finally{
-            try {
-                rs.closeRecordStore();
-            } catch (RecordStoreNotOpenException ex) {
-                ex.printStackTrace();
-            } catch (RecordStoreException ex) {
-                ex.printStackTrace();
-            }
-        }
+        } 
         return registro;
     }
     public String regresarDato(int index){
@@ -115,16 +91,9 @@ public class AdministradorData {
              else{
              dato = AdministradorData.SVacio;
              }
+            rs.closeRecordStore();
         } catch (RecordStoreException ex) {
             ex.printStackTrace();
-        }finally{
-            try {
-                rs.closeRecordStore();
-            } catch (RecordStoreNotOpenException ex) {
-                ex.printStackTrace();
-            } catch (RecordStoreException ex) {
-                ex.printStackTrace();
-            }
         }
         return dato;
     }

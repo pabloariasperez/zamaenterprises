@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import samurai.animacion.Animable;
+import samurai.juego.Global;
 
 
 /**
@@ -53,7 +54,7 @@ public class FondoCapa implements Animable{
     }
     public void dibujar(Graphics g){
         g.drawImage(imagen, posicionX, posicionY, Graphics.LEFT|Graphics.TOP);
-       if(posicionX<-(imagen.getWidth()-240))
+       if(posicionX<-(imagen.getWidth()-Global.ANCHO_PANTALLA-10))
             g.drawImage(imagen, posicionX+imagen.getWidth(), posicionY, Graphics.LEFT|Graphics.TOP);
    }
 
