@@ -14,10 +14,10 @@ import samurai.presentacion.Timor;
  * @version 1.0 Septiembre 2010
  */
 public class SpriteEnemigo  extends Sprite implements Animable {
-    private static int[] secuenciaFondo = new int[]{0,1,2,3};
-    private static int[] secuenciaMedia = new int[]{4,5,6,7};
-    private static int[] secuenciaMediaFrente = new int[]{8,9,10,11};
-    private static int[] secuenciaFrente = new int[]{12,13,14,15};
+    private static int[] secuenciaFondo = {0,1,2,3};
+    private static int[] secuenciaMedia = {4,5,6,7};
+    private static int[] secuenciaMediaFrente = {8,9,10,11};
+    private static int[] secuenciaFrente = {12,13,14,15};
 
     private int tipoEnemigo;
     private Posicion posicion;
