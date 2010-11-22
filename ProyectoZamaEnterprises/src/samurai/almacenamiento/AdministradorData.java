@@ -15,8 +15,8 @@ import javax.microedition.rms.RecordStoreNotOpenException;
  */
 public class AdministradorData {
 
-    RecordStore rs;
-    String nombreData;
+    private RecordStore rs;
+    private String nombreData;
     public static final String SVacio = "vacio";
     public static final int REGISTRO_SCORE=1;
     public static final int REGISTRO_VIDA=2;
@@ -36,7 +36,7 @@ public class AdministradorData {
     public void agregarRegistro(String registro){
         try{
         rs = RecordStore.openRecordStore(this.nombreData, false);
-         byte data[] = this.convertirAByte(registro);
+         byte data[] = registro.getBytes();
          rs.addRecord(data, 0, data.length);
           rs.closeRecordStore();
             
@@ -47,7 +47,7 @@ public class AdministradorData {
       public void cambiarRegistro(String registro, int index){
         try{
         rs = RecordStore.openRecordStore(this.nombreData, false);
-         byte data[] = this.convertirAByte(registro);
+         byte data[] = registro.getBytes();
          rs.addRecord(data, 0, data.length);
          rs.setRecord(index, data, 0, data.length);
          rs.closeRecordStore();
@@ -55,15 +55,6 @@ public class AdministradorData {
       } catch (RecordStoreException e) {
           e.printStackTrace();
       } 
-    }
-
-    private byte[] convertirAByte(String string){
-        byte data[]= new byte[string.length()];
-        for(int i=0; i<string.length(); i++){
-            data[i] = (byte) (int)string.charAt(i);
-        }
-        return data;
-
     }
 
     public String regresarRegistroCompleto(){
@@ -99,6 +90,7 @@ public class AdministradorData {
     }
 
     public int regresarValorDato(int index){
+        
         Integer dato=Integer.valueOf(this.regresarDato(index));
         return dato.intValue();
 

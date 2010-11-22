@@ -7,17 +7,18 @@ import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
 import samurai.juego.Global;
 import samurai.juego.Juego;
+import samurai.presentacion.Timor;
 
 /**
  *
  * @author zama
  */
 public class SpriteAmbiente extends Sprite{
-    private static int[] secuenciaFondo = new int[]{0};
-    private static int[] secuenciaMedia = new int[]{0};
-    private static int[] secuenciaMediaFrente = new int[]{0};
-    private static int[] secuenciaFrente = new int[]{0};
-
+    private static int[] secuenciaFondo = {0};
+    private static int[] secuenciaMedia = {0};
+    private static int[] secuenciaMediaFrente = {0};
+    private static int[] secuenciaFrente = {0};
+    private Timor timer;
     private Posicion posicion;
     private int alturaActual;
     private int centesimo;
@@ -38,7 +39,7 @@ public class SpriteAmbiente extends Sprite{
     public SpriteAmbiente(Image imagenAmbiente, int centesimo, int region) throws IOException{
         super(imagenAmbiente,25,40);
 
-       
+       this.timer = new Timor(1);
 
         this.setFrameSequence(this.secuenciaFondo);
 
@@ -72,7 +73,8 @@ public class SpriteAmbiente extends Sprite{
             this.setPosition(posicion.getX() - this.getWidth()/2, posicion.getY()*Juego.ALTO_LINEA + Juego.altoFondo - this.getHeight()/2);
         }
 
-
+         timer.tik();
+        if(timer.activarIteracion()){
         if(this.getY() < 80){
             this.setFrameSequence(secuenciaFondo);
         }
@@ -81,6 +83,7 @@ public class SpriteAmbiente extends Sprite{
             this.setFrameSequence(secuenciaMedia);
         }else if(this.getY()<160){
             this.setFrameSequence(secuenciaMediaFrente);
+        }
         }
         alturaActual+=1;
     }
