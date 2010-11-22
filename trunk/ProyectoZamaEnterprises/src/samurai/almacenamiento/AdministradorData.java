@@ -32,6 +32,15 @@ public class AdministradorData {
             ex.printStackTrace();
         }
     }
+    public void cambiarTabla(String nombreData){
+        this.nombreData = nombreData;
+         try {
+            rs = RecordStore.openRecordStore(this.nombreData, true);
+            rs.closeRecordStore();
+        } catch (RecordStoreException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void agregarRegistro(String registro){
         try{
@@ -43,6 +52,17 @@ public class AdministradorData {
       } catch (RecordStoreException e) {
           e.printStackTrace();
       } 
+    }
+    public void agregarRegistro(int registro){
+        try{
+        rs = RecordStore.openRecordStore(this.nombreData, false);
+         byte data[] = {(byte)registro, (byte)20};
+         rs.addRecord(data, 0, data.length);
+          rs.closeRecordStore();
+
+      } catch (RecordStoreException e) {
+          e.printStackTrace();
+      }
     }
       public void cambiarRegistro(String registro, int index){
         try{
@@ -90,10 +110,20 @@ public class AdministradorData {
     }
 
     public int regresarValorDato(int index){
-        
-        Integer dato=Integer.valueOf(this.regresarDato(index));
-        return dato.intValue();
-
+        int dato=-1;
+       try {
+            rs = RecordStore.openRecordStore(this.nombreData, false);
+            if(index>0 && index<=rs.getNumRecords()){
+            dato = (int)(rs.getRecord(index)[0]);
+            }
+             else{
+             dato = -1;
+             }
+            rs.closeRecordStore();
+        } catch (RecordStoreException ex) {
+            ex.printStackTrace();
+        }
+        return dato;
     }
 
     public void borrarTodo(){
