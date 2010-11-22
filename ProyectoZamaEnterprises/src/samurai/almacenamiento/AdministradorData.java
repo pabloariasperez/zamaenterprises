@@ -7,7 +7,6 @@ package samurai.almacenamiento;
 
 import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
-import javax.microedition.rms.RecordStoreNotOpenException;
 
 /**
  *
