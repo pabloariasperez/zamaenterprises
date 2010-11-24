@@ -127,9 +127,9 @@ public class Juego extends GameCanvas implements Actualizable {
     public void creaBotones() {
         try {
             if (this.menuPausa == null) {
-                this.menuPausa = new Menu(2, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", 1);
-                this.botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
-                this.botonSalir = new Boton("/samurai/imagenes/botonSalir.png");
+                this.menuPausa = new Menu(2, "/samurai/imagenes/titulos/tituloPausa.png", "/samurai/imagenes/slash.png", 1);
+                this.botonContinuar = new Boton("/samurai/imagenes/botones/botonContinuar.png");
+                this.botonSalir = new Boton("/samurai/imagenes/botones/botonSalir.png");
                 this.menuPausa.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
                 this.menuPausa.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
             }
@@ -203,7 +203,7 @@ public class Juego extends GameCanvas implements Actualizable {
             if (rndEnemigo == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10 && !escenario.esFinEscenario()) {
                 agregarEnemigo(Nivel.generarEnemigo(escenarioActual, random));
             }
-            if (rndItem == 0 && manejadorItems.getVectorItem().size() < 2 && !escenario.esFinEscenario()) {
+            if (rndItem == 0 && manejadorItems.getVectorItem().size() < 1 && !escenario.esFinEscenario()) {
                 agregarItem(this.random);
             }
 
@@ -239,15 +239,16 @@ public class Juego extends GameCanvas implements Actualizable {
                 this.item = (SpriteItem) (manejadorItems.getVectorItem().elementAt(i));
 
                 if (manejadorSekai.colisionEspada(this.item)) {
-//                    if (Global.SONIDO_ACTIVADO) {
-//                        sfx.reproducir(SFX.ESPADA);
-//                        //this.reproducir(this.enemigo.getTipoEnemigo());
-//                    }
+                    if (Global.SONIDO_ACTIVADO) {
+                        sfx.reproducir(SFX.ESPADA);
+                        this.reproducir(this.enemigo.getTipoEnemigo());
+                    }
                     this.activarItem(this.item.getTipoItem());
                     manejadorItems.desaparecer(item);
                 }
             }
             if (manejadorSekai.muerteSekai()) {
+                //this.samuraiMidlet.guardarScore(this.score);
                 this.samuraiMidlet.mostrarGameOver();
                 AdministradorData data=new AdministradorData("continuar");
                 data.borrarTodo();
@@ -426,7 +427,7 @@ public class Juego extends GameCanvas implements Actualizable {
     private void activarItem(int tipoItem) {
         switch(tipoItem){
             case SpriteItem.ITEM_CORAZON:
-                manejadorSekai.aumentarVida(10);
+                manejadorSekai.aumentarVida((int) (ManejadorSekai.VIDA_TOTAL * .1));
                 break;
             default:
                 break;

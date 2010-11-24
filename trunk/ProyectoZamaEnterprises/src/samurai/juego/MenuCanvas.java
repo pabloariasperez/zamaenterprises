@@ -78,7 +78,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         
         //Intentamos crear nuestro Menú Principal. De lo contrario regresamos una excepción.
         try {            
-            menuPrincipal = new Menu(5,"/samurai/imagenes/tituloprincipal.png","/samurai/imagenes/slash.png", MenuCanvas.PRINCIPAL );
+            menuPrincipal = new Menu(5,"/samurai/imagenes/titulos/tituloprincipal.png","/samurai/imagenes/slash.png", MenuCanvas.PRINCIPAL );
             this.crearBotonesMenuPrincipal();
 
             //Establecemos el Menú Principal como el Menú Actual para ser desplegado.
@@ -96,11 +96,11 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private void crearBotonesMenuPrincipal(){
         try {
             //Inicializo cada uno de los botones del menú principal.
-            this.botonNuevo = new Boton("/samurai/imagenes/botonNuevo.png");
-            this.botonContinuar = new Boton("/samurai/imagenes/botonContinuar.png");
-            this.botonPuntajes = new Boton("/samurai/imagenes/botonPuntajes.png");
-            this.botonOpciones = new Boton("/samurai/imagenes/botonOpciones.png");
-            this.botonSalir = new Boton("/samurai/imagenes/botonSalir.png");
+            this.botonNuevo = new Boton("/samurai/imagenes/botones/botonNuevo.png");
+            this.botonContinuar = new Boton("/samurai/imagenes/botones/botonContinuar.png");
+            this.botonPuntajes = new Boton("/samurai/imagenes/botones/botonPuntajes.png");
+            this.botonOpciones = new Boton("/samurai/imagenes/botones/botonOpciones.png");
+            this.botonSalir = new Boton("/samurai/imagenes/botones/botonSalir.png");
 
             //Los agregamos a nuestro Menú Principal. Además de indicar el fondo que mostrarán de fondo.
             this.menuPrincipal.agregarBoton(botonNuevo, "/samurai/imagenes/fondosMenu/juegoNuevo.png");
@@ -117,9 +117,9 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private void creaBotonesOpciones(){
         //Creamos cada uno de los botones.
         try {
-            opcionSonido = new Boton("/samurai/imagenes/botonSonido.png");
-            opcionIdioma = new Boton("/samurai/imagenes/botonCreditos.png");
-            opcionAtras = new Boton("/samurai/imagenes/botonAtras.png");
+            opcionSonido = new Boton("/samurai/imagenes/botones/botonSonido.png");
+            opcionIdioma = new Boton("/samurai/imagenes/botones/botonCreditos.png");
+            opcionAtras = new Boton("/samurai/imagenes/botones/botonAtras.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
             menuOpciones.agregarBoton(opcionSonido, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
@@ -133,8 +133,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private void creaBotonesSonido() {
         //Creamos cada uno de los botones.
         try {
-            opcionSi = new Boton("/samurai/imagenes/botonSi.png");
-            opcionNo = new Boton("/samurai/imagenes/botonNo.png");
+            opcionSi = new Boton("/samurai/imagenes/botones/botonSi.png");
+            opcionNo = new Boton("/samurai/imagenes/botones/botonNo.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
             menuSonido.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
@@ -147,8 +147,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private void creaBotonesSalir() {
         //Creamos cada uno de los botones.
         try {
-            opcionNo = new Boton("/samurai/imagenes/botonNo.png");
-            opcionSi = new Boton("/samurai/imagenes/botonSi.png");
+            opcionNo = new Boton("/samurai/imagenes/botones/botonNo.png");
+            opcionSi = new Boton("/samurai/imagenes/botones/botonSi.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
             menuSalir.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
@@ -266,16 +266,16 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     menuOpciones = null;
                     break;
                 case MenuCanvas.OPCIONES:
-                    menuOpciones = new Menu(3, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", MenuCanvas.OPCIONES);
+                    menuOpciones = new Menu(3, "/samurai/imagenes/titulos/tituloOpciones.png", "/samurai/imagenes/slash.png", MenuCanvas.OPCIONES);
                     this.creaBotonesOpciones();
                     menuSonido = null;      //Es poco probable que se vuelva a ingresar a él.
                     break;
                 case MenuCanvas.SONIDO:
-                    menuSonido = new Menu(2, "/samurai/imagenes/tituloSonido.png", "/samurai/imagenes/slash.png", MenuCanvas.SONIDO);
+                    menuSonido = new Menu(2, "/samurai/imagenes/titulos/tituloSonido.png", "/samurai/imagenes/slash.png", MenuCanvas.SONIDO);
                     this.creaBotonesSonido();
                     break;
                 case MenuCanvas.SALIR:
-                    menuSalir = new Menu(2, "/samurai/imagenes/tituloprincipal.png", "/samurai/imagenes/slash.png", MenuCanvas.SALIR);
+                    menuSalir = new Menu(2, "/samurai/imagenes/titulos/tituloSalir.png", "/samurai/imagenes/slash.png", MenuCanvas.SALIR);
                     this.creaBotonesSalir();
                     break;
             }

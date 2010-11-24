@@ -80,7 +80,7 @@ public class SamuraiEnterprises extends MIDlet {
             pantallaActual.destruir();
             pantallaActual=null;
 
-            int score = data.regresarValorDato(AdministradorData.REGISTRO_SCORE);
+            int score = data.regresarValorDato(AdministradorData.REGISTRO_SCORE_ACTUAL);
             int vida = data.regresarValorDato(AdministradorData.REGISTRO_VIDA);
             int nivel = data.regresarValorDato(AdministradorData.REGISTRO_NIVEL);
             int tiempo = data.regresarValorDato(AdministradorData.REGISTRO_TIEMPO);
@@ -92,12 +92,11 @@ public class SamuraiEnterprises extends MIDlet {
     }
 
     private void verificarGuardado(){
-        if(data.regresarDato(AdministradorData.REGISTRO_SCORE)!=AdministradorData.SVacio)
+        if(data.regresarDato(AdministradorData.REGISTRO_SCORE_ACTUAL)!= AdministradorData.SVacio)
             this.guardado=true;
         else
             this.guardado = false;
     }
-
     /**
      *
      */
@@ -129,7 +128,7 @@ public class SamuraiEnterprises extends MIDlet {
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
-    void mostrarPrologo() {
+    public void mostrarPrologo() {
         pantallaActual.destruir();
         pantallaActual=null;
         Global.setFPS(50);
@@ -137,4 +136,8 @@ public class SamuraiEnterprises extends MIDlet {
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
+    public void guardarScore(int score) {
+        data = new AdministradorData("Scores");
+        
+    }
 }
