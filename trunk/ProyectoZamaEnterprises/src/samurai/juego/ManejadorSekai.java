@@ -41,7 +41,7 @@ public class ManejadorSekai implements Animable{
     public ManejadorSekai( ManejadorTeclado manejadorTec, int vida){
         try {
             this.sekai = new SpriteSekai("/samurai/imagenes/sekai.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA);
-            this.efectosEspada = new SpriteEspada("/samurai/imagenes/SpritesEfectos.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA - getHeight());
+            this.efectosEspada = new SpriteEspada("/samurai/imagenes/spriteEspada.png", Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA - getHeight());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
