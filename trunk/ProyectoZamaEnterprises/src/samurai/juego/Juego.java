@@ -71,7 +71,8 @@ public class Juego extends GameCanvas implements Actualizable {
 
         escenario = new Escenario(escenarioActual, tiempo);
 
-        this.agregarFondos(escenarioActual);
+        //Relacionado con Nivel
+        Nivel.inicializar(escenarioActual, escenario);
         altoFondo = escenario.getAltoFondos();
 
         posicionador = new Posicionador(ANCHO_INICIAL, PORCENTAJE_ANCHO_FINAL, ALTO_LINEA, altoFondo);
@@ -85,9 +86,6 @@ public class Juego extends GameCanvas implements Actualizable {
 
 
         try {
-            //Relacionado con Nivel
-            Nivel.inicializar(escenarioActual, escenario);
-
             //Creamos los manejadores
             //Manejador de Teclado
             manejadorTec = new ManejadorTeclado(this);
@@ -365,20 +363,6 @@ public class Juego extends GameCanvas implements Actualizable {
         menuPausa = null;
         botonSalir = null;
         botonContinuar = null;
-    }
-
-    private void agregarFondos(int escenarioActual) {
-        switch(escenarioActual){
-            case Nivel.NIVEL_1:
-                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/cielogrande.png", 5, 0));
-                break;
-            case Nivel.NIVEL_2:
-                break;
-            case Nivel.NIVEL_3:
-                break;
-            default:
-                break;
-        }
     }
 
     private void cargarMusica(int escenarioActual) {

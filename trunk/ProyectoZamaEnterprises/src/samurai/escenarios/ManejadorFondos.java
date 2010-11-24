@@ -10,7 +10,6 @@ import samurai.animacion.Animable;
  * @version 1.0 Octubre 2010
  */
 public class ManejadorFondos implements Animable {
-
     private Vector fondos;
 
     /**
@@ -27,7 +26,7 @@ public class ManejadorFondos implements Animable {
      * @param fondo fondo a ser agregado
      */
     public void agregarFondo(FondoCapa fondo){
-     fondos.addElement(fondo);
+        fondos.addElement(fondo);
      }
 
 
