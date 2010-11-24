@@ -17,7 +17,7 @@ public class AdministradorData {
     private RecordStore rs;
     private String nombreData;
     public static final String SVacio = "vacio";
-    public static final int REGISTRO_SCORE=1;
+    public static final int REGISTRO_SCORE_ACTUAL=1;
     public static final int REGISTRO_VIDA=2;
     public static final int REGISTRO_NIVEL=3;
     public static final int REGISTRO_TIEMPO=4;

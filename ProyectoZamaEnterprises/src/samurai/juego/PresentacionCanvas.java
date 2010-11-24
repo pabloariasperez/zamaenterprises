@@ -91,23 +91,25 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.diapositivas.push(creditoPablo);
                 break;
             case PresentacionCanvas.TUTORIAL:
-                Diapositiva controlIzquierda = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/tutorial/izquierda.png", agregarString(T_Izquierda));
-                Diapositiva controlDerecha = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/tutorial/derecha.png", agregarString(T_Derecha));
-                Diapositiva controlAdelante = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/tutorial/adelante.png", agregarString(T_Adelante));
-                Diapositiva controlAbajo = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/tutorial/pausa.png", agregarString(T_Pausa));
+                Diapositiva controlIzquierda = new Diapositiva("/samurai/imagenes/titulos/tituloTutorial.png", "/samurai/imagenes/tutorial/izquierda.png", agregarString(T_Izquierda));
+                Diapositiva controlDerecha = new Diapositiva("/samurai/imagenes/titulos/tituloTutorial.png", "/samurai/imagenes/tutorial/derecha.png", agregarString(T_Derecha));
+                Diapositiva controlAdelante = new Diapositiva("/samurai/imagenes/titulos/tituloTutorial.png", "/samurai/imagenes/tutorial/adelante.png", agregarString(T_Adelante));
+                Diapositiva controlAbajo = new Diapositiva("/samurai/imagenes/titulos/tituloTutorial.png", "/samurai/imagenes/tutorial/pausa.png", agregarString(T_Pausa));
                 this.diapositivas.push(controlIzquierda);
                 this.diapositivas.push(controlDerecha);
                 this.diapositivas.push(controlAdelante);
                 this.diapositivas.push(controlAbajo);
                 break;
             case PresentacionCanvas.PROLOGO:
-                Diapositiva prologo1 = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_PROLOGO_1));
-                this.diapositivas.push(prologo1);
+                Diapositiva prologo = new Diapositiva("/samurai/imagenes/titulos/tituloPrologo.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_PROLOGO_1));
+                this.diapositivas.push(prologo);
                 break;
             case PresentacionCanvas.EPILOGO:
+                Diapositiva epilogo = new Diapositiva("/samurai/imagenes/titulos/tituloEpilogo.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_PROLOGO_1));
+                this.diapositivas.push(epilogo);
                 break;
             case PresentacionCanvas.GAMEOVER:
-                Diapositiva gameOver = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_GAMEOVER));
+                Diapositiva gameOver = new Diapositiva("/samurai/imagenes/titulos/tituloGameOver.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_GAMEOVER));
                 this.diapositivas.push(gameOver);
                 break;
             default:

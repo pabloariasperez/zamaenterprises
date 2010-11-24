@@ -54,8 +54,8 @@ public class Escenario {
         estadoYActual = 0;
         incremento = 0;
         try {
-            fondoCamino = Image.createImage("/samurai/imagenes/fondoCamino.png");
-            piedra = new Sprite(Image.createImage("/samurai/imagenes/spritePiedra.png"), 20, 20);
+            fondoCamino = Image.createImage("/samurai/imagenes/ambiente/fondoCamino.png");
+            piedra = new Sprite(Image.createImage("/samurai/imagenes/ambiente/spritePiedra.png"), 20, 20);
             piedra.setFrameSequence(new int[]{0,1,2,3});
         } catch (IOException ex) {
             ex.printStackTrace();
