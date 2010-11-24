@@ -36,20 +36,20 @@ public class SpriteEspada extends Sprite implements Animable {
      */
     public SpriteEspada(String archivoEfectos, int posicionX, int posicionY) throws IOException{
 
-        super(Image.createImage(archivoEfectos), 480/8, 180/3);
+        super(Image.createImage(archivoEfectos), 360/6, 210/3);
 
         this.poscionX=posicionX;
         this.poscionY=posicionY;
         this.setPosition(poscionX, poscionY);
 
-//        this.secuenciaIzq=new int[] {0,1,1,2,2,3,3,4,4,5,5,6,6,7,7};
-//        this.secuenciaDer=new int[] {8,9,9,10,10,11,11,12,12,13,13,14,14,15,15};
-//        this.secuenciaFrente=new int[] {16,17,17,18,18,18,19,19,20,20,21,21,21,22,22};
+      // this.secuenciaIzq=new int[] {0,1,1,2,2,3,3,4,4,5,5,6,6,7,7};
+       // this.secuenciaDer=new int[] {8,9,9,10,10,11,11,12,12};
+       // this.secuenciaFrente=new int[] {16,17,17,18,18,18,19,19,};
 
 
         this.secuenciaIzq=new int[] {0,1,2,3,4};
-        this.secuenciaDer=new int[] {8,9,10,11,12};
-        this.secuenciaFrente=new int[] {16,17,18,18,19};
+        this.secuenciaDer=new int[] {6,7,8,9,10};
+        this.secuenciaFrente=new int[] {12,14,15,16,17};
     }
 
     /**
@@ -72,7 +72,7 @@ public class SpriteEspada extends Sprite implements Animable {
      */
     public void setAtaqueIzq(){
         this.setFrameSequence(secuenciaIzq);
-        this.setPosition(poscionX-getWidth()*5/4, poscionY - getHeight()*1/5);
+        this.setPosition(poscionX-getWidth()*9/8, poscionY - getHeight()*1/10);
         this.secuenciaSeleccionada=1;
     }
    /**
@@ -80,7 +80,7 @@ public class SpriteEspada extends Sprite implements Animable {
     */
    public void setAtaqueDer(){
         this.setFrameSequence(secuenciaDer);
-        this.setPosition(poscionX+getWidth()/5, poscionY - getHeight()*1/5);
+        this.setPosition(poscionX+getWidth()/7, poscionY - getHeight()*1/10);
         this.secuenciaSeleccionada=2;
     }
 
