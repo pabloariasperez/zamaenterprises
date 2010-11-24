@@ -87,9 +87,6 @@ public class GeneradorEje implements Runnable {
             alturaActual += altoLinea;
             numerador = Global.ALTO_PANTALLA - alturaActual;
             posiciones[lineaActual][0] = margenIzquierdo + (int) ((float) (constantePrimerGrado * numerador / denominador) + (float) (numerador * numerador * numerador) * parametroDividido);
-            //(((anchoInicial*(100-porcentajeAnchoFinal))/200)*numerador/denominador + (float)parametro*((float)(numerador*numerador*numerador)/(float)(denominador*denominador*denominador)));
-            //(int)((1-(float)(((float)(Global.ALTO_PANTALLA - alturaActual)/(float)(Global.ALTO_PANTALLA - altoFondo))*(float)(100 - porcentajeAnchoFinal)/(float)100))*(float)anchoInicial);
-
 
             posiciones[lineaActual][1] = anchoInicial - (int) ((constanteParaIncremento * numerador) / denominador);
             posiciones[lineaActual][2] = Global.ANCHO_PANTALLA - posiciones[lineaActual][0] - posiciones[lineaActual][1];
