@@ -82,7 +82,7 @@ public class ManejadorAmbiente {
     public void actualizar() {
         int size = ambienteEnPantalla.size();
 
-        int rnd = rndm.nextInt(1);
+        int rnd = rndm.nextInt(10);
         if (rnd == 0 && size < 300) {
             this.agregarElemento(0, 0);
             this.agregarElemento(0, 2);

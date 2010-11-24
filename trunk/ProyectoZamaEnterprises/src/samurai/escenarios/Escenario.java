@@ -93,6 +93,7 @@ public class Escenario {
 
     /**
      * regresa el alto de los fondos
+
      * @return alto de los fondos
      */
     public int getAltoFondos() {

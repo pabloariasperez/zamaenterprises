@@ -56,9 +56,9 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         colores = new Stack();
 
         //Metemos a nuestros STACK's de Splashes y colores los que queremos mostrar. Atención con el órden en que son ingresados.
-        splashes.push( new Splash("/samurai/imagenes/sekai.png") );
+        splashes.push( new Splash("/samurai/imagenes/splashes/SamuraiEnterprisesLogo.png") );
         colores.push(new Integer(0x000000));
-        splashes.push( new Splash("/samurai/imagenes/itesmcel.png") );
+        splashes.push( new Splash("/samurai/imagenes/splashes/Tec_CEM_logo.png") );
         colores.push(new Integer(0xFFFFFF));
 
         //Inicializamos nuestro tiempo.
