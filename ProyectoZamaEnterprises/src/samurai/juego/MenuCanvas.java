@@ -105,9 +105,9 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             //Los agregamos a nuestro Menú Principal. Además de indicar el fondo que mostrarán de fondo.
             this.menuPrincipal.agregarBoton(botonNuevo, "/samurai/imagenes/fondosMenu/juegoNuevo.png");
             this.menuPrincipal.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
-            this.menuPrincipal.agregarBoton(botonPuntajes, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
-            this.menuPrincipal.agregarBoton(botonOpciones, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
-            this.menuPrincipal.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
+            this.menuPrincipal.agregarBoton(botonPuntajes, "/samurai/imagenes/fondosMenu/spriteScores.png");
+            this.menuPrincipal.agregarBoton(botonOpciones, "/samurai/imagenes/fondosMenu/spriteLlave.png");
+            this.menuPrincipal.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/puertas.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

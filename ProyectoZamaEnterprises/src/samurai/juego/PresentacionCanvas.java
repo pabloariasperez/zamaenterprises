@@ -83,7 +83,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private void agregarDiapositivas() {
         switch (this.tipo) {
             case PresentacionCanvas.CREDITO:
-                Diapositiva creditoDaniel = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(C_DANIEL));
+                Diapositiva creditoDaniel = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/feliz.png", agregarString(C_DANIEL));
                 Diapositiva creditoErik = new Diapositiva("/samurai/imagenes/creditos/Erik.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(C_ERIK));
                 Diapositiva creditoPablo = new Diapositiva("/samurai/imagenes/creditos/Pablo.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(C_PABLO));
                 this.diapositivas.push(creditoDaniel);
@@ -101,7 +101,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.diapositivas.push(controlAbajo);
                 break;
             case PresentacionCanvas.PROLOGO:
-                Diapositiva prologo = new Diapositiva("/samurai/imagenes/titulos/tituloPrologo.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_PROLOGO_1));
+                Diapositiva prologo = new Diapositiva("/samurai/imagenes/titulos/tituloPrologo.png", "/samurai/imagenes/creditos/feliz.png", agregarString(S_PROLOGO_1));
                 this.diapositivas.push(prologo);
                 break;
             case PresentacionCanvas.EPILOGO:
