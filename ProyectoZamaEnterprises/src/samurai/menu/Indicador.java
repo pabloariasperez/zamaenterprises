@@ -24,7 +24,7 @@ public class Indicador extends Sprite {
     private static final int ANCHO_SPRITE = 135;
     private static final int ALTO_SPRITE = 40;
     private static final int ALTO_FINAL = 6;
-    private static final int TIEMPO_LLENADO_HORIZONTAL = 1000;    //En milisegundos
+    private static final int TIEMPO_LLENADO_HORIZONTAL = 300;    //En milisegundos
 
 
 
