@@ -12,7 +12,6 @@ import javax.microedition.rms.RecordStoreException;
  * @author mi16
  */
 public class AdministradorData {
-
     private RecordStore recordStore;
     private String nombreStore;
     public static final String SVacio = "vacio";
@@ -20,6 +19,10 @@ public class AdministradorData {
     public static final int REGISTRO_VIDA = 2;
     public static final int REGISTRO_NIVEL = 3;
     public static final int REGISTRO_TIEMPO = 4;
+
+    public static final String STORE_AVANCE = "AVANCE";
+    public static final String STORE_ENEMIGO = "ENEMIGO";
+    public static final String STORE_TOTAL_ENEMIGOS = "TOTAL_ENEMIGOS";
 
     public AdministradorData(String nombreStore) {
         this.nombreStore = nombreStore;
@@ -127,6 +130,9 @@ public class AdministradorData {
     public void borrarTodo() {
         try {
             RecordStore.deleteRecordStore(nombreStore);
+
+            recordStore = RecordStore.openRecordStore(this.nombreStore, true);
+            recordStore.closeRecordStore();
         } catch (RecordStoreException ex) {
             ex.printStackTrace();
         }

@@ -399,12 +399,12 @@ public class Juego extends GameCanvas implements Actualizable {
     }
 
     private void guardarDatos() {
-        AdministradorData data=new AdministradorData("continuar");
+        AdministradorData data=new AdministradorData(AdministradorData.STORE_AVANCE);
         data.borrarTodo();
-        data.agregarRegistro(""+score);
-        data.agregarRegistro("" + manejadorSekai.getVida());
-        data.agregarRegistro(""+escenarioActual);
-        data.agregarRegistro(""+escenario.tiempoActual());
+        data.agregarRegistro( score );
+        data.agregarRegistro( manejadorSekai.getVida() );
+        data.agregarRegistro( escenarioActual );
+        data.agregarRegistro( escenario.tiempoActual() );
         this.manejadorEnemigos.guardarDatos();
     }
 
