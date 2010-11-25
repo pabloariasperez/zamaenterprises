@@ -100,10 +100,6 @@ public class Posicionador {
     public void getPorcion( Posicion posicion, int altura, int centesimal, int region){
         posicion.setY((int)((float)((posiciones.length-1)*(altura)/(float)(Global.ALTO_PANTALLA - altoFondo))) );
 
-        //Evitar que se desborde
-        if( posicion.getY() > posiciones.length - 1){
-            posicion.setY(0);
-        }
         posicion.setX((posiciones[posicion.getY()][region]*centesimal)/100);
         while(region > 0){
             region--;
