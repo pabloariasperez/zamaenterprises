@@ -419,7 +419,7 @@ public class Juego extends GameCanvas implements Actualizable {
 
     protected void hideNotify() {
         super.hideNotify();
-        pausar();
+        this.pausarJuego();
     }
 
     private void guardarDatos() {
