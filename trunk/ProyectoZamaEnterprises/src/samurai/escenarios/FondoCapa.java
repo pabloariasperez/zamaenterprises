@@ -32,7 +32,7 @@ public class FondoCapa implements Animable{
     public FondoCapa(String archivoImagen, int velocidad, int posicionY){
        
         try {
-            this.imagen = Image.createImage(archivoImagen);
+            this.imagen = Global.resizeImage(Image.createImage(archivoImagen));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

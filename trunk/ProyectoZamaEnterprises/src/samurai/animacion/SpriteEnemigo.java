@@ -5,6 +5,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
+import samurai.juego.Global;
 import samurai.juego.Juego;
 
 /**
@@ -55,6 +56,8 @@ public class SpriteEnemigo extends Sprite implements Animable {
      */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo) throws IOException {
         super(Image.createImage(archivoEnemigo), 160 / 4, 160 / 4);
+        Image imagen = Global.resizeSprite(Image.createImage(archivoEnemigo), 4, 4);
+        super.setImage(imagen, imagen.getWidth()/4, imagen.getHeight()/4);
         this.tipoEnemigo = tipoEnemigo;
 
 

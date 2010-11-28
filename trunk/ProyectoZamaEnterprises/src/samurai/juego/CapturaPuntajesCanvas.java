@@ -45,8 +45,8 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
 
         this.puntajeNuevo = puntajeNuevo;
         try {
-            letras = Image.createImage("/samurai/imagenes/letras.png");
-            indicador = new Sprite(Image.createImage("/samurai/imagenes/ambiente/arbol.png"));
+            letras = Global.resizeImage(Image.createImage("/samurai/imagenes/letras.png"));
+            indicador = new Sprite(Global.resizeImage(Image.createImage("/samurai/imagenes/ambiente/arbol.png")));
             indicador.setPosition(Global.ANCHO_PANTALLA / 2 - letras.getWidth() / 2, Global.ALTO_PANTALLA / 2 - letras.getHeight() / 2);
             xTabla = 0;
             yTabla = 0;

@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
+import samurai.juego.Global;
 
 /**
  * Crea el sprite de la espada y la anima
@@ -37,7 +38,8 @@ public class SpriteEspada extends Sprite implements Animable {
     public SpriteEspada(String archivoEfectos, int posicionX, int posicionY) throws IOException{
 
         super(Image.createImage(archivoEfectos), 360/6, 210/3);
-
+        Image imagen = Global.resizeSprite(Image.createImage(archivoEfectos), 6, 3);
+        super.setImage(imagen, imagen.getWidth()/6, imagen.getHeight()/3);
         this.poscionX=posicionX;
         this.poscionY=posicionY;
         this.setPosition(poscionX, poscionY);

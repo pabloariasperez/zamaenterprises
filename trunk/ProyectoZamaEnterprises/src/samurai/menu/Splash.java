@@ -24,7 +24,7 @@ public class Splash implements Animable
     public Splash(String archivo) {
         //INtentamos crear nuestra imagen del Splash actual.
         try {
-            imagen = Image.createImage(archivo);
+            imagen = Global.resizeImage(Image.createImage(archivo));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -33,9 +33,9 @@ public class Diapositiva implements Animable{
      */
     public Diapositiva(String rutaNombre, String rutaImagen, Vector textos){
         try {
-            this.titulo = Image.createImage(rutaNombre);
-            this.imagenRelativa = Image.createImage(rutaImagen);
-            this.imagenCuadro = Image.createImage("/samurai/imagenes/creditos/Cuadro.png");
+            this.titulo = Global.resizeImage(Image.createImage(rutaNombre));
+            this.imagenRelativa = Global.resizeImage(Image.createImage(rutaImagen));
+            this.imagenCuadro = Global.resizeImage(Image.createImage("/samurai/imagenes/creditos/Cuadro.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

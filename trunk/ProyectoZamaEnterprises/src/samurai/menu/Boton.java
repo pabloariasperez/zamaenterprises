@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import samurai.escenarios.Posicion;
+import samurai.juego.Global;
 
 /**
  * Clase encargada de la imagen del boton y su posicion
@@ -24,6 +25,7 @@ public class Boton {
       */
      public Boton(String file) throws IOException{
         this.image = Image.createImage(file);
+       this.image = Global.resizeImage(image);
         this.posicion = new Posicion( 0, 0 );
      }
 
@@ -74,4 +76,6 @@ public class Boton {
       public int getAlto(){
           return this.image.getHeight();
       }
+
+      
 }
