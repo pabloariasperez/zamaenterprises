@@ -16,20 +16,22 @@ public class SamuraiEnterprises extends MIDlet {
     //Atributos de nuestro midlet 
     //Crea un SplashCanvas que muestra el logo del Tec asi como el logo del equipo.
     private Actualizable pantallaActual;
-    
+    private int puntajeObtenido = 0;
+
     /**
      * Constructor del MIDlet que inicializa el SplashCanvas. =D
      */
     public SamuraiEnterprises() {
+        establecerPuntajesDefault();
         Global.setFPS(60);
-        pantallaActual=new SplashCanvas(this);
+        pantallaActual = new SplashCanvas(this);
     }
 
     /**
      * Metodo que manda una señal al MIDlet para avisarle a este que entre estado activo.
      */
     public void startApp() {
-        Display.getDisplay(this).setCurrent((Displayable)pantallaActual);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
         pantallaActual.correr();
     }
 
@@ -37,7 +39,7 @@ public class SamuraiEnterprises extends MIDlet {
      * Metodo que manda una señal al MIDlet para avisarle a este entre al estado  de pausa.
      */
     public void pauseApp() {
-        if(this.pantallaActual.tipoCanvas().equals(Actualizable.JUEGO)){
+        if (this.pantallaActual.tipoCanvas().equals(Actualizable.JUEGO)) {
             ((Juego) pantallaActual).pausarJuego();
         }
 
@@ -48,13 +50,18 @@ public class SamuraiEnterprises extends MIDlet {
      * Metodo que manda una señal al MIDlet para avisarle a este que entre al estado de destruido.
      * @param unconditional Booleano que indica si la aplicacion se debe detener o no.
      */
-    public void destroyApp(boolean unconditional) {    
+    public void destroyApp(boolean unconditional) {
     }
 
     /**
      *
      */
     public void mostrarPuntajes() {
+        pantallaActual.destruir();
+        pantallaActual = null;
+        Global.setFPS(30);
+        pantallaActual = new MostrarPuntajesCanvas(this);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
@@ -62,9 +69,9 @@ public class SamuraiEnterprises extends MIDlet {
      */
     public void mostrarCreditos() {
         pantallaActual.destruir();
-        pantallaActual=null;
+        pantallaActual = null;
         Global.setFPS(50);
-        pantallaActual= new PresentacionCanvas(this,PresentacionCanvas.TUTORIAL);
+        pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.TUTORIAL);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
@@ -74,30 +81,29 @@ public class SamuraiEnterprises extends MIDlet {
     public void continuarJuego() {
         AdministradorData data = new AdministradorData(AdministradorData.STORE_AVANCE);
 
-        boolean estaGuardado = !data.regresarDato(AdministradorData.REGISTRO_SCORE_ACTUAL).equals( AdministradorData.SVacio);
-        if( estaGuardado ){
+        boolean estaGuardado = !data.regresarDato(AdministradorData.REGISTRO_SCORE_ACTUAL).equals(AdministradorData.SVacio);
+        if (estaGuardado) {
             pantallaActual.destruir();
-            pantallaActual=null;
+            pantallaActual = null;
 
             int score = data.regresarValorDato(AdministradorData.REGISTRO_SCORE_ACTUAL);
             int vida = data.regresarValorDato(AdministradorData.REGISTRO_VIDA);
             int nivel = data.regresarValorDato(AdministradorData.REGISTRO_NIVEL);
             int tiempo = data.regresarValorDato(AdministradorData.REGISTRO_TIEMPO);
-            pantallaActual = new Juego(this, nivel,score, vida, tiempo);
+            pantallaActual = new Juego(this, nivel, score, vida, tiempo);
             Global.setFPS(60);
             Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
         }
     }
-    
+
     /**
      *
      */
-    public void mostrarMenu(){
+    public void mostrarMenu() {
         pantallaActual.destruir();
-        pantallaActual=null;
+        pantallaActual = null;
         Global.setFPS(20);
-        pantallaActual = new PuntajesCanvas(this);
-//        pantallaActual = new MenuCanvas(this);
+        pantallaActual = new MenuCanvas(this);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
@@ -107,27 +113,68 @@ public class SamuraiEnterprises extends MIDlet {
      */
     public void correrNivelUno() {
         pantallaActual.destruir();
-        pantallaActual=null;
-        pantallaActual = new Juego(this, Nivel.NIVEL_1,0,50, 0);
+        pantallaActual = null;
+        pantallaActual = new Juego(this, Nivel.NIVEL_1, 0, 50, 0);
         Global.setFPS(60);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
-    public void mostrarGameOver(){
-        if(this.pantallaActual.tipoCanvas().equals(Actualizable.JUEGO)){
-            int puntajeObtenido = ((Juego) pantallaActual).getPuntaje();
+
+    public void mostrarGameOver() {
+        if (this.pantallaActual.tipoCanvas().equals(Actualizable.JUEGO)) {
+            this.puntajeObtenido = ((Juego) pantallaActual).getPuntaje();
         }
         pantallaActual.destruir();
-        pantallaActual=null;
+        pantallaActual = null;
         Global.setFPS(50);
-        pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.GAMEOVER);
+        pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.GAMEOVER);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     public void mostrarPrologo() {
         pantallaActual.destruir();
-        pantallaActual=null;
+        pantallaActual = null;
         Global.setFPS(50);
-        pantallaActual = new PresentacionCanvas(this,PresentacionCanvas.PROLOGO);
+        pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.PROLOGO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+    }
+
+    public void verificarNuevoPuntaje() {
+        pantallaActual.destruir();
+        pantallaActual = null;
+        Global.setFPS(30);
+        if (CapturaPuntajesCanvas.esNuevoPuntajeAlto(puntajeObtenido)) {
+            pantallaActual = new CapturaPuntajesCanvas(this, puntajeObtenido);
+            Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+        } else {
+            pantallaActual = new MostrarPuntajesCanvas(this);
+            Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+        }
+
+    }
+
+    private void establecerPuntajesDefault() {
+        AdministradorData puntajesEstablecidos = new AdministradorData(AdministradorData.STORE_PUNTAJES_ESTABLECIDOS);
+        System.out.println(puntajesEstablecidos.regresarValorDato(1));
+        if (puntajesEstablecidos.regresarValorDato(1) == -1) {
+            puntajesEstablecidos.agregarRegistro(1);
+            puntajesEstablecidos = null;
+
+            AdministradorData puntajesDefault = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + "1");
+            puntajesDefault.agregarRegistro("ZAMA");
+            puntajesDefault.agregarRegistro(2100);
+
+            puntajesDefault = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + "2");
+            puntajesDefault.agregarRegistro("LAMB");
+            puntajesDefault.agregarRegistro(1200);
+
+            puntajesDefault = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + "3");
+            puntajesDefault.agregarRegistro("PERRY");
+            puntajesDefault.agregarRegistro(700);
+
+            for( int c=Global.NUMERO_PUNTAJES_ALMACENADOS - 3; c>0; c--){
+                puntajesDefault.agregarRegistro("...");
+                puntajesDefault.agregarRegistro(25*c);
+            }
+        }
     }
 }
