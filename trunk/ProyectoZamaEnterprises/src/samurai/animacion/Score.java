@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
+import samurai.juego.Global;
 
 /**
  *
@@ -24,7 +25,7 @@ public class Score {
     public Score(int x, int y){
         this.x = x;
         this.y = y;
-        this.numeros = new int[6];
+        this.numeros = new int[Global.DIGITOS_PUNTAJES];
         this.INDEX=28;
         try {
             this.spriteNumeros = new Sprite(Image.createImage("/samurai/imagenes/letrasScore.png"), 105 / 7, 120 / 6);
@@ -44,7 +45,7 @@ public class Score {
     }
 
     public void dibujar(Graphics g){
-        for(int i=0; i<6;i++){
+        for(int i=0; i<Global.DIGITOS_PUNTAJES;i++){
             this.spriteNumeros.setPosition(x+(15*i), y);
             this.spriteNumeros.setFrame(this.INDEX+this.numeros[i]);
             this.spriteNumeros.paint(g);

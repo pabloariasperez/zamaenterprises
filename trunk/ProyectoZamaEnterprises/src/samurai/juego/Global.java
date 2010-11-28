@@ -30,6 +30,7 @@ public class Global {
 
 
     public static boolean SONIDO_ACTIVADO = false;
+    public static final int DIGITOS_PUNTAJES = 6;
 
     /**
      * modifica ANCHO_PANTALLA solo una vez

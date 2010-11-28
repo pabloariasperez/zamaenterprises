@@ -80,20 +80,16 @@ public class SamuraiEnterprises extends MIDlet {
      */
     public void continuarJuego() {
         AdministradorData data = new AdministradorData(AdministradorData.STORE_AVANCE);
+        pantallaActual.destruir();
+        pantallaActual = null;
 
-        boolean estaGuardado = !data.regresarDato(AdministradorData.REGISTRO_SCORE_ACTUAL).equals(AdministradorData.SVacio);
-        if (estaGuardado) {
-            pantallaActual.destruir();
-            pantallaActual = null;
-
-            int score = data.regresarValorDato(AdministradorData.REGISTRO_SCORE_ACTUAL);
-            int vida = data.regresarValorDato(AdministradorData.REGISTRO_VIDA);
-            int nivel = data.regresarValorDato(AdministradorData.REGISTRO_NIVEL);
-            int tiempo = data.regresarValorDato(AdministradorData.REGISTRO_TIEMPO);
-            pantallaActual = new Juego(this, nivel, score, vida, tiempo);
-            Global.setFPS(60);
-            Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
-        }
+        int score = data.regresarValorDato(AdministradorData.REGISTRO_SCORE_ACTUAL);
+        int vida = data.regresarValorDato(AdministradorData.REGISTRO_VIDA);
+        int nivel = data.regresarValorDato(AdministradorData.REGISTRO_NIVEL);
+        int tiempo = data.regresarValorDato(AdministradorData.REGISTRO_TIEMPO);
+        pantallaActual = new Juego(this, nivel, score, vida, tiempo);
+        Global.setFPS(60);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
@@ -154,7 +150,6 @@ public class SamuraiEnterprises extends MIDlet {
 
     private void establecerPuntajesDefault() {
         AdministradorData puntajesEstablecidos = new AdministradorData(AdministradorData.STORE_PUNTAJES_ESTABLECIDOS);
-        System.out.println(puntajesEstablecidos.regresarValorDato(1));
         if (puntajesEstablecidos.regresarValorDato(1) == -1) {
             puntajesEstablecidos.agregarRegistro(1);
             puntajesEstablecidos = null;
@@ -172,6 +167,7 @@ public class SamuraiEnterprises extends MIDlet {
             puntajesDefault.agregarRegistro(700);
 
             for( int c=Global.NUMERO_PUNTAJES_ALMACENADOS - 3; c>0; c--){
+                puntajesDefault = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + c);
                 puntajesDefault.agregarRegistro("...");
                 puntajesDefault.agregarRegistro(25*c);
             }
