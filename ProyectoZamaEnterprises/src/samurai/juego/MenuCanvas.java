@@ -57,6 +57,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     //Objetos - Menú Sonido, Salir
     private Boton opcionSi, opcionNo;
     private Menu menuSonido, menuSalir;
+    private boolean estaGuardado;
     
 
     /**
@@ -86,6 +87,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         }catch(IOException ex){
             ex.printStackTrace();
         }
+        this.verificarGuardado();
 
         //Creamos nuestra animador y lo iniciamos.
         animador = new Animador(this);
@@ -207,7 +209,9 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         }else if(this.menuActual.getPosition() == 1 && teclado.firePresionado()){
             switch(menuActual.nombreMenu){
                 case MenuCanvas.PRINCIPAL:
-                    samuraiMidlet.continuarJuego();
+                    if(estaGuardado){
+                        samuraiMidlet.continuarJuego();
+                    }
                     break;
                 case MenuCanvas.OPCIONES:
                     samuraiMidlet.mostrarCreditos();
@@ -318,4 +322,11 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             animador.iniciar();
         }
     }
+    private void verificarGuardado(){
+         AdministradorData data = new AdministradorData(AdministradorData.STORE_AVANCE);
+         estaGuardado = !data.regresarDato(AdministradorData.REGISTRO_SCORE_ACTUAL).equals(AdministradorData.SVacio);
+
+    }
+
+
 }
