@@ -7,6 +7,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import samurai.almacenamiento.AdministradorData;
+import samurai.animacion.Score;
 import samurai.animacion.SpriteEnemigo;
 import samurai.animacion.SpriteItem;
 import samurai.escenarios.*;
@@ -56,6 +57,7 @@ public class Juego extends GameCanvas implements Actualizable {
     private Boton botonSalir;
     private Boton botonContinuar;
     private int score;
+    private Score scoreSprite;
 
     /**
      * Contructor de juego; inicicaliza todo lo necesario
@@ -109,6 +111,7 @@ public class Juego extends GameCanvas implements Actualizable {
             Nivel.cargarSFX(escenarioActual, sfx);
 
             this.score = score;
+            this.scoreSprite=new Score(10, 10);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -146,7 +149,7 @@ public class Juego extends GameCanvas implements Actualizable {
         manejadorItems.dibujar(g);
         manejadorEnemigos.dibujar(g);
         manejadorSekai.dibujar(g);
-        g.drawString(""+score, 10, 10, Graphics.LEFT|Graphics.TOP);
+        scoreSprite.dibujar(g);
         if (this.pausado && menuPausa != null) {
             g.drawImage(imagenPausa, 0, 0, Graphics.LEFT | Graphics.TOP);
             this.menuPausa.dibujar(g);
@@ -256,6 +259,7 @@ public class Juego extends GameCanvas implements Actualizable {
             escenario.actualizar();
             manejadorEnemigos.actualizar();
             manejadorItems.actualizar();
+            scoreSprite.actualizar(score);
             try {
                 manejadorSekai.actualizar();
             } catch (InterruptedException ex) {
