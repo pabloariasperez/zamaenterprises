@@ -19,7 +19,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private ManejadorTeclado teclado;
 
     //Efectos dentro del Menu
-    private Animador animador;    
+    private Animador animador;
 
     //El menuActual nos dirá a quien debemos pintar en pantalla.
     private Menu menuActual;

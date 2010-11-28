@@ -96,7 +96,8 @@ public class SamuraiEnterprises extends MIDlet {
         pantallaActual.destruir();
         pantallaActual=null;
         Global.setFPS(20);
-        pantallaActual = new MenuCanvas(this);
+        pantallaActual = new PuntajesCanvas(this);
+//        pantallaActual = new MenuCanvas(this);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
@@ -112,6 +113,9 @@ public class SamuraiEnterprises extends MIDlet {
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
     public void mostrarGameOver(){
+        if(this.pantallaActual.tipoCanvas().equals(Actualizable.JUEGO)){
+            int puntajeObtenido = ((Juego) pantallaActual).getPuntaje();
+        }
         pantallaActual.destruir();
         pantallaActual=null;
         Global.setFPS(50);
