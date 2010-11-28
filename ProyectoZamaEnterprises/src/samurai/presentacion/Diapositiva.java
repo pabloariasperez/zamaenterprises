@@ -44,7 +44,7 @@ public class Diapositiva implements Animable{
         this.imagenX = -(imagenRelativa.getWidth());
         this.imagenY = Global.ALTO_PANTALLA/2;
         this.textos = textos;
-        this.Ystring=this.imagenY+this.imagenRelativa.getHeight()-20;
+        this.Ystring=Global.ALTO_PANTALLA-this.imagenCuadro.getHeight();
         this.Xstring = Global.ANCHO_PANTALLA;
         this.Xcuadro = -(this.imagenCuadro.getWidth());
     }
@@ -52,7 +52,7 @@ public class Diapositiva implements Animable{
     public void dibujar(Graphics g) {
       
             g.drawImage(titulo, this.tituloX, tituloY, Graphics.HCENTER|Graphics.VCENTER);
-            g.drawImage(imagenRelativa, this.imagenX, imagenY, Graphics.HCENTER|Graphics.VCENTER);
+            g.drawImage(imagenRelativa, this.imagenX, Global.ALTO_PANTALLA/2, Graphics.HCENTER|Graphics.VCENTER);
             g.drawImage(imagenCuadro, this.Xcuadro, Ystring-10, Graphics.LEFT | Graphics.TOP);
             g.setColor(0xFFFFFF);
             int tamañoVec=textos.size();
@@ -60,7 +60,7 @@ public class Diapositiva implements Animable{
             g.drawString((String)(textos.elementAt(i)),10+this.Xstring,Ystring , Graphics.LEFT|Graphics.TOP);
             this.Ystring +=this.SALTO;
             }
-            this.Ystring=this.imagenY+this.imagenRelativa.getHeight()-20;
+            this.Ystring=Global.ALTO_PANTALLA-this.imagenCuadro.getHeight();
     }
 
     /**
@@ -98,5 +98,9 @@ public class Diapositiva implements Animable{
             return true;
         }
         return false;
+    }
+
+    public void centrar() {
+        imagenX=Global.ANCHO_PANTALLA/2;
     }
 }
