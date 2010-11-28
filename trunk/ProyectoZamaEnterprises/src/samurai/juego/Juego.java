@@ -3,6 +3,7 @@ package samurai.juego;
 import java.io.IOException;
 import java.util.Random;
 import javax.microedition.lcdui.Display;
+import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
@@ -61,15 +62,21 @@ public class Juego extends GameCanvas implements Actualizable {
 
     /**
      * Contructor de juego; inicicaliza todo lo necesario
-     * @param midlet midlet que maneja a juego
+     * @param samuraiMidlet midlet que maneja a juego
      */
-    public Juego(SamuraiEnterprises midlet, int nivel, int score, int vida, int tiempo) {
+    public Juego(SamuraiEnterprises samuraiMidlet, int nivel, int score, int vida, int tiempo) {
         super(true);
-        escenarioActual = nivel;
-        this.samuraiMidlet = midlet;
         this.setFullScreenMode(true);
+        this.samuraiMidlet = samuraiMidlet;
         g = this.getGraphics();
+
+        Cargador cargador = new Cargador("Cargando juego nuevo");
+        cargador.iniciar();
+        Display.getDisplay(samuraiMidlet).setCurrent((Displayable) cargador);
+
+        cargador.cambiarMensaje("Cargando escenario");
         this.pausado = false;
+        escenarioActual = nivel;
 
         escenario = new Escenario(escenarioActual, tiempo);
 
@@ -77,16 +84,17 @@ public class Juego extends GameCanvas implements Actualizable {
         Nivel.inicializar(escenarioActual, escenario);
         altoFondo = escenario.getAltoFondos();
 
+        cargador.cambiarMensaje("Cargando posicionador");
         posicionador = new Posicionador(ANCHO_INICIAL, PORCENTAJE_ANCHO_FINAL, ALTO_LINEA, altoFondo);
 
-        parametro = 0;
+        parametro = escenario.obtenerParametro();
         posicionador.generarNuevoEje(parametro);
         while (!posicionador.hayNuevoEje()) {
             posicionador.sleep(100);
         }
         escenario.setRazonCambioPiedra(posicionador.posiciones.length);
 
-
+        cargador.cambiarMensaje("Cargando manejadores");
         try {
             //Creamos los manejadores
             //Manejador de Teclado
@@ -103,7 +111,8 @@ public class Juego extends GameCanvas implements Actualizable {
 
             manejadorItems= new ManejadorItems();
             item=null;
-                        
+
+            cargador.cambiarMensaje("Cargando música");
             this.cargarMusica(escenarioActual);
             this.reproduciendo = false;
 
@@ -115,11 +124,16 @@ public class Juego extends GameCanvas implements Actualizable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
         if(tiempo>0){
+            cargador.cambiarMensaje("Cargando enemigos");
             this.manejadorEnemigos.cargarDatos();
             this.pausarJuego();
         }
         random = new Random();
+
+        cargador.terminar();
+        cargador = null;
 
         animador = new Animador(this);
         animador.iniciar();
@@ -329,7 +343,7 @@ public class Juego extends GameCanvas implements Actualizable {
     /**
      * pausa el juego
      */
-    public void pausarJuego() {
+    public final void pausarJuego() {
         musica.parar();
         this.reproduciendo = false;
         this.pausado = true;
@@ -402,13 +416,24 @@ public class Juego extends GameCanvas implements Actualizable {
     }
 
     private void guardarDatos() {
+        Cargador cargador = new Cargador("Guardando juego");
+        cargador.iniciar();
+        Display.getDisplay(samuraiMidlet).setCurrent((Displayable)cargador);
+
         AdministradorData data=new AdministradorData(AdministradorData.STORE_AVANCE);
+        cargador.cambiarMensaje("Borrando registro anterior");
         data.borrarTodo();
+        cargador.cambiarMensaje("Guardando puntaje");
         data.agregarRegistro( score );
+        cargador.cambiarMensaje("Guardando estado de partida");
         data.agregarRegistro( manejadorSekai.getVida() );
         data.agregarRegistro( escenarioActual );
         data.agregarRegistro( escenario.tiempoActual() );
+        cargador.cambiarMensaje("Guardando enemigos");
         this.manejadorEnemigos.guardarDatos();
+
+        cargador.terminar();
+        cargador = null;
     }
 
     private void activarItem(int tipoItem) {
