@@ -26,6 +26,8 @@ public class FondoMenu extends Sprite
     public FondoMenu(String archivoFondo) throws IOException{
         super(Image.createImage(archivoFondo), FondoMenu.ANCHO_SPRITE, FondoMenu.ALTO_SPRITE);
         this.retrasoAnimacion = 0;
+        Image imagen =Global.resizeSprite(Image.createImage(archivoFondo),3,1);
+        super.setImage(imagen, imagen.getWidth()/3, imagen.getHeight());
     }
 
     /**

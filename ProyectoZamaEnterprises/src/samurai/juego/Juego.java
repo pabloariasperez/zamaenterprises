@@ -43,7 +43,7 @@ public class Juego extends GameCanvas implements Actualizable {
     Escenario escenario;
     private static Posicionador posicionador;
 
-    private final int ANCHO_INICIAL = 190;
+    private final int ANCHO_INICIAL;
     private final int PORCENTAJE_ANCHO_FINAL = 15;
     /**
      * tamaño de la linea
@@ -66,6 +66,13 @@ public class Juego extends GameCanvas implements Actualizable {
      */
     public Juego(SamuraiEnterprises samuraiMidlet, int nivel, int score, int vida, int tiempo) {
         super(true);
+        if(Global.ANCHO_PANTALLA>200){
+            this.ANCHO_INICIAL=190;
+            
+        }
+         else{
+            this.ANCHO_INICIAL=(int)((190*Global.ANCHO_PANTALLA)/Global.AnchoSTD);
+         }
         this.setFullScreenMode(true);
         this.samuraiMidlet = samuraiMidlet;
         g = this.getGraphics();

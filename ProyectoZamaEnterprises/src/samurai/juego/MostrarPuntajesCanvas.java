@@ -42,7 +42,8 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
 
         y = Y_INICIAL;
         try {
-            letras = new Sprite(Image.createImage("/samurai/imagenes/letrasScore.png"), 105 / 7, 120 / 6);
+            Image imagen = Global.resizeSprite(Image.createImage("/samurai/imagenes/letrasScore.png"),7,6);
+            letras = new Sprite(imagen, imagen.getWidth() / 7, imagen.getHeight() / 6);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
