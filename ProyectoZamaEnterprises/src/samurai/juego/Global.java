@@ -23,6 +23,11 @@ public class Global {
      * los frames per second
      */
     public static int FPS;
+    /**
+     * los frames per second
+     */
+    public static final int NUMERO_PUNTAJES_ALMACENADOS = 3;
+
 
     public static boolean SONIDO_ACTIVADO = false;
 

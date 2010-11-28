@@ -19,10 +19,16 @@ public class AdministradorData {
     public static final int REGISTRO_VIDA = 2;
     public static final int REGISTRO_NIVEL = 3;
     public static final int REGISTRO_TIEMPO = 4;
+    
+    public static final int REGISTRO_INICIALES = 1;
+    public static final int REGISTRO_PUNTAJE = 2;
 
     public static final String STORE_AVANCE = "AVANCE";
     public static final String STORE_ENEMIGO = "ENEMIGO";
     public static final String STORE_TOTAL_ENEMIGOS = "TOTAL_ENEMIGOS";
+    public static final String STORE_PUNTAJE_ = "PUNTAJE_";
+    public static final String STORE_PUNTAJES_ESTABLECIDOS = "PUNTAJES_DEFAULT";
+
 
     public AdministradorData(String nombreStore) {
         this.nombreStore = nombreStore;
