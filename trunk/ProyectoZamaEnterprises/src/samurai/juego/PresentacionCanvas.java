@@ -253,6 +253,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 samuraiMidlet.mostrarMenu();
                 break;
             case PresentacionCanvas.GAMEOVER:
+
                 samuraiMidlet.mostrarMenu();
                 break;
             case PresentacionCanvas.PROLOGO:

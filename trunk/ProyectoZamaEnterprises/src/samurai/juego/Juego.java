@@ -417,4 +417,8 @@ public class Juego extends GameCanvas implements Actualizable {
                 break;
         }
     }
+
+    public int getPuntaje() {
+        return score;
+    }
 }

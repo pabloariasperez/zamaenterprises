@@ -16,6 +16,7 @@ package samurai.juego;
     public static final String MENU="MENU";
     public static final String PRESENTACION="PRESENTACION";
     public static final String SPLASH="SPLASH";
+    public static final String PUNTAJES="PUNTAJES";
 
     /**
      * Actualiza
