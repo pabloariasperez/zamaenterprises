@@ -71,7 +71,7 @@ public class SamuraiEnterprises extends MIDlet {
         pantallaActual.destruir();
         pantallaActual = null;
         Global.setFPS(50);
-        pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.TUTORIAL);
+        pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.CREDITO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
@@ -99,7 +99,7 @@ public class SamuraiEnterprises extends MIDlet {
         pantallaActual.destruir();
         pantallaActual = null;
         Global.setFPS(20);
-        pantallaActual = new MenuCanvas(this);
+        pantallaActual = new MenuCanvas(this, false);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
@@ -172,5 +172,21 @@ public class SamuraiEnterprises extends MIDlet {
                 puntajesDefault.agregarRegistro(25*c);
             }
         }
+    }
+
+    public void mostrarTutorial() {
+        pantallaActual.destruir();
+        pantallaActual = null;
+        Global.setFPS(50);
+        pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.TUTORIAL);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+    }
+
+    public void mostrarMenuSonido() {
+        pantallaActual.destruir();
+        pantallaActual = null;
+        Global.setFPS(20);
+        pantallaActual = new MenuCanvas(this, true);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 }

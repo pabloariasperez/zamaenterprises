@@ -51,20 +51,21 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private Boton botonNuevo, botonContinuar, botonPuntajes, botonOpciones, botonSalir;
 
     //Objetos - Menú Opciones
-    private Boton opcionSonido, opcionIdioma, opcionAtras;
+    private Boton opcionSonido, opcionCreditos, opcionTutorial,opcionAtras;
     private Menu menuOpciones;
 
     //Objetos - Menú Sonido, Salir
     private Boton opcionSi, opcionNo;
     private Menu menuSonido, menuSalir;
     private boolean estaGuardado;
+    private boolean inicio;
     
 
     /**
      * Constructor que recibe al samurai e iniciliza todas las contantes.
      * @param samuraiMidlet midlet que se recibe.
      */
-    public MenuCanvas(SamuraiEnterprises samuraiMidlet){
+    public MenuCanvas(SamuraiEnterprises samuraiMidlet, boolean inicio){
         //Se manda TRUE en el constructor de la clase padre (GameCanvas) para decir que cuando se quiera saber si una tecla está presionada
         //se preguntará.
         super(true);
@@ -89,6 +90,11 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         }
         this.verificarGuardado();
 
+        this.inicio=inicio;
+        if(inicio){
+            crearMenu(MenuCanvas.SONIDO);
+            cambiarMenu(menuSonido);
+        }
         //Creamos nuestra animador y lo iniciamos.
         animador = new Animador(this);
         animador.iniciar();
@@ -120,12 +126,14 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         //Creamos cada uno de los botones.
         try {
             opcionSonido = new Boton("/samurai/imagenes/botones/botonSonido.png");
-            opcionIdioma = new Boton("/samurai/imagenes/botones/botonCreditos.png");
+            opcionCreditos = new Boton("/samurai/imagenes/botones/botonCreditos.png");
+            opcionTutorial = new Boton("/samurai/imagenes/botones/botonTutorial.png");
             opcionAtras = new Boton("/samurai/imagenes/botones/botonAtras.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
             menuOpciones.agregarBoton(opcionSonido, "/samurai/imagenes/fondosMenu/sonidoLateral.png");
-            menuOpciones.agregarBoton(opcionIdioma, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            menuOpciones.agregarBoton(opcionCreditos, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            menuOpciones.agregarBoton(opcionTutorial, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
             menuOpciones.agregarBoton(opcionAtras, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -197,8 +205,14 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     break;
                 case MenuCanvas.SONIDO:
                     Global.sonidoOn();
-                    crearMenu(MenuCanvas.OPCIONES);
-                    cambiarMenu(menuOpciones);
+                    if(inicio){
+                        crearMenu(MenuCanvas.PRINCIPAL);
+                        cambiarMenu(menuPrincipal);
+                        inicio=true;
+                    }else{
+                        crearMenu(MenuCanvas.OPCIONES);
+                        cambiarMenu(menuOpciones);
+                    }
                     break;
                 case MenuCanvas.SALIR:
                     crearMenu(MenuCanvas.PRINCIPAL);
@@ -218,8 +232,14 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     break;
                 case MenuCanvas.SONIDO:
                     Global.sonidoOff();
-                    crearMenu(MenuCanvas.OPCIONES);
-                    cambiarMenu(menuOpciones);
+                    if(inicio){
+                        crearMenu(MenuCanvas.PRINCIPAL);
+                        cambiarMenu(menuPrincipal);
+                        inicio=false;
+                    }else{
+                        crearMenu(MenuCanvas.OPCIONES);
+                        cambiarMenu(menuOpciones);
+                    }
                     break;
                 case MenuCanvas.SALIR:
                     samuraiMidlet.destroyApp(true);
@@ -233,8 +253,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     samuraiMidlet.mostrarPuntajes();
                     break;
                 case MenuCanvas.OPCIONES:
-                    crearMenu(MenuCanvas.PRINCIPAL);
-                    cambiarMenu(menuPrincipal);
+                    samuraiMidlet.mostrarTutorial();
                     break;
             }
         //Preguntamos si estamos en la CUARTA posición y si fue elegida con FIRE.
@@ -243,6 +262,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                 case MenuCanvas.PRINCIPAL:
                     crearMenu(MenuCanvas.OPCIONES);
                     cambiarMenu(menuOpciones);
+                    break;
+                case MenuCanvas.OPCIONES:
+                    crearMenu(MenuCanvas.PRINCIPAL);
+                    cambiarMenu(menuPrincipal);
                     break;
             }
         //Preguntamos si estamos en la QUINTA posición y si fue elegida con FIRE.
@@ -270,7 +293,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     menuOpciones = null;
                     break;
                 case MenuCanvas.OPCIONES:
-                    menuOpciones = new Menu(3, "/samurai/imagenes/titulos/tituloOpciones.png", "/samurai/imagenes/slash.png", MenuCanvas.OPCIONES);
+                    menuOpciones = new Menu(4, "/samurai/imagenes/titulos/tituloOpciones.png", "/samurai/imagenes/slash.png", MenuCanvas.OPCIONES);
                     this.creaBotonesOpciones();
                     menuSonido = null;      //Es poco probable que se vuelva a ingresar a él.
                     break;
@@ -303,7 +326,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         menuActual=null;
         menuPrincipal=null;
         botonNuevo=null; botonContinuar=null; botonPuntajes=null; botonOpciones=null; botonSalir=null;
-        opcionSonido=null; opcionIdioma=null; opcionAtras=null;
+        opcionSonido=null; opcionCreditos=null; opcionAtras=null;
         menuOpciones=null;
         opcionSi=null; opcionNo=null;
         menuSonido=null; menuSalir=null;

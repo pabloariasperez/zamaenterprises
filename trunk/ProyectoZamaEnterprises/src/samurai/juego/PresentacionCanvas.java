@@ -109,7 +109,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.diapositivas.push(epilogo);
                 break;
             case PresentacionCanvas.GAMEOVER:
-                Diapositiva gameOver = new Diapositiva("/samurai/imagenes/titulos/tituloGameOver.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_GAMEOVER));
+                Diapositiva gameOver = new Diapositiva("/samurai/imagenes/titulos/tituloGameOver.png", "/samurai/imagenes/gameOver.png", agregarString(S_GAMEOVER));
                 this.diapositivas.push(gameOver);
                 break;
             default:
@@ -183,6 +183,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 }
             }
         } else {
+            diapositivaActual.centrar();
             timer.tik();
             if (timer.activarIteracion()) {
                 this.camine = false;

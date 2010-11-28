@@ -24,12 +24,13 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
     private Vector iniciales;
     private int[] score;
     private Sprite letras;
+    private Sprite titulo;
     private Animador animador;
     private final int INDEX_NUMERO = 28;
     private final int SUSTRAENDO_LETRA = 65;
-    private final int X_TEXTO = 10;
-    private final int X_NUMEROS = 110;
-    private final int Y_INICIAL = 70;
+    private final int X_TEXTO = 20;
+    private final int X_NUMEROS =40;
+    private final int Y_INICIAL;
     private int y;
     private boolean dibujado = false;
 
@@ -39,15 +40,17 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
         this.samuraiMidlet = samuraiMidlet;
         this.g = this.getGraphics();
         teclado = new ManejadorTeclado(this);
-
+        Y_INICIAL=(Global.ALTO_PANTALLA/Global.NUMERO_PUNTAJES_ALMACENADOS);
         y = Y_INICIAL;
         try {
             Image imagen = Global.resizeSprite(Image.createImage("/samurai/imagenes/letrasScore.png"),7,6);
             letras = new Sprite(imagen, imagen.getWidth() / 7, imagen.getHeight() / 6);
+            titulo= new Sprite(Image.createImage("/samurai/imagenes/titulos/tituloPuntajes.png"),200, 40);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
+        titulo.setPosition(20, 20);
         iniciales = new Vector();
         score = new int[6];
 
@@ -65,6 +68,7 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
         if (!dibujado) {
             g.setColor(0x000000);
             g.fillRect(0, 0, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA);
+            titulo.paint(g);
             for (int i = 1; i <= Global.NUMERO_PUNTAJES_ALMACENADOS; i++) {
                 this.nombre(i);
                 this.score(i);
@@ -74,11 +78,10 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
                     this.letras.paint(g);
                 }
                 this.iniciales.removeAllElements();
-                for (int k = 0; k < this.score.length; k++) {
-                    this.letras.setPosition(X_NUMEROS + (15 * k), y);
+                for (int k = 0; k< score.length; k++) {
+                    this.letras.setPosition( Global.ANCHO_PANTALLA - X_NUMEROS - (15 *k), y);
                     this.letras.setFrame(this.INDEX_NUMERO + this.score[k]);
                     this.letras.paint(g);
-                    System.out.println();
                 }
                 y += 50;
             }
@@ -109,10 +112,9 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
     }
 
     private void score(int num) {
-        ;
         AdministradorData inicial = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + num);
         int numero = inicial.regresarValorDato(AdministradorData.REGISTRO_PUNTAJE);
-        for (int i = 5; i >= 0; i--) {
+        for (int i = 0; i <= 5; i++) {
             this.score[i] = numero % 10;
             numero = numero / 10;
             System.out.println(score[i]);

@@ -103,7 +103,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
             }
         }else{
             animador.terminar();
-            samuraiMidlet.mostrarMenu();
+            samuraiMidlet.mostrarMenuSonido();
         }       
     }
     
