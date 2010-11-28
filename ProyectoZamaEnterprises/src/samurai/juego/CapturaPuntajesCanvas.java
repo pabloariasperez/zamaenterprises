@@ -172,8 +172,6 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     public static boolean esNuevoPuntajeAlto(int puntajeNuevo) {
         AdministradorData minimoPuntajeMayorStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + Global.NUMERO_PUNTAJES_ALMACENADOS);
         int puntajeASuperar = minimoPuntajeMayorStore.regresarValorDato(AdministradorData.REGISTRO_PUNTAJE);
-        System.out.println("PN:"+puntajeNuevo);
-        System.out.println("PS:"+puntajeASuperar);
         return puntajeNuevo > puntajeASuperar;
     }
 

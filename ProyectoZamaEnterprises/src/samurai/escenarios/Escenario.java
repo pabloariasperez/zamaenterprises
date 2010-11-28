@@ -195,6 +195,10 @@ public class Escenario {
         }
     }
 
+    public int obtenerParametro(){
+        return ((int[])parametrosCamino.peek())[1];
+    }
+
     private int obtenerUltimoEvento() {
         return ((int[])parametrosCamino.elementAt(0))[0];
     }

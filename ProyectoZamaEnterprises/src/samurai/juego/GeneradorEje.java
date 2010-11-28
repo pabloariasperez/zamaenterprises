@@ -31,7 +31,7 @@ public class GeneradorEje implements Runnable {
     /**
      *Indica el número de bloques de operaciones que debe de hacer para que se mande dormir el thread.
      */
-    public static int OPERACIONES_PARA_DORMIR = 30;
+    public static int OPERACIONES_PARA_DORMIR = 60;
     private int anchoInicial;
     private int porcentajeAnchoFinal;
     private int altoLinea;

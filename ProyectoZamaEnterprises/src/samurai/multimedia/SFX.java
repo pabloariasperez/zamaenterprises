@@ -5,6 +5,7 @@ import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.media.Manager;
 import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
+import samurai.juego.Global;
 
 /**
  * Clase encargada de los SFX de cada enemigo y sekai
@@ -46,6 +47,8 @@ public class SFX {
      * Enum de sfx de muerte cesar
      */
     public static final int MUERTE_CESAR=7;
+    private Player p;
+    private final int MAXIMO_PLAYERS = 8;
 
 
     /**
@@ -54,7 +57,8 @@ public class SFX {
      */
     public SFX(GameCanvas canvas){
         this.canvas=canvas;
-        this.players= new Player[8];
+        this.players= new Player[MAXIMO_PLAYERS];
+        Player p;
     }
     /**
      * agreaga un player al arreglo players
@@ -90,6 +94,9 @@ public class SFX {
                 default:
                     players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/wrong.mp3"), "audio/mp3");
             }
+            players[tipo].realize();
+            players[tipo].prefetch();
+            
         } catch (IOException ex) {
             ex.printStackTrace();
         } catch (MediaException ex) {
@@ -102,9 +109,7 @@ public class SFX {
      */
     public void reproducir(int sfx){
         try {
-            Player p = players[sfx];
-            p.realize();
-            p.prefetch();
+            p = players[sfx];
             p.start();
         } catch (MediaException ex) {
             ex.printStackTrace();
