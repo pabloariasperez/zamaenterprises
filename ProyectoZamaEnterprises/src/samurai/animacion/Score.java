@@ -29,8 +29,7 @@ public class Score {
         this.INDEX=28;
         
         try {
-            Image imagen = Global.resizeSprite(Image.createImage("/samurai/imagenes/letrasScore.png"), 7, 6);
-            this.spriteNumeros = new Sprite(imagen, imagen.getWidth() / 7, imagen.getHeight() / 6);
+            this.spriteNumeros = new Sprite(Image.createImage("/samurai/imagenes/letrasScore.png"), 105/7, 120 / 6);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

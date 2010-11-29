@@ -25,7 +25,6 @@ public class Boton {
       */
      public Boton(String file) throws IOException{
         this.image = Image.createImage(file);
-       this.image = Global.resizeImage(image);
         this.posicion = new Posicion( 0, 0 );
      }
 

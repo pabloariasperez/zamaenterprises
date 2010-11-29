@@ -1,6 +1,7 @@
 package samurai.animacion;
 
 import java.io.IOException;
+import java.util.Random;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
@@ -46,6 +47,7 @@ public class SpriteEnemigo extends Sprite implements Animable {
 
     
     private final int REGION = 1;
+    private int rapidez;
 
     /**
      * constructor que inicializa variables
@@ -56,7 +58,8 @@ public class SpriteEnemigo extends Sprite implements Animable {
      */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo) throws IOException {
         super(Image.createImage(archivoEnemigo), 160 / 4, 160 / 4);
-        Image imagen = Global.resizeSprite(Image.createImage(archivoEnemigo), 4, 4);
+        Image imagen = Image.createImage(archivoEnemigo);
+//        Image imagen = Global.resizeSprite(Image.createImage(archivoEnemigo), 4, 4);
         super.setImage(imagen, imagen.getWidth()/4, imagen.getHeight()/4);
         this.tipoEnemigo = tipoEnemigo;
 
@@ -65,6 +68,7 @@ public class SpriteEnemigo extends Sprite implements Animable {
 
         alturaActual = 0;
         posicion = new Posicion(0, 0);
+        this.rapidez = (int) (System.currentTimeMillis() % 5 + 1);
 
         this.centesimo = centesimo;
 
@@ -108,7 +112,7 @@ public class SpriteEnemigo extends Sprite implements Animable {
 
 
         this.nextFrame();
-        alturaActual += 3;
+        alturaActual += rapidez;
     }
 
     public int getCentesimo() {

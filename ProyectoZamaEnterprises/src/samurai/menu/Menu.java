@@ -49,7 +49,7 @@ public class Menu {
        this.nombreMenu = nombreMenu;
         
         //Se crea el Sprite Título y se modifica su posición en pantalla con el que sería dibujado.
-        titulo= new Sprite(Global.resizeImage(Image.createImage(archivoTitulo)));
+        titulo= new Sprite(Image.createImage(archivoTitulo));
         titulo.setPosition(20, 20);
         //Se crea el sprite delINDICADOR:
         this.indicador = new Indicador (archivoIndicador,MARGEN_INDICADOR,this.MARGEN_SELECCIONADO );

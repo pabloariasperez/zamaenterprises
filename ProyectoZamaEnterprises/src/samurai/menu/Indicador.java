@@ -40,8 +40,6 @@ public class Indicador extends Sprite {
     public Indicador(String archivoIndicador, int posicionX, int posicionY ) throws IOException{
         //El 135 representa el ancho de la imagen, mientras que el 40 representa lo alto de esta.
         super(Image.createImage(archivoIndicador),ANCHO_SPRITE, ALTO_SPRITE);
-        Image imagen = Global.resizeImage(Image.createImage(archivoIndicador));
-        super.setImage(imagen, imagen.getWidth(), imagen.getHeight());
         this.posicion = new Posicion(posicionX, posicionY);
         this.setPosition(this.posicion.getX(), this.posicion.getY());
         this.crecimientoAncho=0;

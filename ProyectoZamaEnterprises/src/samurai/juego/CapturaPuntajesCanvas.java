@@ -34,6 +34,8 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     private int inicialActual;
     private int pantalla;
     private int puntajeNuevo;
+    private final int SUSTRAENDO_LETRA = 65;
+    private Sprite letrasDeIniciales;
 
     public CapturaPuntajesCanvas(SamuraiEnterprises samuraiMidlet, int puntajeNuevo) {
         super(true);
@@ -45,8 +47,10 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
 
         this.puntajeNuevo = puntajeNuevo;
         try {
-            letras = Global.resizeImage(Image.createImage("/samurai/imagenes/letras.png"));
-            indicador = new Sprite(Global.resizeImage(Image.createImage("/samurai/imagenes/ambiente/arbol.png")));
+            letras = Image.createImage("/samurai/imagenes/letras.png");
+            letrasDeIniciales = new Sprite(Image.createImage("/samurai/imagenes/letras.png"), letras.getWidth() / 7, letras.getHeight() / 4);
+            indicador = new Sprite(Image.createImage("/samurai/imagenes/ambiente/arbol.png"));
+
             indicador.setPosition(Global.ANCHO_PANTALLA / 2 - letras.getWidth() / 2, Global.ALTO_PANTALLA / 2 - letras.getHeight() / 2);
             xTabla = 0;
             yTabla = 0;
@@ -121,7 +125,12 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         g.drawImage(letras, Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA / 2, g.HCENTER | g.VCENTER);
         indicador.paint(g);
         g.setColor(0x00FFFFFF);
-        g.drawString("" + iniciales[0] + iniciales[1] + iniciales[2], Global.ANCHO_PANTALLA / 2, 10, g.HCENTER | g.TOP);
+
+        for( int inicialIndex = 0; inicialIndex < inicialActual; inicialIndex++){
+            letrasDeIniciales.setFrame( (int)iniciales[inicialIndex] - SUSTRAENDO_LETRA);
+            letrasDeIniciales.setPosition(Global.ANCHO_PANTALLA/2 + letrasDeIniciales.getWidth()*(inicialIndex-1), letrasDeIniciales.getHeight()*3/5);
+            letrasDeIniciales.paint(g);
+        }
         flushGraphics();
     }
 
@@ -130,6 +139,16 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     }
 
     public void destruir() {
+        animador.terminar();
+        animador = null;
+
+        samuraiMidlet = null;
+        g = null;
+        teclado = null;
+        animador = null;
+        letras = null;
+        indicador = null;
+        iniciales = null;
     }
 
     public void pausar() {
@@ -155,14 +174,14 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
 
     private void guardarPuntaje(String iniciales) {
         //Establecemos el nuevo puntaje como la base de la pirámide.
-        AdministradorData puntajeStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_+Global.NUMERO_PUNTAJES_ALMACENADOS);
+        AdministradorData puntajeStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + Global.NUMERO_PUNTAJES_ALMACENADOS);
         puntajeStore.cambiarRegistro(puntajeNuevo, AdministradorData.REGISTRO_PUNTAJE);
         puntajeStore.cambiarRegistro(iniciales, AdministradorData.REGISTRO_INICIALES);
 
-        for( int c=Global.NUMERO_PUNTAJES_ALMACENADOS-1; c>0; c--){
-            puntajeStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_+c);
-            if(puntajeNuevo > puntajeStore.regresarValorDato(AdministradorData.REGISTRO_PUNTAJE)){
-                intercambiarPuntajes(c+1, iniciales);
+        for (int c = Global.NUMERO_PUNTAJES_ALMACENADOS - 1; c > 0; c--) {
+            puntajeStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + c);
+            if (puntajeNuevo > puntajeStore.regresarValorDato(AdministradorData.REGISTRO_PUNTAJE)) {
+                intercambiarPuntajes(c + 1, iniciales);
             }
         }
 
@@ -175,8 +194,8 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         return puntajeNuevo > puntajeASuperar;
     }
 
-    private void intercambiarPuntajes( int puntajeBajo, String iniciales){
-        AdministradorData puntajeAltoStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + (puntajeBajo-1));
+    private void intercambiarPuntajes(int puntajeBajo, String iniciales) {
+        AdministradorData puntajeAltoStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + (puntajeBajo - 1));
         AdministradorData puntajeBajoStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + puntajeBajo);
 
         puntajeBajoStore.cambiarRegistro(puntajeAltoStore.regresarValorDato(AdministradorData.REGISTRO_PUNTAJE), AdministradorData.REGISTRO_PUNTAJE);

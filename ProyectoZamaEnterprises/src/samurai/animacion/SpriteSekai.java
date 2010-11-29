@@ -26,8 +26,6 @@ public class SpriteSekai extends Sprite implements Animable {
      */
     public SpriteSekai(String archivoSekai, int posicionX, int posicionY) throws IOException{
         super(Image.createImage(archivoSekai),40,60);
-        Image imagen = Global.resizeSprite(Image.createImage(archivoSekai), 2, 1);
-        super.setImage(imagen, imagen.getWidth()/2, imagen.getHeight());
         this.posicionX = posicionX - this.getWidth()/2;
         this.posicionY = posicionY - this.getHeight();
         this.secuenciaCorrer = new int[] {0,1};
