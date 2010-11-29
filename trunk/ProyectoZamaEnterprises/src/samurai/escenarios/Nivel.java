@@ -91,25 +91,9 @@ public class Nivel{
         switch(escenario){
             case NIVEL_1:
                 Stack parametros = new Stack();  //En qué momento y qué parámetro.
-                parametros.push( new int[]{ 1300, -50} );
-                parametros.push( new int[]{ 1200, -45} );
-                parametros.push( new int[]{ 1100, -40} );
-                parametros.push( new int[]{ 1000, -35} );
-                parametros.push( new int[]{ 900, -30} );
-                parametros.push( new int[]{ 800, -25} );
-                parametros.push( new int[]{ 700, -20} );
-                parametros.push( new int[]{ 530, -15} );
-                parametros.push( new int[]{ 470, -10} );
-                parametros.push( new int[]{ 450, -10} );
-                parametros.push( new int[]{ 400, -20} );
-                parametros.push( new int[]{ 360, -30} );
-                parametros.push( new int[]{ 320, -40} );
-                parametros.push( new int[]{ 300, -50} );
-                parametros.push( new int[]{ 250, -60} );
-                parametros.push( new int[]{ 200, -70} );
-                parametros.push( new int[]{ 180, -80} );
-                parametros.push( new int[]{ 150, -90} );
-                parametros.push( new int[]{ 0, -100 } );
+                for(int c=1000; c>=0; c-=10){
+                    parametros.push( new int[]{ c, (int)(120*Math.sin(c*Math.PI/500))} );
+                }
                 return parametros;
             case NIVEL_2:
                 return null;
@@ -119,5 +103,4 @@ public class Nivel{
                 return null;
         }
     }
-
 }

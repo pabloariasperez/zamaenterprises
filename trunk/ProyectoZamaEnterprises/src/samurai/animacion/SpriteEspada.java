@@ -36,10 +36,7 @@ public class SpriteEspada extends Sprite implements Animable {
      * @throws IOException si no se encuentra el archivo de la imagen
      */
     public SpriteEspada(String archivoEfectos, int posicionX, int posicionY) throws IOException{
-
         super(Image.createImage(archivoEfectos), 360/6, 210/3);
-        Image imagen = Global.resizeSprite(Image.createImage(archivoEfectos), 6, 3);
-        super.setImage(imagen, imagen.getWidth()/6, imagen.getHeight()/3);
         this.poscionX=posicionX;
         this.poscionY=posicionY;
         this.setPosition(poscionX, poscionY);

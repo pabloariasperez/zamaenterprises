@@ -34,6 +34,7 @@ public class Global {
     public static final int DIGITOS_PUNTAJES = 6;
     public static final int AnchoSTD = 240;
     public static final int AltoSTD = 320;
+
     /**
      * modifica ANCHO_PANTALLA solo una vez
      * @param nuevoAnchoPantalla nuevo valor
@@ -70,53 +71,49 @@ public class Global {
         SONIDO_ACTIVADO = false;
     }
 
-     private static int[] reescalaArray(int[] ini, int x, int y, int x2, int y2) {
-        int out[] = new int[x2*y2];
-        for (int yy = 0; yy < y2; yy++) {
-            int dy = yy * y / y2;
-            for (int xx = 0; xx < x2; xx++) {
-             int dx = xx * x / x2;
-                out[(x2*yy)+xx]=ini[(x*dy)+dx];
-            }
-        }
-        return out;
-        }
-
-       public static Image  resizeImage(Image temp){
-
-        int ancho = (int)((temp.getWidth()*Global.ANCHO_PANTALLA)/Global.AnchoSTD);
-        int alto = (int)((temp.getHeight()*Global.ALTO_PANTALLA)/Global.AltoSTD);
-        //Need an array (for RGB, with the size of original image)
-        int rgb[] = new int[temp.getWidth()*temp.getHeight()];
-        //Get the RGB array of image into "rgb"
-        temp.getRGB(rgb,0,temp.getWidth(),0,0,temp.getWidth(),temp.getHeight());
-        //Call to our function and obtain RGB2
-        int rgb2[] = reescalaArray(rgb,temp.getWidth(),temp.getHeight(),ancho,alto);
-        //Create an image with that RGB array
-        Image temp2 = Image.createRGBImage(rgb2,ancho,alto,true);
-        return temp2;
-        }
-
-        public static Image  resizeSprite(Image temp, int framesHorizontal, int framesVertical){
-
-        int ancho = (int)((temp.getWidth()*Global.ANCHO_PANTALLA)/Global.AnchoSTD);
-        while(ancho%framesHorizontal!=0){
-            ancho++;
-        }
-        int alto = (int)((temp.getHeight()*Global.ALTO_PANTALLA)/Global.AltoSTD);
-         while(alto%framesVertical!=0){
-            alto++;
-        }
-        //Need an array (for RGB, with the size of original image)
-        int rgb[] = new int[temp.getWidth()*temp.getHeight()];
-        //Get the RGB array of image into "rgb"
-        temp.getRGB(rgb,0,temp.getWidth(),0,0,temp.getWidth(),temp.getHeight());
-        //Call to our function and obtain RGB2
-        int rgb2[] = reescalaArray(rgb,temp.getWidth(),temp.getHeight(),ancho,alto);
-        //Create an image with that RGB array
-        Image temp2 = Image.createRGBImage(rgb2,ancho,alto,true);
-        return temp2;
-        }
+//    private static int[] reescalaArray(int[] ini, int x, int y, int x2, int y2) {
+//        int out[] = new int[x2 * y2];
+//        for (int yy = 0; yy < y2; yy++) {
+//            int dy = yy * y / y2;
+//            for (int xx = 0; xx < x2; xx++) {
+//                int dx = xx * x / x2;
+//                out[(x2 * yy) + xx] = ini[(x * dy) + dx];
+//            }
+//        }
+//        return out;
+//    }
+//
+//    public static Image resizeImage(Image temp) {
+//        int ancho = (int) ((temp.getWidth() * Global.ANCHO_PANTALLA) / Global.AnchoSTD);
+//        int alto = (int) ((temp.getHeight() * Global.ALTO_PANTALLA) / Global.AltoSTD);
+//        //Need an array (for RGB, with the size of original image)
+//        int rgb[] = new int[temp.getWidth() * temp.getHeight()];
+//        //Get the RGB array of image into "rgb"
+//        temp.getRGB(rgb, 0, temp.getWidth(), 0, 0, temp.getWidth(), temp.getHeight());
+//        //Call to our function and obtain RGB2
+//        int rgb2[] = reescalaArray(rgb, temp.getWidth(), temp.getHeight(), ancho, alto);
+//        //Create an image with that RGB array
+//        Image temp2 = Image.createRGBImage(rgb2, ancho, alto, true);
+//        return temp2;
+//    }
+//
+//    public static Image resizeSprite(Image temp, int framesHorizontal, int framesVertical) {
+//        int ancho = (int) ((temp.getWidth() * Global.ANCHO_PANTALLA) / Global.AnchoSTD);
+//        while (ancho % framesHorizontal != 0) {
+//            ancho++;
+//        }
+//        int alto = (int) ((temp.getHeight() * Global.ALTO_PANTALLA) / Global.AltoSTD);
+//        while (alto % framesVertical != 0) {
+//            alto++;
+//        }
+//        //Need an array (for RGB, with the size of original image)
+//        int rgb[] = new int[temp.getWidth() * temp.getHeight()];
+//        //Get the RGB array of image into "rgb"
+//        temp.getRGB(rgb, 0, temp.getWidth(), 0, 0, temp.getWidth(), temp.getHeight());
+//        //Call to our function and obtain RGB2
+//        int rgb2[] = reescalaArray(rgb, temp.getWidth(), temp.getHeight(), ancho, alto);
+//        //Create an image with that RGB array
+//        Image temp2 = Image.createRGBImage(rgb2, ancho, alto, true);
+//        return temp2;
+//    }
 }
-
-

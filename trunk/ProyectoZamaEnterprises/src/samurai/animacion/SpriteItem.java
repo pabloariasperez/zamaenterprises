@@ -29,7 +29,8 @@ public class SpriteItem extends Sprite implements Animable{
 
     public SpriteItem(Image imagenItem, int centesimo, int tipoItem) throws IOException{
         super(imagenItem,13,12);
-        Image imagen = Global.resizeImage(imagenItem);
+        Image imagen = imagenItem;
+//        Image imagen = Global.resizeImage(imagenItem);
         super.setImage(imagen, imagen.getWidth()/1, imagen.getHeight()/1);
         this.tipoItem = tipoItem;
         this.secuenciaFondo=new int[]{0};
