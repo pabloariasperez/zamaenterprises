@@ -33,7 +33,7 @@ public class ManejadorAmbiente {
         elemento = null;
         elemetosEliminados=0;
         try {
-            arbol_1 = Image.createImage("/samurai/imagenes/ambiente/arbol.png");
+            arbol_1 = Image.createImage("/samurai/imagenes/ambiente/spriteArbol.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class ManejadorAmbiente {
         try {
             switch (tipoAmbiente) {
                 case SpriteAmbiente.ARBOL_1:
-                    ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_1, rndm.nextInt(80)+10, region));
+                    ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_1, rndm.nextInt(60), region));
                     break;
                 default:
                     break;
@@ -82,8 +82,10 @@ public class ManejadorAmbiente {
     public void actualizar() {
         int size = ambienteEnPantalla.size();
 
-        int rnd = rndm.nextInt(10);
+        int rnd = rndm.nextInt(1);
         if (rnd == 0 && size < 300) {
+            this.agregarElemento(0, 0);
+            this.agregarElemento(0, 2);
             this.agregarElemento(0, 0);
             this.agregarElemento(0, 2);
         }

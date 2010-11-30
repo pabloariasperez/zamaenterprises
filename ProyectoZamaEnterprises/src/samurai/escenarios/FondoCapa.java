@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package samurai.escenarios;
 
 import java.io.IOException;
@@ -11,17 +10,17 @@ import javax.microedition.lcdui.Image;
 import samurai.animacion.Animable;
 import samurai.juego.Global;
 
-
 /**
  * se encarga de mover el fondo y dibujarlo
  * @author Pablo, Erik, Daniel
  * @version 1.0 Octubre 2010
  */
-public class FondoCapa implements Animable{
+public class FondoCapa implements Animable {
 
     private Image imagen;
-    private int mover;
+    private int velocidad;
     private int posicionX, posicionY;
+    private int parametroVelocidad;
 
     /**
      * crea la imagen a ser utilizada, e inicializa variables
@@ -29,34 +28,38 @@ public class FondoCapa implements Animable{
      * @param velocidad : velocidad a la que se movera
      * @param posicionY : posicion y
      */
-    public FondoCapa(String archivoImagen, int velocidad, int posicionY){
-       
+    public FondoCapa(String archivoImagen, int velocidad) throws IllegalArgumentException{
+
         try {
             this.imagen = Image.createImage(archivoImagen);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-;
-        this.mover = velocidad;
-        this.posicionY = posicionY;
-        this.posicionX =0;
-
+        this.velocidad = velocidad;
+        posicionX = 0;
+        posicionY = 0;
     }
-
 
     /**
-     * mueve el fondo
+     * Mueve el fondo
      */
     public void actualizar() {
-        posicionX+=this.mover;
-        if(this.posicionX<=-imagen.getWidth())
-            this.posicionX=0;
+        posicionX += (-parametroVelocidad*velocidad)/100;
+        if ( -parametroVelocidad > 0 && this.posicionX > Global.ANCHO_PANTALLA) {
+            this.posicionX -= imagen.getWidth();
+        }else if(  -parametroVelocidad < 0 && this.posicionX  < - imagen.getWidth() ){
+            this.posicionX = Global.ANCHO_PANTALLA;
+        }
     }
-    public void dibujar(Graphics g){
-        g.drawImage(imagen, posicionX, posicionY, Graphics.LEFT|Graphics.TOP);
-       if(posicionX<-(imagen.getWidth()-Global.ANCHO_PANTALLA-10))
-            g.drawImage(imagen, posicionX+imagen.getWidth(), posicionY, Graphics.LEFT|Graphics.TOP);
-   }
+
+    public void dibujar(Graphics g) {
+        g.drawImage(imagen, posicionX, posicionY, Graphics.LEFT | Graphics.TOP);
+        if( posicionX > 0 ){
+            g.drawImage(imagen, posicionX - imagen.getWidth(), posicionY, Graphics.LEFT | Graphics.TOP);
+        }else if( posicionX < 0 ){
+            g.drawImage(imagen, posicionX + imagen.getWidth(), posicionY, Graphics.LEFT | Graphics.TOP);
+        }
+    }
 
     /**
      * regresa el alto de la imagen
@@ -66,4 +69,7 @@ public class FondoCapa implements Animable{
         return imagen.getHeight();
     }
 
+    public void setParametro(int parametroVelocidad) {
+        this.parametroVelocidad = parametroVelocidad;
+    }
 }

@@ -36,12 +36,12 @@ public class Nivel{
     public  static void inicializar(int nivel, Escenario escenario){
        switch(nivel){
            case NIVEL_1:
-                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/atardecergrande.png", -1, 0));
-                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/montanascafes.png", -2, 0));
+                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/atardecergrande.png", 6));
+                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/montanascafes.png", 16));
                 break;
            case NIVEL_2:
-               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/atardecergrande.png", -1, 0));
-               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/montanascafes.png", -2, 0));
+               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/atardecergrande.png", -1));
+               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/montanascafes.png", -2));
                break;
            case NIVEL_3:
                break;

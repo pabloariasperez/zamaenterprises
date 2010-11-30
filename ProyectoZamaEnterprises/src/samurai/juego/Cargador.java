@@ -62,8 +62,8 @@ public class Cargador extends GameCanvas implements Runnable {
 
             //Dibujamos mensajes
             g.setColor(0x00ffffff);
-            g.drawString(mensajeGeneral + puntitos, 10, 10, Graphics.LEFT | Graphics.TOP);
-            g.drawString("--"+mensaje + puntitos, 10, 30, Graphics.LEFT|Graphics.TOP);
+            g.drawString(mensajeGeneral + puntitos, 10, Global.ALTO_PANTALLA - 30, Graphics.LEFT | Graphics.BOTTOM);
+            g.drawString("--"+mensaje + puntitos, 10, Global.ALTO_PANTALLA - 10, Graphics.LEFT|Graphics.BOTTOM);
 
             try {
                 hiloDeCarga.sleep(100);

@@ -110,4 +110,8 @@ public class Posicionador {
     public void sleep(int tiempoADormir) {
          generadorEje.sleep(tiempoADormir);
     }
+
+    public int getAnchoFinal(){
+        return (anchoInicial*porcentajeAnchoFinal)/100;
+    }
 }
