@@ -31,7 +31,7 @@ public class Escenario {
     private TiempoEscenario tiempo;
     private Stack parametrosCamino;
     private int tiempoProxEvento;
-    private ManejadorAmbiente Ambiente;
+    private ManejadorAmbiente ambiente;
     /**
      * la distancia que hay entre cada piedra
      */
@@ -49,7 +49,7 @@ public class Escenario {
         
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
-        this.Ambiente= new ManejadorAmbiente();
+        this.ambiente= new ManejadorAmbiente();
         velocidad = 3;
         estadoYActual = 0;
         incremento = 0;
@@ -65,10 +65,10 @@ public class Escenario {
         correccionDesfaseXPiedra = piedra.getWidth()/2;
         correccionDesfaseYPiedra = piedra.getWidth()/2;
 
-        tiempoProxEvento = 0;
         tiempo = new TiempoEscenario();
         tiempo.setTiempo(tiempoInicio);
         parametrosCamino = Nivel.llenarStackParametro(escenarioActual);
+        tiempoProxEvento = ((int[])parametrosCamino.peek())[0];
         obtenerPrimerEvento();
 
         esFinEscenario = false;
@@ -109,8 +109,8 @@ public class Escenario {
         this.dibujarFondoCamino(g);
         Juego.getPosicionador().dibujarCamino(g);
         this.dibujarFondos(g);
-        this.Ambiente.dibujar(g);
         this.dibujarPiedras(g);
+        this.ambiente.dibujar(g);
         this.mapaAvance.dibujar(g);
     }
 
@@ -152,6 +152,7 @@ public class Escenario {
         }
 
         if( tiempo.actual() == tiempoProxEvento && !parametrosCamino.isEmpty() ){
+            manejadorFondos.setParametro(((int[])parametrosCamino.peek())[1]);
             Juego.getPosicionador().generarNuevoEje(((int[])parametrosCamino.pop())[1] );
         }
         if(!parametrosCamino.isEmpty() && !esFinEscenario ){
@@ -162,7 +163,7 @@ public class Escenario {
 
         Juego.getPosicionador().hayNuevoEje();
         tiempo.incrementar();
-        this.Ambiente.actualizar();
+        this.ambiente.actualizar();
     }
 
     /**

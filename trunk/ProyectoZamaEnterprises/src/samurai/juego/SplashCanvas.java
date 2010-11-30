@@ -9,6 +9,7 @@ package samurai.juego;
 import java.util.Stack;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
+import samurai.almacenamiento.AlmacenamientoServidor;
 import samurai.menu.Splash;
 
 /**
