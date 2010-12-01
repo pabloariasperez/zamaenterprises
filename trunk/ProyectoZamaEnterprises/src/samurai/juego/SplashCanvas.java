@@ -9,7 +9,6 @@ package samurai.juego;
 import java.util.Stack;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.game.GameCanvas;
-import samurai.almacenamiento.AlmacenamientoServidor;
 import samurai.menu.Splash;
 
 /**
@@ -67,14 +66,10 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         //Establecemos cuánto queremos que dure cada SPLASH.
         TIEMPO_SPLASH = (TIEMPO/1000) * Global.FPS;      //Recuérdese que el tiempo funciona a base de FRAMES como tiempo.
 
-        g.setColor(0x0000aabb);
-        g.fillRect(0, 0, 10, 10);
-
         //Creamos nuestra animador y lo iniciamos.
         animador = new Animador(this);
         animador.iniciar();
 
-        g.fillRect(20, 20, 10, 10);
     }
 
    
@@ -124,24 +119,15 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     }
 
     /**
-     * Metodo que regresa un booleano el cual indica si ya se terminaron de mostrar todos los Splashes.
-     *
-     */
-
-    public void iniciar(){
-        animador.iniciar();
-    }
-
-    /**
-     *
-     * @return
+     * regresa el tipo de canvas
+     * @return tipo canvas
      */
     public String tipoCanvas() {
         return Actualizable.SPLASH;
     }
 
     /**
-     *
+     * destructor: interrumpe el animador y nulifica los objetos
      */
     public void destruir() {
         animador.interrumpir();
@@ -156,22 +142,14 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
-     * @return
-     */
-    public Animador getAnimador() {
-        return animador;
-    }
-
-    /**
-     *
+     * interrumpe el animador
      */
     public void interrumpir() {
         animador.interrumpir();
     }
 
     /**
-     *
+     * inicia el animador
      */
     public void correr() {
         if( !animador.estaCorriendo() ){

@@ -6,10 +6,9 @@
 package samurai.juego;
 
 /**
- *
+ * Clase dedicada a llevar el tiempo transcurrido en cada escenario.
  * @author Pablo, Erik, Daniel
  * @version 1.0, octubre 2010
- * Clase dedicada a llevar el tiempo transcurrido en cada escenario.
  */
 public class TiempoEscenario {
     //El tiempo es un entero que abarca hasta 2^31 - 1 en FRAMES.
@@ -49,8 +48,8 @@ public class TiempoEscenario {
     }
 
     /**
-     *
-     * @param tiempoNuevo
+     * coloca un tiempo determinado
+     * @param tiempoNuevo nuevo tiempo
      */
     public void setTiempo(int tiempoNuevo) {
         tiempo = tiempoNuevo;

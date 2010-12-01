@@ -40,10 +40,6 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
      * Constante entera que define el menu de salir que ya esta creado.
      */
     public static final int SALIR = 3;
-     /**
-     * Constante entera que define el menu de salir que ya esta creado.
-     */
-
 
 
     //Objetos - Menú Principal.
@@ -171,7 +167,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
     
     /**
-     * Méotodo que dibuja el Menú Actual.
+     * Metodo que dibuja el Menú Actual.
      */
     public void dibujar(){    
         //Establecemos nuestro color para dibujar. NEGRO
@@ -314,15 +310,15 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
-     * @return
+     * tipo de canvas
+     * @return tippo de canvas
      */
     public String tipoCanvas() {
         return Actualizable.MENU;
     }
 
     /**
-     *
+     * destructor: interrumpe el animador y nulifica los objetos
      */
     public void destruir() {
         animador.interrumpir();
@@ -341,22 +337,14 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
-     * @return
-     */
-    public Animador getAnimador() {
-        return animador;
-    }
-
-    /**
-     *
+     * interrumpe el animador
      */
     public void interrumpir() {
         animador.interrumpir();
     }
 
     /**
-     *
+     * inicia el animador
      */
     public void correr() {
         if( !animador.estaCorriendo() ){
@@ -366,8 +354,5 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private void verificarGuardado(){
          AdministradorData data = new AdministradorData(AdministradorData.STORE_AVANCE);
          estaGuardado = !data.regresarDato(AdministradorData.REGISTRO_SCORE_ACTUAL).equals(AdministradorData.SVacio);
-
     }
-
-
 }

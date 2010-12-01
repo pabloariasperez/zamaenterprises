@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package samurai.juego;
 
 import java.io.IOException;
@@ -13,8 +9,9 @@ import javax.microedition.lcdui.game.Sprite;
 import samurai.almacenamiento.AdministradorData;
 
 /**
- *
- * @author Pablo
+ * Clase encargada de mostrar los puntajes altos
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Noviembre 2010
  */
 class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
 
@@ -57,13 +54,17 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
         animador = new Animador(this);
         animador.iniciar();
     }
-
+    /**
+     * actualiza
+     */
     public void actualizar() {
         if (teclado.firePresionado()) {
             samuraiMidlet.mostrarMenu();
         }
     }
-
+    /**
+     * dibuja los scores altos
+     */
     public void dibujar() {
         if (!dibujado) {
             g.setColor(0x000000);
@@ -89,19 +90,42 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
         }
         dibujado = true;
     }
-
+    /**
+     * regresa el tipo de canvas
+     * @return tipo de canvas
+     */
     public String tipoCanvas() {
-        return null;
+        return Actualizable.MUESTRA_PUNTAJES;
     }
-
+    /**
+     * Destructor: interrumpe el animador y nulifica los objetos
+     */
     public void destruir() {
-    }
+        animador.interrumpir();
+        animador=null;
 
+        samuraiMidlet=null;
+        g=null;
+        teclado=null;
+        iniciales=null;
+        score=null;
+        letras=null;
+        titulo=null;
+
+    }
+    /**
+     * interrumpe el animador
+     */
     public void interrumpir(){
         animador.interrumpir();
     }
-
+    /**
+     * inicia el animador
+     */
     public void correr() {
+        if( !animador.estaCorriendo() ){
+            animador.iniciar();
+        }
     }
 
     private void nombre(int num) {

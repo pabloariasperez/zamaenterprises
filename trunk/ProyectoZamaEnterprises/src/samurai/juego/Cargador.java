@@ -45,7 +45,7 @@ public class Cargador extends GameCanvas implements Runnable {
     }
 
     /**
-     *
+     * corre el thread
      */
     public void run() {
         corriendo = true;
@@ -90,7 +90,7 @@ public class Cargador extends GameCanvas implements Runnable {
     }
 
     /**
-     *
+     * inicia el hilo de carga
      */
     public void iniciar() {
         if(estado==COMENZANDO){
@@ -100,7 +100,7 @@ public class Cargador extends GameCanvas implements Runnable {
     }
 
     /**
-     *
+     * termina el run
      */
     public void terminar(){
         if(corriendo){
@@ -109,8 +109,8 @@ public class Cargador extends GameCanvas implements Runnable {
     }
 
     /**
-     *
-     * @param mensaje
+     * cambia el mensaje que se muestra
+     * @param mensaje nuevo mensaje
      */
     public void cambiarMensaje(String mensaje){
         this.mensaje = mensaje;
