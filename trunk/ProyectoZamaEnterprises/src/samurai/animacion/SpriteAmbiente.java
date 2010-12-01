@@ -28,7 +28,6 @@ public class SpriteAmbiente extends Sprite {
      */
     public static final int ARBOL_1 = 0;
     public static final int PIEDRA_1 = 1;
-    private final int ANCHO_PIEDRA = 20;
 
     /**
      * constructor que inicializa variables
@@ -52,7 +51,7 @@ public class SpriteAmbiente extends Sprite {
         if (region == 1) {
             distancia = (Juego.getPosicionador().getAnchoFinal() * centesimo )/ 100;
         } else {
-            distancia = (Global.ANCHO_PANTALLA * centesimo) / 100 + ANCHO_PIEDRA;
+            distancia = (Global.ANCHO_PANTALLA * centesimo) / 100;
         }
         this.setPosition(distancia, posicion.getY());
     }

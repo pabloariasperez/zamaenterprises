@@ -50,13 +50,13 @@ public class ManejadorAmbiente {
         try {
             switch (tipoAmbiente) {
                 case SpriteAmbiente.ARBOL_1:
-                    ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_1, rndm.nextInt(60), region));
+                    ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_1, 10 + rndm.nextInt(60), region));
                     break;
                 case SpriteAmbiente.PIEDRA_1:
                     if( region == 2 ){
-                        ambienteEnPantalla.addElement(new SpriteAmbiente(piedra_1, 0, region));
+                        ambienteEnPantalla.addElement(new SpriteAmbiente(piedra_1, rndm.nextInt(5), region));
                     }else{
-                        ambienteEnPantalla.addElement(new SpriteAmbiente(piedra_1, -10 + rndm.nextInt(20), region));
+                        ambienteEnPantalla.addElement(new SpriteAmbiente(piedra_1, -20 + rndm.nextInt(40), region));
                     }
                 default:
                     break;
