@@ -11,6 +11,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import samurai.animacion.SpriteAmbiente;
 import samurai.juego.Global;
+import samurai.juego.Posicionador;
 
 /**
  *
@@ -61,7 +62,7 @@ public class ManejadorAmbiente {
                     }
                     break;
                 case SpriteAmbiente.ARENA_1:
-                    ambienteEnPantalla.addElement(new SpriteAmbiente(arena_1, 30 + rndm.nextInt(40), region));
+                    ambienteEnPantalla.addElement(new SpriteAmbiente(arena_1, 100, region - 1));
                     break;
                 default:
                     break;
@@ -98,13 +99,19 @@ public class ManejadorAmbiente {
 
         int rnd = rndm.nextInt(1);
         if (rnd == 0 && size < 300) {
-            this.agregarElemento(0, 0);
-            this.agregarElemento(0, 2);
-            this.agregarElemento(0, 0);
-            this.agregarElemento(0, 2);
-            this.agregarElemento(1, 1);
-            this.agregarElemento(1, 2);
-            this.agregarElemento(2, 1);
+            this.agregarElemento(SpriteAmbiente.ARBOL_1, Posicionador.REGION_IZQUIERDA);
+            this.agregarElemento(SpriteAmbiente.ARBOL_1, Posicionador.REGION_DERECHA);
+
+            this.agregarElemento(SpriteAmbiente.ARBOL_1, Posicionador.REGION_IZQUIERDA);
+            this.agregarElemento(SpriteAmbiente.ARBOL_1, Posicionador.REGION_DERECHA);
+
+            this.agregarElemento(SpriteAmbiente.PIEDRA_1, Posicionador.REGION_CENTRO);
+                this.agregarElemento(SpriteAmbiente.PIEDRA_1, Posicionador.REGION_DERECHA);
+
+            rnd = rndm.nextInt(4);
+            if (rnd == 0) {
+                this.agregarElemento(SpriteAmbiente.ARENA_1, Posicionador.REGION_CENTRO);
+            }
         }
         for (int i = 0; i < ambienteEnPantalla.size(); i++) {
             elemento = (SpriteAmbiente) ambienteEnPantalla.elementAt(i);

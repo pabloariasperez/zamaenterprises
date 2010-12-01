@@ -43,7 +43,7 @@ public class Juego extends GameCanvas implements Actualizable {
     Escenario escenario;
     private static Posicionador posicionador;
 
-    private final int ANCHO_INICIAL;
+    private final int ANCHO_INICIAL = 190;
     private final int PORCENTAJE_ANCHO_FINAL = 15;
     
     /**
@@ -73,13 +73,6 @@ public class Juego extends GameCanvas implements Actualizable {
      */
     public Juego(SamuraiEnterprises samuraiMidlet, int nivel, int score, int vida, int tiempo) {
         super(true);
-        if(Global.ANCHO_PANTALLA>200){
-            this.ANCHO_INICIAL=190;
-            
-        }
-         else{
-            this.ANCHO_INICIAL=(int)((190*Global.ANCHO_PANTALLA)/Global.AnchoSTD);
-         }
         this.setFullScreenMode(true);
         this.samuraiMidlet = samuraiMidlet;
         g = this.getGraphics();
@@ -106,7 +99,6 @@ public class Juego extends GameCanvas implements Actualizable {
         while (!posicionador.hayNuevoEje()) {
             posicionador.sleep(100);
         }
-        escenario.setRazonCambioPiedra(posicionador.posiciones.length);
 
         cargador.cambiarMensaje("Cargando manejadores");
         try {
@@ -372,7 +364,9 @@ public class Juego extends GameCanvas implements Actualizable {
      * pausa el juego
      */
     public final void pausarJuego() {
-        musica.parar();
+        if (Global.SONIDO_ACTIVADO) {
+            musica.parar();
+        }
         this.reproduciendo = false;
         this.creaBotones();
         this.pausado = true;        
