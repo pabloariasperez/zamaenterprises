@@ -21,6 +21,10 @@ public class Posicionador {
 
     private int colorCamino;
 
+    public static final int REGION_IZQUIERDA = 0;
+    public static final int REGION_CENTRO = 1;
+    public static final int REGION_DERECHA = 2;
+
     /**
      *Vector que almacena números enteros referentes al ancho en pixeles de cada una de las regiones de camino.
      */

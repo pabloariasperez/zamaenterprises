@@ -27,9 +27,6 @@ public class Escenario {
     private Stack parametrosCamino;
     private int tiempoProxEvento;
     private ManejadorAmbiente ambiente;
-    private int correccionDesfaseXPiedra;
-    private int correccionDesfaseYPiedra;
-    private int razonCambioPiedra;
     private boolean esFinEscenario;
     private Mapa mapaAvance;
 
@@ -58,10 +55,6 @@ public class Escenario {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
-        //Cositas de las piedras
-        correccionDesfaseXPiedra = piedra.getWidth()/2;
-        correccionDesfaseYPiedra = piedra.getWidth()/2;
 
         tiempo = new TiempoEscenario();
         tiempo.setTiempo(tiempoInicio);
@@ -109,30 +102,8 @@ public class Escenario {
         this.dibujarFondoCamino(g);
         Juego.getPosicionador().dibujarCamino(g);
         this.dibujarFondos(g);
-//        this.dibujarPiedras(g);
         this.ambiente.dibujar(g);
         this.mapaAvance.dibujar(g);
-    }
-
-    private void dibujarPiedras(Graphics g){
-        int posiciones[][] = Juego.getPosicionador().posiciones;
-        int x1;
-        piedra.setFrame(0);
-        for(int lineaActual = 0, razonCambio = 0; lineaActual<posiciones.length && lineaActual+incremento<posiciones.length; lineaActual+= DISTANCIADOR_PIEDRAS){
-            x1 =posiciones[lineaActual + incremento ][0] - correccionDesfaseXPiedra;
-            piedra.setPosition(     x1,
-                                    lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseYPiedra);
-            piedra.paint(g);
-            
-            piedra.setPosition(     x1 + posiciones[lineaActual + incremento ][1],
-                                    lineaActual*Juego.ALTO_LINEA + incremento*Juego.ALTO_LINEA + Juego.altoFondo - correccionDesfaseYPiedra);
-            piedra.paint(g);
-
-            if( lineaActual >= razonCambioPiedra*(razonCambio+1) ){
-                piedra.nextFrame();
-                razonCambio++;
-            }
-        }
     }
     
     /**
@@ -174,16 +145,6 @@ public class Escenario {
         g.setColor(0x0000AA00);
         g.fillRect(0, Juego.altoFondo, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA - Juego.altoFondo);
         g.drawImage(fondoCamino, 0, Juego.altoFondo, Graphics.LEFT|Graphics.TOP);
-    }
-
-    /**
-     * cambia el número de puntos que deberán ser representados por CADA frame de la piedra
-     * @param longitudPosiciones total de las posiciones
-     */
-    public void setRazonCambioPiedra(int longitudPosiciones){
-        //Este número representa el número de puntos que deberán ser representados por CADA frame de la piedra.
-        // Al total de las posiciones se divide entre la distancia que deben guardar entre ellos, y luego entre el número de frames en piedra.
-        razonCambioPiedra = longitudPosiciones/piedra.getFrameSequenceLength()/(DISTANCIADOR_PIEDRAS-1);
     }
 
     /**

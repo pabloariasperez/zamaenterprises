@@ -5,6 +5,7 @@ import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
+import samurai.juego.Global;
 import samurai.juego.Juego;
 
 /**
@@ -22,7 +23,7 @@ public class SpriteEnemigo extends Sprite implements Animable {
     private int alturaActual;
     private int centesimo;
     private Sprite spriteSombra;
-
+    private int razonCambioTamanios;
     /**
      * Enum del Rata
      */
@@ -45,6 +46,8 @@ public class SpriteEnemigo extends Sprite implements Animable {
     public static final int CESAR = 4;
     private final int REGION = 1;
     private int rapidez;
+    private final int NUMERO_TAMANIOS_SPRITE = 3;
+    private int razonCambio;
 
     /**
      * constructor que inicializa variables y crea la imagen del enemigo
@@ -54,7 +57,7 @@ public class SpriteEnemigo extends Sprite implements Animable {
      * @throws IOException Si no se encuentra el archivo
      */
     public SpriteEnemigo(Image enemigo, int centesimo, int tipoEnemigo) throws IOException {
-        super(enemigo, enemigo.getWidth()/4, enemigo.getHeight()/4);
+        super(enemigo, enemigo.getWidth() / 4, enemigo.getHeight() / 4);
         this.tipoEnemigo = tipoEnemigo;
 
 
@@ -65,6 +68,9 @@ public class SpriteEnemigo extends Sprite implements Animable {
         this.rapidez = (int) (System.currentTimeMillis() % 5 + 1);
 
         this.centesimo = centesimo;
+
+        razonCambioTamanios = (Global.ALTO_PANTALLA - 2 * Juego.altoFondo) / NUMERO_TAMANIOS_SPRITE;
+        razonCambio = 0;
 
         Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, REGION);
         this.setPosition(posicion.getX(), posicion.getY());
@@ -78,8 +84,7 @@ public class SpriteEnemigo extends Sprite implements Animable {
      * @param alturaActual altura donde se coloca
      * @throws IOException si no se encuentra el archivo
      */
-
-    public SpriteEnemigo(Image enemigo, int centesimo, int tipoEnemigo, int alturaActual ) throws IOException {
+    public SpriteEnemigo(Image enemigo, int centesimo, int tipoEnemigo, int alturaActual) throws IOException {
         this(enemigo, centesimo, tipoEnemigo);
         this.alturaActual = alturaActual;
 
@@ -87,8 +92,8 @@ public class SpriteEnemigo extends Sprite implements Animable {
         this.setPosition(posicion.getX() - this.getWidth() / 2, posicion.getY() * Juego.ALTO_LINEA + Juego.altoFondo - this.getHeight() / 2);
     }
 
-    public void agregarSombra(Image sombra){
-        this.spriteSombra = new Sprite(sombra,sombra.getWidth()/4,sombra.getHeight()/4);
+    public void agregarSombra(Image sombra) {
+        this.spriteSombra = new Sprite(sombra, sombra.getWidth() / 4, sombra.getHeight() / 4);
     }
 
     /**
@@ -96,11 +101,11 @@ public class SpriteEnemigo extends Sprite implements Animable {
      * @param g Graficos donde se dibuja
      */
     public void dibujar(Graphics g) {
-       if(this.spriteSombra!=null){
+        if (this.spriteSombra != null) {
             this.spriteSombra.paint(g);
         }
         this.paint(g);
-        
+
     }
 
     /**
@@ -110,34 +115,51 @@ public class SpriteEnemigo extends Sprite implements Animable {
 
         Juego.getPosicionador().getPorcion(posicion, alturaActual, centesimo, REGION);
         this.setPosition(posicion.getX() - this.getWidth() / 2, posicion.getY() * Juego.ALTO_LINEA + Juego.altoFondo - this.getHeight() / 2);
-        if(this.spriteSombra!=null){
+        if (this.spriteSombra != null) {
             this.spriteSombra.setPosition(posicion.getX() - this.getWidth() / 2, posicion.getY() * Juego.ALTO_LINEA + Juego.altoFondo - this.getHeight() / 2);
-            if(this.tipoEnemigo==SpriteEnemigo.FANTASMA){
-                this.spriteSombra.setPosition(this.getX(), this.getY()+this.getHeight()/4);
+            if (this.tipoEnemigo == SpriteEnemigo.FANTASMA) {
+                this.spriteSombra.setPosition(this.getX(), this.getY() + this.getHeight() / 4);
             }
-             if (this.spriteSombra.getY() < 80) {
-                this.spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaFondo);
-            } else if (this.spriteSombra.getY() < 120) {
-                this.spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaMedia);
-            } else if (this.spriteSombra.getY() < 160) {
-                this.spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaFrente);
+
+            if (spriteSombra.getY() + Juego.altoFondo >= razonCambioTamanios * (razonCambio + 1)) {
+                switch (razonCambio) {
+                    case 1:
+                        spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaMedia);
+                        break;
+                    case 2:
+                        spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaFrente);
+                        break;
+                    case 3:
+                        spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaFrente);
+                        break;
+                    default:
+                        spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaFondo);
+                        break;
+                }
             }
+
             this.spriteSombra.nextFrame();
         }
 
-
-
-        if (this.getY() < 80) {
-            this.setFrameSequence(SpriteEnemigo.secuenciaFondo);
-        } else if (this.getY() < 120) {
-            this.setFrameSequence(SpriteEnemigo.secuenciaMedia);
-        } else if (this.getY() < 160) {
-            this.setFrameSequence(SpriteEnemigo.secuenciaFrente);
+        if (this.getY() + Juego.altoFondo >= razonCambioTamanios * (razonCambio + 1)) {
+            switch (razonCambio) {
+                case 1:
+                    this.setFrameSequence(SpriteEnemigo.secuenciaMedia);
+                    break;
+                case 2:
+                    this.setFrameSequence(SpriteEnemigo.secuenciaFrente);
+                    break;
+                case 3:
+                    this.setFrameSequence(SpriteEnemigo.secuenciaFrente);
+                    break;
+                default:
+                    this.setFrameSequence(SpriteEnemigo.secuenciaFondo);
+                    break;
+            }
+            razonCambio++;
         }
 
-
         this.nextFrame();
-
         alturaActual += rapidez;
     }
 

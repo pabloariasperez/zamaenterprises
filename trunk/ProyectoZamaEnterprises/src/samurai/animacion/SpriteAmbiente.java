@@ -7,7 +7,6 @@ import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
 import samurai.juego.Global;
 import samurai.juego.Juego;
-import samurai.presentacion.Timor;
 
 /**
  *
@@ -17,7 +16,7 @@ public class SpriteAmbiente extends Sprite {
 
     private static int[] secuenciaFondo = {0};
     private static int[] secuenciaMedia = {1};
-    private static int[] secuenciaMediaFrente = {2};
+    private static int[] secuenciaFrente = {2};
     private Posicion posicion;
     private int alturaActual;
     private int centesimo;
@@ -28,6 +27,9 @@ public class SpriteAmbiente extends Sprite {
      */
     public static final int ARBOL_1 = 0;
     public static final int PIEDRA_1 = 1;
+    private final int razonCambioTamanios;
+    private int razonCambio;
+    private final int NUMERO_TAMANIOS_SPRITE = 3;
 
     public static final int ARENA_1 = 2;
     private final int ANCHO_PIEDRA = 20;
@@ -51,9 +53,12 @@ public class SpriteAmbiente extends Sprite {
 
         this.centesimo = 0;
 
+        razonCambioTamanios = (Global.ALTO_PANTALLA - 2 * Juego.altoFondo) / NUMERO_TAMANIOS_SPRITE;
+        razonCambio = 0;
+
         Juego.getPosicionador().getPorcion(posicion, alturaActual, 0, region);
         if (region == 1) {
-            distancia = (Juego.getPosicionador().getAnchoFinal() * centesimo )/ 100;
+            distancia = (Juego.getPosicionador().getAnchoFinal() * centesimo) / 100;
         } else {
             distancia = (Global.ANCHO_PANTALLA * centesimo) / 100;
         }
@@ -85,7 +90,23 @@ public class SpriteAmbiente extends Sprite {
         }
 
 
-        
+        if (this.getY() + Juego.altoFondo >= razonCambioTamanios * (razonCambio + 1)) {
+            switch (razonCambio) {
+                case 1:
+                    this.setFrameSequence(SpriteAmbiente.secuenciaMedia);
+                    break;
+                case 2:
+                    this.setFrameSequence(SpriteAmbiente.secuenciaFrente);
+                    break;
+                case 3:
+                    this.setFrameSequence(SpriteAmbiente.secuenciaFrente);
+                    break;
+                default:
+                    this.setFrameSequence(SpriteAmbiente.secuenciaFondo);
+                    break;
+            }
+            razonCambio++;
+        }
 
         alturaActual += 2;
     }
