@@ -22,9 +22,9 @@ public class ManejadorAmbiente {
     private Random rndm;
     private SpriteAmbiente elemento;
     private int elemetosEliminados;
-
     private Image arbol_1;
     private Image piedra_1;
+    private Image arena_1;
 
     /**
      * Constructor que inicializa el Vector como un Vector vacio.
@@ -33,10 +33,11 @@ public class ManejadorAmbiente {
         ambienteEnPantalla = new Vector();
         rndm = new Random();
         elemento = null;
-        elemetosEliminados=0;
+        elemetosEliminados = 0;
         try {
             arbol_1 = Image.createImage("/samurai/imagenes/ambiente/spriteArbol.png");
             piedra_1 = Image.createImage("/samurai/imagenes/ambiente/spritePiedra.png");
+            arena_1 = Image.createImage("/samurai/imagenes/ambiente/arenita.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -53,11 +54,15 @@ public class ManejadorAmbiente {
                     ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_1, 10 + rndm.nextInt(60), region));
                     break;
                 case SpriteAmbiente.PIEDRA_1:
-                    if( region == 2 ){
+                    if (region == 2) {
                         ambienteEnPantalla.addElement(new SpriteAmbiente(piedra_1, rndm.nextInt(5), region));
-                    }else{
+                    } else {
                         ambienteEnPantalla.addElement(new SpriteAmbiente(piedra_1, -20 + rndm.nextInt(40), region));
                     }
+                    break;
+                case SpriteAmbiente.ARENA_1:
+                    ambienteEnPantalla.addElement(new SpriteAmbiente(arena_1, 30 + rndm.nextInt(40), region));
+                    break;
                 default:
                     break;
             }
@@ -80,7 +85,7 @@ public class ManejadorAmbiente {
      * @param g Graficos donde se dibujan los elementos del vector.
      */
     public void dibujar(Graphics g) {
-        for (int i = ambienteEnPantalla.size() - 1; i >=0; i--) {
+        for (int i = ambienteEnPantalla.size() - 1; i >= 0; i--) {
             ((SpriteAmbiente) ambienteEnPantalla.elementAt(i)).dibujar(g);
         }
     }
@@ -99,6 +104,7 @@ public class ManejadorAmbiente {
             this.agregarElemento(0, 2);
             this.agregarElemento(1, 1);
             this.agregarElemento(1, 2);
+            this.agregarElemento(2, 1);
         }
         for (int i = 0; i < ambienteEnPantalla.size(); i++) {
             elemento = (SpriteAmbiente) ambienteEnPantalla.elementAt(i);
@@ -109,8 +115,8 @@ public class ManejadorAmbiente {
                 elemento.mover();
             }
         }
-        if(elemetosEliminados>= 10){
-            elemetosEliminados=0;
+        if (elemetosEliminados >= 10) {
+            elemetosEliminados = 0;
             System.gc();
         }
     }
