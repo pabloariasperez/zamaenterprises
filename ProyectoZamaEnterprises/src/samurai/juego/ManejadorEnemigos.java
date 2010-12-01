@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 import samurai.almacenamiento.AdministradorData;
 import samurai.animacion.SpriteEnemigo;
 
@@ -21,6 +22,12 @@ public class ManejadorEnemigos {
     private Vector enemigosEnPantalla;
     private int enemigosMuertos;
     private Random rndm;
+    private Image sombra;
+    private Image imagenMurcielago;
+    private Image imagenRata;
+    private Image imagenTopo;
+    private Image imagenFantasma;
+
 
     /**
      * Constructor que inicializa el Vector como un Vector vacio.
@@ -29,6 +36,15 @@ public class ManejadorEnemigos {
         enemigosEnPantalla = new Vector();
         this.enemigosMuertos = 0;
         rndm = new Random();
+        try {
+            this.sombra = Image.createImage("/samurai/imagenes/enemigos/spriteSombra.png");
+            this.imagenMurcielago = Image.createImage("/samurai/imagenes/enemigos/spriteZubat.png");
+            this.imagenRata = Image.createImage("/samurai/imagenes/enemigos/spriteRata.png");
+            this.imagenFantasma = Image.createImage("/samurai/imagenes/enemigos/spriteFantasma.png");
+            this.imagenTopo = Image.createImage("/samurai/imagenes/enemigos/spriteTopo.png");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -39,19 +55,21 @@ public class ManejadorEnemigos {
         try {
             switch (tipoEnemigo) {
                 case SpriteEnemigo.MURCIELAGO:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
+                    SpriteEnemigo sprite = new SpriteEnemigo(this.imagenFantasma, rndm.nextInt(60) + 20, SpriteEnemigo.FANTASMA);
+                    sprite.agregarSombra(sombra);
+                    enemigosEnPantalla.addElement(sprite);
                     break;
                 case SpriteEnemigo.TOPO:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteTopo.png", rndm.nextInt(60) + 20, tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenTopo, rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
                 case SpriteEnemigo.RATA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteRata.png", rndm.nextInt(60) + 20, tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenRata, rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
                 case SpriteEnemigo.FANTASMA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteFantasma.png", rndm.nextInt(60) + 20, tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenFantasma, rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
                 case SpriteEnemigo.CESAR:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenMurcielago, rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
             }
         } catch (IOException ex) {
@@ -70,19 +88,21 @@ public class ManejadorEnemigos {
         try {
             switch (tipoEnemigo) {
                 case SpriteEnemigo.MURCIELAGO:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo, tipoEnemigo, altura ));
+                    SpriteEnemigo sprite = new SpriteEnemigo(this.imagenMurcielago, centesimo, tipoEnemigo, altura );
+                    sprite.agregarSombra(this.sombra);
+                    enemigosEnPantalla.addElement(sprite);
                     break;
                 case SpriteEnemigo.TOPO:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteTopo.png", centesimo, tipoEnemigo, altura ));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenTopo, centesimo, tipoEnemigo, altura ));
                     break;
                 case SpriteEnemigo.RATA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteRata.png", centesimo, tipoEnemigo, altura ));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenRata, centesimo, tipoEnemigo, altura ));
                     break;
                 case SpriteEnemigo.FANTASMA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteFantasma.png", centesimo, tipoEnemigo, altura ));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenFantasma, centesimo, tipoEnemigo, altura ));
                     break;
                 case SpriteEnemigo.CESAR:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo, tipoEnemigo, altura ));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenMurcielago, centesimo, tipoEnemigo, altura ));
                     break;
             }
         } catch (IOException ex) {

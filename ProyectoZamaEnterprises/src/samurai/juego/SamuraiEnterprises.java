@@ -164,7 +164,7 @@ public class SamuraiEnterprises extends MIDlet {
 
     private void establecerPuntajesDefault() {
         AdministradorData puntajesEstablecidos = new AdministradorData(AdministradorData.STORE_PUNTAJES_ESTABLECIDOS);
-        if (puntajesEstablecidos.regresarValorDato(1) == -1) {
+        if (puntajesEstablecidos.regresarValorDato(1) == AdministradorData.VALOR_ERROR) {
             puntajesEstablecidos.agregarRegistro(1);
             puntajesEstablecidos = null;
 
@@ -177,7 +177,7 @@ public class SamuraiEnterprises extends MIDlet {
             puntajesDefault.agregarRegistro(700);
 
             puntajesDefault = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + "3");
-            puntajesDefault.agregarRegistro("PERRY");
+            puntajesDefault.agregarRegistro("JUNCO");
             puntajesDefault.agregarRegistro(300);
 
             for( int c=Global.NUMERO_PUNTAJES_ALMACENADOS - 3; c>0; c--){

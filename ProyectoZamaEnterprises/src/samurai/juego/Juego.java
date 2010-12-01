@@ -226,7 +226,7 @@ public class Juego extends GameCanvas implements Actualizable {
             }
 
 
-            int rndEnemigo = random.nextInt(100);
+            int rndEnemigo = random.nextInt(2);
             int rndItem = random.nextInt(50);
 
             if (rndEnemigo == 0 && manejadorEnemigos.getVectorEnemigo().size() < 10 && !escenario.esFinEscenario()) {
