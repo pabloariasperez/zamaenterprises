@@ -384,7 +384,7 @@ public class Juego extends GameCanvas implements Actualizable {
      */
     public void destruir() {
         musica.parar();
-        animador.terminar();
+        animador.interrumpir();
         animador = null;
 
         samuraiMidlet = null;
@@ -428,8 +428,8 @@ public class Juego extends GameCanvas implements Actualizable {
     /**
      *
      */
-    public void pausar() {
-        animador.terminar();
+    public void interrumpir() {
+        animador.interrumpir();
     }
 
     /**

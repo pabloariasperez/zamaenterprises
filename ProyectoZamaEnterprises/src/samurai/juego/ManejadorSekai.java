@@ -138,10 +138,10 @@ public class ManejadorSekai implements Animable{
                     this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.05;
                     break;
                 case SpriteEnemigo.FANTASMA:
-                    this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.15;
+                    this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.20;
                     break;
                 case SpriteEnemigo.TOPO:
-                    this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.20;
+                    this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.15;
                     break;
                 case SpriteEnemigo.CESAR:
                     this.puntosVidaActual=0;

@@ -47,7 +47,7 @@ public class SamuraiEnterprises extends MIDlet {
             ((Juego) pantallaActual).pausarJuego();
         }
 
-        pantallaActual.pausar();
+        pantallaActual.interrumpir();
     }
 
     /**

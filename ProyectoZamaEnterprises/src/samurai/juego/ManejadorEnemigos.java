@@ -48,7 +48,7 @@ public class ManejadorEnemigos {
                     enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteRata.png", rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
                 case SpriteEnemigo.FANTASMA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteFantasma.png", rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
                 case SpriteEnemigo.CESAR:
                     enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", rndm.nextInt(60) + 20, tipoEnemigo));
@@ -79,7 +79,7 @@ public class ManejadorEnemigos {
                     enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteRata.png", centesimo, tipoEnemigo, altura ));
                     break;
                 case SpriteEnemigo.FANTASMA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo, tipoEnemigo, altura ));
+                    enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteFantasma.png", centesimo, tipoEnemigo, altura ));
                     break;
                 case SpriteEnemigo.CESAR:
                     enemigosEnPantalla.addElement(new SpriteEnemigo("/samurai/imagenes/enemigos/spriteZubat.png", centesimo, tipoEnemigo, altura ));

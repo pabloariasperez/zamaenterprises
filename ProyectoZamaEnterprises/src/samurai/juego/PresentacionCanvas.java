@@ -245,7 +245,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
      *
      */
     public void destruir() {
-        animador.terminar();
+        animador.interrumpir();
         animador = null;
 
         samuraiMidlet = null;
@@ -280,8 +280,8 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     /**
      *
      */
-    public void pausar() {
-        animador.terminar();
+    public void interrumpir() {
+        animador.interrumpir();
     }
 
     /**

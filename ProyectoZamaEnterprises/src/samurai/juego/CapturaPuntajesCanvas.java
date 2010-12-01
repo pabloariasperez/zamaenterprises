@@ -34,9 +34,9 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     private Sprite letrasDeIniciales;
 
     /**
-     * 
-     * @param samuraiMidlet
-     * @param puntajeNuevo
+     * Constructor inicializa variables
+     * @param samuraiMidlet midlet
+     * @param puntajeNuevo nuevo puntaje a colocar
      */
     public CapturaPuntajesCanvas(SamuraiEnterprises samuraiMidlet, int puntajeNuevo) {
         super(true);
@@ -49,9 +49,8 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         this.puntajeNuevo = puntajeNuevo;
         try {
             letras = Image.createImage("/samurai/imagenes/letras.png");
-            letrasDeIniciales = new Sprite(Image.createImage("/samurai/imagenes/letras.png"), letras.getWidth() / 7, letras.getHeight() / 4);
+            letrasDeIniciales = new Sprite(letras, letras.getWidth() / 7, letras.getHeight() / 4);
             indicador = new Sprite(Image.createImage("/samurai/imagenes/ambiente/arbol.png"));
-
             indicador.setPosition(Global.ANCHO_PANTALLA / 2 - letras.getWidth() / 2, Global.ALTO_PANTALLA / 2 - letras.getHeight() / 2);
             xTabla = 0;
             yTabla = 0;
@@ -65,7 +64,9 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         animador = new Animador(this);
         animador.iniciar();
     }
-
+    /**
+     * actualiza
+     */
     public void actualizar() {
         if (teclado.downPresionado()) {
             if (yTabla < 3) {
@@ -119,7 +120,9 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         indicador.setPosition(Global.ANCHO_PANTALLA / 2 - letras.getWidth() / 2 + xTabla * letras.getWidth() / 7,
                 Global.ALTO_PANTALLA / 2 - letras.getHeight() / 2 + yTabla * letras.getHeight() / 4);
     }
-
+    /**
+     * dibuja el abcedario y las iniciales
+     */
     public void dibujar() {
         g.setColor(0x0);
         g.fillRect(0, 0, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA);
@@ -136,18 +139,18 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
-     * @return
+     * regresa el tipo de convas que es
+     * @return tipo de canvas
      */
     public String tipoCanvas() {
-        return Actualizable.PUNTAJES;
+        return Actualizable.CAPTURA_PUNTAJES;
     }
 
     /**
-     *
+     * Destructor: para el animador y vuelve nulo a todos los objetos del objeto
      */
     public void destruir() {
-        animador.terminar();
+        animador.interrumpir();
         animador = null;
 
         samuraiMidlet = null;
@@ -160,15 +163,19 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
+     * interrumpe el animador
      */
-    public void pausar() {
+    public void interrumpir() {
+        animador.interrumpir();
     }
 
     /**
-     *
+     * inicia el animador
      */
     public void correr() {
+        if( !animador.estaCorriendo() ){
+            animador.iniciar();
+        }
     }
 
     private void borrarLetra() {
@@ -203,9 +210,9 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     }
 
     /**
-     *
-     * @param puntajeNuevo
-     * @return
+     * checa si el nuevo puntaje es lo suficientemente alto para estar en los mejores
+     * @param puntajeNuevo nuevo puntaje
+     * @return si supera algun record
      */
     public static boolean esNuevoPuntajeAlto(int puntajeNuevo) {
         AdministradorData minimoPuntajeMayorStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + Global.NUMERO_PUNTAJES_ALMACENADOS);
