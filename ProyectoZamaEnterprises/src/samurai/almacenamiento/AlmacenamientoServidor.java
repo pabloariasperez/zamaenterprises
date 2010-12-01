@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package samurai.almacenamiento;
 
 import java.io.IOException;
@@ -11,8 +7,9 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.HttpConnection;
 
 /**
- *
- * @author Pablo
+ * Clase encargada de subir los puntajes altos a una pagina
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Noviembre 2010
  */
 public class AlmacenamientoServidor {
 
@@ -22,10 +19,10 @@ public class AlmacenamientoServidor {
     private static final String VAR_PUNTAJE = "&puntaje=";
 
     /**
-     *
-     * @param iniciales
-     * @param puntaje
-     * @throws IOException
+     * Sube los puntajes
+     * @param iniciales iniciales del score
+     * @param puntaje puntaje a subir
+     * @throws IOException 
      */
     public static void subirPuntaje(String iniciales, int puntaje) throws IOException {
         HttpConnection conexion = null;
