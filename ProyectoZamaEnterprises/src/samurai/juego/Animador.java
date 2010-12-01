@@ -54,7 +54,11 @@ public class Animador implements Runnable {
             tiempoInicial = System.currentTimeMillis();
 
             //Actualizamos y dibujamos el GameCanvas, de aquí la importancia que implementen Actualizable.
-            this.gmCanvas.actualizar();
+            try{
+                this.gmCanvas.actualizar();
+                }catch(NullPointerException e){
+                    e.printStackTrace();
+                }
             if (!corriendo) {
                 //Nos salimos =D!!
                 return;

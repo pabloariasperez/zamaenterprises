@@ -191,7 +191,7 @@ public class Juego extends GameCanvas implements Actualizable {
     /**
      * actualiza todos los coponentes de juego
      */
-    public void actualizar() {
+    public void actualizar() throws NullPointerException{
         if (!this.pausado) {
             if (this.manejadorTec.downPresionado()) {
                 this.pausarJuego();
@@ -288,7 +288,9 @@ public class Juego extends GameCanvas implements Actualizable {
                 }
             }
             if (manejadorSekai.muerteSekai()) {
-                sfx.reproducir(SFX.MUERTE_SEKAI);
+                if (Global.SONIDO_ACTIVADO) {
+                    sfx.reproducir(SFX.MUERTE_SEKAI);
+                }
                 this.samuraiMidlet.mostrarGameOver();
                 AdministradorData data=new AdministradorData(AdministradorData.STORE_AVANCE);
                 data.borrarTodo();
@@ -395,7 +397,9 @@ public class Juego extends GameCanvas implements Actualizable {
      *
      */
     public void destruir() {
-        musica.parar();
+        if (Global.SONIDO_ACTIVADO) {
+            musica.parar();
+        }
         animador.interrumpir();
         animador = null;
 
