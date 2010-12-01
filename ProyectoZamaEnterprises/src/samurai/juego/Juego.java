@@ -45,10 +45,13 @@ public class Juego extends GameCanvas implements Actualizable {
 
     private final int ANCHO_INICIAL;
     private final int PORCENTAJE_ANCHO_FINAL = 15;
+    
     /**
      * tamaño de la linea
      */
     public static final int ALTO_LINEA = 4;
+    public static final int SCORE_INICIAL = 0;
+    public static final int TIEMPO_INICIAL = 0;
     /**
      * tamaño del fondo
      */
@@ -238,7 +241,15 @@ public class Juego extends GameCanvas implements Actualizable {
 
             if( escenario.esFinEscenario() ){
                 if( manejadorEnemigos.getVectorEnemigo().isEmpty() && manejadorItems.getVectorItem().isEmpty()){
-                    samuraiMidlet.mostrarMenu();
+                    switch( escenarioActual ){
+                        case Nivel.NIVEL_1:
+                            samuraiMidlet.transicionNivelDos(score);
+                            break;
+                        case Nivel.NIVEL_2:
+                            samuraiMidlet.transicionNivelTres(score);
+                            break;
+                    }
+                    
                     return;
                 }
             }
@@ -360,8 +371,8 @@ public class Juego extends GameCanvas implements Actualizable {
     public final void pausarJuego() {
         musica.parar();
         this.reproduciendo = false;
-        this.pausado = true;
         this.creaBotones();
+        this.pausado = true;        
     }
 
     /**

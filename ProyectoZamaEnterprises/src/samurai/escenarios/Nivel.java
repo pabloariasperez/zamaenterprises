@@ -58,10 +58,10 @@ public class Nivel{
                 sfx.agregarSFX(SFX.MUERTE_RATA);
                 sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
                 break;
-//            case NIVEL_2:
-//                sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
-                  //sfx.agregarSFX(SFX.MUERTE_TOPO);
-//                break;
+            case NIVEL_2:
+                sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
+                sfx.agregarSFX(SFX.MUERTE_TOPO);
+                break;
 //            case NIVEL_3:
                 //sfx.agregarSFX(SFX.MUERTE_TOPO);
                 //sfx.agregarSFX(SFX.MUERTE_FANTASMA);
@@ -79,7 +79,7 @@ public class Nivel{
             case NIVEL_1:
                 return random.nextInt(2);
             case NIVEL_2:
-                return random.nextInt(2);
+                return random.nextInt(3)+2;
             case NIVEL_3:
                 return random.nextInt(2);
             default:
@@ -93,15 +93,24 @@ public class Nivel{
      * @return stack de parametros
      */
     public static Stack llenarStackParametro(int escenario){
+        Stack parametros = new Stack();  //En qué momento y qué parámetro.
         switch(escenario){
             case NIVEL_1:
-                Stack parametros = new Stack();  //En qué momento y qué parámetro.
-                for(int c=1000; c>=0; c-=10){
+                for(int c=200; c>=0; c-=10){
                     parametros.push( new int[]{ c, (int)(120*Math.sin(c*Math.PI/500))} );
                 }
                 return parametros;
             case NIVEL_2:
-                return null;
+                int asintotaLineal = 10;
+                int factorDeArgumentoTrigonometrico = 0;
+                for(int c=1000; c>=0; c-=10){
+                    parametros.push( new int[]{ c, (int)(asintotaLineal*Math.sin( (factorDeArgumentoTrigonometrico++*Math.PI)/10))} );
+                    if( factorDeArgumentoTrigonometrico == 21 ){
+                        factorDeArgumentoTrigonometrico = 0;
+                        asintotaLineal += 20;
+                    }
+                }
+                return parametros;
             case NIVEL_3:
                 return null;
             default:

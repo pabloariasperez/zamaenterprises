@@ -16,7 +16,7 @@ public class SpriteEnemigo extends Sprite implements Animable {
 
     private static int[] secuenciaFondo = {0, 1, 2, 3};
     private static int[] secuenciaMedia = {4, 5, 6, 7};
-    private static int[] secuenciaMediaFrente = {8, 9, 10, 11};
+    private static int[] secuenciaFrente = {8, 9, 10, 11};
     private int tipoEnemigo;
     private Posicion posicion;
     private int alturaActual;
@@ -24,13 +24,13 @@ public class SpriteEnemigo extends Sprite implements Animable {
     private Sprite spriteSombra;
 
     /**
-     * Enum del Murcielago
-     */
-    public static final int MURCIELAGO = 0;
-    /**
      * Enum del Rata
      */
-    public static final int RATA = 1;
+    public static final int RATA = 0;
+    /**
+     * Enum del Murcielago
+     */
+    public static final int MURCIELAGO = 1;
     /**
      * Enum del Topo
      */
@@ -43,8 +43,6 @@ public class SpriteEnemigo extends Sprite implements Animable {
      * Enum del Cesar
      */
     public static final int CESAR = 4;
-
-    
     private final int REGION = 1;
     private int rapidez;
 
@@ -57,8 +55,6 @@ public class SpriteEnemigo extends Sprite implements Animable {
      */
     public SpriteEnemigo(Image enemigo, int centesimo, int tipoEnemigo) throws IOException {
         super(enemigo, enemigo.getWidth()/4, enemigo.getHeight()/4);
-//        Image imagen = Global.resizeSprite(Image.createImage(archivoEnemigo), 4, 4);
-
         this.tipoEnemigo = tipoEnemigo;
 
 
@@ -82,6 +78,7 @@ public class SpriteEnemigo extends Sprite implements Animable {
      * @param alturaActual altura donde se coloca
      * @throws IOException si no se encuentra el archivo
      */
+
     public SpriteEnemigo(Image enemigo, int centesimo, int tipoEnemigo, int alturaActual ) throws IOException {
         this(enemigo, centesimo, tipoEnemigo);
         this.alturaActual = alturaActual;
@@ -123,20 +120,20 @@ public class SpriteEnemigo extends Sprite implements Animable {
             } else if (this.spriteSombra.getY() < 120) {
                 this.spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaMedia);
             } else if (this.spriteSombra.getY() < 160) {
-                this.spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaMediaFrente);
+                this.spriteSombra.setFrameSequence(SpriteEnemigo.secuenciaFrente);
             }
             this.spriteSombra.nextFrame();
         }
 
 
 
-            if (this.getY() < 80) {
-                this.setFrameSequence(SpriteEnemigo.secuenciaFondo);
-            } else if (this.getY() < 120) {
-                this.setFrameSequence(SpriteEnemigo.secuenciaMedia);
-            } else if (this.getY() < 160) {
-                this.setFrameSequence(SpriteEnemigo.secuenciaMediaFrente);
-            }
+        if (this.getY() < 80) {
+            this.setFrameSequence(SpriteEnemigo.secuenciaFondo);
+        } else if (this.getY() < 120) {
+            this.setFrameSequence(SpriteEnemigo.secuenciaMedia);
+        } else if (this.getY() < 160) {
+            this.setFrameSequence(SpriteEnemigo.secuenciaFrente);
+        }
 
 
         this.nextFrame();

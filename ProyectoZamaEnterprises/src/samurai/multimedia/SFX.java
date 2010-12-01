@@ -73,26 +73,26 @@ public class SFX {
                 case SFX.GOLPE_SEKAI:
                     players[tipo]= Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/golpe.wav"), "audio/wav");
                     break;
-//                case SFX.MUERTE_SEKAI:
-//                    players[tipo]= Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/muerte.mp3"), "audio/mp3");
-//                    break;
+                case SFX.MUERTE_SEKAI:
+                    players[tipo]= Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/golpe.mp3"), "audio/mp3");
+                    break;
                 case SFX.MUERTE_MURCIELAGO:
                     players[tipo]= Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/murcielago.wav"), "audio/wav");
                     break;
-//                case SFX.MUERTE_TOPO:
-//                    players[tipo]= Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/topo.mp3"), "audio/mp3");
-//                    break;
+                case SFX.MUERTE_TOPO:
+                    players[tipo]= Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/rata.wav"), "audio/wav");
+                    break;
                 case SFX.MUERTE_RATA:
                     players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/rata.wav"), "audio/wav");
                     break;
-//                case SFX.MUERTE_FANTASMA:
-//                    players[tipo] = Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/fantasma.mp3"), "audio/mp3");
-//                    break;
-//                case SFX.MUERTE_CESAR:
-//                    players[tipo] = Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/cesar.mp3"), "audio/mp3");
-//                    break;
+                case SFX.MUERTE_FANTASMA:
+                    players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/rata.wav"), "audio/wav");
+                    break;
+                case SFX.MUERTE_CESAR:
+                    players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/rata.wav"), "audio/wav");
+                    break;
                 default:
-                    players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/wrong.mp3"), "audio/mp3");
+                    players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/rata.wav"), "audio/wav");
             }
             players[tipo].realize();
             players[tipo].prefetch();
