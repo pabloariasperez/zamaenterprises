@@ -103,7 +103,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
                 tiempo.reiniciar();
             }
         }else{
-            animador.terminar();
+            animador.interrumpir();
             samuraiMidlet.mostrarMenuSonido();
         }       
     }
@@ -144,7 +144,7 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
      *
      */
     public void destruir() {
-        animador.terminar();
+        animador.interrumpir();
         animador = null;
 
         samuraiMidlet = null;
@@ -166,8 +166,8 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
     /**
      *
      */
-    public void pausar() {
-        animador.terminar();
+    public void interrumpir() {
+        animador.interrumpir();
     }
 
     /**

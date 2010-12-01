@@ -13,8 +13,9 @@ import javax.microedition.lcdui.Image;
 import samurai.animacion.SpriteItem;
 
 /**
- *
- * @author zama
+ * Clase encargada de manejar los items
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Noviembre 2010
  */
 public class ManejadorItems {
 

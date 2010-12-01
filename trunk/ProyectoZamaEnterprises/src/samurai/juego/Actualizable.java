@@ -26,7 +26,11 @@ public interface Actualizable {
     /**
      * String que indica que un game canvas es tipo puntajes
      */
-    public static final String PUNTAJES = "PUNTAJES";
+    public static final String CAPTURA_PUNTAJES = "CAPTURA_PUNTAJES";
+    /**
+     *
+     */
+    public static final String MUESTRA_PUNTAJES = "MUESTRA_PUNTAJES";
 
     /**
      * Actualiza
@@ -50,9 +54,9 @@ public interface Actualizable {
     public abstract void destruir();
 
     /**
-     * obliga a pausar
+     * interrumpe el animador
      */
-    public void pausar();
+    public void interrumpir();
 
     /**
      * corre el animador

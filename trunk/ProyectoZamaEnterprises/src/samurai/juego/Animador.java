@@ -79,9 +79,9 @@ public class Animador implements Runnable {
     }
 
     /**
-     * Metodo con el que se termina el run
+     * Metodo con el que se interrumpe el run
      */
-    public void terminar() {
+    public void interrumpir() {
         corriendo = false;
     }
 

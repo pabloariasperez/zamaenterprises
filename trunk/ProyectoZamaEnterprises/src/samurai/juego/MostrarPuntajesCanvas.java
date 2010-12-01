@@ -97,7 +97,8 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
     public void destruir() {
     }
 
-    public void pausar() {
+    public void interrumpir(){
+        animador.interrumpir();
     }
 
     public void correr() {
@@ -114,7 +115,7 @@ class MostrarPuntajesCanvas extends GameCanvas implements Actualizable {
     private void score(int num) {
         AdministradorData inicial = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + num);
         int numero = inicial.regresarValorDato(AdministradorData.REGISTRO_PUNTAJE);
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= Global.DIGITOS_PUNTAJES-1; i++) {
             this.score[i] = numero % 10;
             numero = numero / 10;
             System.out.println(score[i]);
