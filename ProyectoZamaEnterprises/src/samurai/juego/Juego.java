@@ -42,10 +42,8 @@ public class Juego extends GameCanvas implements Actualizable {
     private Random random;
     Escenario escenario;
     private static Posicionador posicionador;
-
     private final int ANCHO_INICIAL = 190;
     private final int PORCENTAJE_ANCHO_FINAL = 15;
-    
     /**
      * tamaño de la linea
      */
@@ -109,14 +107,14 @@ public class Juego extends GameCanvas implements Actualizable {
             this.imagenPausa = Image.createImage("/samurai/imagenes/pausa.png");
 
             //Manejador Sekai
-            this.manejadorSekai = new ManejadorSekai(manejadorTec, vida );
+            this.manejadorSekai = new ManejadorSekai(manejadorTec, vida);
 
             //Manejador Enemigos
             manejadorEnemigos = new ManejadorEnemigos();
             enemigo = null;       //Para no crear mil "BICHOS" enemigo
 
-            manejadorItems= new ManejadorItems();
-            item=null;
+            manejadorItems = new ManejadorItems();
+            item = null;
 
             cargador.cambiarMensaje("Cargando música");
             this.cargarMusica(escenarioActual);
@@ -126,12 +124,16 @@ public class Juego extends GameCanvas implements Actualizable {
             Nivel.cargarSFX(escenarioActual, sfx);
 
             this.score = score;
-            this.scoreSprite=new Score(10, 10);
+            this.scoreSprite = new Score(10, 10);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-        if(tiempo>0){
+        cargador.cambiarMensaje("Cargando ambiente");
+        escenario.cargarAmbiente();
+
+
+        if (tiempo > 0) {
             cargador.cambiarMensaje("Cargando enemigos");
             this.manejadorEnemigos.cargarDatos();
             this.pausarJuego();
@@ -183,7 +185,7 @@ public class Juego extends GameCanvas implements Actualizable {
     /**
      * actualiza todos los coponentes de juego
      */
-    public void actualizar() throws NullPointerException{
+    public void actualizar() throws NullPointerException {
         if (!this.pausado) {
             if (this.manejadorTec.downPresionado()) {
                 this.pausarJuego();
@@ -231,9 +233,9 @@ public class Juego extends GameCanvas implements Actualizable {
                 agregarItem(this.random);
             }
 
-            if( escenario.esFinEscenario() ){
-                if( manejadorEnemigos.getVectorEnemigo().isEmpty() && manejadorItems.getVectorItem().isEmpty()){
-                    switch( escenarioActual ){
+            if (escenario.esFinEscenario()) {
+                if (manejadorEnemigos.getVectorEnemigo().isEmpty() && manejadorItems.getVectorItem().isEmpty()) {
+                    switch (escenarioActual) {
                         case Nivel.NIVEL_1:
                             samuraiMidlet.transicionNivelDos(score);
                             break;
@@ -241,11 +243,11 @@ public class Juego extends GameCanvas implements Actualizable {
                             samuraiMidlet.transicionNivelTres(score);
                             break;
                     }
-                    
+
                     return;
                 }
             }
-            
+
             for (int i = 0; i < manejadorEnemigos.getVectorEnemigo().size(); i++) {
                 this.enemigo = (SpriteEnemigo) (manejadorEnemigos.getVectorEnemigo().elementAt(i));
 
@@ -284,7 +286,7 @@ public class Juego extends GameCanvas implements Actualizable {
                     sfx.reproducir(SFX.MUERTE_SEKAI);
                 }
                 this.samuraiMidlet.mostrarGameOver();
-                AdministradorData data=new AdministradorData(AdministradorData.STORE_AVANCE);
+                AdministradorData data = new AdministradorData(AdministradorData.STORE_AVANCE);
                 data.borrarTodo();
                 return;
             }
@@ -305,6 +307,7 @@ public class Juego extends GameCanvas implements Actualizable {
     private void agregarEnemigo(int enemigo) {
         this.manejadorEnemigos.agregarEnemigo(enemigo);
     }
+
     private void agregarItem(Random rnd) {
         this.manejadorItems.agregarItem(rnd);
     }
@@ -370,7 +373,7 @@ public class Juego extends GameCanvas implements Actualizable {
         }
         this.reproduciendo = false;
         this.creaBotones();
-        this.pausado = true;        
+        this.pausado = true;
     }
 
     /**
@@ -415,7 +418,7 @@ public class Juego extends GameCanvas implements Actualizable {
     }
 
     private void cargarMusica(int escenarioActual) {
-        switch(escenarioActual){
+        switch (escenarioActual) {
             case Nivel.NIVEL_1:
                 this.musica = new Musica("/samurai/sonidos/tema.mid", this);
                 break;
@@ -432,7 +435,7 @@ public class Juego extends GameCanvas implements Actualizable {
      *
      * @return
      */
-    public int getEscenarioActual(){
+    public int getEscenarioActual() {
         return escenarioActual;
     }
 
@@ -447,7 +450,7 @@ public class Juego extends GameCanvas implements Actualizable {
      *
      */
     public void correr() {
-        if( !animador.estaCorriendo() ){
+        if (!animador.estaCorriendo()) {
             animador.iniciar();
         }
     }
@@ -463,17 +466,17 @@ public class Juego extends GameCanvas implements Actualizable {
     private void guardarDatos() {
         Cargador cargador = new Cargador("Guardando juego");
         cargador.iniciar();
-        Display.getDisplay(samuraiMidlet).setCurrent((Displayable)cargador);
+        Display.getDisplay(samuraiMidlet).setCurrent((Displayable) cargador);
 
-        AdministradorData data=new AdministradorData(AdministradorData.STORE_AVANCE);
+        AdministradorData data = new AdministradorData(AdministradorData.STORE_AVANCE);
         cargador.cambiarMensaje("Borrando registro anterior");
         data.borrarTodo();
         cargador.cambiarMensaje("Guardando puntaje");
-        data.agregarRegistro( score );
+        data.agregarRegistro(score);
         cargador.cambiarMensaje("Guardando estado de partida");
-        data.agregarRegistro( manejadorSekai.getVida() );
-        data.agregarRegistro( escenarioActual );
-        data.agregarRegistro( escenario.tiempoActual() );
+        data.agregarRegistro(manejadorSekai.getVida());
+        data.agregarRegistro(escenarioActual);
+        data.agregarRegistro(escenario.tiempoActual());
         cargador.cambiarMensaje("Guardando enemigos");
         this.manejadorEnemigos.guardarDatos();
 
@@ -482,7 +485,7 @@ public class Juego extends GameCanvas implements Actualizable {
     }
 
     private void activarItem(int tipoItem) {
-        switch(tipoItem){
+        switch (tipoItem) {
             case SpriteItem.ITEM_CORAZON:
                 manejadorSekai.aumentarVida((int) (ManejadorSekai.VIDA_TOTAL * .1));
                 break;

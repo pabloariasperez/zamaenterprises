@@ -20,9 +20,6 @@ public class Escenario {
 
     private Sprite piedra;
     private Image fondoCamino;
-    private int incremento;
-    private int velocidad;
-    private int estadoYActual;
     private TiempoEscenario tiempo;
     private Stack parametrosCamino;
     private int tiempoProxEvento;
@@ -30,10 +27,6 @@ public class Escenario {
     private boolean esFinEscenario;
     private Mapa mapaAvance;
 
-     /**
-     * la distancia que hay entre cada piedra
-     */
-    public int DISTANCIADOR_PIEDRAS = 4;
 
     /**
      * Constructor: no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
@@ -45,9 +38,6 @@ public class Escenario {
         //Inicializamos cada uno de los atributos.
         this.manejadorFondos = new ManejadorFondos();
         this.ambiente= new ManejadorAmbiente();
-        velocidad = 3;
-        estadoYActual = 0;
-        incremento = 0;
         try {
             fondoCamino = Image.createImage("/samurai/imagenes/ambiente/fondoCamino.png");
             piedra = new Sprite(Image.createImage("/samurai/imagenes/ambiente/spritePiedra.png"), 20, 20);
@@ -110,14 +100,6 @@ public class Escenario {
      * Actualiza el escenario
      */
     public void actualizar(){
-        estadoYActual++;
-        if( estadoYActual == velocidad){
-            estadoYActual = 0;
-            incremento++;
-            if( incremento == DISTANCIADOR_PIEDRAS - 1){
-                incremento = 0;
-            }
-        }
         if(!manejadorFondos.isEmpty()){
             manejadorFondos.actualizar();
         }
@@ -179,5 +161,11 @@ public class Escenario {
 
     private int obtenerUltimoEvento() {
         return ((int[])parametrosCamino.elementAt(0))[0];
+    }
+
+    public void cargarAmbiente() {
+        for( int c=0; c < Global.ALTO_PANTALLA/Juego.ALTO_LINEA; c++){
+            ambiente.actualizar();
+        }
     }
 }
