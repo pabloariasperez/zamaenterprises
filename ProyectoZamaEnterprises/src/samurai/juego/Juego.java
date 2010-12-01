@@ -63,6 +63,10 @@ public class Juego extends GameCanvas implements Actualizable {
     /**
      * Contructor de juego; inicicaliza todo lo necesario
      * @param samuraiMidlet midlet que maneja a juego
+     * @param nivel
+     * @param vida
+     * @param score
+     * @param tiempo
      */
     public Juego(SamuraiEnterprises samuraiMidlet, int nivel, int score, int vida, int tiempo) {
         super(true);
@@ -146,6 +150,9 @@ public class Juego extends GameCanvas implements Actualizable {
         animador.iniciar();
     }
 
+    /**
+     *
+     */
     public void creaBotones() {
         try {
             if (this.menuPausa == null) {
@@ -364,10 +371,17 @@ public class Juego extends GameCanvas implements Actualizable {
         this.pausado = false;
     }
 
+    /**
+     *
+     * @return
+     */
     public String tipoCanvas() {
         return Actualizable.JUEGO;
     }
 
+    /**
+     *
+     */
     public void destruir() {
         musica.parar();
         animador.terminar();
@@ -403,20 +417,33 @@ public class Juego extends GameCanvas implements Actualizable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getEscenarioActual(){
         return escenarioActual;
     }
 
+    /**
+     *
+     */
     public void pausar() {
         animador.terminar();
     }
 
+    /**
+     *
+     */
     public void correr() {
         if( !animador.estaCorriendo() ){
             animador.iniciar();
         }
     }
 
+    /**
+     *
+     */
     protected void hideNotify() {
         super.hideNotify();
         this.pausarJuego();
@@ -453,6 +480,10 @@ public class Juego extends GameCanvas implements Actualizable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPuntaje() {
         return score;
     }

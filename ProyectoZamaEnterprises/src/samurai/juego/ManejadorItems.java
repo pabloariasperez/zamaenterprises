@@ -39,7 +39,7 @@ public class ManejadorItems {
 
     /**
      * Metodo que agrega los elementos del ambiente al Vector.
-     * @param tipoAmbiente  elemento que se desea agregar
+     * @param rnd
      */
     public void agregarItem(Random rnd) {
         int tipoItem = rnd.nextInt(1);
@@ -58,7 +58,7 @@ public class ManejadorItems {
 
     /**
      * hace desaparecer al elemento
-     * @param elemento Sprite que se desea desaparecer
+     * @param item
      */
     public void desaparecer(SpriteItem item) {
         itemEnPantalla.removeElement(item);

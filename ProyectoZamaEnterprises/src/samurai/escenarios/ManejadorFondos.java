@@ -63,6 +63,10 @@ public class ManejadorFondos implements Animable {
         return ((FondoCapa) fondos.elementAt(0)).getAlto();
     }
 
+    /**
+     * cambia el parametro de velocidad
+     * @param parametro nuevo parametro
+     */
     public void setParametro(int parametro) {
         if (parametro != parametroVelocidad) {
             this.parametroVelocidad = parametro;

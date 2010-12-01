@@ -1,12 +1,10 @@
 package samurai.animacion;
 
 import java.io.IOException;
-import java.util.Random;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.escenarios.Posicion;
-import samurai.juego.Global;
 import samurai.juego.Juego;
 
 /**
@@ -50,10 +48,10 @@ public class SpriteEnemigo extends Sprite implements Animable {
     private int rapidez;
 
     /**
-     * constructor que inicializa variables
+     * constructor que inicializa variables y crea la imagen del enemigo
      * @param archivoEnemigo direccion de la imagen del enemigo
-     * @param centesimo
-     * @param tipoEnemigo
+     * @param centesimo lugar donde se coloca el enemigo
+     * @param tipoEnemigo tipo de enemigo
      * @throws IOException Si no se encuentra el archivo
      */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo) throws IOException {
@@ -76,6 +74,14 @@ public class SpriteEnemigo extends Sprite implements Animable {
         this.setPosition(posicion.getX(), posicion.getY());
     }
 
+    /**
+     * constructor que inicializa variables y crea la imagen del enemigo
+     * @param archivoEnemigo direccion de la imagen del enemigo
+     * @param centesimo lugar donde se coloca el enemigo
+     * @param tipoEnemigo tipo de enemigo
+     * @param alturaActual altura donde se coloca
+     * @throws IOException si no se encuentra el archivo
+     */
     public SpriteEnemigo(String archivoEnemigo, int centesimo, int tipoEnemigo, int alturaActual ) throws IOException {
         this(archivoEnemigo, centesimo, tipoEnemigo);
         this.alturaActual = alturaActual;
@@ -115,10 +121,18 @@ public class SpriteEnemigo extends Sprite implements Animable {
         alturaActual += rapidez;
     }
 
+    /**
+     * regresa el centesimo donde se ecuentra
+     * @return el centesimo donde se ecuentra
+     */
     public int getCentesimo() {
         return this.centesimo;
     }
 
+    /**
+     * regresa la altura actual
+     * @return la altura actual
+     */
     public int getAltura() {
         return this.alturaActual;
     }

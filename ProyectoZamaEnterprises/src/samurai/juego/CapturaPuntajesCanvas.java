@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package samurai.juego;
 
 import java.io.IOException;
@@ -12,8 +8,9 @@ import javax.microedition.lcdui.game.Sprite;
 import samurai.almacenamiento.AdministradorData;
 
 /**
- *
- * @author Pablo
+ * Clase encargada de desplegar la pantalla de capturar de puntajes altos
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Noviembre 2010
  */
 public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
 
@@ -32,11 +29,15 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     };
     private char[] iniciales;
     private int inicialActual;
-    private int pantalla;
     private int puntajeNuevo;
     private final int SUSTRAENDO_LETRA = 65;
     private Sprite letrasDeIniciales;
 
+    /**
+     * 
+     * @param samuraiMidlet
+     * @param puntajeNuevo
+     */
     public CapturaPuntajesCanvas(SamuraiEnterprises samuraiMidlet, int puntajeNuevo) {
         super(true);
         this.setFullScreenMode(true);
@@ -126,18 +127,25 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         indicador.paint(g);
         g.setColor(0x00FFFFFF);
 
-        for( int inicialIndex = 0; inicialIndex < inicialActual; inicialIndex++){
-            letrasDeIniciales.setFrame( (int)iniciales[inicialIndex] - SUSTRAENDO_LETRA);
-            letrasDeIniciales.setPosition(Global.ANCHO_PANTALLA/2 + letrasDeIniciales.getWidth()*(inicialIndex-1), letrasDeIniciales.getHeight()*3/5);
+        for (int inicialIndex = 0; inicialIndex < inicialActual; inicialIndex++) {
+            letrasDeIniciales.setFrame((int) iniciales[inicialIndex] - SUSTRAENDO_LETRA);
+            letrasDeIniciales.setPosition(Global.ANCHO_PANTALLA / 2 + letrasDeIniciales.getWidth() * (inicialIndex - 1), letrasDeIniciales.getHeight() * 3 / 5);
             letrasDeIniciales.paint(g);
         }
         flushGraphics();
     }
 
+    /**
+     *
+     * @return
+     */
     public String tipoCanvas() {
         return Actualizable.PUNTAJES;
     }
 
+    /**
+     *
+     */
     public void destruir() {
         animador.terminar();
         animador = null;
@@ -151,9 +159,15 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         iniciales = null;
     }
 
+    /**
+     *
+     */
     public void pausar() {
     }
 
+    /**
+     *
+     */
     public void correr() {
     }
 
@@ -188,6 +202,11 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         samuraiMidlet.mostrarPuntajes();
     }
 
+    /**
+     *
+     * @param puntajeNuevo
+     * @return
+     */
     public static boolean esNuevoPuntajeAlto(int puntajeNuevo) {
         AdministradorData minimoPuntajeMayorStore = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + Global.NUMERO_PUNTAJES_ALMACENADOS);
         int puntajeASuperar = minimoPuntajeMayorStore.regresarValorDato(AdministradorData.REGISTRO_PUNTAJE);

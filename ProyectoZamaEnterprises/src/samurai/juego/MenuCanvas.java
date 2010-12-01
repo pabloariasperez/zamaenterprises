@@ -64,6 +64,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     /**
      * Constructor que recibe al samurai e iniciliza todas las contantes.
      * @param samuraiMidlet midlet que se recibe.
+     * @param inicio
      */
     public MenuCanvas(SamuraiEnterprises samuraiMidlet, boolean inicio){
         //Se manda TRUE en el constructor de la clase padre (GameCanvas) para decir que cuando se quiera saber si una tecla está presionada
@@ -312,10 +313,17 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         System.gc();
     }
 
+    /**
+     *
+     * @return
+     */
     public String tipoCanvas() {
         return Actualizable.MENU;
     }
 
+    /**
+     *
+     */
     public void destruir() {
         animador.terminar();
         animador = null;
@@ -332,14 +340,24 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
         menuSonido=null; menuSalir=null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Animador getAnimador() {
         return animador;
     }
 
+    /**
+     *
+     */
     public void pausar() {
         animador.terminar();
     }
 
+    /**
+     *
+     */
     public void correr() {
         if( !animador.estaCorriendo() ){
             animador.iniciar();

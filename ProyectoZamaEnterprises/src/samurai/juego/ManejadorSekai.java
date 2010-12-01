@@ -21,7 +21,6 @@ public class ManejadorSekai implements Animable{
     private final int SECUENCIA_DER=2;
     private final int SECUENCIA_FRONTAL=3;
     private int frameActual;
-    private final int puntosVidaTotal;
     private int puntosVidaActual;
     private final int X_VIDA;
     private final int Y_VIDA;
@@ -30,12 +29,14 @@ public class ManejadorSekai implements Animable{
     private int DIFERENCIAL_COLISION_ESPADA;
     private int DIFERENCIAL_COLISION_SEKAI;
 
+    /**
+     * puntos de vida totales
+     */
     public static final int VIDA_TOTAL=50;
 
     /**
      * Constructor que iniciliza todas las variables
-     * @param sekai Recibe un SpriteSekai que contiene los movimientos del personaje
-     * @param efectos Recibe un SpriteEspada que contiene los efectos de la espada.
+     * @param vida vida actual
      * @param manejadorTec Recibe un ManejadorTeclado para detectar las teclas presionadas.
      */
     public ManejadorSekai( ManejadorTeclado manejadorTec, int vida){
@@ -49,8 +50,7 @@ public class ManejadorSekai implements Animable{
         this.manejadorTec=manejadorTec;
         this.estoyAnimandome=false;
         this.frameActual = 0;
-        this.puntosVidaTotal=50;
-        this.ANCHO_VIDA=this.puntosVidaTotal;
+        this.ANCHO_VIDA=this.VIDA_TOTAL;
         this.X_VIDA=Global.ANCHO_PANTALLA-this.ANCHO_VIDA-15;
         this.Y_VIDA=10;
         this.ALTO_VIDA=10;
@@ -124,15 +124,7 @@ public class ManejadorSekai implements Animable{
             }
             estoyAnimandome=true;
         }
-
 }
-    /**
-     * regresa un SpriteEspada
-     * @return efectosEspada
-     */
-    public SpriteEspada getEspada(){
-        return this.efectosEspada;
-    }
     /**
      * Reduce la vida dependiendo de que tipo de enemigo fue el que se la bajo
      * @param enemigo tipo de enemigo
@@ -140,16 +132,16 @@ public class ManejadorSekai implements Animable{
     public void reducirVida(int enemigo){
          switch (enemigo) {
                 case SpriteEnemigo.MURCIELAGO:
-                    this.puntosVidaActual-=this.puntosVidaTotal*.10;
+                    this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.10;
                     break;
                 case SpriteEnemigo.RATA:
-                    this.puntosVidaActual-=this.puntosVidaTotal*.05;
+                    this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.05;
                     break;
                 case SpriteEnemigo.FANTASMA:
-                    this.puntosVidaActual-=this.puntosVidaTotal*.15;
+                    this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.15;
                     break;
                 case SpriteEnemigo.TOPO:
-                    this.puntosVidaActual-=this.puntosVidaTotal*.20;
+                    this.puntosVidaActual-=ManejadorSekai.VIDA_TOTAL*.20;
                     break;
                 case SpriteEnemigo.CESAR:
                     this.puntosVidaActual=0;
@@ -171,7 +163,7 @@ public class ManejadorSekai implements Animable{
 
     /**
      * Indca si hubo colision entre la espada y un enemigo
-     * @param spriteEnemigo enemigo que efectua colision
+     * @param sprite
      * @return true sii la colision fue efectuada
      */
     public boolean colisionEspada(Sprite sprite) {
@@ -188,6 +180,10 @@ public class ManejadorSekai implements Animable{
     public int getHeight() {
         return this.sekai.getHeight();
     }
+    /**
+     * regresa si sekai sigue vivo
+     * @return bolleano vida mayor o igual a 0
+     */
     public boolean muerteSekai(){
         return this.puntosVidaActual<=0;
     }
@@ -202,16 +198,24 @@ public class ManejadorSekai implements Animable{
         g.fillRect(this.X_VIDA+5, Y_VIDA+1,ANCHO_VIDA, ALTO_VIDA-2);
 
         g.setColor(0x0000AA00);
-        if(puntosVidaActual < puntosVidaTotal*0.3){
+        if(puntosVidaActual < VIDA_TOTAL*0.3){
             g.setColor(0xFF0000);
         }
         g.fillRect(this.X_VIDA+6, Y_VIDA+2,puntosVidaActual -2, ALTO_VIDA-4);
     }
 
+    /**
+     * regresa la vida actual de sekai
+     * @return vida actual
+     */
     public int getVida() {
         return this.puntosVidaActual;
     }
 
+    /**
+     * aumenta la vida actual de sekai
+     * @param aumento la cantidad que aumenta
+     */
     public void aumentarVida(int aumento) {
         puntosVidaActual+=aumento;
         if(puntosVidaActual>ManejadorSekai.VIDA_TOTAL){

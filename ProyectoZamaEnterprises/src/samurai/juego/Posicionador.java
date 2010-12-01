@@ -107,10 +107,18 @@ public class Posicionador {
         }
     }
 
+    /**
+     *
+     * @param tiempoADormir
+     */
     public void sleep(int tiempoADormir) {
          generadorEje.sleep(tiempoADormir);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAnchoFinal(){
         return (anchoInicial*porcentajeAnchoFinal)/100;
     }

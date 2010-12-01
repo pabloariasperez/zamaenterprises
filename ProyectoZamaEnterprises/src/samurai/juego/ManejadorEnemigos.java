@@ -59,6 +59,13 @@ public class ManejadorEnemigos {
         }
     }
 
+    /**
+     * Metodo que agrega los enemigos al vector
+     * Solo es utilizado cuando se carga un juego
+     * @param tipoEnemigo enemigo que se desea agregar
+     * @param centesimo lugar donde se quedo
+     * @param altura altura en la que se encontraba
+     */
     public void agregarEnemigo(int tipoEnemigo, int centesimo, int altura ) {
         try {
             switch (tipoEnemigo) {
@@ -134,6 +141,9 @@ public class ManejadorEnemigos {
         return this.enemigosEnPantalla;
     }
 
+    /**
+     * Carga los datos de los enemigos al continuar un juego
+     */
     public void cargarDatos() {
         AdministradorData storeTotalEnemigos = new AdministradorData(AdministradorData.STORE_TOTAL_ENEMIGOS);
         int totalEnemigos = storeTotalEnemigos.regresarValorDato(1);
@@ -149,6 +159,9 @@ public class ManejadorEnemigos {
 
     }
 
+    /**
+     * guarda a los enemigos 
+     */
     public void guardarDatos() {
         AdministradorData totalEnemigos = new AdministradorData(AdministradorData.STORE_TOTAL_ENEMIGOS);
         totalEnemigos.borrarTodo();

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package samurai.escenarios;
 
 import java.util.Random;
@@ -12,7 +7,7 @@ import samurai.multimedia.SFX;
 /**
  * Se encarga de los enemigos,  los fondos y los sfx de cada nivel
  * @author Pablo, Erik, Daniel
- * @version 1.2
+ * @version 1.3
  */
 public class Nivel{
     /**
@@ -36,14 +31,16 @@ public class Nivel{
     public  static void inicializar(int nivel, Escenario escenario){
        switch(nivel){
            case NIVEL_1:
-                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/atardecergrande.png", 6));
+                escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/cielogrande.png", 6));
                 escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/montanascafes.png", 16));
                 break;
            case NIVEL_2:
-               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/atardecergrande.png", -1));
-               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/montanascafes.png", -2));
+               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/atardecergrande.png", 6));
+               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/montanascafes.png", 16));
                break;
            case NIVEL_3:
+               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/fondoLuna.png", 6));
+               escenario.agregarFondo(new FondoCapa("/samurai/imagenes/ambiente/edificios.png", 16));
                break;
        }
     }
@@ -62,9 +59,12 @@ public class Nivel{
                 sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
                 break;
 //            case NIVEL_2:
+//                sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
                   //sfx.agregarSFX(SFX.MUERTE_TOPO);
 //                break;
 //            case NIVEL_3:
+                //sfx.agregarSFX(SFX.MUERTE_TOPO);
+                //sfx.agregarSFX(SFX.MUERTE_FANTASMA);
 //                break;
         }
     }
@@ -79,14 +79,19 @@ public class Nivel{
             case NIVEL_1:
                 return random.nextInt(2);
             case NIVEL_2:
-                return random.nextInt(3);
+                return random.nextInt(2);
             case NIVEL_3:
-                return random.nextInt(4);
+                return random.nextInt(2);
             default:
                 return random.nextInt(2);
         }
     }
 
+    /**
+     * regresa el stack del parametro dependiendo del nivel
+     * @param escenario nivel al que se le agrega
+     * @return stack de parametros
+     */
     public static Stack llenarStackParametro(int escenario){
         switch(escenario){
             case NIVEL_1:

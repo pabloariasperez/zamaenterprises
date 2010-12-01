@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package samurai.escenarios;
 
 import java.io.IOException;
@@ -32,18 +27,21 @@ public class Escenario {
     private Stack parametrosCamino;
     private int tiempoProxEvento;
     private ManejadorAmbiente ambiente;
-    /**
-     * la distancia que hay entre cada piedra
-     */
-    public int DISTANCIADOR_PIEDRAS = 4;
     private int correccionDesfaseXPiedra;
     private int correccionDesfaseYPiedra;
     private int razonCambioPiedra;
     private boolean esFinEscenario;
     private Mapa mapaAvance;
 
+     /**
+     * la distancia que hay entre cada piedra
+     */
+    public int DISTANCIADOR_PIEDRAS = 4;
+
     /**
      * Constructor: no tiene argumentos porque cada uno de sus elementos será alimentado por otros métodos.
+     * @param escenarioActual numero de escenario a cargar
+     * @param tiempoInicio momento en que se inicia
      */
     public Escenario(int escenarioActual, int tiempoInicio ){
         
@@ -93,7 +91,6 @@ public class Escenario {
 
     /**
      * regresa el alto de los fondos
-
      * @return alto de los fondos
      */
     public int getAltoFondos() {
@@ -102,7 +99,10 @@ public class Escenario {
     
     /**
      * Se dibuja el escenario.
+     * Se dibuja el fondo
      * Se dibuja el camino
+     * Se dibuja el ambiente
+     * Se dibuja el mapa de avance
      * @param g Graficos
      */
     public void dibujar(Graphics g){
@@ -176,16 +176,28 @@ public class Escenario {
         g.drawImage(fondoCamino, 0, Juego.altoFondo, Graphics.LEFT|Graphics.TOP);
     }
 
+    /**
+     * cambia el número de puntos que deberán ser representados por CADA frame de la piedra
+     * @param longitudPosiciones total de las posiciones
+     */
     public void setRazonCambioPiedra(int longitudPosiciones){
         //Este número representa el número de puntos que deberán ser representados por CADA frame de la piedra.
-        // Al total de mis posiciones lo divido entre la distancia que deben guardar entre ellos, y luego entre el número de frames en piedra.
+        // Al total de las posiciones se divide entre la distancia que deben guardar entre ellos, y luego entre el número de frames en piedra.
         razonCambioPiedra = longitudPosiciones/piedra.getFrameSequenceLength()/(DISTANCIADOR_PIEDRAS-1);
     }
 
+    /**
+     * inidica si ya va a acabar el escenario
+     * @return si es fin de escenario
+     */
     public boolean esFinEscenario(){
         return esFinEscenario;
     }
 
+    /**
+     * regresa el tiempo actual
+     * @return tiempo actual
+     */
     public int tiempoActual(){
         return tiempo.actual();
     }
@@ -196,6 +208,10 @@ public class Escenario {
         }
     }
 
+    /**
+     * regresa el parametro
+     * @return parametro
+     */
     public int obtenerParametro(){
         return ((int[])parametrosCamino.peek())[1];
     }

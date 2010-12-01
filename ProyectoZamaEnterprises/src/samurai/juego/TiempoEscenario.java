@@ -48,6 +48,10 @@ public class TiempoEscenario {
         tiempo = 0;
     }
 
+    /**
+     *
+     * @param tiempoNuevo
+     */
     public void setTiempo(int tiempoNuevo) {
         tiempo = tiempoNuevo;
     }

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package samurai.escenarios;
 
 import javax.microedition.lcdui.Graphics;
@@ -12,13 +7,19 @@ import samurai.juego.TiempoEscenario;
 
 /**
  *
- * @author Pablo
+ * @author Pablo, Erik, Daniel
+ * @version 1.0 Noviembre 2010
  */
 public class Mapa implements Animable{
     private int tiempoUltimoEvento;
     private TiempoEscenario tiempo;
     private final int RADIO_CIRCULO = 5;
     
+    /**
+     *
+     * @param tiempoUltimoEvento
+     * @param tiempo
+     */
     public Mapa( int tiempoUltimoEvento, TiempoEscenario tiempo ){
         this.tiempoUltimoEvento = tiempoUltimoEvento;
         this.tiempo = tiempo;

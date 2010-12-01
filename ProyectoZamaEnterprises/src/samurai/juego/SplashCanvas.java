@@ -132,10 +132,17 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         animador.iniciar();
     }
 
+    /**
+     *
+     * @return
+     */
     public String tipoCanvas() {
         return Actualizable.SPLASH;
     }
 
+    /**
+     *
+     */
     public void destruir() {
         animador.terminar();
         animador = null;
@@ -148,14 +155,24 @@ public class SplashCanvas extends GameCanvas implements Actualizable {
         colores = null;
     }
 
+    /**
+     *
+     * @return
+     */
     public Animador getAnimador() {
         return animador;
     }
 
+    /**
+     *
+     */
     public void pausar() {
         animador.terminar();
     }
 
+    /**
+     *
+     */
     public void correr() {
         if( !animador.estaCorriendo() ){
             animador.iniciar();

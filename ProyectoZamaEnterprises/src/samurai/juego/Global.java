@@ -30,9 +30,21 @@ public class Global {
      * los frames per second
      */
     public static final int NUMERO_PUNTAJES_ALMACENADOS = 3;
+    /**
+     *
+     */
     public static boolean SONIDO_ACTIVADO = false;
+    /**
+     *
+     */
     public static final int DIGITOS_PUNTAJES = 6;
+    /**
+     *
+     */
     public static final int AnchoSTD = 240;
+    /**
+     *
+     */
     public static final int AltoSTD = 320;
 
     /**
@@ -63,10 +75,16 @@ public class Global {
         FPS = nuevoFPS;
     }
 
+    /**
+     *
+     */
     public static void sonidoOn() {
         SONIDO_ACTIVADO = true;
     }
 
+    /**
+     *
+     */
     public static void sonidoOff() {
         SONIDO_ACTIVADO = false;
     }
