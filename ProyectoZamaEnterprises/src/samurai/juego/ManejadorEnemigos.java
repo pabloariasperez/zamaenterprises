@@ -55,7 +55,7 @@ public class ManejadorEnemigos {
         try {
             switch (tipoEnemigo) {
                 case SpriteEnemigo.MURCIELAGO:
-                    SpriteEnemigo sprite = new SpriteEnemigo(this.imagenFantasma, rndm.nextInt(60) + 20, SpriteEnemigo.FANTASMA);
+                    SpriteEnemigo sprite = new SpriteEnemigo(this.imagenMurcielago, rndm.nextInt(60) + 20, tipoEnemigo);
                     sprite.agregarSombra(sombra);
                     enemigosEnPantalla.addElement(sprite);
                     break;
@@ -66,7 +66,9 @@ public class ManejadorEnemigos {
                     enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenRata, rndm.nextInt(60) + 20, tipoEnemigo));
                     break;
                 case SpriteEnemigo.FANTASMA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenFantasma, rndm.nextInt(60) + 20, tipoEnemigo));
+                     SpriteEnemigo spriteFantasma = new SpriteEnemigo(this.imagenFantasma, rndm.nextInt(60) + 20, tipoEnemigo);
+                     spriteFantasma.agregarSombra(sombra);
+                    enemigosEnPantalla.addElement(spriteFantasma);
                     break;
                 case SpriteEnemigo.CESAR:
                     enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenMurcielago, rndm.nextInt(60) + 20, tipoEnemigo));
@@ -99,7 +101,9 @@ public class ManejadorEnemigos {
                     enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenRata, centesimo, tipoEnemigo, altura ));
                     break;
                 case SpriteEnemigo.FANTASMA:
-                    enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenFantasma, centesimo, tipoEnemigo, altura ));
+                    SpriteEnemigo spriteFantasma = new SpriteEnemigo(this.imagenFantasma, centesimo, tipoEnemigo, altura );
+                    spriteFantasma.agregarSombra(sombra);
+                    enemigosEnPantalla.addElement(spriteFantasma);
                     break;
                 case SpriteEnemigo.CESAR:
                     enemigosEnPantalla.addElement(new SpriteEnemigo(this.imagenMurcielago, centesimo, tipoEnemigo, altura ));
