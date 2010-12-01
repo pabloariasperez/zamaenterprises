@@ -6,6 +6,9 @@ import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.game.GameCanvas;
 import javax.microedition.lcdui.game.Sprite;
 import samurai.almacenamiento.AdministradorData;
+import samurai.almacenamiento.AlmacenamientoServidor;
+import samurai.menu.Boton;
+import samurai.menu.Menu;
 
 /**
  * Clase encargada de desplegar la pantalla de capturar de puntajes altos
@@ -32,6 +35,9 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
     private int puntajeNuevo;
     private final int SUSTRAENDO_LETRA = 65;
     private Sprite letrasDeIniciales;
+    private boolean menu = false;
+    private Menu menuSubir;
+    private String nombre;
 
     /**
      * Constructor inicializa variables
@@ -61,65 +67,93 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         iniciales = new char[3];
         inicialActual = 0;
 
+        menuSubir = null;
+        nombre = "";
         animador = new Animador(this);
         animador.iniciar();
     }
+
     /**
      * actualiza
      */
     public void actualizar() {
-        if (teclado.downPresionado()) {
-            if (yTabla < 3) {
-                yTabla++;
-            } else {
-                yTabla = 0;
-            }
-        }
-
-        if (teclado.upPresionado()) {
-            if (yTabla > 0) {
-                yTabla--;
-            } else {
-                yTabla = 3;
-            }
-        }
-
-        if (teclado.derPresionado()) {
-            if (xTabla < 6) {
-                xTabla++;
-            } else {
-                xTabla = 0;
-            }
-        }
-
-        if (teclado.izqPresionado()) {
-            if (xTabla > 0) {
-                xTabla--;
-            } else {
-                xTabla = 6;
-            }
-        }
-
-        if (teclado.firePresionado()) {
-            if (xTabla >= 5 && yTabla == 3) {
-                if (xTabla == 5) {
-                    borrarLetra();
-                } else if (xTabla == 6) {
-                    terminarCaptura();
+        if (!menu) {
+            if (teclado.downPresionado()) {
+                if (yTabla < 3) {
+                    yTabla++;
+                } else {
+                    yTabla = 0;
                 }
-            } else if (inicialActual < 3) {
-                iniciales[inicialActual] = alfabeto[yTabla][xTabla];
-                inicialActual++;
             }
-            if (inicialActual == 3) {
-                xTabla = 6;
-                yTabla = 3;
+
+            if (teclado.upPresionado()) {
+                if (yTabla > 0) {
+                    yTabla--;
+                } else {
+                    yTabla = 3;
+                }
+            }
+
+            if (teclado.derPresionado()) {
+                if (xTabla < 6) {
+                    xTabla++;
+                } else {
+                    xTabla = 0;
+                }
+            }
+
+            if (teclado.izqPresionado()) {
+                if (xTabla > 0) {
+                    xTabla--;
+                } else {
+                    xTabla = 6;
+                }
+            }
+
+            if (teclado.firePresionado()) {
+                if (xTabla >= 5 && yTabla == 3) {
+                    if (xTabla == 5) {
+                        borrarLetra();
+                    } else if (xTabla == 6) {
+                        terminarCaptura();
+                    }
+                } else if (inicialActual < 3) {
+                    iniciales[inicialActual] = alfabeto[yTabla][xTabla];
+                    inicialActual++;
+                }
+                if (inicialActual == 3) {
+                    xTabla = 6;
+                    yTabla = 3;
+                }
+            }
+
+            indicador.setPosition(Global.ANCHO_PANTALLA / 2 - letras.getWidth() / 2 + xTabla * letras.getWidth() / 7,
+                    Global.ALTO_PANTALLA / 2 - letras.getHeight() / 2 + yTabla * letras.getHeight() / 4);
+        } else {
+            if (this.teclado.downPresionado()) {
+                this.menuSubir.moverOpcion(1);
+            }
+            if (this.teclado.upPresionado()) {
+                this.menuSubir.moverOpcion(-1);
+            }
+            if (this.teclado.firePresionado()) {
+                switch (this.menuSubir.getPosition()) {
+                    case 0:
+                        try {
+                            AlmacenamientoServidor.subirPuntaje(nombre, puntajeNuevo);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        samuraiMidlet.mostrarPuntajes();
+                        break;
+                    case 1:
+                        samuraiMidlet.mostrarPuntajes();
+                        return;
+                }
             }
         }
-
-        indicador.setPosition(Global.ANCHO_PANTALLA / 2 - letras.getWidth() / 2 + xTabla * letras.getWidth() / 7,
-                Global.ALTO_PANTALLA / 2 - letras.getHeight() / 2 + yTabla * letras.getHeight() / 4);
     }
+
     /**
      * dibuja el abcedario y las iniciales
      */
@@ -128,12 +162,15 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
         g.fillRect(0, 0, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA);
         g.drawImage(letras, Global.ANCHO_PANTALLA / 2, Global.ALTO_PANTALLA / 2, g.HCENTER | g.VCENTER);
         indicador.paint(g);
-        g.setColor(0x00FFFFFF);
 
         for (int inicialIndex = 0; inicialIndex < inicialActual; inicialIndex++) {
             letrasDeIniciales.setFrame((int) iniciales[inicialIndex] - SUSTRAENDO_LETRA);
             letrasDeIniciales.setPosition(Global.ANCHO_PANTALLA / 2 + letrasDeIniciales.getWidth() * (inicialIndex - 1), letrasDeIniciales.getHeight() * 3 / 5);
             letrasDeIniciales.paint(g);
+        }
+        if (this.menu && menuSubir != null) {
+            g.fillRect(0, 0, Global.ANCHO_PANTALLA, Global.ALTO_PANTALLA);
+            this.menuSubir.dibujar(g);
         }
         flushGraphics();
     }
@@ -173,7 +210,7 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
      * inicia el animador
      */
     public void correr() {
-        if( !animador.estaCorriendo() ){
+        if (!animador.estaCorriendo()) {
             animador.iniciar();
         }
     }
@@ -190,7 +227,8 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
             iniciales[1] = 'O';
             iniciales[2] = 'U';
         }
-        guardarPuntaje("" + iniciales[0] + iniciales[1] + iniciales[2]);
+        nombre = "" + iniciales[0] + iniciales[1] + iniciales[2];
+        guardarPuntaje(nombre);
     }
 
     private void guardarPuntaje(String iniciales) {
@@ -205,8 +243,7 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
                 intercambiarPuntajes(c + 1, iniciales);
             }
         }
-
-        samuraiMidlet.mostrarPuntajes();
+        this.subir();
     }
 
     /**
@@ -229,5 +266,24 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
 
         puntajeAltoStore.cambiarRegistro(puntajeNuevo, AdministradorData.REGISTRO_PUNTAJE);
         puntajeAltoStore.cambiarRegistro(iniciales, AdministradorData.REGISTRO_INICIALES);
+    }
+
+    private void subir() {
+        this.crearMenu();
+        this.menu = true;
+    }
+
+    private void crearMenu() {
+        try {
+             if (this.menuSubir == null) {
+            this.menuSubir = new Menu(2, "/samurai/imagenes/titulos/tituloSubir.png", "/samurai/imagenes/slash.png", 1);
+            Boton botonSi = new Boton("/samurai/imagenes/botones/botonSi.png");
+            Boton botonNo = new Boton("/samurai/imagenes/botones/botonNo.png");
+            this.menuSubir.agregarBoton(botonSi, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            this.menuSubir.agregarBoton(botonNo, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

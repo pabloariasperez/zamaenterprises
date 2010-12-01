@@ -296,6 +296,7 @@ public class Juego extends GameCanvas implements Actualizable {
             try {
                 manejadorSekai.actualizar();
             } catch (InterruptedException ex) {
+
                 ex.printStackTrace();
             }
         }

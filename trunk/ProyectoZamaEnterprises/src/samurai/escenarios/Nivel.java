@@ -61,6 +61,7 @@ public class Nivel{
             case NIVEL_2:
                 sfx.agregarSFX(SFX.MUERTE_MURCIELAGO);
                 sfx.agregarSFX(SFX.MUERTE_TOPO);
+                sfx.agregarSFX(SFX.MUERTE_FANTASMA);
                 break;
 //            case NIVEL_3:
                 //sfx.agregarSFX(SFX.MUERTE_TOPO);
@@ -79,7 +80,7 @@ public class Nivel{
             case NIVEL_1:
                 return random.nextInt(2);
             case NIVEL_2:
-                return random.nextInt(3)+2;
+                return random.nextInt(3)+1;
             case NIVEL_3:
                 return random.nextInt(2);
             default:

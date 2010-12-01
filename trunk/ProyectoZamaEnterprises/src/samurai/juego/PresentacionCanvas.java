@@ -96,7 +96,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
         switch (this.tipo) {
             case PresentacionCanvas.CREDITO:
                 Diapositiva creditoDaniel = new Diapositiva("/samurai/imagenes/creditos/Daniel.png", "/samurai/imagenes/creditos/feliz.png", agregarString(C_DANIEL));
-                Diapositiva creditoErik = new Diapositiva("/samurai/imagenes/creditos/Erik.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(C_ERIK));
+                Diapositiva creditoErik = new Diapositiva("/samurai/imagenes/creditos/Erik.png", "/samurai/imagenes/creditos/rosa_negra.png", agregarString(C_ERIK));
                 Diapositiva creditoPablo = new Diapositiva("/samurai/imagenes/creditos/Pablo.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(C_PABLO));
                 this.diapositivas.push(creditoDaniel);
                 this.diapositivas.push(creditoErik);
