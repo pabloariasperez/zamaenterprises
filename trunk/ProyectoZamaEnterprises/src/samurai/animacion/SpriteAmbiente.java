@@ -29,6 +29,10 @@ public class SpriteAmbiente extends Sprite {
     public static final int ARBOL_1 = 0;
     public static final int PIEDRA_1 = 1;
 
+    public static final int ARENA_1 = 2;
+    private final int ANCHO_PIEDRA = 20;
+
+
     /**
      * constructor que inicializa variables
      * @param imagenAmbiente imagen del sprite

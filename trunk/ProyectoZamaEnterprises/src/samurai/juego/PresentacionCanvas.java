@@ -113,11 +113,11 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.diapositivas.push(controlAbajo);
                 break;
             case PresentacionCanvas.PROLOGO:
-                Diapositiva prologo = new Diapositiva("/samurai/imagenes/titulos/tituloPrologo.png", "/samurai/imagenes/creditos/feliz.png", agregarString(S_PROLOGO_1));
+                Diapositiva prologo = new Diapositiva("/samurai/imagenes/titulos/tituloPrologo.png", "/samurai/imagenes/imagenPrologo.png", agregarString(S_PROLOGO_1));
                 this.diapositivas.push(prologo);
                 break;
             case PresentacionCanvas.EPILOGO:
-                Diapositiva epilogo = new Diapositiva("/samurai/imagenes/titulos/tituloEpilogo.png", "/samurai/imagenes/creditos/pruebin.png", agregarString(S_PROLOGO_1));
+                Diapositiva epilogo = new Diapositiva("/samurai/imagenes/titulos/tituloEpilogo.png", "/samurai/imagenes/imagenEpilogo.png", agregarString(S_PROLOGO_1));
                 this.diapositivas.push(epilogo);
                 break;
             case PresentacionCanvas.GAMEOVER:
