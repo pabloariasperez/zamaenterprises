@@ -156,17 +156,18 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 texto.addElement("");
                 return texto;
             case C_DANIEL:
-                texto.addElement("           (  .  V  .  )");
-                texto.addElement("             )   .    (");
-                texto.addElement("            (    W    )");
+                texto.addElement("Arriba el Veracruz");
+                texto.addElement("Un ornitorrinco...!perry");
+                texto.addElement("el ornitorrinco¡");
                 return texto;
             case S_GAMEOVER:
                 texto.addElement("Moriste");
                 texto.addElement("  ...  ");
                 return texto;
             case S_PROLOGO_1:
-                texto.addElement("Empezando");
-                texto.addElement("  ...  ");
+                texto.addElement("Ayuda a Sekai a");
+                texto.addElement("acabar con los");
+                texto.addElement("enemigos.");
                 return texto;
             case T_Adelante:
                 texto.addElement("Utilice el boton 2 para");
