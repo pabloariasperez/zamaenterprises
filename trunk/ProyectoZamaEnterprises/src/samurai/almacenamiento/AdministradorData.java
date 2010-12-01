@@ -8,28 +8,68 @@ import javax.microedition.rms.RecordStore;
 import javax.microedition.rms.RecordStoreException;
 
 /**
- *
- * @author mi16
+ * Clase encargada de guardar
+ * @author Pablo, Erik, Daniel
+ * @version 2.0
  */
 public class AdministradorData {
     private RecordStore recordStore;
     private String nombreStore;
+    /**
+     * String que representa un registro vacio
+     */
     public static final String SVacio = "vacio";
+    /**
+     * Enum que representa el registro del score actual
+     */
     public static final int REGISTRO_SCORE_ACTUAL = 1;
+    /**
+     * Enum que representa el registro de la vida
+     */
     public static final int REGISTRO_VIDA = 2;
+    /**
+     * Enum que representa el registro del nivel
+     */
     public static final int REGISTRO_NIVEL = 3;
+    /**
+     * Enum que representa el registro del tiempo
+     */
     public static final int REGISTRO_TIEMPO = 4;
-    
+    /**
+     * Enum que representa el registro de las iniciales de los scores
+     */
     public static final int REGISTRO_INICIALES = 1;
+    /**
+     * Enum que representa el registro del puntaje de los scores altos
+     */
     public static final int REGISTRO_PUNTAJE = 2;
-
+    /**
+     * String del nombre del store utilizado para el avance
+     */
     public static final String STORE_AVANCE = "AVANCE";
+    /**
+     * String del nombre del store utilizado para los enemigos
+     */
     public static final String STORE_ENEMIGO = "ENEMIGO";
+    /**
+     * String del nombre del store utilizado para el total de enemigos
+     */
     public static final String STORE_TOTAL_ENEMIGOS = "TOTAL_ENEMIGOS";
+    /**
+     * String del nombre del store utilizado para los puntajes
+     */
     public static final String STORE_PUNTAJE_ = "PUNTAJE_";
+    /**
+     * String del nombre del store utilizado para los puntajes default
+     */
     public static final String STORE_PUNTAJES_ESTABLECIDOS = "PUNTAJES_DEFAULT";
+    public static  int VALOR_ERROR=-1;
 
 
+    /**
+     * Constructor que abre el store y lo crea si este no existiera
+     * @param nombreStore nombre del store a abrir
+     */
     public AdministradorData(String nombreStore) {
         this.nombreStore = nombreStore;
         try {
@@ -42,6 +82,10 @@ public class AdministradorData {
         }
     }
 
+    /**
+     * Agrega un registro con la String enviada
+     * @param valorRegistro String que se desea guardar
+     */
     public void agregarRegistro(String valorRegistro) {
         try {
             recordStore = RecordStore.openRecordStore(this.nombreStore, false);
@@ -54,6 +98,10 @@ public class AdministradorData {
         }
     }
 
+    /**
+     * Agrega un registro con el valor int enviado
+     * @param valorRegistro int que se desea guardar
+     */
     public void agregarRegistro(int valorRegistro) {
         try {
             recordStore = RecordStore.openRecordStore(this.nombreStore, false);
@@ -65,6 +113,11 @@ public class AdministradorData {
         }
     }
 
+    /**
+     * Cambia el valor de un registro
+     * @param nuevoDato valor nuevo a guardar
+     * @param index registro a cambiar
+     */
     public void cambiarRegistro(String nuevoDato, int index) {
         try {
             recordStore = RecordStore.openRecordStore(this.nombreStore, false);
@@ -76,6 +129,11 @@ public class AdministradorData {
         }
     }
 
+    /**
+     * Cambia el valor de un registro
+     * @param nuevoDato valor nuevo a guardar
+     * @param index registro a cambiar
+     */
     public void cambiarRegistro(int nuevoDato, int index) {
         try {
             recordStore = RecordStore.openRecordStore(this.nombreStore, false);
@@ -87,6 +145,10 @@ public class AdministradorData {
         }
     }
 
+    /**
+     * Regresa un String con el valor de todos los registros de un store
+     * @return String con todos los registros
+     */
     public String regresarRegistroCompleto() {
         String registro = "";
         try {
@@ -102,6 +164,11 @@ public class AdministradorData {
         return registro;
     }
 
+    /**
+     * Regresa el dato de un registro como String
+     * @param index registro
+     * @return valor del registro como string
+     */
     public String regresarDato(int index) {
         String dato = "";
         try {
@@ -118,8 +185,13 @@ public class AdministradorData {
         return dato;
     }
 
+    /**
+     * regresa el dato de un registro como int
+     * @param index registro
+     * @return valor del registro como int
+     */
     public int regresarValorDato(int index) {
-        int valor = -1;
+        int valor = VALOR_ERROR;
         try {
             recordStore = RecordStore.openRecordStore(this.nombreStore, false);
             if (index > 0 && index <= recordStore.getNumRecords()) {
@@ -133,6 +205,9 @@ public class AdministradorData {
         return valor;
     }
 
+    /**
+     * borra todo lo de un store
+     */
     public void borrarTodo() {
         try {
             RecordStore.deleteRecordStore(nombreStore);

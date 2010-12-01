@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package samurai.escenarios;
 
 import java.io.IOException;
@@ -26,7 +22,7 @@ public class FondoCapa implements Animable {
      * crea la imagen a ser utilizada, e inicializa variables
      * @param archivoImagen direccion de la imagen
      * @param velocidad : velocidad a la que se movera
-     * @param posicionY : posicion y
+     * @throws IllegalArgumentException
      */
     public FondoCapa(String archivoImagen, int velocidad) throws IllegalArgumentException{
 
@@ -51,7 +47,10 @@ public class FondoCapa implements Animable {
             this.posicionX = Global.ANCHO_PANTALLA;
         }
     }
-
+    /**
+     * Dibuja el fondo
+     * @param g Graficos
+     */
     public void dibujar(Graphics g) {
         g.drawImage(imagen, posicionX, posicionY, Graphics.LEFT | Graphics.TOP);
         if( posicionX > 0 ){
@@ -69,6 +68,10 @@ public class FondoCapa implements Animable {
         return imagen.getHeight();
     }
 
+    /**
+     * cambia el parametro de velocidad
+     * @param parametroVelocidad nuevo parametro
+     */
     public void setParametro(int parametroVelocidad) {
         this.parametroVelocidad = parametroVelocidad;
     }

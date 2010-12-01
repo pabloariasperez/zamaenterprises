@@ -153,6 +153,10 @@ public class GeneradorEje implements Runnable {
         estado = GeneradorEje.PARADO;
     }
 
+    /**
+     *
+     * @param tiempoADormir
+     */
     public void sleep(int tiempoADormir) {
         try {
             hiloSegundoPlano.sleep((long) tiempoADormir);

@@ -48,11 +48,14 @@ public class Diapositiva implements Animable{
         this.Xstring = Global.ANCHO_PANTALLA;
         this.Xcuadro = -(this.imagenCuadro.getWidth());
     }
-
+    /**
+     * Dibuja el titulo, la imagen y el texto de la diapositiva
+     * @param g Graficos
+     */
     public void dibujar(Graphics g) {
       
             g.drawImage(titulo, this.tituloX, tituloY, Graphics.HCENTER|Graphics.VCENTER);
-            g.drawImage(imagenRelativa, this.imagenX, Global.ALTO_PANTALLA/2, Graphics.HCENTER|Graphics.VCENTER);
+            g.drawImage(imagenRelativa, this.imagenX, imagenY, Graphics.HCENTER|Graphics.VCENTER);
             g.drawImage(imagenCuadro, this.Xcuadro, Ystring-10, Graphics.LEFT | Graphics.TOP);
             g.setColor(0xFFFFFF);
             int tamañoVec=textos.size();
@@ -100,6 +103,9 @@ public class Diapositiva implements Animable{
         return false;
     }
 
+    /**
+     * Centra la imagen cuando esta se para
+     */
     public void centrar() {
         imagenX=Global.ANCHO_PANTALLA/2;
     }

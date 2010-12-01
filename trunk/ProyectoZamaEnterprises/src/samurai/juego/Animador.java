@@ -85,6 +85,10 @@ public class Animador implements Runnable {
         corriendo = false;
     }
 
+    /**
+     * regresa un booleano indicando si sigue vivo
+     * @return booleano indicando si sigue vivo
+     */
     public boolean estaCorriendo(){
         return thread.isAlive();
     }

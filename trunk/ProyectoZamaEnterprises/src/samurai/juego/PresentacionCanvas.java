@@ -51,12 +51,15 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
      * Enum de epilogo
      */
     public static final int EPILOGO = 3;
+    /**
+     *
+     */
     public static final int GAMEOVER = 4;
 
     /**
      * Constructor inicializa variables
      * @param samuraiMidlet midlet que usa
-     * @param tipoCanvas tipoCanvas de presentacion que es
+     * @param tipo
      */
     public PresentacionCanvas(SamuraiEnterprises samuraiMidlet, int tipo) {
 
@@ -230,10 +233,17 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String tipoCanvas() {
         return Actualizable.PRESENTACION;
     }
 
+    /**
+     *
+     */
     public void destruir() {
         animador.terminar();
         animador = null;
@@ -267,10 +277,16 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
         }
     }
 
+    /**
+     *
+     */
     public void pausar() {
         animador.terminar();
     }
 
+    /**
+     *
+     */
     public void correr() {
         if (!animador.estaCorriendo()) {
             animador.iniciar();

@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package samurai.juego;
 
 import javax.microedition.lcdui.Graphics;
@@ -35,6 +30,10 @@ public class Cargador extends GameCanvas implements Runnable {
     private String mensajeGeneral;
     private String puntitos;
 
+    /**
+     *
+     * @param mensajeGeneral
+     */
     public Cargador(String mensajeGeneral){
         super(true);
         setFullScreenMode(true);
@@ -45,6 +44,9 @@ public class Cargador extends GameCanvas implements Runnable {
         estado = COMENZANDO;
     }
 
+    /**
+     *
+     */
     public void run() {
         corriendo = true;
         estado = CARGANDO;
@@ -87,6 +89,9 @@ public class Cargador extends GameCanvas implements Runnable {
         return estado;
     }
 
+    /**
+     *
+     */
     public void iniciar() {
         if(estado==COMENZANDO){
             hiloDeCarga = new Thread(this);
@@ -94,12 +99,19 @@ public class Cargador extends GameCanvas implements Runnable {
         }
     }
 
+    /**
+     *
+     */
     public void terminar(){
         if(corriendo){
             corriendo=false;
         }
     }
 
+    /**
+     *
+     * @param mensaje
+     */
     public void cambiarMensaje(String mensaje){
         this.mensaje = mensaje;
     }

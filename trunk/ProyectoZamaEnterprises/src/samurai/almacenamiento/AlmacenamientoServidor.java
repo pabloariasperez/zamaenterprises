@@ -21,6 +21,12 @@ public class AlmacenamientoServidor {
     private static final String VAR_INICIALES = "&iniciales=";
     private static final String VAR_PUNTAJE = "&puntaje=";
 
+    /**
+     *
+     * @param iniciales
+     * @param puntaje
+     * @throws IOException
+     */
     public static void subirPuntaje(String iniciales, int puntaje) throws IOException {
         HttpConnection conexion = null;
         InputStream inputStream = null;

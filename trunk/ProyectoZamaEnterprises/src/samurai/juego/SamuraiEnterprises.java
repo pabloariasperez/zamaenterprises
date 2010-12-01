@@ -18,12 +18,16 @@ public class SamuraiEnterprises extends MIDlet {
     private Actualizable pantallaActual;
     private int puntajeObtenido = 0;
 
+    private final int FPS_MUY_RAPIDO=60;
+    private final int FPS_RAPIDO=50;
+    private final int FPS_LENTO=30;
+
     /**
-     * Constructor del MIDlet que inicializa el SplashCanvas. =D
+     * Constructor del MIDlet que inicializa el SplashCanvas.
      */
     public SamuraiEnterprises() {
         establecerPuntajesDefault();
-        Global.setFPS(60);
+        Global.setFPS(FPS_MUY_RAPIDO);
         pantallaActual = new SplashCanvas(this);
     }
 
@@ -54,29 +58,29 @@ public class SamuraiEnterprises extends MIDlet {
     }
 
     /**
-     *
+     * Cambia la pantalla a la de mostrar puntajes
      */
     public void mostrarPuntajes() {
         pantallaActual.destruir();
         pantallaActual = null;
-        Global.setFPS(30);
+        Global.setFPS(FPS_LENTO);
         pantallaActual = new MostrarPuntajesCanvas(this);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
-     *
+     * Cambia la pantalla a la de mostrar creditos
      */
     public void mostrarCreditos() {
         pantallaActual.destruir();
         pantallaActual = null;
-        Global.setFPS(50);
+        Global.setFPS(FPS_RAPIDO);
         pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.CREDITO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
-     *
+     * Metodo que Cambia la pantalla a la de juego continuando donde se habia quedado
      */
     public void continuarJuego() {
         AdministradorData data = new AdministradorData(AdministradorData.STORE_AVANCE);
@@ -88,56 +92,66 @@ public class SamuraiEnterprises extends MIDlet {
         int nivel = data.regresarValorDato(AdministradorData.REGISTRO_NIVEL);
         int tiempo = data.regresarValorDato(AdministradorData.REGISTRO_TIEMPO);
         pantallaActual = new Juego(this, nivel, score, vida, tiempo);
-        Global.setFPS(60);
+        Global.setFPS(FPS_MUY_RAPIDO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
-     *
+     * Cambia la pantalla a la del menu
      */
     public void mostrarMenu() {
         pantallaActual.destruir();
         pantallaActual = null;
-        Global.setFPS(20);
+        Global.setFPS(FPS_LENTO);
         pantallaActual = new MenuCanvas(this, false);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
     /**
-     *
-     *
+     * Corre en nivel 1
      */
     public void correrNivelUno() {
         pantallaActual.destruir();
         pantallaActual = null;
         pantallaActual = new Juego(this, Nivel.NIVEL_1, 0, 50, 0);
-        Global.setFPS(60);
+        Global.setFPS(FPS_MUY_RAPIDO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
+    /**
+     * Cambia la pantalla a la de mostrar GameOver
+     */
     public void mostrarGameOver() {
         if (this.pantallaActual.tipoCanvas().equals(Actualizable.JUEGO)) {
             this.puntajeObtenido = ((Juego) pantallaActual).getPuntaje();
         }
         pantallaActual.destruir();
         pantallaActual = null;
-        Global.setFPS(50);
+        Global.setFPS(FPS_RAPIDO);
         pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.GAMEOVER);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
+    /**
+     * Cambia la pantalla a la de mostrar prologo
+     */
     public void mostrarPrologo() {
         pantallaActual.destruir();
         pantallaActual = null;
-        Global.setFPS(50);
+        Global.setFPS(FPS_RAPIDO);
         pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.PROLOGO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
+    /**
+     * verifica si el puntaje nuevo rompio algun record
+     * si lo rompio Cambia la pantalla a la de captura de puntajes
+     * si no a la de mostrar puntajes
+     */
     public void verificarNuevoPuntaje() {
         pantallaActual.destruir();
         pantallaActual = null;
-        Global.setFPS(30);
+        Global.setFPS(FPS_LENTO);
         if (CapturaPuntajesCanvas.esNuevoPuntajeAlto(puntajeObtenido)) {
             pantallaActual = new CapturaPuntajesCanvas(this, puntajeObtenido);
             Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
@@ -174,18 +188,24 @@ public class SamuraiEnterprises extends MIDlet {
         }
     }
 
+    /**
+     * Cambia la pantalla a la de mostrar tutorial
+     */
     public void mostrarTutorial() {
         pantallaActual.destruir();
         pantallaActual = null;
-        Global.setFPS(50);
+        Global.setFPS(FPS_RAPIDO);
         pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.TUTORIAL);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
+    /**
+     * Cambia la pantalla a la del menu sonido
+     */
     public void mostrarMenuSonido() {
         pantallaActual.destruir();
         pantallaActual = null;
-        Global.setFPS(20);
+        Global.setFPS(FPS_LENTO);
         pantallaActual = new MenuCanvas(this, true);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
