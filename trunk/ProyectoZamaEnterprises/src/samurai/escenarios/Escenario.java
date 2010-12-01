@@ -109,7 +109,7 @@ public class Escenario {
         this.dibujarFondoCamino(g);
         Juego.getPosicionador().dibujarCamino(g);
         this.dibujarFondos(g);
-        this.dibujarPiedras(g);
+//        this.dibujarPiedras(g);
         this.ambiente.dibujar(g);
         this.mapaAvance.dibujar(g);
     }

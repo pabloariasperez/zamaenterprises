@@ -13,7 +13,6 @@ import samurai.presentacion.Diapositiva;
  * @version 1.1
  */
 public class PresentacionCanvas extends GameCanvas implements Actualizable {
-
     private SamuraiEnterprises samuraiMidlet;
     private Stack diapositivas;
     private Graphics g;
@@ -26,12 +25,18 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
     private final int C_PABLO = 0;
     private final int C_ERIK = 1;
     private final int C_DANIEL = 2;
+
     private final int S_GAMEOVER = 3;
     private final int S_PROLOGO_1 = 4;
+    
     private final int T_Izquierda = 5;
     private final int T_Derecha = 6;
     private final int T_Pausa = 7;
     private final int T_Adelante = 8;
+
+    private final int TEXTO_NIVEL_1 = 9;
+    private final int TEXTO_NIVEL_2 = 10;
+    private final int TEXTO_NIVEL_3 = 11;
 
     private boolean mostrandome;
     private ManejadorTeclado teclado;
@@ -55,6 +60,10 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
      *
      */
     public static final int GAMEOVER = 4;
+    
+    public static final int NIVEL_1 = 5;
+    public static final int NIVEL_2 = 6;
+    public static final int NIVEL_3 = 7;
 
     /**
      * Constructor inicializa variables
@@ -115,6 +124,18 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 Diapositiva gameOver = new Diapositiva("/samurai/imagenes/titulos/tituloGameOver.png", "/samurai/imagenes/gameOver.png", agregarString(S_GAMEOVER));
                 this.diapositivas.push(gameOver);
                 break;
+            case PresentacionCanvas.NIVEL_1:
+                Diapositiva nivel1 = new Diapositiva("/samurai/imagenes/titulos/tituloNivel1.png", "/samurai/imagenes/gameOver.png", agregarString(TEXTO_NIVEL_1));
+                this.diapositivas.push(nivel1);
+                break;
+            case PresentacionCanvas.NIVEL_2:
+                Diapositiva nivel2 = new Diapositiva("/samurai/imagenes/titulos/tituloNivel2.png", "/samurai/imagenes/gameOver.png", agregarString(TEXTO_NIVEL_2));
+                this.diapositivas.push(nivel2);
+                break;
+            case PresentacionCanvas.NIVEL_3:
+                Diapositiva nivel3 = new Diapositiva("/samurai/imagenes/titulos/tituloNivel3.png", "/samurai/imagenes/gameOver.png", agregarString(TEXTO_NIVEL_3));
+                this.diapositivas.push(nivel3);
+                break;
             default:
                 break;
         }
@@ -165,7 +186,21 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
             case T_Pausa:
                 texto.addElement("Utilice el boton 8 para");
                 texto.addElement("pausar el juego.");
-
+                return texto;
+            case TEXTO_NIVEL_1:
+                texto.addElement("Ratas y murciélagos");
+                texto.addElement("te embisten para");
+                texto.addElement("detenerte.");
+                return texto;
+            case TEXTO_NIVEL_2:
+                texto.addElement("De las tierras emergen");
+                texto.addElement("topos, y en los aires");
+                texto.addElement("aparecen fantasmas.");
+                return texto;
+            case TEXTO_NIVEL_3:
+                texto.addElement("Sientes una mirada");
+                texto.addElement("fría sobre tí, ¿será");
+                texto.addElement("la muerte acechándote?");
                 return texto;
             default:
                 return texto;
@@ -271,6 +306,15 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 break;
             case PresentacionCanvas.TUTORIAL:
                 samuraiMidlet.mostrarMenu();
+                break;
+            case PresentacionCanvas.NIVEL_1:
+                samuraiMidlet.correrNivelUno();
+                break;
+            case PresentacionCanvas.NIVEL_2:
+                samuraiMidlet.correrNivelDos();
+                break;
+            case PresentacionCanvas.NIVEL_3:
+                samuraiMidlet.correrNivelTres();
                 break;
             default:
                 break;

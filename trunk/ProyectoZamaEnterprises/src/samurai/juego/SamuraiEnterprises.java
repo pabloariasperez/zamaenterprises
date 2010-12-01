@@ -18,9 +18,9 @@ public class SamuraiEnterprises extends MIDlet {
     private Actualizable pantallaActual;
     private int puntajeObtenido = 0;
 
-    private final int FPS_MUY_RAPIDO=60;
-    private final int FPS_RAPIDO=50;
-    private final int FPS_LENTO=30;
+    private final int FPS_MUY_RAPIDO = 60;
+    private final int FPS_RAPIDO = 50;
+    private final int FPS_LENTO = 30;
 
     /**
      * Constructor del MIDlet que inicializa el SplashCanvas.
@@ -104,17 +104,6 @@ public class SamuraiEnterprises extends MIDlet {
         pantallaActual = null;
         Global.setFPS(FPS_LENTO);
         pantallaActual = new MenuCanvas(this, false);
-        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
-    }
-
-    /**
-     * Corre en nivel 1
-     */
-    public void correrNivelUno() {
-        pantallaActual.destruir();
-        pantallaActual = null;
-        pantallaActual = new Juego(this, Nivel.NIVEL_1, 0, 50, 0);
-        Global.setFPS(FPS_MUY_RAPIDO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 
@@ -207,6 +196,52 @@ public class SamuraiEnterprises extends MIDlet {
         pantallaActual = null;
         Global.setFPS(FPS_LENTO);
         pantallaActual = new MenuCanvas(this, true);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+    }
+
+    /**
+     * Corre en nivel 1
+     */
+    public void correrNivelUno() {
+        pantallaActual.destruir();
+        pantallaActual = null;
+        pantallaActual = new Juego(this, Nivel.NIVEL_1, Juego.SCORE_INICIAL, ManejadorSekai.VIDA_TOTAL, Juego.TIEMPO_INICIAL);
+        Global.setFPS(FPS_MUY_RAPIDO);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+    }
+
+    public void transicionNivelDos( int score ) {
+        puntajeObtenido = score;
+        pantallaActual.destruir();
+        pantallaActual = null;
+        Global.setFPS(FPS_RAPIDO);
+        pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.NIVEL_2);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+        
+    }
+
+    public void correrNivelDos() {
+        pantallaActual.destruir();
+        pantallaActual = null;
+        pantallaActual = new Juego(this, Nivel.NIVEL_2, puntajeObtenido, ManejadorSekai.VIDA_TOTAL, Juego.TIEMPO_INICIAL);
+        Global.setFPS(FPS_MUY_RAPIDO);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+    }
+
+    public void transicionNivelTres( int score ) {
+        puntajeObtenido = score;
+        pantallaActual.destruir();
+        pantallaActual = null;
+        Global.setFPS(FPS_RAPIDO);
+        pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.NIVEL_3);
+        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
+    }
+
+    public void correrNivelTres() {
+        pantallaActual.destruir();
+        pantallaActual = null;
+        pantallaActual = new BossArea();
+        Global.setFPS(FPS_MUY_RAPIDO);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
 }

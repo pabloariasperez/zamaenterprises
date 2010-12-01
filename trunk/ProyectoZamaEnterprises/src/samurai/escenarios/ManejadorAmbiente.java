@@ -21,8 +21,10 @@ public class ManejadorAmbiente {
     private Vector ambienteEnPantalla;
     private Random rndm;
     private SpriteAmbiente elemento;
-    private Image arbol_1;
     private int elemetosEliminados;
+
+    private Image arbol_1;
+    private Image piedra_1;
 
     /**
      * Constructor que inicializa el Vector como un Vector vacio.
@@ -34,6 +36,7 @@ public class ManejadorAmbiente {
         elemetosEliminados=0;
         try {
             arbol_1 = Image.createImage("/samurai/imagenes/ambiente/spriteArbol.png");
+            piedra_1 = Image.createImage("/samurai/imagenes/ambiente/spritePiedra.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -49,6 +52,12 @@ public class ManejadorAmbiente {
                 case SpriteAmbiente.ARBOL_1:
                     ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_1, rndm.nextInt(60), region));
                     break;
+                case SpriteAmbiente.PIEDRA_1:
+                    if( region == 2 ){
+                        ambienteEnPantalla.addElement(new SpriteAmbiente(piedra_1, 0, region));
+                    }else{
+                        ambienteEnPantalla.addElement(new SpriteAmbiente(piedra_1, -10 + rndm.nextInt(20), region));
+                    }
                 default:
                     break;
             }
@@ -88,6 +97,8 @@ public class ManejadorAmbiente {
             this.agregarElemento(0, 2);
             this.agregarElemento(0, 0);
             this.agregarElemento(0, 2);
+            this.agregarElemento(1, 1);
+            this.agregarElemento(1, 2);
         }
         for (int i = 0; i < ambienteEnPantalla.size(); i++) {
             elemento = (SpriteAmbiente) ambienteEnPantalla.elementAt(i);
