@@ -236,12 +236,4 @@ public class SamuraiEnterprises extends MIDlet {
         pantallaActual = new PresentacionCanvas(this, PresentacionCanvas.NIVEL_3);
         Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
     }
-
-    public void correrNivelTres() {
-        pantallaActual.destruir();
-        pantallaActual = null;
-        pantallaActual = new BossArea();
-        Global.setFPS(FPS_MUY_RAPIDO);
-        Display.getDisplay(this).setCurrent((Displayable) pantallaActual);
-    }
 }

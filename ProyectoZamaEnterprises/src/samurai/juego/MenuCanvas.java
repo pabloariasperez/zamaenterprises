@@ -180,8 +180,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             opcionSi = new Boton("/samurai/imagenes/botones/botonSi.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
-            menuSalir.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/si.png");
-            menuSalir.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/no.png");
+            menuSalir.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/no.png");
+            menuSalir.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/si.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

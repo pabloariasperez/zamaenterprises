@@ -133,7 +133,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.diapositivas.push(nivel2);
                 break;
             case PresentacionCanvas.NIVEL_3:
-                Diapositiva nivel3 = new Diapositiva("/samurai/imagenes/titulos/tituloNivel3.png", "/samurai/imagenes/gameOver.png", agregarString(TEXTO_NIVEL_3));
+                Diapositiva nivel3 = new Diapositiva("/samurai/imagenes/titulos/gameOver.png", "/samurai/imagenes/gameOver.png", agregarString(TEXTO_NIVEL_3));
                 this.diapositivas.push(nivel3);
                 break;
             default:
@@ -161,8 +161,8 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 texto.addElement("el ornitorrinco¡");
                 return texto;
             case S_GAMEOVER:
-                texto.addElement("Moriste");
-                texto.addElement("  ...  ");
+                texto.addElement("Tu aventura");
+                texto.addElement("terminó");
                 return texto;
             case S_PROLOGO_1:
                 texto.addElement("Ayuda a Sekai a");
@@ -199,9 +199,8 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 texto.addElement("aparecen fantasmas.");
                 return texto;
             case TEXTO_NIVEL_3:
-                texto.addElement("Sientes una mirada");
-                texto.addElement("fría sobre tí, ¿será");
-                texto.addElement("la muerte acechándote?");
+                texto.addElement("Has ayudado a Sekai");
+                texto.addElement("a escapar");
                 return texto;
             default:
                 return texto;
@@ -315,7 +314,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 samuraiMidlet.correrNivelDos();
                 break;
             case PresentacionCanvas.NIVEL_3:
-                samuraiMidlet.correrNivelTres();
+                samuraiMidlet.mostrarGameOver();
                 break;
             default:
                 break;

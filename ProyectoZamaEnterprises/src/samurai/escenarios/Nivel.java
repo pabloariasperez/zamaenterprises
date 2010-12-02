@@ -53,6 +53,7 @@ public class Nivel{
         sfx.agregarSFX(SFX.ESPADA);
         sfx.agregarSFX(SFX.GOLPE_SEKAI);
         sfx.agregarSFX(SFX.MUERTE_SEKAI);
+        sfx.agregarSFX(SFX.CORAZON);
         switch(nivel){
             case NIVEL_1:
                 sfx.agregarSFX(SFX.MUERTE_RATA);
