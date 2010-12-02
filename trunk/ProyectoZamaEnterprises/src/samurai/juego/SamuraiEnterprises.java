@@ -167,7 +167,7 @@ public class SamuraiEnterprises extends MIDlet {
 
             puntajesDefault = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + "3");
             puntajesDefault.agregarRegistro("JUNCO");
-            puntajesDefault.agregarRegistro(300);
+            puntajesDefault.agregarRegistro(100);
 
             for( int c=Global.NUMERO_PUNTAJES_ALMACENADOS - 3; c>0; c--){
                 puntajesDefault = new AdministradorData(AdministradorData.STORE_PUNTAJE_ + c);
