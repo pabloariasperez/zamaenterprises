@@ -27,6 +27,7 @@ public class SpriteAmbiente extends Sprite {
      */
     public static final int ARBOL_1 = 0;
     public static final int PIEDRA_1 = 1;
+    public static final int ARBOL_2 = 3;
     private final int razonCambioTamanios;
     private int razonCambio;
     private final int NUMERO_TAMANIOS_SPRITE = 3;

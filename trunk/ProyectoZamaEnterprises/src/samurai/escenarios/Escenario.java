@@ -39,7 +39,11 @@ public class Escenario {
         this.manejadorFondos = new ManejadorFondos();
         this.ambiente= new ManejadorAmbiente();
         try {
+            if(escenarioActual==Nivel.NIVEL_1){
             fondoCamino = Image.createImage("/samurai/imagenes/ambiente/fondoCamino.png");
+            }else{
+            fondoCamino = Image.createImage("/samurai/imagenes/ambiente/fondoCamino2.png");
+            }
             piedra = new Sprite(Image.createImage("/samurai/imagenes/ambiente/spritePiedra.png"), 20, 20);
             piedra.setFrameSequence(new int[]{0,1,2,3});
         } catch (IOException ex) {

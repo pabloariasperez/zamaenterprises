@@ -279,8 +279,8 @@ public class CapturaPuntajesCanvas extends GameCanvas implements Actualizable {
             this.menuSubir = new Menu(2, "/samurai/imagenes/titulos/tituloSubir.png", "/samurai/imagenes/slash.png", 1);
             Boton botonSi = new Boton("/samurai/imagenes/botones/botonSi.png");
             Boton botonNo = new Boton("/samurai/imagenes/botones/botonNo.png");
-            this.menuSubir.agregarBoton(botonSi, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
-            this.menuSubir.agregarBoton(botonNo, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            this.menuSubir.agregarBoton(botonSi, "/samurai/imagenes/fondosMenu/si.png");
+            this.menuSubir.agregarBoton(botonNo, "/samurai/imagenes/fondosMenu/no.png");
             }
         } catch (IOException ex) {
             ex.printStackTrace();

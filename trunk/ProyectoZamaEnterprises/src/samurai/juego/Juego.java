@@ -156,8 +156,8 @@ public class Juego extends GameCanvas implements Actualizable {
                 this.menuPausa = new Menu(2, "/samurai/imagenes/titulos/tituloPausa.png", "/samurai/imagenes/slash.png", 1);
                 this.botonContinuar = new Boton("/samurai/imagenes/botones/botonContinuar.png");
                 this.botonSalir = new Boton("/samurai/imagenes/botones/botonSalir.png");
-                this.menuPausa.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
-                this.menuPausa.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+                this.menuPausa.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/continuar.png");
+                this.menuPausa.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/puertas.png");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
