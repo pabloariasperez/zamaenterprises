@@ -347,6 +347,16 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                 case MenuCanvas.DIFICULTAD:
                     this.menuDificultad = new Menu(3, "/samurai/imagenes/titulos/tituloSalir.png", "/samurai/imagenes/slash.png", MenuCanvas.DIFICULTAD);
                     this.crearBotonesDificultad();
+                    switch(Global.dificultad){
+                        case Global.DIFICULTAD_DIFICIL:
+                            this.menuDificultad.setPosition(0);
+                            break;
+                        case Global.DIFICULTAD_MEDIA:
+                            this.menuDificultad.setPosition(1);
+                            break;
+                        case Global.DIFICULTAD_FACIL:
+                            this.menuDificultad.setPosition(2);
+                    }
                     break;
             }
         } catch (IOException ex) {
