@@ -47,8 +47,12 @@ public class SFX {
      * Enum de sfx de muerte cesar
      */
     public static final int MUERTE_CESAR=7;
+    /**
+     *
+     */
+    public static final int CORAZON= 8;
     private Player p;
-    private final int MAXIMO_PLAYERS = 8;
+    private final int MAXIMO_PLAYERS = 9;
 
 
     /**
@@ -87,6 +91,9 @@ public class SFX {
                     break;
                 case SFX.MUERTE_FANTASMA:
                     players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/fantasma.wav"), "audio/wav");
+                    break;
+                case SFX.CORAZON:
+                    players[tipo] = Manager.createPlayer(this.canvas.getClass().getResourceAsStream("/samurai/sonidos/corazon.wav"), "audio/wav");
                     break;
 //                case SFX.MUERTE_CESAR:
 //                    players[tipo] = Manager.createPlayer(this.samuraiMidlet.getClass().getResourceAsStream("/samurai/sonidos/cesar.mp3"), "audio/mp3");

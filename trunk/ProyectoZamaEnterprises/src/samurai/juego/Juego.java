@@ -254,7 +254,7 @@ public class Juego extends GameCanvas implements Actualizable {
                 if (manejadorSekai.colisionEspada(this.enemigo)) {
                     if (Global.SONIDO_ACTIVADO) {
                         sfx.reproducir(SFX.ESPADA);
-                        this.reproducir(this.enemigo.getTipoEnemigo());
+                        this.reproducirEnemigo(this.enemigo.getTipoEnemigo());
                     }
                     this.aumentarScore(this.enemigo.getTipoEnemigo());
                     manejadorEnemigos.kill(this.enemigo);
@@ -275,7 +275,7 @@ public class Juego extends GameCanvas implements Actualizable {
                 if (manejadorSekai.colisionEspada(this.item)) {
                     if (Global.SONIDO_ACTIVADO) {
                         sfx.reproducir(SFX.ESPADA);
-                        this.reproducir(this.enemigo.getTipoEnemigo());
+                        this.reproducirItem(item.getTipoItem());
                     }
                     this.activarItem(this.item.getTipoItem());
                     manejadorItems.desaparecer(item);
@@ -312,7 +312,7 @@ public class Juego extends GameCanvas implements Actualizable {
         this.manejadorItems.agregarItem(rnd);
     }
 
-    private void reproducir(int tipoEnemigo) {
+    private void reproducirEnemigo(int tipoEnemigo) {
         switch (tipoEnemigo) {
             case SpriteEnemigo.CESAR:
                 sfx.reproducir(SFX.MUERTE_CESAR);
@@ -331,7 +331,13 @@ public class Juego extends GameCanvas implements Actualizable {
                 break;
         }
     }
-
+    private void reproducirItem(int tipoItem){
+        switch(tipoItem){
+            case SpriteItem.ITEM_CORAZON:
+                sfx.reproducir(SFX.CORAZON);
+                break;
+        }
+    }
     private void aumentarScore(int tipoEnemigo) {
         switch (tipoEnemigo) {
             case SpriteEnemigo.MURCIELAGO:
