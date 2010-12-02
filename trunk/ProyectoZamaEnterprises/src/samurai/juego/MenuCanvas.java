@@ -40,19 +40,23 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
      * Constante entera que define el menu de salir que ya esta creado.
      */
     public static final int SALIR = 3;
-
+     /**
+     * Constante entera que define el menu de salir que ya esta creado.
+     */
+    public static final int DIFICULTAD = 4;
 
     //Objetos - Menú Principal.
     private Menu menuPrincipal;
     private Boton botonNuevo, botonContinuar, botonPuntajes, botonOpciones, botonSalir;
 
     //Objetos - Menú Opciones
-    private Boton opcionSonido, opcionCreditos, opcionTutorial,opcionAtras;
+    private Boton opcionSonido, opcionCreditos, opcionTutorial,opcionDificultad,opcionAtras;
     private Menu menuOpciones;
 
-    //Objetos - Menú Sonido, Salir
-    private Boton opcionSi, opcionNo;
-    private Menu menuSonido, menuSalir;
+    //Objetos - Menú Sonido, Menú Dificultad, Salir
+    private Boton opcionSi, opcionNo, opcionDificil, opcionMediana, opcionFacil;
+    private Menu menuSonido, menuSalir, menuDificultad;
+
     private boolean estaGuardado;
     private boolean inicio;
     
@@ -117,6 +121,26 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             ex.printStackTrace();
         }
     }
+    private void crearBotonesDificultad(){
+         try {
+            //Inicializo cada uno de los botones del menú principal.
+            opcionDificil = new Boton("/samurai/imagenes/botones/botonNuevo.png");
+            opcionMediana = new Boton("/samurai/imagenes/botones/botonNuevo.png");
+            opcionFacil = new Boton("/samurai/imagenes/botones/botonNuevo.png");
+
+
+
+
+            //Los agregamos a nuestro Menú Principal. Además de indicar el fondo que mostrarán de fondo.
+            this.menuDificultad.agregarBoton(opcionDificil, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            this.menuDificultad.agregarBoton(opcionMediana, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            this.menuDificultad.agregarBoton(opcionFacil, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+    }
 
 
     private void creaBotonesOpciones(){
@@ -125,12 +149,14 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             opcionSonido = new Boton("/samurai/imagenes/botones/botonSonido.png");
             opcionCreditos = new Boton("/samurai/imagenes/botones/botonCreditos.png");
             opcionTutorial = new Boton("/samurai/imagenes/botones/botonTutorial.png");
+            opcionDificultad = new Boton("/samurai/imagenes/botones/botonNuevo.png");
             opcionAtras = new Boton("/samurai/imagenes/botones/botonAtras.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
             menuOpciones.agregarBoton(opcionSonido, "/samurai/imagenes/fondosMenu/sonidoLateral.png");
             menuOpciones.agregarBoton(opcionCreditos, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
             menuOpciones.agregarBoton(opcionTutorial, "/samurai/imagenes/fondosMenu/spriteTutorial.png");
+            menuOpciones.agregarBoton(opcionDificultad, "/samurai/imagenes/fondosMenu/spriteTutorial.png");
             menuOpciones.agregarBoton(opcionAtras, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -211,6 +237,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                         cambiarMenu(menuOpciones);
                     }
                     break;
+                case MenuCanvas.DIFICULTAD:
+                    Global.dificultad = Global.DIFICULTAD_DIFICIL;
+                    cambiarMenu(this.menuOpciones);
+                    break;
                 case MenuCanvas.SALIR:
                     crearMenu(MenuCanvas.PRINCIPAL);
                     cambiarMenu(menuPrincipal);
@@ -238,6 +268,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                         cambiarMenu(menuOpciones);
                     }
                     break;
+                case MenuCanvas.DIFICULTAD:
+                    Global.dificultad = Global.DIFICULTAD_MEDIA;
+                    cambiarMenu(this.menuOpciones);
+                    break;
                 case MenuCanvas.SALIR:
                     samuraiMidlet.destroyApp(true);
                     samuraiMidlet.notifyDestroyed();
@@ -252,6 +286,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                 case MenuCanvas.OPCIONES:
                     samuraiMidlet.mostrarTutorial();
                     break;
+                 case MenuCanvas.DIFICULTAD:
+                    Global.dificultad = Global.DIFICULTAD_FACIL;
+                    cambiarMenu(this.menuOpciones);
+                    break;
             }
         //Preguntamos si estamos en la CUARTA posición y si fue elegida con FIRE.
         }else if(this.menuActual.getPosition() == 3 && teclado.firePresionado()){
@@ -261,8 +299,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     cambiarMenu(menuOpciones);
                     break;
                 case MenuCanvas.OPCIONES:
-                    crearMenu(MenuCanvas.PRINCIPAL);
-                    cambiarMenu(menuPrincipal);
+                    crearMenu(MenuCanvas.DIFICULTAD);
+                    cambiarMenu(menuDificultad);
                     break;
             }
         //Preguntamos si estamos en la QUINTA posición y si fue elegida con FIRE.
@@ -271,6 +309,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                 case MenuCanvas.PRINCIPAL:
                     crearMenu(MenuCanvas.SALIR);
                     cambiarMenu(menuSalir);
+                    break;
+                case MenuCanvas.OPCIONES:
+                    crearMenu(MenuCanvas.PRINCIPAL);
+                    cambiarMenu(menuPrincipal);
                     break;
             }
         }
@@ -290,7 +332,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     menuOpciones = null;
                     break;
                 case MenuCanvas.OPCIONES:
-                    menuOpciones = new Menu(4, "/samurai/imagenes/titulos/tituloOpciones.png", "/samurai/imagenes/slash.png", MenuCanvas.OPCIONES);
+                    menuOpciones = new Menu(5, "/samurai/imagenes/titulos/tituloOpciones.png", "/samurai/imagenes/slash.png", MenuCanvas.OPCIONES);
                     this.creaBotonesOpciones();
                     menuSonido = null;      //Es poco probable que se vuelva a ingresar a él.
                     break;
@@ -301,6 +343,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                 case MenuCanvas.SALIR:
                     menuSalir = new Menu(2, "/samurai/imagenes/titulos/tituloSalir.png", "/samurai/imagenes/slash.png", MenuCanvas.SALIR);
                     this.creaBotonesSalir();
+                    break;
+                case MenuCanvas.DIFICULTAD:
+                    this.menuDificultad = new Menu(3, "/samurai/imagenes/titulos/tituloSalir.png", "/samurai/imagenes/slash.png", MenuCanvas.DIFICULTAD);
+                    this.crearBotonesDificultad();
                     break;
             }
         } catch (IOException ex) {

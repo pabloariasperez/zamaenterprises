@@ -29,6 +29,10 @@ public class Global {
     /**
      * los frames per second
      */
+    public static int dificultad=Global.DIFICULTAD_MEDIA;
+    /**
+     * los frames per second
+     */
     public static final int NUMERO_PUNTAJES_ALMACENADOS = 3;
     /**
      *
@@ -46,6 +50,9 @@ public class Global {
      *
      */
     public static final int AltoSTD = 320;
+    public static final int DIFICULTAD_DIFICIL = 2;
+    public static final  int DIFICULTAD_MEDIA = 15;
+    public static final int DIFICULTAD_FACIL = 20;
 
     /**
      * modifica ANCHO_PANTALLA solo una vez
