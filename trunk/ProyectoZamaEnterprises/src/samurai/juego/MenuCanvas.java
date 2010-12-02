@@ -123,7 +123,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     }
     private void crearBotonesDificultad(){
          try {
-            //Inicializo cada uno de los botones del menú principal.
+            //Inicializo cada uno de los botones del menú de dificultad.
             opcionDificil = new Boton("/samurai/imagenes/botones/botonNuevo.png");
             opcionMediana = new Boton("/samurai/imagenes/botones/botonNuevo.png");
             opcionFacil = new Boton("/samurai/imagenes/botones/botonNuevo.png");
@@ -131,7 +131,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
 
 
-            //Los agregamos a nuestro Menú Principal. Además de indicar el fondo que mostrarán de fondo.
+            //Los agregamos a nuestro Menú Dificultad. Además de indicar el fondo que mostrarán de fondo.
             this.menuDificultad.agregarBoton(opcionDificil, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
             this.menuDificultad.agregarBoton(opcionMediana, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
             this.menuDificultad.agregarBoton(opcionFacil, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
