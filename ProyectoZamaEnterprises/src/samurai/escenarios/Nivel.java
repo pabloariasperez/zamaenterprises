@@ -97,7 +97,7 @@ public class Nivel{
         Stack parametros = new Stack();  //En qué momento y qué parámetro.
         switch(escenario){
             case NIVEL_1:
-                for(int c=200; c>=0; c-=10){
+                for(int c=1000; c>=0; c-=10){
                     parametros.push( new int[]{ c, (int)(120*Math.sin(c*Math.PI/500))} );
                 }
                 return parametros;

@@ -124,12 +124,9 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
     private void crearBotonesDificultad(){
          try {
             //Inicializo cada uno de los botones del menú de dificultad.
-            opcionDificil = new Boton("/samurai/imagenes/botones/botonNuevo.png");
-            opcionMediana = new Boton("/samurai/imagenes/botones/botonNuevo.png");
-            opcionFacil = new Boton("/samurai/imagenes/botones/botonNuevo.png");
-
-
-
+            opcionDificil = new Boton("/samurai/imagenes/botones/botonDificil.png");
+            opcionMediana = new Boton("/samurai/imagenes/botones/botonMedia.png");
+            opcionFacil = new Boton("/samurai/imagenes/botones/botonFacil.png");
 
             //Los agregamos a nuestro Menú Dificultad. Además de indicar el fondo que mostrarán de fondo.
             this.menuDificultad.agregarBoton(opcionDificil, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
@@ -142,14 +139,13 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
     }
 
-
     private void creaBotonesOpciones(){
         //Creamos cada uno de los botones.
         try {
             opcionSonido = new Boton("/samurai/imagenes/botones/botonSonido.png");
             opcionCreditos = new Boton("/samurai/imagenes/botones/botonCreditos.png");
             opcionTutorial = new Boton("/samurai/imagenes/botones/botonTutorial.png");
-            opcionDificultad = new Boton("/samurai/imagenes/botones/botonNuevo.png");
+            opcionDificultad = new Boton("/samurai/imagenes/botones/botonDificultad.png");
             opcionAtras = new Boton("/samurai/imagenes/botones/botonAtras.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
@@ -345,7 +341,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
                     this.creaBotonesSalir();
                     break;
                 case MenuCanvas.DIFICULTAD:
-                    this.menuDificultad = new Menu(3, "/samurai/imagenes/titulos/tituloSalir.png", "/samurai/imagenes/slash.png", MenuCanvas.DIFICULTAD);
+                    this.menuDificultad = new Menu(3, "/samurai/imagenes/titulos/tituloDificultad.png", "/samurai/imagenes/slash.png", MenuCanvas.DIFICULTAD);
                     this.crearBotonesDificultad();
                     switch(Global.dificultad){
                         case Global.DIFICULTAD_DIFICIL:
