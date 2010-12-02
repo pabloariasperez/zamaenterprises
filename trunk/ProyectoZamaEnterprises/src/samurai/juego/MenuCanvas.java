@@ -113,7 +113,7 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
             //Los agregamos a nuestro Menú Principal. Además de indicar el fondo que mostrarán de fondo.
             this.menuPrincipal.agregarBoton(botonNuevo, "/samurai/imagenes/fondosMenu/juegoNuevoLateral.png");
-            this.menuPrincipal.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            this.menuPrincipal.agregarBoton(botonContinuar, "/samurai/imagenes/fondosMenu/continuar.png");
             this.menuPrincipal.agregarBoton(botonPuntajes, "/samurai/imagenes/fondosMenu/spriteScores.png");
             this.menuPrincipal.agregarBoton(botonOpciones, "/samurai/imagenes/fondosMenu/spriteLlave.png");
             this.menuPrincipal.agregarBoton(botonSalir, "/samurai/imagenes/fondosMenu/puertas.png");
@@ -129,9 +129,9 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             opcionFacil = new Boton("/samurai/imagenes/botones/botonFacil.png");
 
             //Los agregamos a nuestro Menú Dificultad. Además de indicar el fondo que mostrarán de fondo.
-            this.menuDificultad.agregarBoton(opcionDificil, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
-            this.menuDificultad.agregarBoton(opcionMediana, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
-            this.menuDificultad.agregarBoton(opcionFacil, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            this.menuDificultad.agregarBoton(opcionDificil, "/samurai/imagenes/fondosMenu/dificil.png");
+            this.menuDificultad.agregarBoton(opcionMediana, "/samurai/imagenes/fondosMenu/media.png");
+            this.menuDificultad.agregarBoton(opcionFacil, "/samurai/imagenes/fondosMenu/facil.png");
 
         }catch (IOException ex){
             ex.printStackTrace();
@@ -150,10 +150,10 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
             menuOpciones.agregarBoton(opcionSonido, "/samurai/imagenes/fondosMenu/sonidoLateral.png");
-            menuOpciones.agregarBoton(opcionCreditos, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            menuOpciones.agregarBoton(opcionCreditos, "/samurai/imagenes/fondosMenu/creditos.png");
             menuOpciones.agregarBoton(opcionTutorial, "/samurai/imagenes/fondosMenu/spriteTutorial.png");
-            menuOpciones.agregarBoton(opcionDificultad, "/samurai/imagenes/fondosMenu/spriteTutorial.png");
-            menuOpciones.agregarBoton(opcionAtras, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
+            menuOpciones.agregarBoton(opcionDificultad, "/samurai/imagenes/fondosMenu/dificultad.png");
+            menuOpciones.agregarBoton(opcionAtras, "/samurai/imagenes/fondosMenu/atras.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -166,8 +166,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             opcionNo = new Boton("/samurai/imagenes/botones/botonNo.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
-            menuSonido.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
-            menuSonido.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            menuSonido.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/si.png");
+            menuSonido.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/no.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -180,8 +180,8 @@ public class MenuCanvas extends GameCanvas implements Actualizable {
             opcionSi = new Boton("/samurai/imagenes/botones/botonSi.png");
 
             //Agregamos los botones creados y además asignamos qué imagen de fondo tendrán.
-            menuSalir.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/fondoMenuPrueba.png");
-            menuSalir.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/fondoMenuPrueba2.png");
+            menuSalir.agregarBoton(opcionNo, "/samurai/imagenes/fondosMenu/si.png");
+            menuSalir.agregarBoton(opcionSi, "/samurai/imagenes/fondosMenu/no.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

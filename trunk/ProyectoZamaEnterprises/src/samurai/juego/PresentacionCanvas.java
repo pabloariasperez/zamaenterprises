@@ -129,7 +129,7 @@ public class PresentacionCanvas extends GameCanvas implements Actualizable {
                 this.diapositivas.push(nivel1);
                 break;
             case PresentacionCanvas.NIVEL_2:
-                Diapositiva nivel2 = new Diapositiva("/samurai/imagenes/titulos/tituloNivel2.png", "/samurai/imagenes/gameOver.png", agregarString(TEXTO_NIVEL_2));
+                Diapositiva nivel2 = new Diapositiva("/samurai/imagenes/titulos/tituloNivel2.png", "/samurai/imagenes/trans2.png", agregarString(TEXTO_NIVEL_2));
                 this.diapositivas.push(nivel2);
                 break;
             case PresentacionCanvas.NIVEL_3:
