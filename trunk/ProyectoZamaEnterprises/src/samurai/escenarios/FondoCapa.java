@@ -44,7 +44,7 @@ public class FondoCapa implements Animable {
         if ( -parametroVelocidad > 0 && this.posicionX > Global.ANCHO_PANTALLA) {
             this.posicionX -= imagen.getWidth();
         }else if(  -parametroVelocidad < 0 && this.posicionX  < - imagen.getWidth() ){
-            this.posicionX = Global.ANCHO_PANTALLA;
+            this.posicionX = imagen.getWidth();
         }
     }
     /**
