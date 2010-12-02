@@ -127,6 +127,16 @@ public class Menu {
              botones[opcionIndex].dibujar(g);
          }
     }
+
+    public void setPosition(int index){
+        if(index<this.getTotalButtons() && index>=0){
+            this.cambiarMargen(botones[this.indexBotonSeleccionado]);
+            this.indexBotonSeleccionado=index;
+            this.cambiarMargen(botones[this.indexBotonSeleccionado]);
+            this.moverIndicador();
+
+        }
+    }
     /**
      * Mueve el indicador a la opción actualmente seleccionada indicada por el indexBotonSeleccionado.
      */
