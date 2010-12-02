@@ -26,7 +26,7 @@ public class ManejadorAmbiente {
     private Image arbol_1;
     private Image piedra_1;
     private Image arena_1;
-
+    private Image arbol_2;
     /**
      * Constructor que inicializa el Vector como un Vector vacio.
      */
@@ -39,6 +39,7 @@ public class ManejadorAmbiente {
             arbol_1 = Image.createImage("/samurai/imagenes/ambiente/spriteArbol.png");
             piedra_1 = Image.createImage("/samurai/imagenes/ambiente/spritePiedra.png");
             arena_1 = Image.createImage("/samurai/imagenes/ambiente/arenita.png");
+            arbol_2 =Image.createImage("/samurai/imagenes/ambiente/spriteArbol2.png");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -63,6 +64,9 @@ public class ManejadorAmbiente {
                     break;
                 case SpriteAmbiente.ARENA_1:
                     ambienteEnPantalla.addElement(new SpriteAmbiente(arena_1, 100, region - 1));
+                    break;
+                 case SpriteAmbiente.ARBOL_2:
+                    ambienteEnPantalla.addElement(new SpriteAmbiente(arbol_2, 10 + rndm.nextInt(60), region));
                     break;
                 default:
                     break;
@@ -102,11 +106,13 @@ public class ManejadorAmbiente {
             this.agregarElemento(SpriteAmbiente.ARBOL_1, Posicionador.REGION_IZQUIERDA);
             this.agregarElemento(SpriteAmbiente.ARBOL_1, Posicionador.REGION_DERECHA);
 
-            this.agregarElemento(SpriteAmbiente.ARBOL_1, Posicionador.REGION_IZQUIERDA);
-            this.agregarElemento(SpriteAmbiente.ARBOL_1, Posicionador.REGION_DERECHA);
+            this.agregarElemento(SpriteAmbiente.ARBOL_2, Posicionador.REGION_IZQUIERDA);
+            this.agregarElemento(SpriteAmbiente.ARBOL_2, Posicionador.REGION_DERECHA);
 
             this.agregarElemento(SpriteAmbiente.PIEDRA_1, Posicionador.REGION_CENTRO);
                 this.agregarElemento(SpriteAmbiente.PIEDRA_1, Posicionador.REGION_DERECHA);
+
+
 
             rnd = rndm.nextInt(4);
             if (rnd == 0) {
